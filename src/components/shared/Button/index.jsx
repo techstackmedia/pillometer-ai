@@ -1,7 +1,7 @@
 import styles from './index.module.css';
-const Button = ({ children, className, sx }) => {
+const Button = ({ children, sx, cn }) => {
   return (
-    <button className={`${styles.button} ${className}`} style={sx}>
+    <button className={`${styles.button} ${cn}`} style={sx}>
       {children}
     </button>
   );

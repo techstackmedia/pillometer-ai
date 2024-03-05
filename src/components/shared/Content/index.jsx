@@ -1,8 +1,6 @@
-import styles from './index.module.css';
-
-const Content = ({ className, sx, children }) => {
+const Content = ({ cn, sx, children }) => {
   return (
-    <div className={`${styles.contentContener} ${className}`} style={sx}>
+    <div className={cn} style={sx}>
       {children}
     </div>
   );

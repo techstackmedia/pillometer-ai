@@ -1,0 +1,26 @@
+.buttons {
+  margin-top: 10px;
+}
+
+.mediaImage {
+  position: relative;
+}
+
+.mediaImage::before {
+  position: absolute;
+  background-repeat: no-repeat;
+  left: 20px;
+  top: 12px;
+}
+
+.mediaImage:nth-child(1):before {
+  content: url('../../images/googleLogo.png');
+}
+
+.mediaImage:nth-child(2):before {
+  content: url('../../images/facebookLogo.png');
+}
+
+.mediaImage:nth-child(3):before {
+  content: url('../../images/appleLogo.png');
+}

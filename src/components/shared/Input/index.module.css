@@ -13,6 +13,22 @@
   margin-block: 10px;
 }
 
+.input-label {
+  position: absolute;
+  left: 20px;
+  top: 25.4px;
+  transition: top 0.3s, font-size 0.3s;
+  pointer-events: none;
+  background-color: #f9f9fb;
+  padding: 4px;
+}
+
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+  top: 0;
+  font-size: 12px;
+}
+
 input[type='checkbox'] {
   margin-left: -3px;
   width: 15px;

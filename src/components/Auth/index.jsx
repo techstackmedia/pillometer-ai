@@ -41,7 +41,7 @@ const Auth = () => {
   return (
     <>
       <img src={Logo} alt='logo' className='logo' />
-      <Content className='heading'>Let's Get You Started</Content>
+      <Content cn='heading'>Let's Get You Started</Content>
       <form onSubmit={handleSubmit}>
         <Input
           type='email'
@@ -72,7 +72,7 @@ const Auth = () => {
           />
           <span style={{ marginLeft: 5 }}>Keep me signed in</span>
         </label>
-        <Content className='paragraph'>
+        <Content cn='paragraph'>
           By continuing, you acknowledge you have read and agreed to our{' '}
           <a href='/#' target='_blank' rel='noopener noreferrer'>
             Teams of Use
@@ -82,7 +82,9 @@ const Auth = () => {
             Privacy Policy
           </a>
         </Content>
-        <Button type='submit'>Create Account</Button>
+        <Button type='submit' sx={{ marginTop: 30 }}>
+          Create Account
+        </Button>
       </form>
     </>
   );

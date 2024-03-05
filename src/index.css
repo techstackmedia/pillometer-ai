@@ -9,12 +9,12 @@ form {
 
 .AuthOrLine {
   width: 100%;
-  margin-top: 30px;
   border: none;
   border-top: 1px solid #c5c4d4;
   position: relative;
-  margin-top: 50px;
   margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 .or {
@@ -24,29 +24,6 @@ form {
   top: -30px;
   background-color: #fff;
   padding-inline: 15px;
-}
-
-.mediaImage {
-  position: relative;
-}
-
-.mediaImage::before {
-  position: absolute;
-  background-repeat: no-repeat;
-  left: 20px;
-  top: 12px;
-}
-
-.mediaImage:nth-child(1):before {
-  content: url('../src/images/googleLogo.png');
-}
-
-.mediaImage:nth-child(2):before {
-  content: url('../src/images/facebookLogo.png');
-}
-
-.mediaImage:nth-child(3):before {
-  content: url('../src/images/appleLogo.png');
 }
 
 .heading {
@@ -90,4 +67,5 @@ input {
   font-size: 16px;
   font-family: 'Lato', sans-serif;
   border: 1px solid #c5c4d4;
+  color: #514f6d;
 }

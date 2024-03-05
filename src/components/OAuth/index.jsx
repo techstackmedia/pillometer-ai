@@ -1,21 +1,26 @@
 import Button from '../shared/Button';
+import styles from './index.module.css';
 
 const OAuth = () => {
-  const buttonStyles = {
+  const buttonMg = {
+    marginBlock: 20,
+  };
+
+  const buttonColor = {
     color: '#000',
     backgroundColor: '#fff',
     border: '1px solid #c5c4d4',
-    marginBlock: 20,
   };
+
   return (
-    <div style={{ marginTop: 10 }}>
-      <Button className='mediaImage' sx={buttonStyles}>
+    <div className={styles.buttons}>
+      <Button cn={styles.mediaImage} sx={buttonColor}>
         Continue with Google
       </Button>
-      <Button className='mediaImage' sx={buttonStyles}>
+      <Button cn={styles.mediaImage} sx={{ ...buttonMg, ...buttonColor }}>
         Continue with Facebook
       </Button>
-      <Button className='mediaImage' sx={buttonStyles}>
+      <Button cn={styles.mediaImage} sx={buttonColor}>
         Continue with Apple
       </Button>
     </div>
