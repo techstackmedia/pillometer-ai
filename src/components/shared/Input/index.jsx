@@ -12,7 +12,7 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
         onChange={onChange}
         style={sx}
       />
-      {value.length > 0 && (
+      {value?.length > 0 && (
         <label className={styles['input-label']}>{placeholder}</label>
       )}
     </div>

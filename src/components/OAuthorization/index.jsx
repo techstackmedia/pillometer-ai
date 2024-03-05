@@ -1,7 +1,7 @@
 import Button from '../shared/Button';
 import styles from './index.module.css';
 
-const OAuthorization = () => {
+const OAuthorization = ({ isCurrentPage }) => {
   const buttonMg = {
     marginBlock: 20,
   };
@@ -12,7 +12,7 @@ const OAuthorization = () => {
     border: '1px solid #c5c4d4',
   };
 
-  return (
+  return isCurrentPage ? null : (
     <div className={styles.buttons}>
       <Button cn={styles.mediaImage} sx={buttonColor}>
         Continue with Google
