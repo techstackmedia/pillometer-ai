@@ -1,0 +1,8 @@
+.showPassword {
+  position: absolute;
+  right: 15px;
+  top: 26px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #fff;
+}
