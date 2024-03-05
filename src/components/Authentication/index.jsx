@@ -10,7 +10,7 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [keepSignedIn, setKeepSignedIn] = useState(false);
-  const [showPassword, setShowPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [keepUpWithCommunity, setKeepUpWithCommunity] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
