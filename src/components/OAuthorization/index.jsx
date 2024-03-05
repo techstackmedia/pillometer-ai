@@ -1,7 +1,7 @@
 import Button from '../shared/Button';
 import styles from './index.module.css';
 
-const OAuth = () => {
+const OAuthorization = () => {
   const buttonMg = {
     marginBlock: 20,
   };
@@ -27,4 +27,4 @@ const OAuth = () => {
   );
 };
 
-export default OAuth;
+export default OAuthorization;

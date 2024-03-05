@@ -1,15 +1,12 @@
-import Authentication from '../../components/Auth';
-import OAuthorization from '../../components/OAuth';
+import AuthLiner from '../../components/AuthLiner';
+import Authentication from '../../components/Authentication';
+import OAuthorization from '../../components/OAuthorization';
 
 const Auth = () => {
   return (
     <div className='App'>
       <Authentication />
-      <div className='AuthOrLine'>
-        <p className='or'>
-          <span style={{ fontSize: 12 }}>OR</span>
-        </p>
-      </div>
+      <AuthLiner />
       <OAuthorization />
     </div>
   );

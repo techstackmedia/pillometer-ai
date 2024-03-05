@@ -5,7 +5,7 @@ import Content from '../shared/Content';
 import Logo from '../../logo.svg';
 import './index.css';
 
-const Auth = () => {
+const Authentication = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [keepSignedIn, setKeepSignedIn] = useState(false);
@@ -46,7 +46,6 @@ const Auth = () => {
         <Input
           type='email'
           placeholder='Email address'
-          // className='email-input'
           name='email'
           value={email}
           onChange={handleEmailChange}
@@ -55,7 +54,6 @@ const Auth = () => {
           <Input
             type={showPassword ? 'text' : 'password'}
             placeholder='Create password'
-            // className='password-input'
             name='password'
             value={password}
             onChange={handlePasswordChange}
@@ -90,4 +88,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Authentication;
