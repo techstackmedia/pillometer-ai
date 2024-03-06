@@ -1,17 +1,17 @@
-# Authentication Components Documentation
+## Authentication Components Documentation
 
 This documentation provides an overview of the components used in the authentication process of an application.
 
-## Components Overview
+### Components Overview
 
-### 1. **Agreement Component**
+#### 1. **Agreement Component**
 
 - **Description:** Renders an agreement content.
 - **Usage:** Used within the login component to display terms of use and privacy policy.
 - **Props:**
   - `children`: Content of the agreement.
 
-### 2. **Login Component**
+#### 2. **Login Component**
 
 - **Description:** Renders a login form.
 - **Usage:** Used for user authentication.
@@ -25,7 +25,7 @@ This documentation provides an overview of the components used in the authentica
   - `handleLoginCheckboxChange`: Function to handle checkbox input change.
   - `togglePasswordVisibility`: Function to toggle password visibility.
 
-### 3. **Register Component**
+#### 3. **Register Component**
 
 - **Description:** Renders a registration form.
 - **Usage:** Used for user registration.
@@ -43,7 +43,7 @@ This documentation provides an overview of the components used in the authentica
   - `handlePhoneNumberChange`: Function to handle phone number input change.
   - `handleCommunityCheckboxChange`: Function to handle community checkbox input change.
 
-### 4. **Authentication Component**
+#### 4. **Authentication Component**
 
 - **Description:** Renders the authentication process.
 - **Usage:** Used as the main component for authentication.
@@ -51,23 +51,23 @@ This documentation provides an overview of the components used in the authentica
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
   - `navigateToNextPage`: Function to navigate to the next page.
 
-### 5. **AuthLiner Component**
+#### 5. **AuthLiner Component**
 
 - **Description:** Renders a line indicating 'OR'.
 - **Usage:** Used for visual separation in the authentication process.
 - **Props:**
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
-### 6. **OAuthorization Component**
+#### 6. **OAuthorization Component**
 
 - **Description:** Renders authorization buttons.
 - **Usage:** Used for authorization through various platforms.
 - **Props:**
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
-## Shared Components
+### Shared Components
 
-### 1. **Button Component**
+#### 1. **Button Component**
 
 - **Description:** Renders a button element.
 - **Usage:** Used for various actions throughout the authentication process.
@@ -78,7 +78,7 @@ This documentation provides an overview of the components used in the authentica
   - `navigateToNextPage`: Function to navigate to the next page.
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
-### 2. **Content Component**
+#### 2. **Content Component**
 
 - **Description:** Renders content.
 - **Usage:** Used for displaying various content elements.
@@ -87,7 +87,7 @@ This documentation provides an overview of the components used in the authentica
   - `sx`: Additional styles for the content.
   - `children`: Content to be displayed.
 
-### 3. **Input Component**
+#### 3. **Input Component**
 
 - **Description:** Renders an input field.
 - **Usage:** Used for user input throughout the authentication process.
@@ -100,7 +100,16 @@ This documentation provides an overview of the components used in the authentica
   - `sx`: Additional styles for the input field.
   - `cn`: Additional classes for the input field.
 
-## Routes
+#### 4. **Card Component**
+
+- **Description:** Renders a card element.
+- **Usage:** Used for grouping related information.
+- **Props:**
+  - `children`: Content of the card.
+  - `cn`: Additional classes for the card.
+  - `sx`: Additional styles for the card.
+
+### Routes
 
 - **Description:** Defines routes for authentication pages.
 - **Usage:** Used for navigation between authentication pages.
