@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AuthLiner from '../../components/AuthLiner';
 import Authentication from '../../components/Authentication';
 import OAuthorization from '../../components/OAuthorization';
+import '../../App.css';
 
 const Auth = () => {
   const [isCurrentPage, setIsCurrentPage] = useState(false);
