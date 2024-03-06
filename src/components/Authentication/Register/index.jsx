@@ -26,7 +26,7 @@ const Register = ({
           value={firstName}
           onChange={handleFirstNameChange}
           placeholder='First Name'
-          sx={{ width: 230 }}
+          sx={{ width: 280 }}
         />
         <Input
           type='text'
@@ -34,7 +34,7 @@ const Register = ({
           value={lastName}
           onChange={handleLastNameChange}
           placeholder='Last Name'
-          sx={{ width: 230 }}
+          sx={{ width: 280 }}
         />
       </div>
       <div className={styles.dropdownInput}>
