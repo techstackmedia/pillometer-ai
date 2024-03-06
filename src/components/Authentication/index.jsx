@@ -26,7 +26,7 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
     setPassword(e.target.value);
   };
 
-  const handleCheckboxChange = (e) => {
+  const handleLoginCheckboxChange = (e) => {
     setKeepSignedIn(e.target.checked);
   };
 
@@ -102,7 +102,7 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
             showPassword={showPassword}
             keepSignedIn={keepSignedIn}
             handleEmailChange={handleEmailChange}
-            handleCheckboxChange={handleCheckboxChange}
+            handleLoginCheckboxChange={handleLoginCheckboxChange}
             handlePasswordChange={handlePasswordChange}
             togglePasswordVisibility={togglePasswordVisibility}
           />
