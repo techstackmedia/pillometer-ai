@@ -13,11 +13,10 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
         onChange={onChange}
         style={sx}
       />
-      {value?.length > 0 && (
-        <label htmlFor={name} className={styles['input-label']}>
-          {placeholder}
-        </label>
-      )}
+
+      <label htmlFor={name} className={styles['input-label']}>
+        {placeholder}
+      </label>
     </div>
   );
 };
