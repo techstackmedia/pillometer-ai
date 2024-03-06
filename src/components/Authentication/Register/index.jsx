@@ -1,5 +1,7 @@
 import Input from '../../shared/Input';
 import styles from './index.module.css';
+import dropdownIcon from '../../../images/arrowDropDown.png';
+import nigeriaFlag from '../../../images/nigeriaFlag.png';
 
 const Register = ({
   discover,
@@ -35,27 +37,45 @@ const Register = ({
           sx={{ width: 230 }}
         />
       </div>
-      <Input
-        type='tel'
-        name='telephone'
-        placeholder='Phone number'
-        value={phoneNumber}
-        onChange={handlePhoneNumberChange}
-      />
-      <Input
-        type='text'
-        name='profession'
-        placeholder='profession'
-        value={profession}
-        onChange={handleProfessionChange}
-      />
-      <Input
-        type='text'
-        name='discovered'
-        value={discover}
-        placeholder='How did you hear about us'
-        onChange={handleDiscoverChange}
-      />
+      <div className={styles.dropdownInput}>
+        <Input
+          type='tel'
+          name='telephone'
+          placeholder='Phone number'
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
+          sx={{ textIndent: 120 }}
+        />
+        <div className={styles.phoneNumberCode}>
+          <img src={nigeriaFlag} alt='nigeria flag icon' />
+          <span className={styles.countryCode}>+234</span>
+          <img
+            className={styles.dropdownCountryCode}
+            src={dropdownIcon}
+            alt='dropdown icon'
+          />
+        </div>
+      </div>
+      <div className={styles.dropdownInput}>
+        <Input
+          type='text'
+          name='profession'
+          placeholder='Profession'
+          value={profession}
+          onChange={handleProfessionChange}
+        />
+        <img src={dropdownIcon} alt='dropdown icon' />
+      </div>
+      <div className={styles.dropdownInput}>
+        <Input
+          type='text'
+          name='discovered'
+          value={discover}
+          placeholder='How did you hear about us'
+          onChange={handleDiscoverChange}
+        />
+        <img src={dropdownIcon} alt='dropdown icon' />
+      </div>
       <label className='paragraph' style={{ display: 'flex' }}>
         <input
           type='checkbox'
