@@ -8,7 +8,7 @@ const Login = ({
   keepSignedIn,
   handleEmailChange,
   handlePasswordChange,
-  handleCheckboxChange,
+  handleLoginCheckboxChange,
   togglePasswordVisibility,
 }) => {
   return (
@@ -36,7 +36,7 @@ const Login = ({
         <input
           type='checkbox'
           checked={keepSignedIn}
-          onChange={handleCheckboxChange}
+          onChange={handleLoginCheckboxChange}
         />
         <span style={{ marginLeft: 5 }}>Keep me signed in</span>
       </label>
