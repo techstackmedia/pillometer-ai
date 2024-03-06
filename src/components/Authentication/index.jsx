@@ -79,7 +79,7 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
           ? 'This information will help us curate a personalized experience'
           : null}
       </Content>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete='off'>
         {isCurrentPage ? (
           <Register
             discover={discover}
