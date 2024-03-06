@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Authentication Components Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This documentation provides an overview of the components used in the authentication process of an application.
 
-## Available Scripts
+## Components Overview
 
-In the project directory, you can run:
+### 1. **Agreement Component**
 
-### `npm start`
+- **Description:** Renders an agreement content.
+- **Usage:** Used within the login component to display terms of use and privacy policy.
+- **Props:**
+  - `children`: Content of the agreement.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. **Login Component**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Description:** Renders a login form.
+- **Usage:** Used for user authentication.
+- **Props:**
+  - `email`: User email.
+  - `password`: User password.
+  - `showPassword`: Boolean value indicating whether the password is visible.
+  - `keepSignedIn`: Boolean value indicating whether to keep the user signed in.
+  - `handleEmailChange`: Function to handle email input change.
+  - `handlePasswordChange`: Function to handle password input change.
+  - `handleLoginCheckboxChange`: Function to handle checkbox input change.
+  - `togglePasswordVisibility`: Function to toggle password visibility.
 
-### `npm test`
+### 3. **Register Component**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Description:** Renders a registration form.
+- **Usage:** Used for user registration.
+- **Props:**
+  - `discover`: How the user discovered the service.
+  - `lastName`: User's last name.
+  - `firstName`: User's first name.
+  - `profession`: User's profession.
+  - `phoneNumber`: User's phone number.
+  - `keepUpWithCommunity`: Boolean value indicating whether to share conversations with the community.
+  - `handleDiscoverChange`: Function to handle discover input change.
+  - `handleLastNameChange`: Function to handle last name input change.
+  - `handleFirstNameChange`: Function to handle first name input change.
+  - `handleProfessionChange`: Function to handle profession input change.
+  - `handlePhoneNumberChange`: Function to handle phone number input change.
+  - `handleCommunityCheckboxChange`: Function to handle community checkbox input change.
 
-### `npm run build`
+### 4. **Authentication Component**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Description:** Renders the authentication process.
+- **Usage:** Used as the main component for authentication.
+- **Props:**
+  - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
+  - `navigateToNextPage`: Function to navigate to the next page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 5. **AuthLiner Component**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Description:** Renders a line indicating 'OR'.
+- **Usage:** Used for visual separation in the authentication process.
+- **Props:**
+  - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
-### `npm run eject`
+### 6. **OAuthorization Component**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Description:** Renders authorization buttons.
+- **Usage:** Used for authorization through various platforms.
+- **Props:**
+  - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Shared Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. **Button Component**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Description:** Renders a button element.
+- **Usage:** Used for various actions throughout the authentication process.
+- **Props:**
+  - `children`: Button text or content.
+  - `sx`: Additional styles for the button.
+  - `cn`: Additional classes for the button.
+  - `navigateToNextPage`: Function to navigate to the next page.
+  - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
-## Learn More
+### 2. **Content Component**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Description:** Renders content.
+- **Usage:** Used for displaying various content elements.
+- **Props:**
+  - `cn`: Additional classes for the content.
+  - `sx`: Additional styles for the content.
+  - `children`: Content to be displayed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3. **Input Component**
 
-### Code Splitting
+- **Description:** Renders an input field.
+- **Usage:** Used for user input throughout the authentication process.
+- **Props:**
+  - `type`: Type of input field.
+  - `placeholder`: Placeholder text for the input field.
+  - `name`: Name of the input field.
+  - `value`: Value of the input field.
+  - `onChange`: Function to handle input change.
+  - `sx`: Additional styles for the input field.
+  - `cn`: Additional classes for the input field.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Routes
 
-### Analyzing the Bundle Size
+- **Description:** Defines routes for authentication pages.
+- **Usage:** Used for navigation between authentication pages.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm start
+```
