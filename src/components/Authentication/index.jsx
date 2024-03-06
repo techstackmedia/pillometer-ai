@@ -5,6 +5,8 @@ import Logo from '../../logo.svg';
 import './index.css';
 import Login from './Login';
 import Register from './Register';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../Navbar';
 
 const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
   const [email, setEmail] = useState('');
@@ -17,6 +19,10 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
   const [profession, setProfession] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [discover, setDiscover] = useState('');
+  const navigate = useNavigate();
+  const handleAuthNavigation = () => {
+    navigate('/auth/profile');
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -70,6 +76,7 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
 
   return (
     <>
+      <Navbar />
       <img src={Logo} alt='logo' className='logo' />
       <Content cn='heading'>
         {isCurrentPage ? 'Help us know you better' : "Let's Get You Started"}
@@ -107,14 +114,25 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
             togglePasswordVisibility={togglePasswordVisibility}
           />
         )}
-        <Button
-          type='submit'
-          sx={{ marginTop: 30 }}
-          navigateToNextPage={navigateToNextPage}
-          isCurrentPage={isCurrentPage}
-        >
-          {isCurrentPage ? 'Proceed' : 'Create Account'}
-        </Button>
+        {isCurrentPage ? (
+          <Button
+            type='submit'
+            sx={{ marginTop: 30 }}
+            navigateToNextPage={handleAuthNavigation}
+            isCurrentPage={isCurrentPage}
+          >
+            Proceed
+          </Button>
+        ) : (
+          <Button
+            type='submit'
+            sx={{ marginTop: 30 }}
+            navigateToNextPage={navigateToNextPage}
+            isCurrentPage={isCurrentPage}
+          >
+            Create Account
+          </Button>
+        )}
       </form>
     </>
   );
