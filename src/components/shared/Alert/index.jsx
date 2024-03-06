@@ -1,7 +1,7 @@
-import Content from '../shared/Content';
-import infoIcon from '../../images/infoIcon.png';
+import Content from '../Content';
+import infoIcon from '../../../images/infoIcon.png';
 import styles from './index.module.css';
-import Card from '../shared/Card';
+import Card from '../Card';
 
 const Alert = ({ children }) => {
   return (
