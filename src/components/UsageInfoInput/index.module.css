@@ -1,0 +1,25 @@
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.card {
+  background-color: transparent;
+  width: 44%;
+  padding: 15px;
+}
+
+.iconRadio {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card input {
+  border: 1px solid #c5c4d4;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
