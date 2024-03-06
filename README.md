@@ -65,6 +65,24 @@ This documentation provides an overview of the components used in the authentica
 - **Props:**
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
+#### 7. **Navbar Component**
+
+- **Description:** Renders navigation bar.
+- **Usage:** Used for navigation within the application.
+- **Props:** None
+
+#### 8. **Profile Component**
+
+- **Description:** Renders user profile information.
+- **Usage:** Used for displaying user details.
+- **Props:** None
+
+#### 9. **UsageInfoInput Component**
+
+- **Description:** Renders input options for usage information.
+- **Usage:** Used for collecting usage information.
+- **Props:** None
+
 ### Shared Components
 
 #### 1. **Button Component**
@@ -108,6 +126,13 @@ This documentation provides an overview of the components used in the authentica
   - `children`: Content of the card.
   - `cn`: Additional classes for the card.
   - `sx`: Additional styles for the card.
+
+#### 5. **Alert Component**
+
+- **Description:** Renders an alert message.
+- **Usage:** Used for displaying important information or notifications.
+- **Props:**
+  - `children`: Content of the alert.
 
 ### Routes
 
