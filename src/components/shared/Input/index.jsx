@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-// import { useLocation } from 'react-router-dom';
 import styles from './index.module.css';
 
 const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
-  // const { pathname } = useLocation();
   const [rows, setRows] = useState(1);
   const textareaRef = useRef(null);
 
@@ -12,7 +10,6 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
     setRows(newRows > 1 ? newRows : 1);
   }, [value]);
 
-  // Scroll textarea to the bottom when value changes
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
@@ -49,23 +46,10 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
   return (
     <div className={styles.inputContainer}>
       {inputElement}
-      {/* {pathname === '/' ? null : (
-        <label htmlFor={name} className={styles['input-label']}>
-          {placeholder}
-        </label>
-      )} */}
+
       {
         <label htmlFor={name} className={styles['input-label']}>
-          {type === 'textarea'
-            ? //   <img
-              //   src={micIcon}
-              //   width={16}
-              //   height={16}
-              //   alt='mic icon'
-              //   title='Click for voice Note Option'
-              // />
-              'Click for voice note option'
-            : placeholder}
+          {type === 'textarea' ? 'Click for voice note option' : placeholder}
         </label>
       }
     </div>
