@@ -4,10 +4,12 @@
   align-items: center;
   height: 80px;
   border-bottom: 1px solid #e8e7ee;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
+  background-color: #fff;
+  z-index: 2;
 }
 
 .navbar div:first-child {
