@@ -8,10 +8,10 @@ import styles from './index.module.css';
 
 const Chat = () => {
   const [value, setValue] = useState('');
-
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+  const valueLength = value.length;
 
   return (
     <div className={styles.input} style={{ marginBottom: 30, width: '68%' }}>
@@ -25,36 +25,52 @@ const Chat = () => {
       >
         <div style={{ position: 'relative', width: '100%' }}>
           <Input
-            type='text'
+            type={valueLength > 0 ? 'textarea' : 'text'}
             placeholder='Ask anything relating to your health'
-            sx={{ width: '100%', textIndent: 48, height: 32 }}
+            sx={{
+              width: '100%',
+              textIndent: valueLength > 0 ? 0 : 48,
+              paddingInline: valueLength > 0 ? 10 : null,
+              height: valueLength > 0 ? 'auto' : 32,
+              resize: 'none',
+              overflowY: 'hidden',
+              maxHeight: 360.532,
+            }}
             name='chatbox'
             value={value}
             onChange={handleChange}
+            autofocus
           />
-          <label>
+          {valueLength > 0 ? null : (
+            <label>
+              <img
+                src={searchIcon}
+                style={{ position: 'absolute', top: 31, left: 13 }}
+                alt='search icon'
+              />
+            </label>
+          )}
+          {valueLength > 0 ? null : (
             <img
-              src={searchIcon}
-              style={{ position: 'absolute', top: 31, left: 13 }}
-              alt='search icon'
+              src={micIcon}
+              style={{ position: 'absolute', top: 31, right: 13 }}
+              alt='mic icon'
             />
-          </label>
-          <img
-            src={micIcon}
-            style={{ position: 'absolute', top: 31, right: 13 }}
-            alt='mic icon'
-          />
+          )}
         </div>
         <button
           type='submit'
           style={{
             backgroundColor: value.length > 0 ? '#4C70D6' : '#C5C4D4',
-            height: 65,
-            width: '15%',
+            height: valueLength > 0 ? 45 : 63.3,
+            width: '72px',
             borderRadius: 8,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            position: valueLength > 0 ? 'fixed' : 'initial',
+            right: valueLength > 0 ? 243 : null,
+            bottom: valueLength > 0 ? 82 : null,
           }}
         >
           <img src={sendIcon} alt='send icon' />
