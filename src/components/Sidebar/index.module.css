@@ -38,8 +38,8 @@
   width: 95%;
   position: relative;
   left: 5%;
-  padding-block: 24px;
-  padding-left: 18px;
+  padding-block: 14px;
+  padding-left: 8px;
 }
 
 .section:first-child {
@@ -51,6 +51,7 @@
   font-family: 'Outfit', sans-serif;
   text-transform: uppercase;
   opacity: 0.5;
+  margin-left: 18px;
 }
 
 .address {
@@ -82,7 +83,14 @@
 }
 
 .tab {
-  margin-block: 30px;
+  margin-block: 20px;
+  padding: 10px 0 10px 20px;
+}
+
+.tab:hover {
+  background-color: #e8e7ee80;
+  border-radius: 8px;
+  width: 200px;
 }
 
 .section .tab:last-child {
