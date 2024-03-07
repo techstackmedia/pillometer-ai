@@ -1,6 +1,6 @@
-const Content = ({ cn, sx, children }) => {
+const Content = ({ cn, sx, children, handleContentClick }) => {
   return (
-    <div className={cn} style={sx}>
+    <div className={cn} style={sx} onClick={handleContentClick}>
       {children}
     </div>
   );
