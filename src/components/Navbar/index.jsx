@@ -13,13 +13,9 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <div>
-        <img src={logo} alt='' />
-        <Content
-          cn='heading'
-          sx={{ margin: 0, color: '#5EA3D6' }}
-          onClick={handleNavigate}
-        >
+      <div onClick={handleNavigate}>
+        <img src={logo} alt='pillometer logo' />
+        <Content cn='heading' sx={{ margin: 0, color: '#5EA3D6' }}>
           pillometer.ai
         </Content>
       </div>
