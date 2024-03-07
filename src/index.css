@@ -59,7 +59,8 @@ a {
   border-bottom: 1px solid #514f6d;
 }
 
-button {
+button,
+label {
   cursor: pointer;
 }
 

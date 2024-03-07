@@ -22,6 +22,7 @@
   pointer-events: none;
   background-color: #f9f9fb;
   padding: 4px;
+  cursor: pointer;
 }
 
 .input-field:focus + .input-label,

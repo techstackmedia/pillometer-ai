@@ -46,7 +46,6 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
   return (
     <div className={styles.inputContainer}>
       {inputElement}
-
       {
         <label htmlFor={name} className={styles['input-label']}>
           {type === 'textarea' ? 'Click for voice note option' : placeholder}

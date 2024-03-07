@@ -52,8 +52,14 @@ const Chat = () => {
           )}
           {valueLength > 0 ? null : (
             <img
+              style={{
+                position: 'absolute',
+                top: 31,
+                right: 13,
+                cursor: 'pointer',
+              }}
+              title='Click for voice note option'
               src={micIcon}
-              style={{ position: 'absolute', top: 31, right: 13 }}
               alt='mic icon'
             />
           )}
@@ -68,9 +74,10 @@ const Chat = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            position: valueLength > 0 ? 'fixed' : 'initial',
-            right: valueLength > 0 ? 243 : null,
+            position: valueLength > 0 ? 'absolute' : 'initial',
+            right: valueLength > 0 ? 235 : null,
             bottom: valueLength > 0 ? 82 : null,
+            cursor: valueLength > 0 ? 'pointer' : 'default',
           }}
         >
           <img src={sendIcon} alt='send icon' />
