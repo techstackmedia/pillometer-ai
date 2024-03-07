@@ -1,8 +1,6 @@
-## Authentication Components Documentation
+## Pilometer AI Documentation
 
-This documentation provides an overview of the components used in the authentication process of an application.
-
-### Components Overview
+### Authentication Components
 
 #### 1. **Agreement Component**
 
@@ -83,6 +81,73 @@ This documentation provides an overview of the components used in the authentica
 - **Usage:** Used for collecting usage information.
 - **Props:** None
 
+#### 10. **Chat Component**
+
+- **Description:** Renders a chat interface.
+- **Usage:** Used for communicating with the AI chatbot.
+- **Props:** None
+
+### Home Components
+
+#### 1. **Sidebar Component**
+
+- **Description:** Renders a sidebar navigation menu.
+- **Usage:** Used for navigation within the application.
+- **Props:** None
+
+#### 2. **Main Component**
+
+- **Description:** Renders the main content area.
+- **Usage:** Used for displaying the main content of the application.
+- **Props:** None
+
+### ProfileInfo Components
+
+#### 1. **ProfileInfo Component**
+
+- **Description:** Renders user profile information.
+- **Usage:** Used for displaying and updating user profile information.
+- **Props:** None
+
+#### 2. **Alert Component**
+
+- **Description:** Renders an alert message.
+- **Usage:** Used for displaying important information or notifications.
+- **Props:**
+  - `children`: Content of the alert.
+
+#### 3. **UsageInfoInput Component**
+
+- **Description:** Renders input options for usage information.
+- **Usage:** Used for collecting usage information.
+- **Props:** None
+
+#### 4. **Banner Component**
+
+- **Description:** Renders a banner element.
+- **Usage:** Used for displaying banner content.
+- **Props:**
+  - `children`: Content of the banner.
+  - `sx`: Additional styles for the banner.
+
+#### 5. **SymptomsSelectionInput Component**
+
+- **Description:** Renders input options for selecting symptoms.
+- **Usage:** Used for selecting symptoms during the health assessment process.
+- **Props:**
+  - `children`: Content of the input options.
+  - `cn`: Additional classes for styling.
+  - `sx`: Additional styles for styling.
+
+#### 6. **Card Component**
+
+- **Description:** Renders a card element.
+- **Usage:** Used for grouping related information.
+- **Props:**
+  - `children`: Content of the card.
+  - `cn`: Additional classes for styling.
+  - `sx`: Additional styles for styling.
+
 ### Shared Components
 
 #### 1. **Button Component**
@@ -103,7 +168,9 @@ This documentation provides an overview of the components used in the authentica
 - **Props:**
   - `cn`: Additional classes for the content.
   - `sx`: Additional styles for the content.
-  - `children`: Content to be displayed.
+  - `
+
+children`: Content to be displayed.
 
 #### 3. **Input Component**
 
@@ -140,6 +207,8 @@ This documentation provides an overview of the components used in the authentica
 - **Usage:** Used for navigation between authentication pages.
 
 ---
+
+To run the application, use the following commands:
 
 ```
 npm install
