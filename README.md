@@ -168,9 +168,7 @@
 - **Props:**
   - `cn`: Additional classes for the content.
   - `sx`: Additional styles for the content.
-  - `
-
-children`: Content to be displayed.
+  - `children`: Content to be displayed.
 
 #### 3. **Input Component**
 
