@@ -24,6 +24,7 @@ const Profile = () => {
               marginBlock: 0,
               marginLeft: pathname !== '/auth/profile' ? 0 : null,
               marginRight: 24,
+              fontFamily: "'Lato', sans-serif",
             }}
           >
             Babajide McKinsey
