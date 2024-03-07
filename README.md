@@ -142,5 +142,6 @@ This documentation provides an overview of the components used in the authentica
 ---
 
 ```
+npm install
 npm start
 ```
