@@ -1,0 +1,93 @@
+.sidebar {
+  width: 265px;
+  background-color: #f9f9fb;
+  position: fixed;
+  top: 81px;
+  left: 0;
+  height: calc(100vh - 81px);
+  overflow-y: auto;
+  border-right: 1px solid #e8e7ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.newChat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: none;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #4c70d6;
+  background-color: #fff;
+  align-items: center;
+  padding: 12px;
+  padding-inline: 24px;
+  border-radius: 999px;
+  width: 208px;
+  color: #4c70d6;
+}
+
+.section {
+  border-top: 1px solid #e8e7ee;
+  width: 95%;
+  position: relative;
+  left: 5%;
+  padding-block: 24px;
+  padding-left: 18px;
+}
+
+.section:first-child {
+  border-top: none;
+}
+
+.paragraph {
+  font-size: 12px;
+  font-family: 'Outfit', sans-serif;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.address {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+}
+
+.main:nth-child(1) .tab {
+  cursor: pointer;
+}
+
+.tab + button {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.section:last-child .paragraph {
+  text-transform: inherit;
+}
+
+.main:nth-child(2) .section:last-child .tab:first-child {
+  font-size: 12px;
+  margin-right: 24px;
+  margin-block: 1rem;
+  line-height: 1.55;
+}
+
+.tab {
+  margin-block: 30px;
+}
+
+.section .tab:last-child {
+  margin-bottom: 0;
+}
+
+.main:nth-child(2) .section:first-child {
+  border-top: 1px solid #e8e7ee;
+}
