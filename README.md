@@ -208,7 +208,8 @@
 
 To run the application, use the following commands:
 
-```
+```bash
+git clone https://github.com/Pillometer/pillometer-ai.git
 npm install
 npm start
 ```
