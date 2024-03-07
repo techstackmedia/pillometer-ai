@@ -1,6 +1,8 @@
+import { useLocation } from 'react-router-dom';
 import styles from './index.module.css';
 
 const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
+  const { pathname } = useLocation();
   return (
     <div className={styles.inputContainer}>
       <input
@@ -14,9 +16,11 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
         style={sx}
       />
 
-      <label htmlFor={name} className={styles['input-label']}>
-        {placeholder}
-      </label>
+      {pathname === '/' ? null : (
+        <label htmlFor={name} className={styles['input-label']}>
+          {placeholder}
+        </label>
+      )}
     </div>
   );
 };
