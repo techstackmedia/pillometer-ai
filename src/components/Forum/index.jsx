@@ -6,11 +6,11 @@ import searchIcon from '../../images/searchCommunity.png';
 import Button from '../shared/Button';
 import Card from '../shared/Card';
 import dropdownIcon from '../../images/arrowDropDown.png';
-import Question from '../Question';
 import thumbUpIcon from '../../images/thumbUp.png';
 import barChatIcon from '../../images/barChart.png';
 import Tags from '../Tag';
-import ChatResponse from '../ChatResponse';
+import QuestionList from '../QuestionList';
+import ChatResponseList from '../ChatResponseList';
 
 const Forum = () => {
   return (
@@ -67,12 +67,7 @@ const Forum = () => {
             width: '100%',
           }}
         >
-          <Question />
-          <Question />
-          <Question />
-          <Question />
-          <Question />
-          <Question />
+          <QuestionList />
         </div>
         <form style={{ position: 'relative', top: 20, width: '100%' }}>
           <Card cn={styles.qa}>
@@ -99,12 +94,7 @@ const Forum = () => {
             </div>
             <Tags sx={{ justifyContent: 'flex-end', marginBlock: 20 }} />
             <hr style={{ border: 0, borderTop: '1px solid #C5C4D4' }} />
-            <ChatResponse />
-            <ChatResponse />
-            <ChatResponse />
-            <ChatResponse />
-            <ChatResponse />
-            <ChatResponse />
+            <ChatResponseList />
           </Card>
         </form>
       </div>
