@@ -235,6 +235,12 @@
 - **Usage:** Used for displaying detailed information about a question and its responses in a chat format.
 - **Props:** None
 
+#### 5. **Question List Component**
+
+- **Description:** Renders a list of question components.
+- **Usage:** Used for displaying questions asked by the user.
+- **Props:** None
+
 ---
 
 To run the application, use the following commands:
