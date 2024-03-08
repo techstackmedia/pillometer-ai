@@ -6,7 +6,6 @@ import './index.css';
 import Login from './Login';
 import Register from './Register';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../Navbar';
 
 const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
   const [email, setEmail] = useState('');
@@ -76,7 +75,6 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
 
   return (
     <>
-      <Navbar />
       <img src={Logo} alt='logo' className='logo' />
       <Content cn='heading'>
         {isCurrentPage ? 'Help us know you better' : "Let's Get You Started"}
