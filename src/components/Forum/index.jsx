@@ -10,7 +10,7 @@ import Question from '../Question';
 import thumbUpIcon from '../../images/thumbUp.png';
 import barChatIcon from '../../images/barChart.png';
 import Tags from '../Tag';
-import ChatResponse from '../../ChatResponse';
+import ChatResponse from '../ChatResponse';
 
 const Forum = () => {
   return (
