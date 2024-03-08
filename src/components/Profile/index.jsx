@@ -13,7 +13,8 @@ const Profile = () => {
           src={profileImage}
           alt='person profile'
           style={{
-            borderColor: pathname !== '/auth/profile' ? 'transparent' : null,
+            borderColor:
+              pathname !== '/auth/profile' ? 'transparent' : '#5ebd75',
           }}
         />
         <div>
