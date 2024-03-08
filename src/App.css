@@ -20,6 +20,9 @@
   width: 80%;
   margin: auto;
   margin-block: 80;
-  max-height: 75vh;
+  /* max-height: 75vh; */
   overflow-y: auto;
+}
+.Detail::-webkit-scrollbar {
+  display: none;
 }
