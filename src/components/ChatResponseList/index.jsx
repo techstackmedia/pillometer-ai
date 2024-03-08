@@ -24,7 +24,7 @@ const ChatResponseList = () => {
         <ChatResponse />
         <ChatResponse />
       </div>
-      <Chat />
+      {pathname === '/community' ? null : <Chat />}
     </main>
   );
 };
