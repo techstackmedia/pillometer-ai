@@ -1,0 +1,28 @@
+/* .chatResponse:not(:first-child) {
+  margin-top: 40px;
+  background-color: red;
+} */
+
+.userQuestion {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+.userQuestion :first-child > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.userQuestion:last-child > img {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+}
+
+.editButton,
+.qaIcons img {
+  cursor: pointer;
+}
