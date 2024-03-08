@@ -64,6 +64,7 @@ const Forum = () => {
             flexDirection: 'column',
             maxHeight: '106vh',
             overflowY: 'auto',
+            width: '100%',
           }}
         >
           <Question />
@@ -73,7 +74,7 @@ const Forum = () => {
           <Question />
           <Question />
         </div>
-        <form style={{ position: 'relative', top: 20, width: '50%' }}>
+        <form style={{ position: 'relative', top: 20, width: '100%' }}>
           <Card cn={styles.qa}>
             <div
               style={{
