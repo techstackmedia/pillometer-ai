@@ -1,0 +1,14 @@
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+
+.tags > div {
+  background-color: #fff;
+  border: 1px solid #e8e7ee;
+  border-radius: 8px;
+  padding: 4px 8px 4px 8px;
+}

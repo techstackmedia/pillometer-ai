@@ -1,8 +1,8 @@
 import styles from './index.module.css';
 
-const Banner = ({ children, sx }) => {
+const Banner = ({ children, sx, cn }) => {
   return (
-    <div className={styles.banner} style={sx}>
+    <div className={`${cn} ${styles.banner}`} style={sx}>
       {children}
     </div>
   );

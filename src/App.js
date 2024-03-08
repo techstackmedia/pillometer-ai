@@ -3,6 +3,7 @@ import Auth from './pages/Auth';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProfileInfo from './pages/ProfileInfo';
 import Home from './pages/Home';
+import Community from './pages/Community';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/auth' element={<Auth />} />
           <Route path='/auth/profile' element={<ProfileInfo />} />
+          <Route path='/community' element={<Community />} />
         </Routes>
       </div>
     </BrowserRouter>

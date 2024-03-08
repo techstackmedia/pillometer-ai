@@ -6,7 +6,7 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
   const textareaRef = useRef(null);
 
   useEffect(() => {
-    const newRows = value.split('\n').length;
+    const newRows = value?.split('\n').length;
     setRows(newRows > 1 ? newRows : 1);
   }, [value]);
 

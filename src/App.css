@@ -15,3 +15,7 @@
   width: calc(100% - 265px);
   margin-left: auto;
 }
+
+.Detail::-webkit-scrollbar {
+  display: none;
+}

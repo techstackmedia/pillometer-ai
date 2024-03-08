@@ -2,7 +2,14 @@ import AddIcon from '../../images/add.png';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import editPenIcon from '../../images/editPen.png';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const handleCommunityNav = () => {
+    navigate('/community');
+  };
+  const { pathname } = useLocation();
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.main}>
@@ -22,7 +29,14 @@ const Sidebar = () => {
           <Content cn={styles.tab}>Hospitals</Content>
         </div>
         <div className={styles.section}>
-          <Content cn={styles.tab}>Community</Content>
+          <Content
+            handleContentClick={handleCommunityNav}
+            cn={`${styles.tab} ${
+              pathname === '/community' ? styles.active : undefined
+            }`}
+          >
+            Community
+          </Content>
           <Content cn={styles.tab}>Help & Feedback</Content>
         </div>
       </div>

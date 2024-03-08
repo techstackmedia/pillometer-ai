@@ -87,7 +87,8 @@
   padding: 10px 0 10px 20px;
 }
 
-.tab:hover {
+.tab:hover,
+.active {
   background-color: #e8e7ee80;
   border-radius: 8px;
   width: 200px;
