@@ -1,12 +1,12 @@
-import Content from '../components/shared/Content';
-import userProfileImage from '../images/userProgileImage.png';
-import editPenIcon from '../images/editPen.png';
+import Content from '../shared/Content';
+import userProfileImage from '../../images/userProgileImage.png';
+import editPenIcon from '../../images/editPen.png';
 import styles from './index.module.css';
-import copyIcon from '../images/copy.png';
-import reloadIcon from '../images/reload.png';
-import thumbUp from '../images/thumbUp.png';
-import thumbDown from '../images/thumbDown.png';
-import logo from '../logo.svg';
+import copyIcon from '../../images/copy.png';
+import reloadIcon from '../../images/reload.png';
+import thumbUp from '../../images/thumbUp.png';
+import thumbDown from '../../images/thumbDown.png';
+import logo from '../../logo.svg';
 import { useLocation } from 'react-router-dom';
 
 const ChatResponse = () => {
