@@ -1,0 +1,129 @@
+.main {
+  position: relative;
+}
+
+.main::before {
+  position: absolute;
+  content: 'Community';
+  color: #514f6d;
+  font-size: 20px;
+  top: -35px;
+  left: 45px;
+}
+
+.banner {
+  position: relative;
+  background: #4c70d6;
+  color: '#F9F9FB';
+  margin-top: 60px;
+}
+
+.banner::after {
+  position: absolute;
+  content: url('../../images/rightGroupBannerProfileImage.png');
+  right: 44px;
+  top: 30px;
+}
+
+.banner::before {
+  position: absolute;
+  content: url('../../images/leftGroupBannerProfileImage.png');
+  left: 44px;
+  top: 30px;
+}
+
+.topics {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-inline: 50px;
+}
+
+.topics:first-child {
+  margin-top: 30px;
+}
+
+.topics:last-child {
+  margin-top: 10px;
+}
+
+.topics .card:hover {
+  background-color: #fff;
+  border: 1px solid #4c70d6;
+}
+
+.topics form:first-child,
+.topics form:last-child {
+  position: relative;
+}
+
+.topics form:first-child input {
+  padding-left: 30px;
+}
+
+.topics form:last-child {
+  display: flex;
+  width: 40%;
+  gap: 10px;
+}
+
+.topics form:last-child button {
+  background-color: #fff;
+  border: 1px solid #e8e7ee;
+  color: #514f6d;
+  gap: 4px;
+}
+
+.topics form:last-child button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topics form:first-child img.img {
+  position: absolute;
+  top: 25px;
+  left: 15px;
+}
+
+.qa {
+  width: 100%;
+  max-height: 100vh;
+  overflow-y: auto;
+  margin-top: -5px;
+  padding: 20px;
+}
+
+.qa::-webkit-scrollbar,
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.likesSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 12px;
+}
+
+.likes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #e8e7ee;
+  background-color: #fff;
+  border-radius: 999px;
+  padding: 5px 10px;
+}
+
+.likes span {
+  font-family: 'Lato', sans-serif;
+}
+
+.likes img {
+  width: 16px;
+  height: 16px;
+}
