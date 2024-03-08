@@ -16,6 +16,10 @@
   margin-left: auto;
 }
 
-.Detail::-webkit-scrollbar {
-  display: none;
+.Detail {
+  width: 80%;
+  margin: auto;
+  margin-block: 80;
+  max-height: 75vh;
+  overflow-y: auto;
 }
