@@ -1,4 +1,4 @@
-## Pilometer AI Documentation
+## Pillometer AI Documentation
 
 ### Authentication Components
 
@@ -145,8 +145,8 @@
 - **Usage:** Used for grouping related information.
 - **Props:**
   - `children`: Content of the card.
-  - `cn`: Additional classes for styling.
-  - `sx`: Additional styles for styling.
+  - `cn`: Additional classes for the card.
+  - `sx`: Additional styles for the card.
 
 ### Shared Components
 
@@ -199,10 +199,32 @@
 - **Props:**
   - `children`: Content of the alert.
 
-### Routes
+### Community Components
 
-- **Description:** Defines routes for authentication pages.
-- **Usage:** Used for navigation between authentication pages.
+#### 1. **Question Component**
+
+- **Description:** Renders a question with associated metadata.
+- **Usage:** Used for displaying questions in the community forum.
+- **Props:** None
+
+#### 2. **Tag Component**
+
+- **Description:** Renders tags associated with a question.
+- **Usage:** Used for displaying tags in the community forum.
+- **Props:**
+  - `sx`: Additional styles for the tag container.
+
+#### 3. **ChatResponse Component**
+
+- **Description:** Renders a response to a question in a chat format.
+- **Usage:** Used for displaying responses to questions in the community forum.
+- **Props:** None
+
+#### 4. **Forum Component**
+
+- **Description:** Renders the community forum.
+- **Usage:** Used for displaying questions and responses in the community.
+- **Props:** None
 
 ---
 
