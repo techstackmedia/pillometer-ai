@@ -27,7 +27,7 @@ const Chat = () => {
               height: valueLength > 0 ? 'auto' : 32,
               resize: 'none',
               overflowY: 'hidden',
-              maxHeight: 360.532,
+              maxHeight: 351,
             }}
             name='chatbox'
             value={value}
