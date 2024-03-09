@@ -1,0 +1,18 @@
+.symptomsButton {
+  margin-top: 10px;
+  margin-inline: auto;
+  width: 68%;
+  background-color: #fff;
+  border: none;
+  color: #4c70d6;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diagnoseButton {
+  margin-top: 30px;
+  margin-inline: auto;
+  width: 68%;
+}
