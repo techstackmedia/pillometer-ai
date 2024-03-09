@@ -14,6 +14,7 @@
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   opacity: 0.5;
+  padding-right: 80px;
 }
 
 .inputPosition {
@@ -33,6 +34,12 @@
 
 .micIcon {
   right: 13px;
+}
+
+.micListening {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
 }
 
 .inputContainer button {

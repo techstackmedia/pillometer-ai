@@ -2,38 +2,91 @@ import Input from '../shared/Input';
 import searchIcon from '../../images/search.png';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Content from '../shared/Content';
 import styles from './index.module.css';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from 'react-speech-recognition';
 
 const Chat = () => {
   const [value, setValue] = useState('');
+  const [height, setHeight] = useState(32);
+  const { transcript, listening, browserSupportsContinuousListening } =
+    useSpeechRecognition();
+
+  const valueLength = value.length;
+
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-  const valueLength = value.length;
+  useEffect(() => {
+    setValue(transcript);
+    setHeight(351);
+  }, [transcript, listening]);
+
+  const startListening = () => {
+    if (browserSupportsContinuousListening) {
+      SpeechRecognition.startListening({ continuous: true });
+      console.log('hello');
+    } else {
+      return <span>Browser doesn't support speech recognition.</span>;
+    }
+  };
+
+  const stopListening = () => {
+    if (browserSupportsContinuousListening) {
+      SpeechRecognition.abortListening();
+    } else {
+      return <span>Browser doesn't support speech recognition.</span>;
+    }
+  };
 
   return (
     <div className={styles.input}>
       <div className={styles.inputContainer}>
         <div className={styles.inputPosition}>
-          <Input
-            type={valueLength > 0 ? 'textarea' : 'text'}
-            placeholder='Ask anything relating to your health'
-            sx={{
-              width: '100%',
-              textIndent: valueLength > 0 ? 0 : 48,
-              paddingInline: valueLength > 0 ? 10 : null,
-              height: valueLength > 0 ? 'auto' : 32,
-              resize: 'none',
-              overflowY: 'hidden',
-              maxHeight: 351,
-            }}
-            name='chatbox'
-            value={value}
-            onChange={handleChange}
-            autofocus
-          />
+          {transcript.length > 0 ? (
+            <Input
+              type={valueLength > 0 ? 'textarea' : 'text'}
+              placeholder='Ask anything relating to your health'
+              sx={{
+                width: '100%',
+                textIndent: valueLength > 0 ? 0 : 48,
+                paddingInline: valueLength > 0 ? 10 : null,
+                height: valueLength > 0 ? height : 32,
+                resize: 'none',
+                overflowY: 'hidden',
+                maxHeight: 351,
+              }}
+              name='chatbox-text-only'
+              value={value}
+              listening={listening}
+              stopListening={stopListening}
+              startListening={startListening}
+              onChange={handleChange}
+              autoFocus
+            />
+          ) : (
+            <Input
+              type={valueLength > 0 ? 'textarea' : 'text'}
+              placeholder='Ask anything relating to your health'
+              sx={{
+                width: '100%',
+                textIndent: valueLength > 0 ? 0 : 48,
+                paddingInline: valueLength > 0 ? 10 : null,
+                height: valueLength > 0 ? 'auto' : 32,
+                resize: 'none',
+                overflowY: 'hidden',
+                maxHeight: 351,
+                // opacity: 0.5,
+              }}
+              name='chatbox-text-to-speech'
+              value={value}
+              onChange={handleChange}
+              autoFocus
+            />
+          )}
           {valueLength > 0 ? null : (
             <label>
               <img
@@ -49,6 +102,7 @@ const Chat = () => {
               title='Click for voice note option'
               src={micIcon}
               alt='mic icon'
+              onClick={startListening}
             />
           )}
         </div>
