@@ -182,6 +182,9 @@
   - `onChange`: Function to handle input change.
   - `sx`: Additional styles for the input field.
   - `cn`: Additional classes for the input field.
+  - `stopListening`: Abort the text to speech conversion
+  - `startListening`: Start the text to speech conversion
+  - `listening`: Listen to user's speech for speech-text conversion
 
 #### 4. **Card Component**
 
@@ -223,9 +226,7 @@
 #### 4. **Forum Component**
 
 - **Description:** Renders the community forum.
-- **Usage:** Used
-
-for displaying questions and responses in the community.
+- **Usage:** Used for displaying questions and responses in the community.
 
 - **Props:** None
 
@@ -241,14 +242,12 @@ for displaying questions and responses in the community.
 - **Usage:** Used for displaying questions asked by the user.
 - **Props:** None
 
-### Community Components
+### Other Components
 
 #### 1. **Question Component**
 
 - **Description:** Renders a question with associated metadata.
-- **Usage:** Used for displaying questions in the community
-
-forum.
+- **Usage:** Used for displaying questions in the community forum.
 
 - **Props:** None
 
