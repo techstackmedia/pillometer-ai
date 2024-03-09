@@ -4,13 +4,13 @@ import Sidebar from '../../components/Sidebar';
 
 const ChatQADetail = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <div className='Main'>
         <Sidebar />
         <ChatResponseList />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ const ProfileInfo = () => {
   return (
     <>
       <Navbar />
-      <div className={`App ${styles.App}`} style={{}}>
+      <div className={`App ${styles.App}`}>
         <Profile />
         <Alert />
         <UsageInfoInput />

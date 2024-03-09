@@ -4,13 +4,13 @@ import Main from '../../components/Main';
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <div className='Main'>
         <Sidebar />
         <Main />
       </div>
-    </div>
+    </>
   );
 };
 

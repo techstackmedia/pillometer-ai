@@ -4,13 +4,13 @@ import Question from '../../components/Forum';
 
 const Community = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <div className='Main'>
         <Sidebar />
         <Question />
       </div>
-    </div>
+    </>
   );
 };
 
