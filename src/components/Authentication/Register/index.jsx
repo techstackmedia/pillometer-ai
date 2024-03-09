@@ -18,7 +18,7 @@ const Register = ({
   handleCommunityCheckboxChange,
 }) => {
   return (
-    <div>
+    <>
       <div className={styles.firstLastNameRow}>
         <Input
           type='text'
@@ -84,7 +84,7 @@ const Register = ({
           learning and system improvement.
         </span>
       </label>
-    </div>
+    </>
   );
 };
 
