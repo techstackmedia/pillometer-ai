@@ -5,3 +5,19 @@
   align-items: center;
   height: 100vh;
 }
+
+.responseDetailCommunity,
+.responseDetailNonCommunity {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.responseDetailCommunity {
+  width: 100%;
+}
+
+.responseDetailNonCommunity {
+  max-height: 75vh;
+}

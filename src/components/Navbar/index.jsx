@@ -15,9 +15,7 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div onClick={handleNavigate}>
         <img src={logo} alt='pillometer logo' />
-        <Content cn='heading' sx={{ margin: 0, color: '#5EA3D6' }}>
-          pillometer.ai
-        </Content>
+        <Content cn={`heading ${styles.heading}`}>pillometer.ai</Content>
       </div>
       {pathname === '/auth/profile' ? (
         <button type='button'>Close</button>

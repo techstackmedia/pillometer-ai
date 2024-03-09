@@ -14,16 +14,9 @@ const Chat = () => {
   const valueLength = value.length;
 
   return (
-    <div className={styles.input} style={{ marginBottom: 30, width: '68%' }}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: 18,
-        }}
-      >
-        <div style={{ position: 'relative', width: '100%' }}>
+    <div className={styles.input}>
+      <div className={styles.inputContainer}>
+        <div className={styles.inputPosition}>
           <Input
             type={valueLength > 0 ? 'textarea' : 'text'}
             placeholder='Ask anything relating to your health'
@@ -44,20 +37,15 @@ const Chat = () => {
           {valueLength > 0 ? null : (
             <label>
               <img
+                className={`${styles.icon} ${styles.searchIcon}`}
                 src={searchIcon}
-                style={{ position: 'absolute', top: 31, left: 13 }}
                 alt='search icon'
               />
             </label>
           )}
           {valueLength > 0 ? null : (
             <img
-              style={{
-                position: 'absolute',
-                top: 31,
-                right: 13,
-                cursor: 'pointer',
-              }}
+              className={`${styles.icon} ${styles.micIcon}`}
               title='Click for voice note option'
               src={micIcon}
               alt='mic icon'
@@ -66,31 +54,14 @@ const Chat = () => {
         </div>
         <button
           type='submit'
-          style={{
-            backgroundColor: value.length > 0 ? '#4C70D6' : '#C5C4D4',
-            height: valueLength > 0 ? 45 : 63.3,
-            width: '72px',
-            borderRadius: 8,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: valueLength > 0 ? 'absolute' : 'initial',
-            right: valueLength > 0 ? 235 : null,
-            bottom: valueLength > 0 ? 82 : null,
-            cursor: valueLength > 0 ? 'pointer' : 'default',
-          }}
+          className={
+            valueLength > 0 ? styles.inputValueNoneZero : styles.inputValueZero
+          }
         >
           <img src={sendIcon} alt='send icon' />
         </button>
       </div>
-      <Content
-        sx={{
-          opacity: 0.5,
-          textAlign: 'center',
-          width: '68%',
-          marginInline: 'auto',
-        }}
-      >
+      <Content cn={styles.adviceNote}>
         Information may be inaccurate. It is important you see a medical doctor
         to get prescription and advice.
       </Content>

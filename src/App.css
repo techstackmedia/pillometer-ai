@@ -19,7 +19,6 @@
 .Detail {
   width: 55%;
   margin: auto;
-  margin-block: 80;
   overflow-y: auto;
 }
 .Detail::-webkit-scrollbar {

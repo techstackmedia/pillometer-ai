@@ -10,27 +10,23 @@ const Profile = () => {
     <>
       <div className={styles.profile}>
         <img
+          className={
+            pathname !== '/auth/profile'
+              ? styles.nonProfilePageImage
+              : styles.profilePageImage
+          }
           src={profileImage}
           alt='person profile'
-          style={{
-            borderColor:
-              pathname !== '/auth/profile' ? 'transparent' : '#5ebd75',
-          }}
         />
         <div>
           <Content
-            cn='heading'
-            sx={{
-              fontSize: '1rem',
-              marginBlock: 0,
-              marginLeft: pathname !== '/auth/profile' ? 0 : null,
-              marginRight: 24,
-              fontFamily: "'Lato', sans-serif",
-            }}
+            cn={`heading ${styles.heading} ${
+              pathname !== '/auth/profile' ? styles.nonProfileMg : undefined
+            }`}
           >
             Babajide McKinsey
           </Content>
-          <Content cn='paragraph' sx={{ fontSize: 14, marginBlock: 0 }}>
+          <Content cn={`paragraph ${styles.paragraph}`}>
             b.mckinsey@gmail.com
           </Content>
         </div>

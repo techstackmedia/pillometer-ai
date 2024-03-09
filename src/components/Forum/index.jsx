@@ -15,32 +15,26 @@ import ChatResponseList from '../ChatResponseList';
 const Forum = () => {
   return (
     <div className={styles.main}>
-      <Banner
-        cn={styles.banner}
-        sx={{ backgroundColor: '#4c70d6', color: '#F9F9FB' }}
-      >
+      <Banner cn={styles.banner}>
         <div>
-          <Content
-            cn='heading'
-            sx={{ fontSize: 48, marginBlock: 0, color: '#F9F9FB' }}
-          >
+          <Content cn={`heading ${styles.heading}`}>
             Your Ultimate Wellness Partner
           </Content>
         </div>
-        <Content cn='paragraph' sx={{ fontSize: 16, marginBlock: 2 }}>
+        <Content cn={`paragraph ${styles.paragraph}`}>
           Your medical data and health information is confidential, protected
           and secured with end-to-end encryption.
         </Content>
-        <Content cn='paragraph' sx={{ fontSize: 16, marginBlock: 2 }}>
+        <Content cn={`paragraph ${styles.paragraph}`}>
           We are in compliance with ISO 9145930 data protection law.
         </Content>
       </Banner>
-      <div className={styles.topics} style={{ marginTop: 30 }}>
-        <form style={{ width: '50%' }}>
+      <div className={styles.topics}>
+        <form className={styles.searchForm}>
           <Input type='search' placeholder='Search topics of interest' />
           <img className={styles.img} src={searchIcon} alt='search icon' />
         </form>
-        <form style={{ width: '40%', marginTop: 5 }}>
+        <form className={styles.filterForm}>
           <Button>
             Most recent
             <img src={dropdownIcon} alt='dropdown icon' />
@@ -57,30 +51,13 @@ const Forum = () => {
       </div>
 
       <div className={styles.topics}>
-        <div
-          className={styles['scroll-hidden']}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            maxHeight: '106vh',
-            overflowY: 'auto',
-            width: '100%',
-          }}
-        >
+        <div className={`${styles['scroll-hidden']} ${styles.questions}`}>
           <QuestionList />
         </div>
-        <form style={{ position: 'relative', top: 20, width: '100%' }}>
+        <form className={styles.cardForm}>
           <Card cn={styles.qa}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div style={{ textTransform: 'uppercase', fontSize: 12 }}>
-                Posted 3 days ago
-              </div>
+            <div className={styles.viewLikes}>
+              <div className={styles.postView}>Posted 3 days ago</div>
               <div className={styles.likesSection}>
                 <div className={styles.likes}>
                   <img src={barChatIcon} alt='thumbs up icon' />
@@ -92,8 +69,8 @@ const Forum = () => {
                 </div>
               </div>
             </div>
-            <Tags sx={{ justifyContent: 'flex-end', marginBlock: 20 }} />
-            <hr style={{ border: 0, borderTop: '1px solid #C5C4D4' }} />
+            <Tags cn={styles.tags} />
+            <hr />
             <ChatResponseList />
           </Card>
         </form>

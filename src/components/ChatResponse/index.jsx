@@ -15,14 +15,8 @@ const ChatResponse = () => {
     <div className={styles.chatResponse}>
       <div className={styles.userQuestion}>
         <img src={userProfileImage} alt='user profile' />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <Content
-            cn='heading'
-            sx={{
-              fontSize: 20,
-              marginBlock: 0,
-            }}
-          >
+        <div cn={styles.questionHeading}>
+          <Content cn={`heading ${styles.question}`}>
             I am experiencing cough, sore throat and runny nose.
           </Content>
           {pathname !== '/community' ? (
@@ -33,26 +27,16 @@ const ChatResponse = () => {
                 width={12}
                 height={12}
               />{' '}
-              <span style={{ marginLeft: 5, fontSize: 14 }}>Edit</span>
+              <span className={styles.editIconText}>Edit</span>
             </div>
           ) : null}
         </div>
       </div>
 
-      <div className={styles.userQuestion} style={{ marginTop: 30 }}>
-        <img
-          src={logo}
-          alt='user profile'
-          style={{ border: '1px solid #DEE4F7', padding: 11 }}
-        />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <Content
-            cn='paragraph'
-            sx={{
-              fontSize: 16,
-              marginBlock: 0,
-            }}
-          >
+      <div className={styles.userQuestion}>
+        <img src={logo} alt='user profile' className={styles.userProfileImag} />
+        <div className={styles.chatResponseCol}>
+          <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
             I'm sorry to hear that you're not feeling well. It sounds like you
             might have a cold or a respiratory infection. It's important to
             rest, stay hydrated, and consider reaching out to a healthcare
@@ -60,26 +44,16 @@ const ChatResponse = () => {
             persist.
           </Content>
           {pathname !== '/community' ? (
-            <div
-              className='qaIcons'
-              style={{ display: 'flex', gap: 15, marginBottom: 30 }}
-            >
+            <div className={styles.qaIcons}>
               <img src={copyIcon} alt='copy icon' width={20} height={20} />{' '}
               <img src={reloadIcon} alt='copy icon' width={20} height={20} />{' '}
               <img src={thumbUp} alt='copy icon' width={20} height={20} />{' '}
               <img src={thumbDown} alt='copy icon' width={20} height={20} />
             </div>
           ) : (
-            <div
-              style={{
-                display: 'flex',
-                gap: 8,
-                marginBottom: 30,
-                cursor: 'pointer',
-              }}
-            >
+            <div className={styles.copyButton}>
               <img src={copyIcon} alt='copy icon' width={20} height={20} />{' '}
-              <span style={{ fontSize: 14 }}>Copy</span>
+              <span>Copy</span>
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 import Input from '../../shared/Input';
 import Agreement from '../../Agreement';
+import styles from './index.module.css';
 
 const Login = ({
   email,
@@ -20,7 +21,7 @@ const Login = ({
         value={email}
         onChange={handleEmailChange}
       />
-      <div style={{ position: 'relative' }}>
+      <div className={styles.inputPassword}>
         <Input
           type={showPassword ? 'text' : 'password'}
           placeholder='Create password'
@@ -28,17 +29,20 @@ const Login = ({
           value={password}
           onChange={handlePasswordChange}
         />
-        <span className='showPassword' onClick={togglePasswordVisibility}>
+        <span
+          className={styles.showPassword}
+          onClick={togglePasswordVisibility}
+        >
           {showPassword ? 'Hide' : 'Show'}
         </span>
       </div>
-      <label className='paragraph' style={{ display: 'flex' }}>
+      <label className={`paragraph ${styles.paragraph}`}>
         <input
           type='checkbox'
           checked={keepSignedIn}
           onChange={handleLoginCheckboxChange}
         />
-        <span style={{ marginLeft: 5 }}>Keep me signed in</span>
+        <span>Keep me signed in</span>
       </label>
       <Agreement>
         By continuing, you acknowledge you have read and agreed to our{' '}

@@ -16,6 +16,8 @@
   background: #4c70d6;
   color: '#F9F9FB';
   margin-top: 60px;
+  background-color: #4c70d6;
+  color: #f9f9fb;
 }
 
 .banner::after {
@@ -32,14 +34,22 @@
   top: 30px;
 }
 
+.heading {
+  font-size: 48;
+  margin-block: 0;
+  color: #f9f9fb;
+}
+
+.paragraph {
+  font-size: 16px;
+  margin-block: 2px;
+}
+
 .topics {
   display: flex;
   justify-content: space-between;
   gap: 24px;
   margin-inline: 50px;
-}
-
-.topics:first-child {
   margin-top: 30px;
 }
 
@@ -86,6 +96,29 @@
   left: 15px;
 }
 
+.searchForm {
+  width: 50%;
+}
+
+.filterForm {
+  width: 40%;
+  margin-top: 5px;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  max-height: 106vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.cardForm {
+  position: relative;
+  top: 20px;
+  width: 100%;
+}
+
 .qa {
   width: 100%;
   max-height: 100vh;
@@ -97,6 +130,17 @@
 .qa::-webkit-scrollbar,
 .scroll-hidden::-webkit-scrollbar {
   display: none;
+}
+
+.viewLikes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postView {
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .likesSection {
@@ -126,4 +170,18 @@
 .likes img {
   width: 16px;
   height: 16px;
+}
+
+.tags {
+  justify-content: flex-end;
+  margin-block: 20px;
+}
+
+.cardForm {
+  width: 100% !important;
+}
+
+.cardForm hr {
+  border: 0;
+  border-top: 1px solid #c5c4d4;
 }

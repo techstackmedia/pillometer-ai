@@ -16,15 +16,7 @@ const UsageInfoInput = () => {
 
   return (
     <>
-      <Content
-        cn='heading'
-        sx={{
-          color: '#514F6D',
-          fontSize: 24,
-          fontWeight: 400,
-          marginBlock: 0,
-        }}
-      >
+      <Content cn={`heading ${styles.heading}`}>
         For a better experience, kindly tell us who or why you're using
         pillometer.ai
       </Content>
@@ -40,7 +32,7 @@ const UsageInfoInput = () => {
                 onChange={() => handleOptionChange('personal')}
               />
             </div>
-            <Content cn='heading' sx={{ color: '#514F6D', fontSize: 20 }}>
+            <Content cn={`heading ${styles.usageInfoHeading}`}>
               Personal
             </Content>
             <Content cn='paragraph'>
@@ -60,7 +52,7 @@ const UsageInfoInput = () => {
                 onChange={() => handleOptionChange('friends-family')}
               />
             </div>
-            <Content cn='heading' sx={{ color: '#514F6D', fontSize: 20 }}>
+            <Content cn={`heading ${styles.usageInfoHeading}`}>
               Friends/Family
             </Content>
             <Content cn='paragraph'>
@@ -69,7 +61,7 @@ const UsageInfoInput = () => {
             </Content>
           </Card>
 
-          <Card cn={styles.card} sx={{ margin: 0, marginTop: -10 }}>
+          <Card cn={`${styles.card} ${styles.cardMg}`}>
             <div className={styles.iconRadio}>
               <img src={manageSearch} alt='person icon' />
               <input
@@ -79,7 +71,7 @@ const UsageInfoInput = () => {
                 onChange={() => handleOptionChange('health-consultant')}
               />
             </div>
-            <Content cn='heading' sx={{ color: '#514F6D', fontSize: 20 }}>
+            <Content cn={`heading ${styles.usageInfoHeading}`}>
               Health Consultant
             </Content>
             <Content cn='paragraph'>
@@ -88,7 +80,7 @@ const UsageInfoInput = () => {
             </Content>
           </Card>
         </div>
-        <Button sx={{ marginTop: 30 }}>Proceed</Button>
+        <Button cn={styles.proceedButton}>Proceed</Button>
       </form>
     </>
   );

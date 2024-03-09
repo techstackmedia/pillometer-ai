@@ -8,11 +8,7 @@ import Tags from '../Tag';
 
 const Question = () => {
   return (
-    <form
-      style={{
-        width: '100%',
-      }}
-    >
+    <form className={styles.questionForm}>
       <Card cn={styles.card}>
         <Tags />
         <div className={styles.questions}>
@@ -26,28 +22,15 @@ const Question = () => {
               <img src={thumbUp} alt='thumbs up icon' />
               <span>304</span>
             </div>
-            <div style={{ color: '#E8E7EE' }}>|</div>
+            <div className={styles.divider}>|</div>
             <div className={styles.likes}>
               <span>304</span>
               <img src={thumbDown} alt='thumb down icon' />
             </div>
           </div>
 
-          <div
-            className={styles.likesSection}
-            style={{ backgroundColor: 'transparent', border: 'none' }}
-          >
-            <div
-              className={styles.likes}
-              style={{
-                backgroundColor: '#fff',
-                border: '1px solid #e8e7ee',
-                borderRadius: 999,
-                padding: '5px 10px',
-                height: 23,
-                minWidth: 35,
-              }}
-            >
+          <div className={`${styles.likesSection} ${styles.sectionPostViews}`}>
+            <div className={`${styles.likes} ${styles.postDate}`}>
               <img src={viewBarIcon} alt='thumbs up icon' />
               <span>514</span>
             </div>

@@ -3,6 +3,15 @@
   justify-content: space-between;
 }
 
+.firstLastNameRow input:nth-child(1),
+.firstLastNameRow input:nth-child(2) {
+  width: 330px;
+}
+
+.dropdownInput input[type='tel'] {
+  text-indent: 120px;
+}
+
 .dropdownInput {
   position: relative;
 }
@@ -37,4 +46,12 @@
 .phoneNumberCode .dropdownCountryCode {
   top: 22px;
   left: 89px;
+}
+
+.checkbox {
+  display: flex;
+}
+
+.checkbox span {
+  margin-left: 5px;
 }

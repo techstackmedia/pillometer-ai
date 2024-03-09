@@ -1,3 +1,14 @@
 .symptom-heading {
   text-align: center;
 }
+
+.heading {
+  margin-block: 0;
+  margin-top: 45px;
+  color: #514f6d;
+}
+
+.paragraph {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}

@@ -26,7 +26,6 @@ const Register = ({
           value={firstName}
           onChange={handleFirstNameChange}
           placeholder='First Name'
-          sx={{ width: 330 }}
         />
         <Input
           type='text'
@@ -34,7 +33,6 @@ const Register = ({
           value={lastName}
           onChange={handleLastNameChange}
           placeholder='Last Name'
-          sx={{ width: 330 }}
         />
       </div>
       <div className={styles.dropdownInput}>
@@ -44,7 +42,6 @@ const Register = ({
           placeholder='Phone number'
           value={phoneNumber}
           onChange={handlePhoneNumberChange}
-          sx={{ textIndent: 120 }}
         />
         <div className={styles.phoneNumberCode}>
           <img src={nigeriaFlag} alt='nigeria flag icon' />
@@ -76,13 +73,13 @@ const Register = ({
         />
         <img src={dropdownIcon} alt='dropdown icon' />
       </div>
-      <label className='paragraph' style={{ display: 'flex' }}>
+      <label className={`paragraph ${styles.checkbox}`}>
         <input
           type='checkbox'
           checked={keepUpWithCommunity}
           onChange={handleCommunityCheckboxChange}
         />
-        <span style={{ marginLeft: 5 }}>
+        <span>
           Allow sharing of conversations with pillometer.ai for community
           learning and system improvement.
         </span>

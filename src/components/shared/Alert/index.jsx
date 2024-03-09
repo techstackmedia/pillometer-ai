@@ -8,7 +8,7 @@ const Alert = ({ children }) => {
     <Card cn={styles.alert}>
       {children}
       <img src={infoIcon} alt='info icon' width={24} height={24} />
-      <Content cn='paragraph' sx={{ margin: 0 }}>
+      <Content cn={`paragraph ${styles.paragraph}`}>
         Your medical data and health information is confidential, protected and
         secured with end-to-end encryption. We are in compliance with ISO
         9145930 data protection law.

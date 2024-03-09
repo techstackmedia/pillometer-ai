@@ -1,8 +1,9 @@
+import styles from './index.module.css';
 const AuthLiner = ({ isCurrentPage }) => {
   return isCurrentPage ? null : (
-    <div className='AuthOrLine'>
-      <p className='or'>
-        <span style={{ fontSize: 12 }}>OR</span>
+    <div className={styles.AuthOrLine}>
+      <p className={styles.or}>
+        <span>OR</span>
       </p>
     </div>
   );

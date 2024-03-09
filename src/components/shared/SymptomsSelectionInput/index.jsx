@@ -5,13 +5,10 @@ const SymptomsSelectionInput = ({ children, cn, sx }) => {
   return (
     <>
       <div className={styles['symptom-heading']}>
-        <Content
-          cn='heading'
-          sx={{ marginBlock: 0, marginTop: 45, color: '#514F6D' }}
-        >
+        <Content cn={`heading ${styles.heading}`}>
           What symptoms are you experiencing?
         </Content>
-        <Content cn='paragraph' sx={{ marginTop: 5, marginBottom: 30 }}>
+        <Content cn={`paragraph ${styles.paragraph}`}>
           You can select more than one option
         </Content>
       </div>

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import Button from '../shared/Button';
 import Content from '../shared/Content';
 import Logo from '../../logo.svg';
-import './index.css';
 import Login from './Login';
 import Register from './Register';
 import { useNavigate } from 'react-router-dom';
+import styles from './index.module.css';
 
 const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
   const [email, setEmail] = useState('');
@@ -79,12 +79,12 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
       <Content cn='heading'>
         {isCurrentPage ? 'Help us know you better' : "Let's Get You Started"}
       </Content>
-      <Content cn='paragraph' sx={{ marginTop: -13 }}>
+      <Content cn={`paragraph ${styles.info}`}>
         {isCurrentPage
           ? 'This information will help us curate a personalized experience'
           : null}
       </Content>
-      <form onSubmit={handleSubmit} autoComplete='off'>
+      <form className={styles.form} onSubmit={handleSubmit} autoComplete='off'>
         {isCurrentPage ? (
           <Register
             discover={discover}
@@ -115,7 +115,6 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
         {isCurrentPage ? (
           <Button
             type='submit'
-            sx={{ marginTop: 30 }}
             navigateToNextPage={handleAuthNavigation}
             isCurrentPage={isCurrentPage}
           >
@@ -124,7 +123,6 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
         ) : (
           <Button
             type='submit'
-            sx={{ marginTop: 30 }}
             navigateToNextPage={navigateToNextPage}
             isCurrentPage={isCurrentPage}
           >

@@ -1,3 +1,6 @@
+.questionForm {
+  width: 100% !important;
+}
 .card:hover {
   background-color: #fff;
   border: 1px solid #4c70d6;
@@ -65,4 +68,22 @@
   font-size: 40px;
   top: -35px;
   right: -5px;
+}
+
+.divider {
+  color: #e8e7ee;
+}
+
+.sectionPostViews {
+  background-color: transparent;
+  border: none;
+}
+
+.postDate {
+  background-color: #fff;
+  border: 1px solid #e8e7ee;
+  border-radius: 999;
+  padding: 5px 10px;
+  height: 23px;
+  min-width: 35px;
 }

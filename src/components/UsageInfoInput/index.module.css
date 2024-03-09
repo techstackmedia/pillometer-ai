@@ -1,3 +1,18 @@
+.heading,
+.usageInfoHeading {
+  color: #514f6d;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 400;
+  margin-block: 0;
+}
+
+.usageInfoHeading {
+  font-size: 20px;
+}
+
 .cardContainer {
   display: flex;
   justify-content: space-between;
@@ -11,6 +26,11 @@
   padding: 15px;
 }
 
+.cardMg {
+  margin: 0;
+  margin-top: -10px;
+}
+
 .iconRadio {
   display: flex;
   justify-content: space-between;
@@ -22,4 +42,8 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.proceedButton {
+  margin-top: 30px;
 }

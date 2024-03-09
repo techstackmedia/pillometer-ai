@@ -1,0 +1,23 @@
+.AuthOrLine {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #c5c4d4;
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  width: 700px;
+}
+
+.or {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -30px;
+  background-color: #fff;
+  padding-inline: 15px;
+}
+
+.or span {
+  font-size: 12;
+}

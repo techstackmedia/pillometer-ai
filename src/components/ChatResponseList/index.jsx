@@ -8,11 +8,11 @@ const ChatResponseList = () => {
   return (
     <main className={styles.main}>
       <div
-        className='Detail'
-        style={{
-          maxHeight: pathname === '/community' ? 'auto' : '75vh',
-          width: pathname === '/community' ? '100%' : null,
-        }}
+        className={`Detail ${
+          pathname === '/community'
+            ? styles.responseDetailCommunity
+            : styles.responseDetailNonCommunity
+        }`}
       >
         <ChatResponse />
         <ChatResponse />

@@ -21,3 +21,52 @@
 .qaIcons img {
   cursor: pointer;
 }
+
+.questionHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.question {
+  font-size: 20;
+  margin-block: 0;
+}
+
+.editIconText {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.userProfileImag {
+  border: 1px solid #dee4f7;
+  padding: 11px;
+}
+
+.chatResponseCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chatResponseParagraph {
+  font-size: 16px;
+  margin-block: 0;
+}
+
+.qaIcons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.copyButton {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.copyButton span {
+  font-size: 14px;
+}
