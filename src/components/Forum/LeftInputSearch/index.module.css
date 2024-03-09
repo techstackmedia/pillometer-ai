@@ -1,0 +1,9 @@
+.searchForm {
+  width: calc(50% - 12px);
+}
+
+.searchForm img {
+  position: absolute;
+  top: 25px;
+  left: 15px;
+}
