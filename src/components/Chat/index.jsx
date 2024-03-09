@@ -9,7 +9,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-const Chat = () => {
+const Chat = ({ setViewMore }) => {
   const [value, setValue] = useState('');
   const [height, setHeight] = useState(32);
   const { transcript, listening, browserSupportsContinuousListening } =
@@ -25,10 +25,15 @@ const Chat = () => {
     setHeight(351);
   }, [transcript, listening]);
 
+  useEffect(() => {
+    if (valueLength > 0) {
+      setViewMore(false);
+    }
+  }, [setViewMore, valueLength]);
+
   const startListening = () => {
     if (browserSupportsContinuousListening) {
       SpeechRecognition.startListening({ continuous: true });
-      console.log('hello');
     } else {
       return <span>Browser doesn't support speech recognition.</span>;
     }
