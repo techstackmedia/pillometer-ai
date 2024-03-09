@@ -141,10 +141,7 @@
 
 #### 6. **Card Component**
 
-- \*\*Description
-
-:\*\* Renders a card element.
-
+- **Description:** Renders a card element.
 - **Usage:** Used for grouping related information.
 - **Props:**
   - `children`: Content of the card.
@@ -226,7 +223,10 @@
 #### 4. **Forum Component**
 
 - **Description:** Renders the community forum.
-- **Usage:** Used for displaying questions and responses in the community.
+- **Usage:** Used
+
+for displaying questions and responses in the community.
+
 - **Props:** None
 
 #### 5. **ChatQADetail Component**
