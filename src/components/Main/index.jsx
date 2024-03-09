@@ -40,7 +40,7 @@ const Main = () => {
           handleViewMoreClick={handleViewMoreClick}
         />
       </main>
-      <Chat />
+      <Chat setViewMore={setViewMore} />
     </div>
   );
 };
