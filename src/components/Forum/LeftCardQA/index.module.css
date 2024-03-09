@@ -1,0 +1,11 @@
+.questions {
+  display: flex;
+  flex-direction: column;
+  max-height: 106vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
