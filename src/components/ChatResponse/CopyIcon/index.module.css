@@ -1,0 +1,10 @@
+.copyButton {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.copyButton span {
+  font-size: 14px;
+}
