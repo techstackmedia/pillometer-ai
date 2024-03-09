@@ -1,0 +1,25 @@
+.chatResponse {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 30px;
+}
+
+.userProfileImage {
+  border: 1px solid #dee4f7;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.chatResponseCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chatResponseParagraph {
+  font-size: 16px;
+  margin-block: 0;
+}
