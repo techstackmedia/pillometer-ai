@@ -14,7 +14,6 @@
 .banner {
   position: relative;
   background: #4c70d6;
-  color: '#F9F9FB';
   margin-top: 60px;
   background-color: #4c70d6;
   color: #f9f9fb;
@@ -35,7 +34,7 @@
 }
 
 .heading {
-  font-size: 48;
+  font-size: 48px;
   margin-block: 0;
   color: #f9f9fb;
 }
@@ -88,100 +87,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.topics form:first-child img.img {
-  position: absolute;
-  top: 25px;
-  left: 15px;
-}
-
-.searchForm {
-  width: 50%;
-}
-
-.filterForm {
-  width: 40%;
-  margin-top: 5px;
-}
-
-.questions {
-  display: flex;
-  flex-direction: column;
-  max-height: 106vh;
-  overflow-y: auto;
-  width: 100%;
-}
-
-.cardForm {
-  position: relative;
-  top: 20px;
-  width: 100%;
-}
-
-.qa {
-  width: 100%;
-  max-height: 100vh;
-  overflow-y: auto;
-  margin-top: -5px;
-  padding: 20px;
-}
-
-.qa::-webkit-scrollbar,
-.scroll-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-.viewLikes {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.postView {
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.likesSection {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: 12px;
-}
-
-.likes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  background-color: #fff;
-  border: 1px solid #e8e7ee;
-  background-color: #fff;
-  border-radius: 999px;
-  padding: 5px 10px;
-}
-
-.likes span {
-  font-family: 'Lato', sans-serif;
-}
-
-.likes img {
-  width: 16px;
-  height: 16px;
-}
-
-.tags {
-  justify-content: flex-end;
-  margin-block: 20px;
-}
-
-.cardForm {
-  width: 100% !important;
-}
-
-.cardForm hr {
-  border: 0;
-  border-top: 1px solid #c5c4d4;
 }
