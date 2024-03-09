@@ -25,6 +25,13 @@
   cursor: pointer;
 }
 
+.input-label span {
+  cursor: pointer;
+  user-select: none;
+  z-index: 200;
+  pointer-events: auto;
+}
+
 .input-field:focus + .input-label,
 .input-field:not(:placeholder-shown) + .input-label {
   top: 0;

@@ -1,7 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './index.module.css';
 
-const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
+const Input = ({
+  type,
+  placeholder,
+  name,
+  value,
+  onChange,
+  sx,
+  cn,
+  stopListening,
+  startListening,
+  listening,
+}) => {
   const [rows, setRows] = useState(1);
   const textareaRef = useRef(null);
 
@@ -48,7 +59,13 @@ const Input = ({ type, placeholder, name, value, onChange, sx, cn }) => {
       {inputElement}
       {
         <label htmlFor={name} className={styles['input-label']}>
-          {type === 'textarea' ? 'Click for voice note option' : placeholder}
+          {type === 'textarea' && listening ? (
+            <span onClick={stopListening}>Stop Text-To-Speech</span>
+          ) : (
+            <span onClick={startListening}>
+              {listening === undefined ? placeholder : 'Start Text-To-Speech'}
+            </span>
+          )}
         </label>
       }
     </div>
