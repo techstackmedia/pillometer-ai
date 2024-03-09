@@ -241,6 +241,120 @@ for displaying questions and responses in the community.
 - **Usage:** Used for displaying questions asked by the user.
 - **Props:** None
 
+### Community Components
+
+#### 1. **Question Component**
+
+- **Description:** Renders a question with associated metadata.
+- **Usage:** Used for displaying questions in the community
+
+forum.
+
+- **Props:** None
+
+#### 2. **Tag Component**
+
+- **Description:** Renders tags associated with a question.
+- **Usage:** Used for displaying tags in the community forum.
+- **Props:**
+  - `sx`: Additional styles for the tag container.
+
+#### 3. **ChatResponse Component**
+
+- **Description:** Renders a response to a question in a chat format.
+- **Usage:** Used for displaying responses to questions in the community forum.
+- **Props:** None
+
+#### 4. **Forum Component**
+
+- **Description:** Renders the community forum.
+- **Usage:** Used for displaying questions and responses in the community.
+- **Props:** None
+
+#### 5. **ChatQADetail Component**
+
+- **Description:** Renders the detail page for a question and its responses.
+- **Usage:** Used for displaying detailed information about a question and its responses in a chat format.
+- **Props:** None
+
+#### 6. **Question List Component**
+
+- **Description:** Renders a list of question components.
+- **Usage:** Used for displaying questions asked by the user.
+- **Props:** None
+
+#### 7. **CopyIcon Component**
+
+- **Description:** Renders an icon for copying content.
+- **Usage:** Used for copying content in the application.
+- **Props:** None
+
+#### 8. **QAIcon Component**
+
+- **Description:** Renders icons for question and answer actions.
+- **Usage:** Used for displaying icons related to questions and answers.
+- **Props:** None
+
+#### 9. **ChatResponseList Component**
+
+- **Description:** Renders a list of chat responses.
+- **Usage:** Used for displaying a list of responses in a chat format.
+- **Props:** None
+
+#### 10. **LeftCardQA Component**
+
+- **Description:** Renders the left side of the question and answer card.
+- **Usage:** Used for displaying the left side of the question and answer card.
+- **Props:** None
+
+#### 11. **RightCardQA Component**
+
+- **Description:** Renders the right side of the question and answer card.
+- **Usage:** Used for displaying the right side of the question and answer card.
+- **Props:** None
+
+#### 12. **LeftInputSearch Component**
+
+- **Description:** Renders an input field for searching.
+- **Usage:** Used for searching within the application.
+- **Props:** None
+
+#### 13. **RightFilterButton Component**
+
+- **Description:** Renders filter buttons.
+- **Usage:** Used for filtering content in the application.
+- **Props:** None
+
+#### 14. **Symptom Button Component**
+
+- **Description:** Renders a button for symptom actions.
+- **Usage:** Used for symptom-related actions.
+- **Props:**
+  - `viewMore`: Boolean value indicating whether to view more symptoms.
+  - `handleViewMoreClick`: Function to handle view more click.
+
+#### 15. **SymptomList Component**
+
+- **Description:** Renders a list of symptoms.
+- **Usage:** Used for displaying a list of symptoms.
+- **Props:**
+  - `viewMore`: Boolean value indicating whether to view more symptoms.
+
+#### 16. **CompleteSymptomList Component**
+
+- **Description:** Renders a complete list of symptoms.
+- **Usage:** Used for displaying a complete list of symptoms.
+- **Props:**
+  - `viewMore`: Boolean value indicating whether to view more symptoms.
+  - `fullSymptomList`: Array of all symptoms.
+
+#### 17. **IncompleteSymptomList Component**
+
+- **Description:** Renders an incomplete list of symptoms.
+- **Usage:** Used for displaying an incomplete list of symptoms.
+- **Props:**
+  - `symptoms`: Array of selected symptoms.
+
 ---
 
 To run the application, use the following commands:
