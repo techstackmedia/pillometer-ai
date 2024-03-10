@@ -1,6 +1,8 @@
 .input {
   margin-bottom: 30px;
   width: 68%;
+  position: fixed;
+  bottom: 0;
 }
 
 .inputContainer {
@@ -8,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 18px;
+  background-color: #fff;
 }
 
 .input textarea[placeholder] {
@@ -53,9 +56,9 @@
 .inputValueNoneZero {
   background-color: #4c70d6;
   height: 45px;
-  position: absolute;
-  right: 15.5%;
-  bottom: 82px;
+  position: fixed;
+  right: 8.2%;
+  bottom: 63px;
   cursor: pointer;
 }
 
