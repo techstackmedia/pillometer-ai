@@ -24,6 +24,7 @@ const Input = ({
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+      textareaRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [value]);
 
