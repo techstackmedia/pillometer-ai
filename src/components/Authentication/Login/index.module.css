@@ -13,8 +13,25 @@
 
 .paragraph {
   display: flex;
+  margin-block: 0;
 }
 
 .paragraph span {
   margin-left: 5px;
+}
+
+.alert {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.heading {
+  margin-block: 0;
+  font-size: 1rem;
+}
+
+.paragraphText {
+  margin: 0;
 }
