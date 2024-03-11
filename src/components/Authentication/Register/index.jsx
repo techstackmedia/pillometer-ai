@@ -1,89 +1,96 @@
+import { useContext } from 'react';
+import Agreement from '../../Agreement';
 import Input from '../../shared/Input';
-import styles from './index.module.css';
-import dropdownIcon from '../../../images/arrowDropDown.png';
-import nigeriaFlag from '../../../images/nigeriaFlag.png';
+import styles from '../Login/index.module.css';
+import { AuthSignupContext } from '../../../context/Auth/Register';
+import Alert from '../../shared/Alert';
+import Content from '../../shared/Content';
 
-const Register = ({
-  discover,
-  lastName,
-  firstName,
-  profession,
-  phoneNumber,
-  keepUpWithCommunity,
-  handleDiscoverChange,
-  handleLastNameChange,
-  handleFirstNameChange,
-  handleProfessionChange,
-  handlePhoneNumberChange,
-  handleCommunityCheckboxChange,
-}) => {
+const Register = () => {
+  const {
+    emailReg,
+    passwordReg,
+    keepSignedup,
+    signupError,
+    // isSignup,
+    handleEmailChangeReg,
+    handlePasswordChangeReg,
+    handleCheckboxChangeReg,
+    togglePasswordVisibilityReg,
+    showPasswordReg,
+  } = useContext(AuthSignupContext);
   return (
     <>
-      <div className={styles.firstLastNameRow}>
-        <Input
-          type='text'
-          name='firstName'
-          value={firstName}
-          onChange={handleFirstNameChange}
-          placeholder='First Name'
-        />
-        <Input
-          type='text'
-          name='lastName'
-          value={lastName}
-          onChange={handleLastNameChange}
-          placeholder='Last Name'
-        />
+      <div className={styles.alert}>
+        {signupError && (
+          <Alert>
+            <Content cn={`heading ${styles.heading}`}>{signupError}</Content>
+          </Alert>
+        )}
       </div>
-      <div className={styles.dropdownInput}>
+      <style>{`
+        input[type='email'] {
+          border: ${
+            String(signupError).toLowerCase().split(' ').includes('email')
+              ? '1px solid red'
+              : ''
+          };
+        }
+
+        input[type='password'] {
+          border: ${
+            String(signupError).toLowerCase().split(' ').includes('password')
+              ? '1px solid red'
+              : ''
+          };
+        }
+      `}</style>
+      <Input
+        type='email'
+        placeholder='Email address'
+        name='email'
+        value={emailReg}
+        onChange={handleEmailChangeReg}
+      />
+      <div className={styles.inputPassword}>
         <Input
-          type='tel'
-          name='telephone'
-          placeholder='Phone number'
-          value={phoneNumber}
-          onChange={handlePhoneNumberChange}
+          type={showPasswordReg ? 'text' : 'password'}
+          placeholder='Create password'
+          name='password'
+          value={passwordReg}
+          onChange={handlePasswordChangeReg}
         />
-        <div className={styles.phoneNumberCode}>
-          <img src={nigeriaFlag} alt='nigeria flag icon' />
-          <span className={styles.countryCode}>+234</span>
-          <img
-            className={styles.dropdownCountryCode}
-            src={dropdownIcon}
-            alt='dropdown icon'
-          />
-        </div>
+        <span
+          className={styles.showPassword}
+          onClick={togglePasswordVisibilityReg}
+        >
+          {showPasswordReg ? 'Hide' : 'Show'}
+        </span>
       </div>
-      <div className={styles.dropdownInput}>
-        <Input
-          type='text'
-          name='profession'
-          placeholder='Profession'
-          value={profession}
-          onChange={handleProfessionChange}
-        />
-        <img src={dropdownIcon} alt='dropdown icon' />
-      </div>
-      <div className={styles.dropdownInput}>
-        <Input
-          type='text'
-          name='discovered'
-          value={discover}
-          placeholder='How did you hear about us'
-          onChange={handleDiscoverChange}
-        />
-        <img src={dropdownIcon} alt='dropdown icon' />
-      </div>
-      <label className={`paragraph ${styles.checkbox}`}>
+
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 5,
+        }}
+      >
         <input
           type='checkbox'
-          checked={keepUpWithCommunity}
-          onChange={handleCommunityCheckboxChange}
+          checked={keepSignedup}
+          onChange={handleCheckboxChangeReg}
         />
-        <span>
-          Allow sharing of conversations with pillometer.ai for community
-          learning and system improvement.
-        </span>
-      </label>
+        <Agreement>
+          By continuing, you acknowledge you have read and agreed to our{' '}
+          <a href='/#' target='_blank' rel='noopener noreferrer'>
+            Teams of Use
+          </a>{' '}
+          and{' '}
+          <a href='/#' target='_blank' rel='noopener noreferrer'>
+            Privacy Policy
+          </a>
+        </Agreement>
+      </div>
     </>
   );
 };
