@@ -2,7 +2,7 @@ import Content from '../shared/Content';
 import styles from './index.module.css';
 import logo from '../../logo.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Profile from '../Profile';
+import ProfileImageInfo from '../ProfileImageInfo';
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -20,7 +20,7 @@ const Navbar = () => {
       {pathname === '/auth/profile' ? (
         <button type='button'>Close</button>
       ) : (
-        <Profile />
+        <ProfileImageInfo />
       )}
     </div>
   );
