@@ -30,4 +30,25 @@ const defaultSignupValues = {
   successMessageReg: null,
 };
 
-export { defaultSigninValues, defaultSignupValues };
+const defaultProfileValues = {
+  profile: null,
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  profession: '',
+  discover: '',
+  keepUpWithCommunity: false,
+  errorMessage: null,
+  handleProfileSubmit: () => {},
+  updateProfile: () => {},
+  handleFirstNameChange: () => {},
+  handleLastNameChange: () => {},
+  handlePhoneNumberChange: () => {},
+  handleProfessionChange: () => {},
+  handleDiscoverChange: () => {},
+  handleCommunityCheckboxChange: () => {},
+  navigateToNextPage: () => {},
+  isCurrentPage: false,
+};
+
+export { defaultSigninValues, defaultSignupValues, defaultProfileValues };
