@@ -1,40 +1,54 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from '../shared/Button';
 import Content from '../shared/Content';
 import Logo from '../../logo.svg';
 import Login from './Login';
 import Register from './Register';
-import { useNavigate } from 'react-router-dom';
+import Profile from './Profile';
+import { useLocation } from 'react-router-dom';
 import styles from './index.module.css';
+import { AuthSigninContext } from '../../context/Auth/Signin';
+import { AuthSignupContext } from '../../context/Auth/Register';
 
-const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [keepSignedIn, setKeepSignedIn] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+const Authentication = ({ isCurrentPage /* , navigateToNextPage */ }) => {
+  const {
+    email,
+    password,
+    keepSignedIn,
+    signinError,
+    errorMessage,
+    isSigningIn,
+    handleEmailChange,
+    handlePasswordChange,
+    handleLoginCheckboxChange,
+    handleSigninSubmit,
+    togglePasswordVisibility,
+    showPassword,
+    successMessage,
+  } = useContext(AuthSigninContext);
+  const {
+    emailReg,
+    passwordReg,
+    keepSignedup,
+    signupError,
+    errorMessageReg,
+    isSignup,
+    handleEmailChangeReg,
+    handlePasswordChangeReg,
+    handleCheckboxChangeReg,
+    handleSignupSubmit,
+    togglePasswordVisibilityReg,
+    showPasswordReg,
+    successMessageReg,
+  } = useContext(AuthSignupContext);
+
+  const { pathname } = useLocation();
   const [keepUpWithCommunity, setKeepUpWithCommunity] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [profession, setProfession] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [discover, setDiscover] = useState('');
-  const navigate = useNavigate();
-  const handleAuthNavigation = () => {
-    navigate('/auth/profile');
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleLoginCheckboxChange = (e) => {
-    setKeepSignedIn(e.target.checked);
-  };
-
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
   };
@@ -59,20 +73,6 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
     setKeepUpWithCommunity(e.target.checked);
   };
 
-  const togglePasswordVisibility = () => {
-    if (showPassword === false) {
-      setShowPassword(!showPassword);
-    } else {
-      setShowPassword(false);
-    }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Keep me signed in:', keepSignedIn);
-  };
-
   return (
     <>
       <img src={Logo} alt='logo' className='logo' />
@@ -84,52 +84,83 @@ const Authentication = ({ isCurrentPage, navigateToNextPage }) => {
           ? 'This information will help us curate a personalized experience'
           : null}
       </Content>
-      <form className={styles.form} onSubmit={handleSubmit} autoComplete='off'>
-        {isCurrentPage ? (
-          <Register
-            discover={discover}
-            lastName={lastName}
-            firstName={firstName}
-            profession={profession}
-            phoneNumber={phoneNumber}
-            keepUpWithCommunity={keepUpWithCommunity}
-            handleDiscoverChange={handleDiscoverChange}
-            handleLastNameChange={handleLastNameChange}
-            handleFirstNameChange={handleFirstNameChange}
-            handleProfessionChange={handleProfessionChange}
-            handlePhoneNumberChange={handlePhoneNumberChange}
-            handleCommunityCheckboxChange={handleCommunityCheckboxChange}
-          />
-        ) : (
-          <Login
-            email={email}
-            password={password}
-            showPassword={showPassword}
-            keepSignedIn={keepSignedIn}
-            handleEmailChange={handleEmailChange}
-            handleLoginCheckboxChange={handleLoginCheckboxChange}
-            handlePasswordChange={handlePasswordChange}
-            togglePasswordVisibility={togglePasswordVisibility}
-          />
-        )}
-        {isCurrentPage ? (
+      {pathname !== '/auth/register' ? (
+        <form
+          className={styles.form}
+          onSubmit={pathname === '/auth/profile' ? null : handleSigninSubmit}
+          autoComplete='off'
+        >
+          {isCurrentPage ? (
+            <Profile
+              discover={discover}
+              lastName={lastName}
+              firstName={firstName}
+              profession={profession}
+              phoneNumber={phoneNumber}
+              keepUpWithCommunity={keepUpWithCommunity}
+              handleDiscoverChange={handleDiscoverChange}
+              handleLastNameChange={handleLastNameChange}
+              handleFirstNameChange={handleFirstNameChange}
+              handleProfessionChange={handleProfessionChange}
+              handlePhoneNumberChange={handlePhoneNumberChange}
+              handleCommunityCheckboxChange={handleCommunityCheckboxChange}
+            />
+          ) : (
+            <Login
+              email={email}
+              password={password}
+              keepSignedIn={keepSignedIn}
+              signinError={signinError}
+              errorMessage={errorMessage}
+              isSigningIn={isSigningIn}
+              handleEmailChange={handleEmailChange}
+              handlePasswordChange={handlePasswordChange}
+              handleLoginCheckboxChange={handleLoginCheckboxChange}
+              handleSubmit={handleSigninSubmit}
+              togglePasswordVisibility={togglePasswordVisibility}
+              showPassword={showPassword}
+              successMessage={successMessage}
+            />
+          )}
           <Button
             type='submit'
-            navigateToNextPage={handleAuthNavigation}
+            // navigateToNextPage={handleAuthNavigation}
             isCurrentPage={isCurrentPage}
           >
-            Proceed
+            {pathname === '/auth/login' ? 'Sign in' : 'Proceed'}
           </Button>
-        ) : (
+        </form>
+      ) : (
+        <form
+          className={styles.form}
+          onSubmit={handleSignupSubmit}
+          autoComplete='off'
+        >
+          <Register
+            emailReg={emailReg}
+            passwordReg={passwordReg}
+            keepSignedup={keepSignedup}
+            signupError={signupError}
+            errorMessageReg={errorMessageReg}
+            isSignup={isSignup}
+            handleEmailChangeReg={handleEmailChangeReg}
+            handlePasswordChangeReg={handlePasswordChangeReg}
+            handleCheckboxChangeReg={handleCheckboxChangeReg}
+            handleSignupSubmit={handleSignupSubmit}
+            togglePasswordVisibilityReg={togglePasswordVisibilityReg}
+            showPasswordReg={showPasswordReg}
+            successMessageReg={successMessageReg}
+          />
+
           <Button
             type='submit'
-            navigateToNextPage={navigateToNextPage}
+            // navigateToNextPage={navigateToNextPage}
             isCurrentPage={isCurrentPage}
           >
             Create Account
           </Button>
-        )}
-      </form>
+        </form>
+      )}
     </>
   );
 };
