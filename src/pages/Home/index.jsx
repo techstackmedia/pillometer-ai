@@ -11,8 +11,10 @@ const Home = () => {
   const location = useLocation();
   const token = location.state.token;
   const status = location.state.status;
+  const profile = location.state.profile;
   const { successMessage } = useContext(AuthSigninContext);
   localStorage.setItem('token', token);
+  location.setItem('profile', profile);
 
   return (
     <>
