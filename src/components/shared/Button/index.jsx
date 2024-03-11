@@ -1,10 +1,13 @@
+import { useContext } from 'react';
 import styles from './index.module.css';
-const Button = ({ children, sx, cn, navigateToNextPage, isCurrentPage }) => {
-  console.log(isCurrentPage);
+import { AuthProfileContext } from '../../../context/Auth/Profile';
+const Button = ({ children, sx, cn, type }) => {
+  const { navigateToNextPage } = useContext(AuthProfileContext);
   return (
     <button
       className={`${styles.button} ${cn}`}
       style={sx}
+      type={type}
       onClick={navigateToNextPage}
     >
       {children}
@@ -13,3 +16,7 @@ const Button = ({ children, sx, cn, navigateToNextPage, isCurrentPage }) => {
 };
 
 export default Button;
+
+Button.defaultProps = {
+  type: 'button',
+};
