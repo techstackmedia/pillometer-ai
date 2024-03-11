@@ -42,7 +42,6 @@ const AuthSignupProvider = ({ children }) => {
       });
 
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         // navigate('/auth/email-verification', { state: { email: data.email } });
         navigate('/auth/login', { state: { email: data.email } });
