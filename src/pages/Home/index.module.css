@@ -1,0 +1,29 @@
+.successMessage {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  border-radius: 8px;
+  margin-block: 30px;
+  width: 20%;
+  text-align: center;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alertContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeAlert {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
