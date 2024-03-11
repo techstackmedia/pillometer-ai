@@ -1,0 +1,57 @@
+.firstLastNameRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.firstLastNameRow input:nth-child(1),
+.firstLastNameRow input:nth-child(2) {
+  width: 330px;
+}
+
+.dropdownInput input[type='tel'] {
+  text-indent: 120px;
+}
+
+.dropdownInput {
+  position: relative;
+}
+
+.dropdownInput img,
+.phoneNumberCode {
+  position: absolute;
+}
+
+.dropdownInput img {
+  right: 15px;
+  top: 25px;
+}
+
+.phoneNumberCode {
+  top: 4px;
+}
+
+.phoneNumberCode img:nth-child(1) {
+  left: 21px;
+}
+
+.countryCode,
+.phoneNumberCode .dropdownCountryCode {
+  position: absolute;
+}
+.countryCode {
+  top: 23px;
+  left: 50px;
+}
+
+.phoneNumberCode .dropdownCountryCode {
+  top: 22px;
+  left: 89px;
+}
+
+.checkbox {
+  display: flex;
+}
+
+.checkbox span {
+  margin-left: 5px;
+}
