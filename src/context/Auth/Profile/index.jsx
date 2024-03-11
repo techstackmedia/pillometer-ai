@@ -1,7 +1,9 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { BASE_AUTH_URL } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
+import { defaultProfileValues } from '../defaultValues';
 
-const AuthProfileContext = createContext();
+const AuthProfileContext = createContext(defaultProfileValues);
 
 const AuthProfileProvider = ({ children }) => {
   const [profile, setProfile] = useState(null);
@@ -11,6 +13,13 @@ const AuthProfileProvider = ({ children }) => {
   const [profession, setProfession] = useState('');
   const [discover, setDiscover] = useState('');
   const [keepUpWithCommunity, setKeepUpWithCommunity] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+
+  const [isCurrentPage, setIsCurrentPage] = useState(false);
+  const navigateToNextPage = () => {
+    setIsCurrentPage(true);
+  };
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -51,15 +60,15 @@ const AuthProfileProvider = ({ children }) => {
 
       if (response.ok) {
         setProfile(data.details);
-      } else {
-        throw new Error(data.message);
+        navigate('/', { state: { profile: data.details } });
       }
     } catch (error) {
-      console.error('Error updating profile:', error.message);
+      setErrorMessage(error.message);
     }
   };
 
-  const handleProfileSubmit = async () => {
+  const handleProfileSubmit = async (e) => {
+    e.preventDefault();
     try {
       const token = localStorage.getItem('token');
       await updateProfile(token, {
@@ -70,7 +79,7 @@ const AuthProfileProvider = ({ children }) => {
         app_discovery: discover,
       });
     } catch (error) {
-      console.error('Error updating profile:', error.message);
+      setErrorMessage(error.message);
     }
   };
 
@@ -92,6 +101,9 @@ const AuthProfileProvider = ({ children }) => {
         handleProfessionChange,
         handleDiscoverChange,
         handleCommunityCheckboxChange,
+        navigateToNextPage,
+        isCurrentPage,
+        errorMessage,
       }}
     >
       {children}
