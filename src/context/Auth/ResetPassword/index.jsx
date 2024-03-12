@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { BASE_AUTH_URL } from '../../../constants';
-import resetToken from '../../../utils/URLResetToken';
+import { resetToken } from '../../../utils/URLResetToken';
 import { useNavigate } from 'react-router-dom';
 
 const AuthResetPasswordContext = createContext();
@@ -25,7 +25,7 @@ const AuthResetPasswordProvider = ({ children }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `token ${localStorage.getItem('token')}`,
+          Authorization: `token ${resetToken()}`,
         },
         body: JSON.stringify({ password }),
       });

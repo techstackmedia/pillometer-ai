@@ -7,4 +7,4 @@ const resetToken = () => {
   return token;
 };
 
-export default resetToken;
+export { resetToken };
