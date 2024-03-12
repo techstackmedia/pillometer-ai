@@ -40,7 +40,6 @@ const Authentication = () => {
   } = useContext(AuthSignupContext);
 
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   return (
     <>
