@@ -4,38 +4,14 @@ import Button from '../../shared/Button';
 import styles from './index.module.css';
 import { useContext } from 'react';
 import { AuthForgotPasswordResetContext } from '../../../context/Auth/ForgotPassword';
-import Alert from '../../shared/Alert';
 
 const EmailVerification = () => {
-  const {
-    email,
-    handleForgotPasswordSubmit,
-    handleEmailChange,
-    resetPasswordSuccessMessage,
-    resetPasswordErrorMessage,
-    resetPasswordErrorAltMessage,
-  } = useContext(AuthForgotPasswordResetContext);
+  const { email, handleForgotPasswordSubmit, handleEmailChange } = useContext(
+    AuthForgotPasswordResetContext
+  );
 
   return (
     <>
-      <div className={styles.alert}>
-        {resetPasswordSuccessMessage ? (
-          <Alert>
-            <Content>{resetPasswordSuccessMessage}</Content>
-          </Alert>
-        ) : (
-          resetPasswordErrorMessage && (
-            <Alert>
-              <Content className={`heading ${styles.heading}`}>
-                {resetPasswordErrorMessage}
-              </Content>
-              <Content className={`paragraph ${styles.paragraph}`}>
-                {resetPasswordErrorAltMessage}
-              </Content>
-            </Alert>
-          )
-        )}
-      </div>
       <form
         onSubmit={handleForgotPasswordSubmit}
         className={styles.formEmailVerification}
