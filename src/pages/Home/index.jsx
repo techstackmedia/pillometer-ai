@@ -6,6 +6,8 @@ import { useContext, useEffect } from 'react';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import Alert from '../../components/shared/Alert';
 import styles from './index.module.css';
+import { AuthResetPasswordContext } from '../../context/Auth/ResetPassword';
+import Content from '../../components/shared/Content';
 
 const Home = () => {
   const location = useLocation();
@@ -13,6 +15,11 @@ const Home = () => {
   const status = location.state?.status;
   const profile = location.state?.profile;
   const { successMessage } = useContext(AuthSigninContext);
+  const {
+    resetPasswordSuccessMessage,
+    resetPasswordErrorMessage,
+    resetPasswordErrorAltMessage,
+  } = useContext(AuthResetPasswordContext);
 
   useEffect(() => {
     if (profile) {
@@ -28,9 +35,26 @@ const Home = () => {
 
   return (
     <>
-      {status && successMessage && (
+      {status && successMessage ? (
         <div className={styles.homeAlert}>
           <Alert>Login Successful</Alert>
+        </div>
+      ) : (
+        <div className={styles.homeAlert}>
+          {resetPasswordSuccessMessage ? (
+            <Alert>{resetPasswordSuccessMessage}</Alert>
+          ) : (
+            resetPasswordErrorMessage && (
+              <Alert>
+                <Content className={`heading ${styles.heading}`}>
+                  {resetPasswordErrorMessage}
+                </Content>
+                <Content className={`paragraph ${styles.paragraph}`}>
+                  {resetPasswordErrorAltMessage}
+                </Content>
+              </Alert>
+            )
+          )}
         </div>
       )}
       <Navbar />
