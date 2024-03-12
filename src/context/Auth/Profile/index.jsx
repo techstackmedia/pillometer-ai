@@ -51,7 +51,7 @@ const AuthProfileProvider = ({ children }) => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authentication: `token ${token}`,
+          Authorization: `token ${token}`,
         },
         body: JSON.stringify(profileData),
       });
@@ -83,29 +83,29 @@ const AuthProfileProvider = ({ children }) => {
     }
   };
 
+  const values = {
+    profile,
+    handleProfileSubmit,
+    updateProfile,
+    firstName,
+    lastName,
+    phoneNumber,
+    profession,
+    discover,
+    keepUpWithCommunity,
+    handleFirstNameChange,
+    handleLastNameChange,
+    handlePhoneNumberChange,
+    handleProfessionChange,
+    handleDiscoverChange,
+    handleCommunityCheckboxChange,
+    navigateToNextPage,
+    isCurrentPage,
+    errorMessage,
+  };
+
   return (
-    <AuthProfileContext.Provider
-      value={{
-        profile,
-        handleProfileSubmit,
-        updateProfile,
-        firstName,
-        lastName,
-        phoneNumber,
-        profession,
-        discover,
-        keepUpWithCommunity,
-        handleFirstNameChange,
-        handleLastNameChange,
-        handlePhoneNumberChange,
-        handleProfessionChange,
-        handleDiscoverChange,
-        handleCommunityCheckboxChange,
-        navigateToNextPage,
-        isCurrentPage,
-        errorMessage,
-      }}
-    >
+    <AuthProfileContext.Provider value={values}>
       {children}
     </AuthProfileContext.Provider>
   );
