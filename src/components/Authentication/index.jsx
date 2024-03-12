@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Button from '../shared/Button';
 import Login from './Login';
 import Register from './Register';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './index.module.css';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import { AuthSignupContext } from '../../context/Auth/Register';
