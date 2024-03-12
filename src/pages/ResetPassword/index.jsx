@@ -15,7 +15,7 @@ const ResetPassword = () => {
     resetPasswordErrorAltMessage,
   } = useContext(AuthResetPasswordContext);
 
-  const token = resetToken;
+  const token = resetToken();
   localStorage.setItem('token', token);
 
   useEffect(() => {
