@@ -5,6 +5,7 @@ import Content from '../../components/shared/Content';
 import styles from './index.module.css';
 import { useContext, useEffect } from 'react';
 import { AuthResetPasswordContext } from '../../context/Auth/ResetPassword';
+import resetToken from '../../utils/URLResetToken';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -13,12 +14,13 @@ const ResetPassword = () => {
     resetPasswordErrorMessage,
     resetPasswordErrorAltMessage,
   } = useContext(AuthResetPasswordContext);
-  console.log(window.location.href);
-  const token = localStorage.getItem('token');
+
+  console.log(resetToken);
+  const token = resetToken;
 
   useEffect(() => {
     if (token) {
-      navigate('/');
+      navigate('/auth/password-verification');
     }
   }, [navigate, token]);
 
