@@ -1,15 +1,11 @@
-import Verification from '../../components/Verification';
 import Navbar from '../../components/Navbar';
-import { useLocation } from 'react-router-dom';
+import Verification from '../../components/Authentication/EmailVerification';
 
-const EmailVerification = ({ disabled }) => {
-  const location = useLocation();
-  const email = location?.state?.email;
-
+const EmailVerification = () => {
   return (
     <>
       <Navbar />
-      <Verification email={email} />
+      <Verification />
     </>
   );
 };
