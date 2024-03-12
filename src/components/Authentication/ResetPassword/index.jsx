@@ -24,14 +24,17 @@ const ResetPassword = () => {
             <Content>{forgotPasswordSuccessMessage}</Content>
           </Alert>
         ) : (
-          <Alert>
-            <Content className={`heading ${styles.heading}`}>
-              {forgotPasswordErrorMessage}
-            </Content>
-            <Content className={`paragraph ${styles.paragraph}`}>
-              {forgotPasswordErrorAltMessage}
-            </Content>
-          </Alert>
+          forgotPasswordErrorMessage ||
+          (forgotPasswordErrorAltMessage && (
+            <Alert>
+              <Content className={`heading ${styles.heading}`}>
+                {forgotPasswordErrorMessage}
+              </Content>
+              <Content className={`paragraph ${styles.paragraph}`}>
+                {forgotPasswordErrorAltMessage}
+              </Content>
+            </Alert>
+          ))
         )}
       </div>
       <form

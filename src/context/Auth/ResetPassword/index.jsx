@@ -19,6 +19,8 @@ const AuthResetPasswordProvider = ({ children }) => {
   };
 
   const handleResetPasswordSubmit = async (e) => {
+    console.log(resetToken());
+
     e.preventDefault();
     try {
       const response = await fetch(`${BASE_AUTH_URL}/reset-password`, {
