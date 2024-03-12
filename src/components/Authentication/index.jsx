@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Button from '../shared/Button';
 import Login from './Login';
 import Register from './Register';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import { AuthSignupContext } from '../../context/Auth/Register';
@@ -40,6 +40,7 @@ const Authentication = () => {
   } = useContext(AuthSignupContext);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -66,6 +67,9 @@ const Authentication = () => {
               successMessage={successMessage}
             />
           }
+          <Link to='/auth/email-verification' className={styles.forgotPassword}>
+            Forgot Password
+          </Link>
           <Button type='submit'>Sign in</Button>
         </form>
       ) : (
