@@ -17,16 +17,8 @@ const AuthResetPasswordProvider = ({ children }) => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  let token;
-  if (token === 'undefined') {
-    token = null;
-  } else if (token) {
-    token = resetToken();
-  }
-  console.log('token', token);
 
   const handleResetPasswordSubmit = async (e) => {
-    resetToken();
     e.preventDefault();
     try {
       const response = await fetch(`${BASE_AUTH_URL}/reset-password`, {
@@ -39,7 +31,7 @@ const AuthResetPasswordProvider = ({ children }) => {
       });
       const data = response.json();
       if (response.ok) {
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', resetToken());
         navigate('/', {
           state: { details: data.details },
         });
