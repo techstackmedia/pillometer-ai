@@ -32,7 +32,7 @@ const AuthResetPasswordProvider = ({ children }) => {
       const data = response.json();
       if (response.ok) {
         navigate('/auth/login', {
-          state: { details: data.details },
+          state: { details: data.details, message: data.message },
         });
         setResetPasswordSuccessMessage(data.details);
         setTimeout(() => {
