@@ -36,7 +36,7 @@ const AuthResetPasswordProvider = ({ children }) => {
           state: { details: data.details, message: data.message },
         });
         setResetPasswordSuccessMessage(data.details);
-        setResetMessage('Login With New Password');
+        setResetMessage('Login with new password');
         setTimeout(() => {
           setResetPasswordSuccessMessage(null);
           setResetMessage(null);
