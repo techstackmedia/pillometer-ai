@@ -53,6 +53,7 @@ const defaultProfileValues = {
 
 const defaultResetPasswordValues = {
   password: '',
+  resetMessage: null,
   resetPasswordErrorMessage: null,
   resetPasswordErrorAltMessage: null,
   resetPasswordSuccessMessage: null,
