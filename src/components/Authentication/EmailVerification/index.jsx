@@ -47,6 +47,7 @@ const EmailVerification = () => {
       <form
         onSubmit={handleForgotPasswordSubmit}
         className={styles.formEmailVerification}
+        autoComplete='off'
       >
         <Content cn={`heading ${styles.heading} ${styles.newHeading}`}>
           {forgotPasswordSuccessMessage
