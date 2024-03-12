@@ -3,7 +3,6 @@ const resetToken = () => {
   const tokenStartIndex = url.indexOf('token=') + 'token='.length;
   const tokenEncoded = url.substring(tokenStartIndex);
   const token = decodeURIComponent(tokenEncoded);
-  console.log(token);
   return token;
 };
 
