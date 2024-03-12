@@ -70,6 +70,15 @@ const Authentication = () => {
             Forgot Password
           </Link>
           <Button type='submit'>Sign in</Button>
+          <div className={styles.register}>
+            <span>Not a member yet?</span>
+            <Link
+              to='/auth/register'
+              className={`${styles.forgotPassword} ${styles.registerUser} ${styles.text}`}
+            >
+              <span>Register</span>
+            </Link>
+          </div>
         </form>
       ) : (
         <form
