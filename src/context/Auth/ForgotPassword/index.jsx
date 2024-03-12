@@ -27,12 +27,9 @@ const AuthForgotPasswordProvider = ({ children }) => {
         },
         body: JSON.stringify({ email }),
       });
-      const data = response.json();
+      const data = await response.json();
       if (response.ok) {
         setForgotPasswordSuccessMessage(data.details);
-        setTimeout(() => {
-          setForgotPasswordSuccessMessage(null);
-        }, 3000);
       } else {
         setForgotPasswordErrorMessage(data.details);
         setForgotPasswordErrorAltMessage(data.message);
