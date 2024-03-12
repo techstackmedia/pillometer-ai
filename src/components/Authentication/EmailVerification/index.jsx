@@ -24,14 +24,16 @@ const EmailVerification = () => {
             <Content>{resetPasswordSuccessMessage}</Content>
           </Alert>
         ) : (
-          <Alert>
-            <Content className={`heading ${styles.heading}`}>
-              {resetPasswordErrorMessage}
-            </Content>
-            <Content className={`paragraph ${styles.paragraph}`}>
-              {resetPasswordErrorAltMessage}
-            </Content>
-          </Alert>
+          resetPasswordErrorMessage && (
+            <Alert>
+              <Content className={`heading ${styles.heading}`}>
+                {resetPasswordErrorMessage}
+              </Content>
+              <Content className={`paragraph ${styles.paragraph}`}>
+                {resetPasswordErrorAltMessage}
+              </Content>
+            </Alert>
+          )
         )}
       </div>
       <form
