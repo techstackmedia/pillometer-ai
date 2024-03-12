@@ -6,19 +6,9 @@ import { useContext } from 'react';
 import { AuthResetPasswordContext } from '../../../context/Auth/ResetPassword';
 
 const ResetPassword = () => {
-  const {
-    password,
-    handleResetPasswordSubmit,
-    handlePasswordChange,
-    resetPasswordErrorMessage,
-    resetPasswordErrorAltMessage,
-    resetPasswordSuccessMessage,
-  } = useContext(AuthResetPasswordContext);
-  console.log(
-    resetPasswordErrorMessage,
-    resetPasswordErrorAltMessage,
-    resetPasswordSuccessMessage
-  );
+  const { password, handleResetPasswordSubmit, handlePasswordChange } =
+    useContext(AuthResetPasswordContext);
+
   return (
     <>
       <form
