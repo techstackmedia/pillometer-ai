@@ -27,19 +27,6 @@ const Login = () => {
   const verifiedEmail = location.state?.email;
   const details = location.state?.details;
   const message = location.state?.message;
-  const {
-    resetPasswordErrorMessage,
-    resetPasswordErrorAltMessage,
-    resetPasswordSuccessMessage,
-  } = useContext(AuthResetPasswordContext);
-  console.log(
-    verifiedEmail,
-    details,
-    message,
-    resetPasswordErrorMessage,
-    resetPasswordErrorAltMessage,
-    resetPasswordSuccessMessage
-  );
 
   return (
     <>
