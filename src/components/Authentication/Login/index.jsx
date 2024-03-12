@@ -29,12 +29,14 @@ const Login = () => {
 
   return (
     <>
-      <div className={styles.alert}>
-        <Alert>
-          <Content cn={`heading ${styles.heading}`}>{details}</Content>
-          <Content cn={`paragraph ${styles.paragraph}`}>{message}</Content>
-        </Alert>
-      </div>
+      {details && message && (
+        <div className={styles.alert}>
+          <Alert>
+            <Content cn={`heading ${styles.heading}`}>{details}</Content>
+            <Content cn={`paragraph ${styles.paragraph}`}>{message}</Content>
+          </Alert>
+        </div>
+      )}
       <div className='authMain'>
         <img src={Logo} alt='logo' className='logo' />
         <Content cn='heading'>Login To Continue</Content>
