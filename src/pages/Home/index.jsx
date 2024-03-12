@@ -14,6 +14,7 @@ const Home = () => {
   const token = location.state?.token;
   const status = location.state?.status;
   const profile = location.state?.profile;
+  const details = location.state?.details;
   const { successMessage } = useContext(AuthSigninContext);
   const {
     resetPasswordSuccessMessage,
@@ -32,6 +33,7 @@ const Home = () => {
       localStorage.setItem('token', token);
     }
   }, [token]);
+  console.log(resetPasswordSuccessMessage, resetPasswordErrorMessage);
 
   return (
     <>
@@ -41,8 +43,8 @@ const Home = () => {
         </div>
       ) : (
         <div className={styles.homeAlert}>
-          {resetPasswordSuccessMessage ? (
-            <Alert>{resetPasswordSuccessMessage}</Alert>
+          {details ? (
+            <Alert>{details}</Alert>
           ) : (
             resetPasswordErrorMessage && (
               <Alert>
