@@ -25,7 +25,9 @@ const ResetPassword = () => {
         onSubmit={handleResetPasswordSubmit}
         className={styles.formVerification}
       >
-        <Content cn={`heading ${styles.heading}`}>Create New Password</Content>
+        <Content cn={`heading ${styles.heading} ${styles.newHeading}`}>
+          Create New Password
+        </Content>
         <Input
           type='password'
           name='password'
