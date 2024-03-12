@@ -7,6 +7,7 @@ import Alert from '../../shared/Alert';
 import Content from '../../shared/Content';
 import { AuthSignupContext } from '../../../context/Auth/Register';
 import Logo from '../../../logo.svg';
+import { AuthResetPasswordContext } from '../../../context/Auth/ResetPassword';
 
 const Login = () => {
   const {
@@ -26,6 +27,19 @@ const Login = () => {
   const verifiedEmail = location.state?.email;
   const details = location.state?.details;
   const message = location.state?.message;
+  const {
+    resetPasswordErrorMessage,
+    resetPasswordErrorAltMessage,
+    resetPasswordSuccessMessage,
+  } = useContext(AuthResetPasswordContext);
+  console.log(
+    verifiedEmail,
+    details,
+    message,
+    resetPasswordErrorMessage,
+    resetPasswordErrorAltMessage,
+    resetPasswordSuccessMessage
+  );
 
   return (
     <>
