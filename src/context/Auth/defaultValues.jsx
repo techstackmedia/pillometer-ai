@@ -51,4 +51,27 @@ const defaultProfileValues = {
   isCurrentPage: false,
 };
 
-export { defaultSigninValues, defaultSignupValues, defaultProfileValues };
+const defaultResetPasswordValues = {
+  password: '',
+  resetPasswordErrorMessage: null,
+  resetPasswordErrorAltMessage: null,
+  resetPasswordSuccessMessage: null,
+  handleResetPasswordSubmit: () => {},
+  handlePasswordChange: () => {},
+};
+
+const defaultForgotPasswordValues = {
+  handleForgotPasswordSubmit: () => {},
+  handleEmailChange: () => {},
+  forgotPasswordErrorMessage: () => {},
+  forgotPasswordSuccessMessage: () => {},
+  forgotPasswordErrorAltMessage: () => {},
+};
+
+export {
+  defaultSigninValues,
+  defaultSignupValues,
+  defaultProfileValues,
+  defaultResetPasswordValues,
+  defaultForgotPasswordValues,
+};
