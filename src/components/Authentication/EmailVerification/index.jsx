@@ -34,10 +34,10 @@ const EmailVerification = () => {
           forgotPasswordErrorMessage ||
           (forgotPasswordErrorAltMessage && (
             <Alert>
-              <Content className={`heading ${styles.heading}`}>
+              <Content cn={`heading ${styles.heading}`}>
                 {forgotPasswordErrorMessage}
               </Content>
-              <Content className={`paragraph ${styles.paragraph}`}>
+              <Content cn={`paragraph ${styles.paragraph}`}>
                 {forgotPasswordErrorAltMessage}
               </Content>
             </Alert>
