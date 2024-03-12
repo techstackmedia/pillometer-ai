@@ -13,6 +13,7 @@ const AuthResetPasswordProvider = ({ children }) => {
     useState(null);
   const [resetPasswordSuccessMessage, setResetPasswordSuccessMessage] =
     useState(null);
+  const [resetMessage, setResetMessage] = useState(null);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -35,8 +36,10 @@ const AuthResetPasswordProvider = ({ children }) => {
           state: { details: data.details, message: data.message },
         });
         setResetPasswordSuccessMessage(data.details);
+        setResetMessage('Login With New Password');
         setTimeout(() => {
           setResetPasswordSuccessMessage(null);
+          setResetMessage(null);
         }, 3000);
       } else {
         setResetPasswordErrorMessage(data.details);
@@ -53,6 +56,7 @@ const AuthResetPasswordProvider = ({ children }) => {
 
   const values = {
     password,
+    resetMessage,
     resetPasswordErrorMessage,
     resetPasswordErrorAltMessage,
     resetPasswordSuccessMessage,
