@@ -86,7 +86,7 @@ const Login = () => {
       <div className={styles.inputPassword}>
         <Input
           type={showPassword ? 'text' : 'password'}
-          placeholder={verifiedEmail ? 'Confirm password' : 'Create password'}
+          placeholder={verifiedEmail ? 'Confirm password' : 'Enter password'}
           name='password'
           value={password}
           onChange={handlePasswordChange}
