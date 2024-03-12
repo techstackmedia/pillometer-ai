@@ -15,7 +15,6 @@ const ResetPassword = () => {
     resetPasswordErrorAltMessage,
   } = useContext(AuthResetPasswordContext);
 
-  console.log(resetToken);
   const token = resetToken;
   localStorage.setItem('token', token);
 
