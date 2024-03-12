@@ -4,39 +4,13 @@ import Button from '../../shared/Button';
 import styles from './index.module.css';
 import { useContext } from 'react';
 import { AuthResetPasswordContext } from '../../../context/Auth/ResetPassword';
-import Alert from '../../shared/Alert';
 
 const ResetPassword = () => {
-  const {
-    password,
-    handleResetPasswordSubmit,
-    handlePasswordChange,
-    forgotPasswordErrorMessage,
-    forgotPasswordSuccessMessage,
-    forgotPasswordErrorAltMessage,
-  } = useContext(AuthResetPasswordContext);
+  const { password, handleResetPasswordSubmit, handlePasswordChange } =
+    useContext(AuthResetPasswordContext);
 
   return (
     <>
-      <div className={styles.alert}>
-        {forgotPasswordSuccessMessage ? (
-          <Alert>
-            <Content>{forgotPasswordSuccessMessage}</Content>
-          </Alert>
-        ) : (
-          forgotPasswordErrorMessage ||
-          (forgotPasswordErrorAltMessage && (
-            <Alert>
-              <Content className={`heading ${styles.heading}`}>
-                {forgotPasswordErrorMessage}
-              </Content>
-              <Content className={`paragraph ${styles.paragraph}`}>
-                {forgotPasswordErrorAltMessage}
-              </Content>
-            </Alert>
-          ))
-        )}
-      </div>
       <form
         onSubmit={handleResetPasswordSubmit}
         className={styles.formVerification}
