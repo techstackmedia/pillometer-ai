@@ -2,7 +2,7 @@ import Sidebar from '../../components/Sidebar';
 import Navbar from '../../components/Navbar';
 import Main from '../../components/Main';
 import { useLocation } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import Alert from '../../components/shared/Alert';
 import styles from './index.module.css';
@@ -13,8 +13,18 @@ const Home = () => {
   const status = location.state?.status;
   const profile = location.state?.profile;
   const { successMessage } = useContext(AuthSigninContext);
-  localStorage.setItem('token', token);
-  localStorage.setItem('profile', profile);
+
+  useEffect(() => {
+    if (profile) {
+      localStorage.setItem('profile', JSON.stringify(profile));
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+    }
+  }, [token]);
 
   return (
     <>
