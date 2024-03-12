@@ -17,6 +17,7 @@ const ResetPassword = () => {
 
   const token = resetToken();
   localStorage.setItem('token', token);
+  console.log(token);
 
   useEffect(() => {
     if (token) {
