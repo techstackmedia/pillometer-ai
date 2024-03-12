@@ -20,10 +20,9 @@ const AuthResetPasswordProvider = ({ children }) => {
   let token;
   if (token === 'undefined') {
     token = null;
-  } else {
-    token = localStorage.getItem('token');
+  } else if (token) {
+    token = resetToken();
   }
-
   console.log('token', token);
 
   const handleResetPasswordSubmit = async (e) => {
