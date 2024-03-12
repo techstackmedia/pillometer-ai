@@ -7,7 +7,6 @@ import Alert from '../../shared/Alert';
 import Content from '../../shared/Content';
 import { AuthSignupContext } from '../../../context/Auth/Register';
 import Logo from '../../../logo.svg';
-import { AuthResetPasswordContext } from '../../../context/Auth/ResetPassword';
 
 const Login = () => {
   const {

@@ -29,8 +29,7 @@ const AuthResetPasswordProvider = ({ children }) => {
         },
         body: JSON.stringify({ password }),
       });
-      const data = response.json();
-      console.log(data);
+      const data = await response.json();
       if (response.ok) {
         navigate('/auth/login', {
           state: { details: data.details, message: data.message },
@@ -51,11 +50,7 @@ const AuthResetPasswordProvider = ({ children }) => {
       setResetPasswordErrorMessage(error.message);
     }
   };
-  console.log(
-    resetPasswordErrorMessage,
-    resetPasswordErrorAltMessage,
-    resetPasswordSuccessMessage
-  );
+
   const values = {
     password,
     resetPasswordErrorMessage,
