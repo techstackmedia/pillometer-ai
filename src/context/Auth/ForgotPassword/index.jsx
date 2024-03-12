@@ -18,7 +18,7 @@ const AuthForgotPasswordProvider = ({ children }) => {
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
-    // localStorage.removeItem('token');
+    localStorage.removeItem('token');
     try {
       const response = await fetch(`${BASE_AUTH_URL}/forgot-password`, {
         method: 'POST',
