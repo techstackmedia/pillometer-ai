@@ -7,6 +7,7 @@ import Alert from '../../shared/Alert';
 import Content from '../../shared/Content';
 import { AuthSignupContext } from '../../../context/Auth/Register';
 import Logo from '../../../logo.svg';
+import { AuthResetPasswordContext } from '../../../context/Auth/ResetPassword';
 
 const Login = () => {
   const {
@@ -21,19 +22,21 @@ const Login = () => {
     togglePasswordVisibility,
     showPassword,
   } = useContext(AuthSigninContext);
+  const { resetMessage } = useContext(AuthResetPasswordContext);
   const { successMessageReg } = useContext(AuthSignupContext);
   const location = useLocation();
   const verifiedEmail = location.state?.email;
   const details = location.state?.details;
-  const message = location.state?.message;
 
   return (
     <>
-      {details && message && (
+      {resetMessage && (
         <div className={styles.alert}>
           <Alert>
             <Content cn={`heading ${styles.heading}`}>{details}</Content>
-            <Content cn={`paragraph ${styles.paragraph}`}>{message}</Content>
+            <Content cn={`paragraph ${styles.paragraph}`}>
+              {resetMessage}
+            </Content>
           </Alert>
         </div>
       )}
