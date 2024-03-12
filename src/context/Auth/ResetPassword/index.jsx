@@ -25,7 +25,7 @@ const AuthResetPasswordProvider = ({ children }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `token ${resetToken()}`,
+          Authorization: `token ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({ password }),
       });
