@@ -31,8 +31,8 @@ const EmailVerification = () => {
             </Content>
           </Alert>
         ) : (
-          forgotPasswordErrorMessage ||
-          (forgotPasswordErrorAltMessage && (
+          forgotPasswordErrorAltMessage &&
+          forgotPasswordErrorMessage && (
             <Alert>
               <Content cn={`heading ${styles.heading}`}>
                 {forgotPasswordErrorMessage}
@@ -41,7 +41,7 @@ const EmailVerification = () => {
                 {forgotPasswordErrorAltMessage}
               </Content>
             </Alert>
-          ))
+          )
         )}
       </div>
       <form
