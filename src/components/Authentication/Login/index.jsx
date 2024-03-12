@@ -24,9 +24,17 @@ const Login = () => {
   const { successMessageReg } = useContext(AuthSignupContext);
   const location = useLocation();
   const verifiedEmail = location.state?.email;
+  const details = location.state?.details;
+  const message = location.state?.message;
 
   return (
     <>
+      <div className={styles.alert}>
+        <Alert>
+          <Content cn={`heading ${styles.heading}`}>{details}</Content>
+          <Content cn={`paragraph ${styles.paragraph}`}>{message}</Content>
+        </Alert>
+      </div>
       <div className='authMain'>
         <img src={Logo} alt='logo' className='logo' />
         <Content cn='heading'>Login To Continue</Content>
