@@ -3,7 +3,7 @@ import Chat from '../Chat';
 import ChatResponse from '../ChatResponse';
 import styles from './index.module.css';
 
-const ChatResponseList = ({ setViewMore }) => {
+const ChatResponseList = () => {
   const { pathname } = useLocation();
   return (
     <main className={styles.main}>
@@ -15,17 +15,17 @@ const ChatResponseList = ({ setViewMore }) => {
         }`}
       >
         <ChatResponse />
+        {/* <ChatResponse />
         <ChatResponse />
         <ChatResponse />
         <ChatResponse />
         <ChatResponse />
         <ChatResponse />
         <ChatResponse />
-        <ChatResponse />
-        <ChatResponse />
+        <ChatResponse /> */}
       </div>
       {/* {pathname === '/community' ? null : <Chat />} */}
-      <Chat setViewMore={setViewMore} />
+      <Chat />
     </main>
   );
 };

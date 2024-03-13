@@ -2,6 +2,9 @@ import { createContext, useState, useEffect } from 'react';
 import { connectWebSocket, disconnect, sendMessage } from './websocket';
 import { CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from 'react-speech-recognition';
 
 const WebSocketContext = createContext();
 
@@ -10,6 +13,15 @@ const WebSocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const location = useLocation();
   const newPostData = location.state?.data;
+
+  //
+
+  const [value, setValue] = useState('');
+  const [height, setHeight] = useState(32);
+  const { transcript, listening, browserSupportsContinuousListening } =
+    useSpeechRecognition();
+
+  const valueLength = value.length;
 
   const [viewMore, setViewMore] = useState(false);
 
@@ -21,10 +33,43 @@ const WebSocketProvider = ({ children }) => {
     }
   };
 
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  useEffect(() => {
+    setValue(transcript);
+    setHeight(351);
+  }, [transcript, listening]);
+
+  useEffect(() => {
+    if (valueLength > 0) {
+      setViewMore(false);
+    }
+  }, [setViewMore, valueLength]);
+
+  const startListening = () => {
+    if (browserSupportsContinuousListening) {
+      SpeechRecognition.startListening({ continuous: true });
+    } else {
+      return <span>Browser doesn't support speech recognition.</span>;
+    }
+  };
+
+  const stopListening = () => {
+    if (browserSupportsContinuousListening) {
+      SpeechRecognition.abortListening();
+    } else {
+      return <span>Browser doesn't support speech recognition.</span>;
+    }
+  };
+
+  //
+
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     if (newPostData) {
       const chatUrl = `${CHAT_URL}${newPostData.reference_no}/`;
-      const token = localStorage.getItem('token');
       const newSocket = connectWebSocket(chatUrl, token);
 
       newSocket.onopen = () => {
@@ -50,7 +95,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-  }, [newPostData]);
+  }, [newPostData, token]);
 
   const sendMessageToServer = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
@@ -61,15 +106,32 @@ const WebSocketProvider = ({ children }) => {
         symptoms: [3, 4],
         conditions: [4, 5],
       };
+      console.log(messageToSend);
+
       sendMessage(socket, messageToSend);
     } else {
       console.error('WebSocket not connected');
     }
   };
+  console.log(response);
+  console.log();
 
   return (
     <WebSocketContext.Provider
-      value={{ sendMessageToServer, response, handleViewMoreClick }}
+      value={{
+        sendMessageToServer,
+        response,
+        handleViewMoreClick,
+        height,
+        handleChange,
+        startListening,
+        stopListening,
+        setViewMore,
+        value,
+        transcript,
+        valueLength,
+        listening,
+      }}
     >
       {children}
     </WebSocketContext.Provider>

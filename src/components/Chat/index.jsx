@@ -10,45 +10,21 @@ import SpeechRecognition, {
 } from 'react-speech-recognition';
 import { WebSocketContext } from '../../context/Chat/Service';
 
-const Chat = ({ setViewMore }) => {
-  const [value, setValue] = useState('');
-  const [height, setHeight] = useState(32);
-  const { transcript, listening, browserSupportsContinuousListening } =
-    useSpeechRecognition();
-
-  const valueLength = value.length;
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-  useEffect(() => {
-    setValue(transcript);
-    setHeight(351);
-  }, [transcript, listening]);
-
-  useEffect(() => {
-    if (valueLength > 0) {
-      setViewMore(false);
-    }
-  }, [setViewMore, valueLength]);
-
-  const startListening = () => {
-    if (browserSupportsContinuousListening) {
-      SpeechRecognition.startListening({ continuous: true });
-    } else {
-      return <span>Browser doesn't support speech recognition.</span>;
-    }
-  };
-
-  const stopListening = () => {
-    if (browserSupportsContinuousListening) {
-      SpeechRecognition.abortListening();
-    } else {
-      return <span>Browser doesn't support speech recognition.</span>;
-    }
-  };
-
-  const { sendMessageToServer } = useContext(WebSocketContext);
+const Chat = () => {
+  const {
+    sendMessageToServer,
+    response,
+    handleViewMoreClick,
+    height,
+    handleChange,
+    startListening,
+    stopListening,
+    setViewMore,
+    value,
+    transcript,
+    valueLength,
+    listening,
+  } = useContext(WebSocketContext);
   const handleMessageSend = () => {
     sendMessageToServer(value);
   };

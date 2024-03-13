@@ -13,7 +13,7 @@ const ChatQADetail = () => {
       <div className='Main'>
         <Sidebar />
         <div>
-          <ChatResponseList setViewMore={setViewMore} />
+          <ChatResponseList />
         </div>
       </div>
     </>
