@@ -25,10 +25,8 @@ const WebSocketProvider = ({ children }) => {
     if (newPostData) {
       const chatUrl = `${CHAT_URL}${newPostData.reference_no}/`;
       // const chatUrl = `${CHAT_URL}chtKMKGDTC/`;
-      console.log(chatUrl);
       const token = localStorage.getItem('token');
       const newSocket = connectWebSocket(chatUrl, token);
-      console.log(newSocket);
 
       newSocket.onopen = () => {
         console.log('WebSocket connected');
@@ -44,8 +42,7 @@ const WebSocketProvider = ({ children }) => {
 
       newSocket.onmessage = (event) => {
         const receivedMessage = JSON.parse(event.data);
-        console.log(receivedMessage);
-        setResponse(receivedMessage.message); // Update response state with the message
+        setResponse(receivedMessage.message);
       };
 
       setSocket(newSocket);
