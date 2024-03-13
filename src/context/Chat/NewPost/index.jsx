@@ -21,6 +21,7 @@ const NewPostProvider = ({ children }) => {
 
     try {
       const response = await fetch(BASE_CHAT_URL, requestOptions);
+      console.log(response);
       setResponseMessage(response);
       if (!response.ok) {
         setAltErrorMessage('Failed to create new post');

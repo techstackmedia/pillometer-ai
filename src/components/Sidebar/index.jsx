@@ -1,33 +1,23 @@
-/* eslint-disable no-unused-vars */
 import AddIcon from '../../images/add.png';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import editPenIcon from '../../images/editPen.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NewPostContext } from '../../context/Chat/NewPost';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 const Sidebar = () => {
   const navigate = useNavigate();
   const handleCommunityNav = () => {
     navigate('/community');
   };
   const { pathname } = useLocation();
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [responseMessage, setResponseMessage] = useState(null);
 
-  const { createNewPost } = useContext(NewPostContext);
+  const { createNewPost, responseMessage } = useContext(NewPostContext);
   const handleNewChat = async () => {
     const token = localStorage.getItem('token');
-
-    try {
-      const response = await createNewPost(token);
-      setResponseMessage(response);
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+    createNewPost(token);
+    navigate(`/${responseMessage?.reference_no}`);
   };
-
-  // console.log(errorMessage, responseMessage);
 
   return (
     <div className={styles.sidebar}>
