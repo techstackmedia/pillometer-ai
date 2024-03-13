@@ -1,3 +1,5 @@
 const BASE_AUTH_URL = `${process.env.REACT_APP_BASE_URL}/api/v1/auth`;
-
-export { BASE_AUTH_URL };
+const BASE_CHAT_URL = `${process.env.REACT_APP_BASE_URL}/api/v1/chats`;
+const BASE_SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
+const CHAT_URL = `${BASE_SERVICE_URL}/ws/chat/`;
+export { BASE_AUTH_URL, CHAT_URL, BASE_CHAT_URL };
