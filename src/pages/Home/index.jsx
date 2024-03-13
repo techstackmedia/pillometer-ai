@@ -14,7 +14,7 @@ const Home = () => {
   const status = location.state?.status;
   const profile = location.state?.profile;
   const { successMessage } = useContext(AuthSigninContext);
-  const { errorAltMessage } = useContext(NewPostContext);
+  const { errorAltMessage, responseMessage } = useContext(NewPostContext);
 
   useEffect(() => {
     if (profile) {
@@ -39,6 +39,12 @@ const Home = () => {
       {errorAltMessage && (
         <div className={styles.homeAlert}>
           <Alert>{errorAltMessage}</Alert>
+        </div>
+      )}
+
+      {responseMessage?.statusText && (
+        <div className={styles.homeAlert}>
+          <Alert>{responseMessage?.statusText}</Alert>
         </div>
       )}
 

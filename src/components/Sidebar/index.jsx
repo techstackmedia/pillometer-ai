@@ -12,11 +12,10 @@ const Sidebar = () => {
   };
   const { pathname } = useLocation();
 
-  const { createNewPost, responseMessage } = useContext(NewPostContext);
+  const { createNewPost } = useContext(NewPostContext);
   const handleNewChat = async () => {
     const token = localStorage.getItem('token');
     createNewPost(token);
-    navigate(`/${responseMessage?.reference_no}`);
   };
 
   return (

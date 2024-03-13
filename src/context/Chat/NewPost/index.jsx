@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { BASE_CHAT_URL } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
 
 const NewPostContext = createContext();
 
@@ -7,7 +8,7 @@ const NewPostProvider = ({ children }) => {
   const [newPostData, setNewPostData] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
-  const [responseMessage, setResponseMessage] = useState(null);
+  const navigate = useNavigate();
 
   const createNewPost = async (token) => {
     const requestOptions = {
@@ -21,8 +22,10 @@ const NewPostProvider = ({ children }) => {
 
     try {
       const response = await fetch(BASE_CHAT_URL, requestOptions);
-      console.log(response);
-      setResponseMessage(response);
+      const responseData = await response.json();
+      navigate(`/${responseData?.reference_no}`, {
+        state: { data: responseData },
+      });
       if (!response.ok) {
         setAltErrorMessage('Failed to create new post');
         setTimeout(() => {
@@ -41,7 +44,6 @@ const NewPostProvider = ({ children }) => {
     newPostData,
     errorMessage,
     errorAltMessage,
-    responseMessage,
   };
 
   return (
