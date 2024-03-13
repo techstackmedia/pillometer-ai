@@ -13,6 +13,8 @@ import { AuthForgotPasswordProvider } from './context/Auth/ForgotPassword';
 import PasswordVerification from './pages/PasswordVerification';
 import { AuthResetPasswordProvider } from './context/Auth/ResetPassword';
 import ResetPassword from './pages/ResetPassword';
+import { WebSocketProvider } from './context/Chat/Service';
+import { NewPostProvider } from './context/Chat/NewPost';
 
 function App() {
   return (
@@ -22,23 +24,30 @@ function App() {
           <AuthProfileProvider>
             <AuthForgotPasswordProvider>
               <AuthResetPasswordProvider>
-                <Routes>
-                  <Route index element={<Home />} />
-                  <Route path='/auth/login' element={<Auth />} />
-                  <Route path='/auth/register' element={<Auth />} />
-                  <Route
-                    path='/auth/password-verification'
-                    element={<PasswordVerification />}
-                  />
-                  <Route
-                    path='/auth/email-verification'
-                    element={<EmailVerification />}
-                  />
-                  <Route path='/reset-password' element={<ResetPassword />} />
-                  <Route path='/auth/profile' element={<Profile />} />
-                  <Route path='/community' element={<Community />} />
-                  <Route path='/detail' element={<ChatQADetail />} />
-                </Routes>
+                <NewPostProvider>
+                  <WebSocketProvider>
+                    <Routes>
+                      <Route index element={<Home />} />
+                      <Route path='/auth/login' element={<Auth />} />
+                      <Route path='/auth/register' element={<Auth />} />
+                      <Route
+                        path='/auth/password-verification'
+                        element={<PasswordVerification />}
+                      />
+                      <Route
+                        path='/auth/email-verification'
+                        element={<EmailVerification />}
+                      />
+                      <Route
+                        path='/reset-password'
+                        element={<ResetPassword />}
+                      />
+                      <Route path='/auth/profile' element={<Profile />} />
+                      <Route path='/community' element={<Community />} />
+                      <Route path='/:detail' element={<ChatQADetail />} />
+                    </Routes>
+                  </WebSocketProvider>
+                </NewPostProvider>
               </AuthResetPasswordProvider>
             </AuthForgotPasswordProvider>
           </AuthProfileProvider>
