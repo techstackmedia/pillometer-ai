@@ -6,7 +6,7 @@ import { useContext, useEffect } from 'react';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import Alert from '../../components/shared/Alert';
 import styles from './index.module.css';
-import { NewPostContext } from '../../context/Chat/POST';
+import { NewPostContext } from '../../context/Chat/NewPost';
 
 const Home = () => {
   const location = useLocation();
