@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const NewPostContext = createContext();
 
 const NewPostProvider = ({ children }) => {
-  const [newPostData, setNewPostData] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
   const navigate = useNavigate();
@@ -32,8 +31,6 @@ const NewPostProvider = ({ children }) => {
           setAltErrorMessage(null);
         }, 3000);
       }
-      const data = await response.json();
-      setNewPostData(data);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -41,7 +38,6 @@ const NewPostProvider = ({ children }) => {
 
   const values = {
     createNewPost,
-    newPostData,
     errorMessage,
     errorAltMessage,
   };

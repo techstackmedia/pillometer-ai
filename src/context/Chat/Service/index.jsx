@@ -1,14 +1,15 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import { connect, disconnect, sendMessage } from './websocket';
+import { createContext, useState, useEffect } from 'react';
+import { connectWebSocket, disconnect, sendMessage } from './websocket';
 import { CHAT_URL } from '../../../constants';
-import { NewPostContext } from '../NewPost';
+import { useLocation } from 'react-router-dom';
 
 const WebSocketContext = createContext();
 
 const WebSocketProvider = ({ children }) => {
   const [response, setResponse] = useState('');
   const [socket, setSocket] = useState(null);
-  const { newPostData } = useContext(NewPostContext);
+  const location = useLocation();
+  const newPostData = location.state?.data;
 
   const [viewMore, setViewMore] = useState(false);
 
@@ -23,7 +24,11 @@ const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     if (newPostData) {
       const chatUrl = `${CHAT_URL}${newPostData.reference_no}/`;
-      const newSocket = connect(chatUrl);
+      // const chatUrl = `${CHAT_URL}chtKMKGDTC/`;
+      console.log(chatUrl);
+      const token = localStorage.getItem('token');
+      const newSocket = connectWebSocket(chatUrl, token);
+      console.log(newSocket);
 
       newSocket.onopen = () => {
         console.log('WebSocket connected');
@@ -39,7 +44,8 @@ const WebSocketProvider = ({ children }) => {
 
       newSocket.onmessage = (event) => {
         const receivedMessage = JSON.parse(event.data);
-        setResponse(receivedMessage.message);
+        console.log(receivedMessage);
+        setResponse(receivedMessage.message); // Update response state with the message
       };
 
       setSocket(newSocket);

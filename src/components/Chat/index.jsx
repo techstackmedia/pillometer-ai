@@ -2,12 +2,13 @@ import Input from '../shared/Input';
 import searchIcon from '../../images/search.png';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
+import { WebSocketContext } from '../../context/Chat/Service';
 
 const Chat = ({ setViewMore }) => {
   const [value, setValue] = useState('');
@@ -45,6 +46,11 @@ const Chat = ({ setViewMore }) => {
     } else {
       return <span>Browser doesn't support speech recognition.</span>;
     }
+  };
+
+  const { sendMessageToServer } = useContext(WebSocketContext);
+  const handleMessageSend = () => {
+    sendMessageToServer(value);
   };
 
   return (
@@ -113,6 +119,7 @@ const Chat = ({ setViewMore }) => {
         </div>
         <button
           type='submit'
+          onClick={handleMessageSend}
           className={
             valueLength > 0 ? styles.inputValueNoneZero : styles.inputValueZero
           }

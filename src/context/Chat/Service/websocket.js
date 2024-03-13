@@ -1,7 +1,6 @@
-let socket;
-
-export const connect = (url) => {
-  socket = new WebSocket(url);
+export const connectWebSocket = (url, token) => {
+  const authenticatedUrl = `${url}?token=${token}`;
+  const socket = new WebSocket(authenticatedUrl);
 
   socket.onopen = () => {
     console.log('WebSocket connected');
@@ -18,13 +17,13 @@ export const connect = (url) => {
   return socket;
 };
 
-export const disconnect = () => {
+export const disconnect = (socket) => {
   if (socket) {
     socket.close();
   }
 };
 
-export const sendMessage = (message) => {
+export const sendMessage = (socket, message) => {
   if (socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify(message));
   } else {
