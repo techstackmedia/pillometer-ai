@@ -4,7 +4,7 @@ import Content from '../shared/Content';
 import styles from './index.module.css';
 import editPenIcon from '../../images/editPen.png';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { NewPostContext } from '../../context/Chat/POST';
+import { NewPostContext } from '../../context/Chat/NewPost';
 import { useContext, useState } from 'react';
 const Sidebar = () => {
   const navigate = useNavigate();
