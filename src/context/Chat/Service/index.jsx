@@ -24,7 +24,6 @@ const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     if (newPostData) {
       const chatUrl = `${CHAT_URL}${newPostData.reference_no}/`;
-      // const chatUrl = `${CHAT_URL}chtKMKGDTC/`;
       const token = localStorage.getItem('token');
       const newSocket = connectWebSocket(chatUrl, token);
 
