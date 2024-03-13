@@ -2,24 +2,21 @@ import Input from '../shared/Input';
 import searchIcon from '../../images/search.png';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import Content from '../shared/Content';
 import styles from './index.module.css';
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from 'react-speech-recognition';
 import { WebSocketContext } from '../../context/Chat/Service';
 
 const Chat = () => {
   const {
     sendMessageToServer,
-    response,
-    handleViewMoreClick,
+    // response,
+    // handleViewMoreClick,
     height,
     handleChange,
     startListening,
     stopListening,
-    setViewMore,
+    // setViewMore,
     value,
     transcript,
     valueLength,
