@@ -3,13 +3,18 @@ import styles from './index.module.css';
 import { AuthProfileContext } from '../../../context/Auth/Profile';
 const Button = ({ children, sx, cn, type, disabled }) => {
   const { navigateToNextPage } = useContext(AuthProfileContext);
+  const handleClick = () => {
+    if (navigateToNextPage) {
+      navigateToNextPage();
+    }
+  };
   return (
     <button
       className={`${styles.button} ${cn}`}
       style={sx}
       type={type}
       disabled={disabled}
-      onClick={navigateToNextPage}
+      onClick={handleClick}
     >
       {children}
     </button>
