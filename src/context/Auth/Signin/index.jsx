@@ -44,6 +44,7 @@ const AuthSigninProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         navigate('/', { state: { token: data.token, status: data.status } });
+        window.location.href = '/';
         setSuccessMessage('Login Successful');
         setTimeout(() => {
           setSuccessMessage(null);

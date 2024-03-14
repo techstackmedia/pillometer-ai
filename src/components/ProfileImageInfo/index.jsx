@@ -34,7 +34,7 @@ const ProfileImageInfo = () => {
 
   return (
     <>
-      {first_name && last_name && email ? (
+      {first_name && last_name && email && token ? (
         <div className={styles.profile}>
           <img
             className={
@@ -57,6 +57,9 @@ const ProfileImageInfo = () => {
               {truncateString(email, 15)}
             </Content>
           </div>
+          <div onClick={logout}>
+            <Button navigateToNextPage={logout}>Log out</Button>
+          </div>
         </div>
       ) : token ? (
         <div className={styles.alertLogout}>
@@ -68,9 +71,6 @@ const ProfileImageInfo = () => {
               alt='alarm--v1'
             />
           </a>
-          <div onClick={logout}>
-            <Button navigateToNextPage={logout}>Log out</Button>
-          </div>
         </div>
       ) : (
         <div onClick={login}>
