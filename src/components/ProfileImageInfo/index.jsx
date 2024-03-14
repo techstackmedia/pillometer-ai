@@ -18,7 +18,9 @@ const ProfileImageInfo = () => {
     return str.length > maxLength ? str.slice(0, maxLength) + '...' : str;
   };
 
-  const { first_name, last_name, email } = profileResponse;
+  const first_name = profileResponse?.first_name;
+  const last_name = profileResponse?.last_name;
+  const email = profileResponse?.email;
 
   return (
     <>
