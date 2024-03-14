@@ -13,9 +13,6 @@ const WebSocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const location = useLocation();
   const newPostData = location.state?.data;
-
-  //
-
   const [value, setValue] = useState('');
   const [height, setHeight] = useState(32);
   const { transcript, listening, browserSupportsContinuousListening } =
@@ -106,15 +103,12 @@ const WebSocketProvider = ({ children }) => {
         symptoms: [3, 4],
         conditions: [4, 5],
       };
-      console.log(messageToSend);
-
       sendMessage(socket, messageToSend);
     } else {
       console.error('WebSocket not connected');
     }
   };
   console.log(response);
-  console.log();
 
   return (
     <WebSocketContext.Provider

@@ -21,10 +21,12 @@ const Chat = () => {
     transcript,
     valueLength,
     listening,
+    messages,
   } = useContext(WebSocketContext);
   const handleMessageSend = () => {
     sendMessageToServer(value);
   };
+  console.log(messages);
 
   return (
     <div className={styles.input}>

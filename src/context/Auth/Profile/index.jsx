@@ -14,6 +14,7 @@ const AuthProfileProvider = ({ children }) => {
   const [discover, setDiscover] = useState('');
   const [keepUpWithCommunity, setKeepUpWithCommunity] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [profileResponse, setProfileResponse] = useState(null);
   const navigate = useNavigate();
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
@@ -43,6 +44,22 @@ const AuthProfileProvider = ({ children }) => {
 
   const handleCommunityCheckboxChange = (e) => {
     setKeepUpWithCommunity(e.target.checked);
+  };
+
+  const getProfile = async (token) => {
+    try {
+      const response = await fetch(`${BASE_AUTH_URL}/profile`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setProfileResponse(data);
+      }
+    } catch {}
   };
 
   const updateProfile = async (token, profileData) => {
@@ -102,6 +119,8 @@ const AuthProfileProvider = ({ children }) => {
     navigateToNextPage,
     isCurrentPage,
     errorMessage,
+    profileResponse,
+    getProfile,
   };
 
   return (
