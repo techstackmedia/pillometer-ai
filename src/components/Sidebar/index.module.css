@@ -12,6 +12,10 @@
   justify-content: space-between;
 }
 
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
 .newChat {
   display: flex;
   align-items: center;

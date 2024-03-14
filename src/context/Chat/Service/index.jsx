@@ -60,7 +60,12 @@ const WebSocketProvider = ({ children }) => {
     }
   };
 
-  //
+  const handleTextToSpeech = () => {
+    if (response) {
+      const utterance = new SpeechSynthesisUtterance(response);
+      window.speechSynthesis.speak(utterance);
+    }
+  };
 
   const token = localStorage.getItem('token');
 
@@ -121,6 +126,7 @@ const WebSocketProvider = ({ children }) => {
         startListening,
         stopListening,
         setViewMore,
+        handleTextToSpeech,
         value,
         transcript,
         valueLength,

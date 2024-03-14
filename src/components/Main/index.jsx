@@ -9,13 +9,10 @@ import SymptomButton from './SymptomButton';
 const Main = () => {
   const [viewMore, setViewMore] = useState(false);
 
-  const handleViewMoreClick = () => {
-    if (viewMore === false) {
-      setViewMore(!viewMore);
-    } else {
-      setViewMore(false);
-    }
+  const handleViewMoreClick = (value) => {
+    setViewMore(value);
   };
+  console.log(viewMore);
 
   return (
     <div className={styles.main}>
@@ -35,10 +32,7 @@ const Main = () => {
           </Content>
         </Banner>
         <SymptomList viewMore={viewMore} />
-        <SymptomButton
-          viewMore={viewMore}
-          handleViewMoreClick={handleViewMoreClick}
-        />
+        <SymptomButton handleViewMoreClick={handleViewMoreClick} />
       </main>
       <Chat setViewMore={setViewMore} />
     </div>

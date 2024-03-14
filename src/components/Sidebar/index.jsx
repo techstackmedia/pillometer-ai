@@ -35,7 +35,7 @@ const Sidebar = () => {
   };
   const handleNewChat = async () => {
     createNewPost(token);
-    handleChatList();
+    // handleChatList();
   };
   const [chatList, setChatList] = useState(null);
   const [error, setError] = useState(null);
