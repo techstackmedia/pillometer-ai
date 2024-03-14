@@ -6,6 +6,8 @@ import { useContext } from 'react';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import { WebSocketContext } from '../../context/Chat/Service';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { NewPostContext } from '../../context/Chat/NewPost';
 
 const Chat = () => {
   const {
@@ -23,10 +25,25 @@ const Chat = () => {
     listening,
     messages,
   } = useContext(WebSocketContext);
+  const navigate = useNavigate();
+  const { createNewPost } = useContext(NewPostContext);
+
   const handleMessageSend = () => {
     sendMessageToServer(value);
   };
-  console.log(messages);
+
+  const handleCommunityNav = () => {
+    navigate('/community');
+  };
+
+  const { pathname } = useLocation();
+  const location = useLocation();
+  const referenceNo = location.state?.data;
+  const handleClick = () => {
+    const token = localStorage.getItem('token');
+    handleMessageSend();
+    pathname === '/' && createNewPost(token) && navigate(`/${referenceNo}`);
+  };
 
   return (
     <div className={styles.input}>
@@ -94,7 +111,7 @@ const Chat = () => {
         </div>
         <button
           type='submit'
-          onClick={handleMessageSend}
+          onClick={handleClick}
           className={
             valueLength > 0 ? styles.inputValueNoneZero : styles.inputValueZero
           }
