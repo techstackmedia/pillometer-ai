@@ -14,6 +14,7 @@ const ProfileImageInfo = () => {
   const token = localStorage.getItem('token');
   useEffect(() => {
     getProfile(token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const truncateString = (str, maxLength) => {

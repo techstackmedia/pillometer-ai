@@ -24,8 +24,8 @@ const ChatResponseList = () => {
         <ChatResponse />
         <ChatResponse /> */}
       </div>
-      {/* {pathname === '/community' ? null : <Chat />} */}
-      <Chat />
+      {pathname === '/community' ? null : <Chat />}
+      {/* <Chat /> */}
     </main>
   );
 };
