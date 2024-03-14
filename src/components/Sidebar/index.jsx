@@ -79,6 +79,11 @@ const Sidebar = () => {
                       {chatList[1]?.title}
                     </Link>
                   </Content>
+                  <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
+                    <Link to={`/${chatList[2]?.reference_no}`}>
+                      {chatList[2]?.title}
+                    </Link>
+                  </Content>
                   {chatList[2] && (
                     <Content
                       cn={styles.tab}
