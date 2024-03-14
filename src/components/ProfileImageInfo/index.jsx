@@ -1,12 +1,14 @@
 import styles from './index.module.css';
 import profileImage from '../../images/personProfileImage.png';
 import Content from '../shared/Content';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { AuthProfileContext } from '../../context/Auth/Profile';
+import Button from '../shared/Button';
 
 const ProfileImageInfo = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const { profileResponse, getProfile } = useContext(AuthProfileContext);
   const token = localStorage.getItem('token');
@@ -21,6 +23,14 @@ const ProfileImageInfo = () => {
   const first_name = profileResponse?.first_name;
   const last_name = profileResponse?.last_name;
   const email = profileResponse?.email;
+  const logout = () => {
+    localStorage.removeItem('token');
+    navigate('/auth/login');
+  };
+
+  const login = () => {
+    navigate('/auth/login');
+  };
 
   return (
     <>
@@ -48,8 +58,24 @@ const ProfileImageInfo = () => {
             </Content>
           </div>
         </div>
+      ) : token ? (
+        <div className={styles.alertLogout}>
+          <a href='/auth/profile' className={styles.img}>
+            <img
+              width={24}
+              height={24}
+              src='https://img.icons8.com/material-sharp/24/alarm--v1.png'
+              alt='alarm--v1'
+            />
+          </a>
+          <div onClick={logout}>
+            <Button navigateToNextPage={logout}>Log out</Button>
+          </div>
+        </div>
       ) : (
-        <a href='/auth/profile'>Set up your profile</a>
+        <div onClick={login}>
+          <Button>Log in</Button>
+        </div>
       )}
     </>
   );
