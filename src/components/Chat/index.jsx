@@ -23,17 +23,12 @@ const Chat = () => {
     transcript,
     valueLength,
     listening,
-    messages,
   } = useContext(WebSocketContext);
   const navigate = useNavigate();
   const { createNewPost } = useContext(NewPostContext);
 
   const handleMessageSend = () => {
     sendMessageToServer(value);
-  };
-
-  const handleCommunityNav = () => {
-    navigate('/community');
   };
 
   const { pathname } = useLocation();

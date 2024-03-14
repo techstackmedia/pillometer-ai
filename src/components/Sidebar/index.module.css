@@ -101,3 +101,7 @@
 .main:nth-child(2) .section:first-child {
   border-top: 1px solid #e8e7ee;
 }
+
+.tab a {
+  border: 0;
+}
