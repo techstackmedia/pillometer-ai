@@ -28,6 +28,7 @@ const ProfileImageInfo = () => {
     localStorage.removeItem('token');
     navigate('/auth/login');
   };
+  console.log(profileResponse);
 
   const login = () => {
     navigate('/auth/login');
@@ -35,11 +36,7 @@ const ProfileImageInfo = () => {
 
   return (
     <>
-      {first_name &&
-      last_name &&
-      email &&
-      token &&
-      pathname !== '/auth/profile' ? (
+      {first_name && last_name && token && pathname !== '/auth/profile' ? (
         <div className={styles.profile}>
           <img
             className={
@@ -66,21 +63,12 @@ const ProfileImageInfo = () => {
             <Button navigateToNextPage={logout}>Log out</Button>
           </div>
         </div>
-      ) : token ? (
-        <div className={styles.alertLogout}>
-          <a href='/auth/profile' className={styles.img}>
-            <img
-              width={24}
-              height={24}
-              src='https://img.icons8.com/material-sharp/24/alarm--v1.png'
-              alt='alarm--v1'
-            />
-          </a>
-        </div>
       ) : (
-        <div onClick={login}>
-          <Button>Log in</Button>
-        </div>
+        pathname !== '/auth/profile' && (
+          <div onClick={login}>
+            <Button>Log in</Button>
+          </div>
+        )
       )}
     </>
   );
