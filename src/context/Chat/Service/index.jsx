@@ -27,6 +27,12 @@ const WebSocketProvider = ({ children }) => {
   //   }
   // }, [response]);
 
+  useEffect(() => {
+    if (response) {
+      setHeight(32);
+    }
+  }, [response]);
+
   const [viewMore, setViewMore] = useState(false);
 
   const handleViewMoreClick = () => {
