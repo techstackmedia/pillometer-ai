@@ -12,7 +12,7 @@ import { NewPostContext } from '../../context/Chat/NewPost';
 const Chat = () => {
   const {
     sendMessageToServer,
-    // response,
+    response,
     // handleViewMoreClick,
     height,
     handleChange,

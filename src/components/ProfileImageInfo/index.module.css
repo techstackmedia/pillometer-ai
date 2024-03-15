@@ -18,6 +18,7 @@
 
 .nonProfilePageImage {
   border-color: transparent;
+  margin-right: 24px;
 }
 
 .heading {
@@ -45,4 +46,9 @@
 .alertLogout {
   display: flex;
   align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
 }

@@ -17,8 +17,15 @@ const WebSocketProvider = ({ children }) => {
   const [height, setHeight] = useState(32);
   const { transcript, listening, browserSupportsContinuousListening } =
     useSpeechRecognition();
+  console.log(response);
 
   const valueLength = value.length;
+
+  // useEffect(() => {
+  //   if (response.length > 30) {
+  //     stopListening();
+  //   }
+  // }, [response]);
 
   const [viewMore, setViewMore] = useState(false);
 

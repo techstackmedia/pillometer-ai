@@ -12,7 +12,6 @@ const Main = () => {
   const handleViewMoreClick = (value) => {
     setViewMore(value);
   };
-  console.log(viewMore);
 
   return (
     <div className={styles.main}>

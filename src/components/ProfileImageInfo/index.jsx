@@ -2,16 +2,18 @@ import styles from './index.module.css';
 import profileImage from '../../images/personProfileImage.png';
 import Content from '../shared/Content';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthProfileContext } from '../../context/Auth/Profile';
 import Button from '../shared/Button';
+import ProfileDropdown from './Dropdown';
 
 const ProfileImageInfo = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
+  const [show, setShow] = useState(false);
   const { profileResponse, getProfile } = useContext(AuthProfileContext);
   const token = localStorage.getItem('token');
+
   useEffect(() => {
     getProfile(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,22 +23,27 @@ const ProfileImageInfo = () => {
     return str.length > maxLength ? str.slice(0, maxLength) + '...' : str;
   };
 
-  const first_name = profileResponse?.first_name;
-  const last_name = profileResponse?.last_name;
+  const firstName = profileResponse?.first_name;
+  const lastName = profileResponse?.last_name;
   const email = profileResponse?.email;
   const logout = () => {
     localStorage.removeItem('token');
     navigate('/auth/login');
   };
-  console.log(profileResponse);
 
   const login = () => {
     navigate('/auth/login');
   };
 
+  const handleClick = () => {
+    setShow((prev) => {
+      return !prev;
+    });
+  };
+
   return (
     <>
-      {first_name && last_name && token && pathname !== '/auth/profile' ? (
+      {firstName && lastName && token && pathname !== '/auth/profile' ? (
         <div className={styles.profile}>
           <img
             className={
@@ -53,7 +60,7 @@ const ProfileImageInfo = () => {
                 pathname !== '/auth/profile' ? styles.nonProfileMg : undefined
               }`}
             >
-              {truncateString(first_name, 10)} {truncateString(last_name, 10)}
+              {truncateString(firstName, 10)} {truncateString(lastName, 10)}
             </Content>
             <Content cn={`paragraph ${styles.paragraph}`}>
               {truncateString(email, 15)}
@@ -63,12 +70,23 @@ const ProfileImageInfo = () => {
             <Button navigateToNextPage={logout}>Log out</Button>
           </div>
         </div>
+      ) : !token ? (
+        <div onClick={login}>
+          <Button>Log in</Button>
+        </div>
       ) : (
-        pathname !== '/auth/profile' && (
-          <div onClick={login}>
-            <Button>Log in</Button>
-          </div>
-        )
+        <div className={styles.dropdown} onClick={handleClick}>
+          <img
+            className={
+              pathname !== '/auth/profile'
+                ? styles.nonProfilePageImage
+                : styles.profilePageImage
+            }
+            src={profileImage}
+            alt='person profile'
+          />
+          {show && <ProfileDropdown />}
+        </div>
       )}
     </>
   );

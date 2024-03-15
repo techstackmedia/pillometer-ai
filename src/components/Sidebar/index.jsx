@@ -7,6 +7,7 @@ import { NewPostContext } from '../../context/Chat/NewPost';
 import { useContext } from 'react';
 import { BASE_CHAT_URL } from '../../constants';
 import { useState, useEffect } from 'react';
+import { WebSocketContext } from '../../context/Chat/Service';
 const Sidebar = () => {
   const navigate = useNavigate();
   const handleCommunityNav = () => {
@@ -15,6 +16,7 @@ const Sidebar = () => {
   const { pathname } = useLocation();
 
   const { createNewPost } = useContext(NewPostContext);
+  const { response } = useContext(WebSocketContext);
   const token = localStorage.getItem('token');
   const handleChatList = async (e) => {
     try {
@@ -44,7 +46,7 @@ const Sidebar = () => {
   useEffect(() => {
     void handleChatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
+  }, [navigate, response]);
 
   return (
     <div className={styles.sidebar}>

@@ -10,22 +10,27 @@ const NewPostProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const createNewPost = async (token) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `token ${token}`,
-      },
-      body: JSON.stringify({}),
-    };
-
     try {
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+        body: JSON.stringify({}),
+      };
+
       const response = await fetch(BASE_CHAT_URL, requestOptions);
-      const responseData = await response.json();
-      navigate(`/details/${responseData?.reference_no}`, {
-        state: { data: responseData },
-      });
       if (!response.ok) {
+        throw new Error('Failed to create new post');
+      }
+
+      const responseData = await response.json();
+      if (responseData) {
+        navigate(`/details/${responseData.reference_no}`, {
+          state: { data: responseData },
+        });
+      } else {
         setAltErrorMessage('Failed to create new post');
         setTimeout(() => {
           setAltErrorMessage(null);

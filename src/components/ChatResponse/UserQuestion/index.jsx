@@ -1,6 +1,6 @@
 import Content from '../../shared/Content';
 import styles from './index.module.css';
-import userProfileImage from '../../../images/userProgileImage.png';
+import userProfileImage from '../../../images/personProfileImage.png';
 import editPenIcon from '../../../images/editPen.png';
 import { useLocation } from 'react-router-dom';
 import { useContext } from 'react';
