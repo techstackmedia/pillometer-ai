@@ -53,7 +53,7 @@ const Sidebar = () => {
           <button className={styles.button} onClick={handleNewChat}>
             <span>New Chat</span> <img src={AddIcon} alt='add icon' />
           </button>
-          {!error && chatList && (
+          {!error && chatList?.length > 0 && (
             <>
               <Content cn={styles.tab} sx={{ marginBlock: 0, marginTop: 30 }}>
                 <Link to={`/${chatList[0]?.reference_no}`}>

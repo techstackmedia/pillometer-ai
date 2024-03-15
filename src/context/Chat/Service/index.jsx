@@ -113,7 +113,6 @@ const WebSocketProvider = ({ children }) => {
       console.error('WebSocket not connected');
     }
   };
-  console.log(response);
 
   return (
     <WebSocketContext.Provider

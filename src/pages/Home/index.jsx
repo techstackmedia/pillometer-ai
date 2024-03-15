@@ -2,7 +2,7 @@ import Sidebar from '../../components/Sidebar';
 import Navbar from '../../components/Navbar';
 import Main from '../../components/Main';
 import { useLocation } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import Alert from '../../components/shared/Alert';
 import styles from './index.module.css';
@@ -16,9 +16,15 @@ const Home = () => {
   const { successMessage } = useContext(AuthSigninContext);
   const { errorAltMessage, responseMessage } = useContext(NewPostContext);
 
+  const [showProfileAlert, setShowProfileAlert] = useState(false);
+
   useEffect(() => {
     if (profile) {
       localStorage.setItem('profile', JSON.stringify(profile));
+      setShowProfileAlert(true);
+      setTimeout(() => {
+        setShowProfileAlert(false);
+      }, 3000);
     }
   }, [profile]);
 
@@ -45,6 +51,12 @@ const Home = () => {
       {responseMessage?.statusText && (
         <div className={styles.homeAlert}>
           <Alert>{responseMessage?.statusText}</Alert>
+        </div>
+      )}
+
+      {showProfileAlert && (
+        <div className={styles.homeAlert}>
+          <Alert>{profile}</Alert>
         </div>
       )}
 

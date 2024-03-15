@@ -35,7 +35,11 @@ const ProfileImageInfo = () => {
 
   return (
     <>
-      {first_name && last_name && email && token ? (
+      {first_name &&
+      last_name &&
+      email &&
+      token &&
+      pathname !== '/auth/profile' ? (
         <div className={styles.profile}>
           <img
             className={

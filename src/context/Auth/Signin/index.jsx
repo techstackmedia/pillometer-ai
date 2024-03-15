@@ -1,7 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_AUTH_URL } from '../../../constants';
 import { defaultSigninValues } from '../defaultValues';
+import { AuthProfileContext } from '../Profile';
 
 const AuthSigninContext = createContext(defaultSigninValues);
 
@@ -14,6 +15,8 @@ const AuthSigninProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const { profileResponse } = useContext(AuthProfileContext);
 
   const navigate = useNavigate();
   const togglePasswordVisibility = () => {
@@ -28,6 +31,10 @@ const AuthSigninProvider = ({ children }) => {
   const handleLoginCheckboxChange = (e) => {
     setKeepSignedIn(e.target.checked);
   };
+  const checkProfileUpdate =
+    profileResponse?.first_name.length > 0 &&
+    profileResponse?.last_name.length > 0;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSigningIn(true);
@@ -42,9 +49,15 @@ const AuthSigninProvider = ({ children }) => {
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        navigate('/', { state: { token: data.token, status: data.status } });
-        window.location.href = '/';
+        if (checkProfileUpdate) {
+          navigate('/', { state: { token: data.token, status: data.status } });
+        } else {
+          // window.location.href = '/auth/profile';
+          navigate('/auth/profile', { state: { profile: data.details } });
+        }
+
         setSuccessMessage('Login Successful');
         setTimeout(() => {
           setSuccessMessage(null);

@@ -5,6 +5,7 @@ import { AuthProfileContext } from '../../context/Auth/Profile';
 
 const Profile = () => {
   const { handleProfileSubmit, isCurrentPage } = useContext(AuthProfileContext);
+  console.log(isCurrentPage);
 
   return (
     <form onSubmit={handleProfileSubmit}>
