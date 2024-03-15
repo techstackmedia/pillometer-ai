@@ -56,9 +56,9 @@ const Sidebar = () => {
           {!error && chatList?.length > 0 && (
             <>
               <Content cn={styles.tab} sx={{ marginBlock: 0, marginTop: 30 }}>
-                <Link to={`/${chatList[0]?.reference_no}`}>
+                <a href={`/${chatList[0]?.reference_no}`}>
                   {chatList[0]?.title}
-                </Link>
+                </a>
               </Content>
               <Content
                 cn={styles.paragraph}
@@ -69,20 +69,20 @@ const Sidebar = () => {
               {showAll ? (
                 chatList.slice(1).map((item, index) => (
                   <Content key={index} cn={styles.tab} sx={{ marginBlock: 0 }}>
-                    <Link to={`/${item.reference_no}`}>{item.title}</Link>
+                    <a href={`/${item.reference_no}`}>{item.title}</a>
                   </Content>
                 ))
               ) : (
                 <>
                   <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
-                    <Link to={`/${chatList[1]?.reference_no}`}>
+                    <a href={`/${chatList[1]?.reference_no}`}>
                       {chatList[1]?.title}
-                    </Link>
+                    </a>
                   </Content>
                   <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
-                    <Link to={`/${chatList[2]?.reference_no}`}>
+                    <a href={`/${chatList[2]?.reference_no}`}>
                       {chatList[2]?.title}
-                    </Link>
+                    </a>
                   </Content>
                   {chatList[2] && (
                     <Content
