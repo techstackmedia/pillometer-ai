@@ -1,9 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Chat from '../Chat';
 import ChatResponse from '../ChatResponse';
 import styles from './index.module.css';
 
 const ChatResponseList = () => {
+  const { id } = useParams();
   const { pathname } = useLocation();
   return (
     <main className={styles.main}>

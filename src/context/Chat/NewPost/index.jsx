@@ -22,7 +22,7 @@ const NewPostProvider = ({ children }) => {
     try {
       const response = await fetch(BASE_CHAT_URL, requestOptions);
       const responseData = await response.json();
-      navigate(`/${responseData?.reference_no}`, {
+      navigate(`/details/${responseData?.reference_no}`, {
         state: { data: responseData },
       });
       if (!response.ok) {

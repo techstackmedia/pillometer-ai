@@ -44,7 +44,7 @@ function App() {
                       />
                       <Route path='/auth/profile' element={<Profile />} />
                       <Route path='/community' element={<Community />} />
-                      <Route path='/:detail' element={<ChatQADetail />} />
+                      <Route path='/details/:id' element={<ChatQADetail />} />
                     </Routes>
                   </WebSocketProvider>
                 </NewPostProvider>
