@@ -1,7 +1,7 @@
 export const connectWebSocket = (url, token) => {
   const authenticatedUrl = `${url}?token=${token}`;
   const socket = new WebSocket(authenticatedUrl);
-
+  // wss://pillometer-ai-backend-33371317abd5.herokuapp.com/ws/chat/chtOipkfTV/?token=
   socket.onopen = () => {
     console.log('WebSocket connected');
   };

@@ -2,33 +2,43 @@ import AddIcon from '../../images/add.png';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import editPenIcon from '../../images/editPen.png';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NewPostContext } from '../../context/Chat/NewPost';
 import { useContext } from 'react';
-import { BASE_CHAT_URL } from '../../constants';
 import { useState, useEffect } from 'react';
 import { WebSocketContext } from '../../context/Chat/Service';
+import { ChatDetailContext } from '../../context/ChatDetail';
+import { BASE_CHAT_URL, token } from '../../constants';
+
 const Sidebar = () => {
+  const [chatList, setChatList] = useState(null);
+  const [error, setError] = useState(null);
+  const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const handleCommunityNav = () => {
     navigate('/community');
   };
   const { pathname } = useLocation();
+  const { handleChatQAResponses } = useContext(ChatDetailContext);
 
-  const { createNewPost } = useContext(NewPostContext);
-  const { response } = useContext(WebSocketContext);
-  const token = localStorage.getItem('token');
-  const handleChatList = async (e) => {
+  const { createNewPost, res } = useContext(NewPostContext);
+  const { newPostData, response } = useContext(WebSocketContext);
+  useEffect(() => {
+    void handleChatList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newPostData, res, response]);
+
+  const handleChatList = async () => {
     try {
-      const res = await fetch(`${BASE_CHAT_URL}`, {
+      const response = await fetch(BASE_CHAT_URL, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `token ${token}`,
         },
       });
-      if (res.ok) {
-        const data = await res.json();
+      if (response.ok) {
+        const data = await response.json();
         setChatList(data?.results);
       }
     } catch (e) {
@@ -36,31 +46,29 @@ const Sidebar = () => {
     }
   };
   const handleNewChat = async () => {
-    createNewPost(token);
-    // handleChatList();
+    createNewPost();
+    handleChatQAResponses();
   };
-  const [chatList, setChatList] = useState(null);
-  const [error, setError] = useState(null);
-  const [showAll, setShowAll] = useState(false);
-
-  useEffect(() => {
-    void handleChatList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, response]);
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.main}>
         <div className={styles.section}>
+          {/* <form onSubmit={handleNewChat}> */}
           <button className={styles.button} onClick={handleNewChat}>
             <span>New Chat</span> <img src={AddIcon} alt='add icon' />
           </button>
+          {/* </form> */}
           {!error && chatList?.length > 0 && (
             <>
               <Content cn={styles.tab} sx={{ marginBlock: 0, marginTop: 30 }}>
-                <a href={`/details/${chatList[0]?.reference_no}`}>
+                <button
+                  onClick={() =>
+                    navigate(`/details/${chatList[0]?.reference_no}`)
+                  }
+                >
                   {chatList[0]?.title}
-                </a>
+                </button>
               </Content>
               <Content
                 cn={styles.paragraph}
@@ -71,20 +79,32 @@ const Sidebar = () => {
               {showAll ? (
                 chatList.slice(1).map((item, index) => (
                   <Content key={index} cn={styles.tab} sx={{ marginBlock: 0 }}>
-                    <a href={`/details/${item.reference_no}`}>{item.title}</a>
+                    <button
+                      onClick={() => navigate(`/details/${item?.reference_no}`)}
+                    >
+                      {item.title}
+                    </button>
                   </Content>
                 ))
               ) : (
                 <>
                   <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
-                    <a href={`/details/${chatList[1]?.reference_no}`}>
+                    <button
+                      onClick={() =>
+                        navigate(`/details/${chatList[1]?.reference_no}`)
+                      }
+                    >
                       {chatList[1]?.title}
-                    </a>
+                    </button>
                   </Content>
                   <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
-                    <a href={`/details/${chatList[2]?.reference_no}`}>
+                    <button
+                      onClick={() =>
+                        navigate(`/details/${chatList[2]?.reference_no}`)
+                      }
+                    >
                       {chatList[2]?.title}
-                    </a>
+                    </button>
                   </Content>
                   {chatList[2] && (
                     <Content

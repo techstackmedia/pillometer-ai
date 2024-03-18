@@ -35,7 +35,8 @@
 }
 
 button:disabled {
-  background-color: #ddd;
+  /* background-color: #ddd; */
+  /* background-color: #c5c4d4; */
   border: 1px solid #ddd;
   color: #555;
   pointer-events: none;

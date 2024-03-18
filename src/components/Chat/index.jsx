@@ -1,115 +1,113 @@
+import React, { useContext } from 'react';
 import Input from '../shared/Input';
-import searchIcon from '../../images/search.png';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
-import { useContext } from 'react';
-import Content from '../shared/Content';
-import styles from './index.module.css';
 import { WebSocketContext } from '../../context/Chat/Service';
-import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './index.module.css';
+import Content from '../shared/Content';
+import unmuteMic from '../../images/unmutemic.png';
 import { NewPostContext } from '../../context/Chat/NewPost';
+import { WSS_CHAT_URL, token } from '../../constants';
+import { useLocation, useParams } from 'react-router-dom';
+import { ChatDetailContext } from '../../context/ChatDetail';
 
 const Chat = () => {
   const {
     sendMessageToServer,
-    response,
-    // handleViewMoreClick,
-    height,
-    handleChange,
     startListening,
     stopListening,
-    // setViewMore,
+    listening,
+    handleChange,
     value,
     transcript,
-    valueLength,
-    listening,
+    setValue,
+    transcription,
+    handleNewPostCreation,
+    isWebSocketConnected,
+    connectWebSocket,
+    mySymptoms,
   } = useContext(WebSocketContext);
-  const navigate = useNavigate();
-  const { createNewPost } = useContext(NewPostContext);
+  const { pathname } = useLocation();
+  const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
+  const { reference_no } = useParams();
 
   const handleMessageSend = () => {
-    sendMessageToServer(value);
+    if (isWebSocketConnected) {
+      sendMessageToServer(value);
+    } else {
+      connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
+      setTimeout(() => {
+        sendMessageToServer(value);
+      }, 1000);
+    }
+    handleChatQAResponses();
   };
 
-  const { pathname } = useLocation();
-  const location = useLocation();
-  const referenceNo = location.state?.data;
+  const handleMicClick = (e) => {
+    if (listening) {
+      stopListening();
+      setValue(transcript);
+      setValue(e.target.value);
+    } else {
+      startListening();
+    }
+  };
+
+  const voice = value
+    ? value
+    : mySymptoms
+    ? `Provide remedy to symptoms: ${mySymptoms}`
+    : transcription;
+  console.log(Ref);
+
   const handleClick = () => {
-    const token = localStorage.getItem('token');
     handleMessageSend();
-    pathname === '/' && createNewPost(token) && navigate(`/${referenceNo}`);
+    handleNewPostCreation();
+    if (pathname === '/') {
+      createNewPost();
+      if (Ref) {
+        window.location.href = `/details/${Ref}`;
+      }
+    }
+    sendNewPost(value);
   };
 
   return (
     <div className={styles.input}>
       <div className={styles.inputContainer}>
         <div className={styles.inputPosition}>
-          {transcript.length > 0 ? (
-            <Input
-              type={valueLength > 0 ? 'textarea' : 'text'}
-              placeholder='Ask anything relating to your health'
-              sx={{
-                width: '100%',
-                textIndent: valueLength > 0 ? 0 : 48,
-                paddingInline: valueLength > 0 ? 10 : null,
-                height: valueLength > 0 ? height : 32,
-                resize: 'none',
-                overflowY: 'hidden',
-                maxHeight: 351,
-              }}
-              name='chatbox-text-only'
-              value={value}
-              listening={listening}
-              stopListening={stopListening}
-              startListening={startListening}
-              onChange={handleChange}
-              autoFocus
-            />
-          ) : (
-            <Input
-              type={valueLength > 0 ? 'textarea' : 'text'}
-              placeholder='Ask anything relating to your health'
-              sx={{
-                width: '100%',
-                textIndent: valueLength > 0 ? 0 : 48,
-                paddingInline: valueLength > 0 ? 10 : null,
-                height: valueLength > 0 ? 'auto' : 32,
-                resize: 'none',
-                overflowY: 'hidden',
-                maxHeight: 351,
-                // opacity: 0.5,
-              }}
-              name='chatbox-text-to-speech'
-              value={value}
-              onChange={handleChange}
-              autoFocus
-            />
-          )}
-          {valueLength > 0 ? null : (
-            <label>
-              <img
-                className={`${styles.icon} ${styles.searchIcon}`}
-                src={searchIcon}
-                alt='search icon'
-              />
-            </label>
-          )}
-          {valueLength > 0 ? null : (
-            <img
-              className={`${styles.icon} ${styles.micIcon}`}
-              title='Click for voice note option'
-              src={micIcon}
-              alt='mic icon'
-              onClick={startListening}
-            />
-          )}
+          <Input
+            type='textarea'
+            placeholder={
+              value?.length > 0 ? '' : 'Ask anything relating to your health'
+            }
+            sx={{
+              resize: 'none',
+              overflowY: 'hidden',
+              maxHeight: 351,
+              opacity: 0.5,
+            }}
+            name='chatbox-text-to-speech'
+            value={voice}
+            onChange={handleChange}
+            autoFocus
+          />
+          <img
+            className={`${styles.icon} ${styles.micIcon}`}
+            title={
+              listening ? 'Click to stop voice input' : 'Click for voice input'
+            }
+            src={listening ? unmuteMic : micIcon}
+            alt={listening ? 'search icon' : 'mic icon'}
+            onClick={handleMicClick}
+          />
         </div>
         <button
+          disabled={voice ? false : true}
           type='submit'
           onClick={handleClick}
-          className={
-            valueLength > 0 ? styles.inputValueNoneZero : styles.inputValueZero
-          }
+          className={styles.inputValueZero}
         >
           <img src={sendIcon} alt='send icon' />
         </button>

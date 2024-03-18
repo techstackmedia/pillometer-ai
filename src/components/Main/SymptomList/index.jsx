@@ -5,7 +5,7 @@ import CompleteSymptomList from './CompleteSymptomList';
 const SymptomList = ({ viewMore }) => {
   return (
     <>
-      {viewMore ? (
+      {true ? (
         <CompleteSymptomList fullSymptomList={fullSymptomList} />
       ) : (
         <IncompleteSymptomList symptoms={symptoms} />

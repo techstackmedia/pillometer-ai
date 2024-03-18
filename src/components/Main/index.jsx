@@ -9,8 +9,10 @@ import SymptomButton from './SymptomButton';
 const Main = () => {
   const [viewMore, setViewMore] = useState(false);
 
-  const handleViewMoreClick = (value) => {
-    setViewMore(value);
+  const handleViewMoreClick = () => {
+    setViewMore((prev) => {
+      return !prev;
+    });
   };
 
   return (

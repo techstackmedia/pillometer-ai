@@ -35,3 +35,11 @@
   margin-left: 5px;
   font-size: 14px;
 }
+
+.homeAlert {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}

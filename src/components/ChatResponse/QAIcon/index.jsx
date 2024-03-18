@@ -5,19 +5,27 @@ import thumbUp from '../../../images/thumbUp.png';
 import thumbDown from '../../../images/thumbDown.png';
 import { useContext } from 'react';
 import { WebSocketContext } from '../../../context/Chat/Service';
+import speakerIcon from '../../../images/speaker.png';
 
-const QAIcon = () => {
+const QAIcon = ({ message, handleCopy, textCopied }) => {
   const { handleTextToSpeech } = useContext(WebSocketContext);
   return (
     <div className={styles.qaIcons}>
+      {textCopied && <span>Text Copied</span>}
       <img
-        onClick={handleTextToSpeech}
-        src='https://img.icons8.com/ios/50/high-volume--v1.png'
+        onClick={() => handleTextToSpeech(message)}
+        src={speakerIcon}
         alt='copy icon'
         width={20}
         height={20}
       />{' '}
-      <img src={copyIcon} alt='copy icon' width={20} height={20} />{' '}
+      <img
+        src={copyIcon}
+        alt='copy icon'
+        width={20}
+        height={20}
+        onClick={handleCopy}
+      />{' '}
       <img src={reloadIcon} alt='copy icon' width={20} height={20} />{' '}
       <img src={thumbUp} alt='copy icon' width={20} height={20} />{' '}
       <img src={thumbDown} alt='copy icon' width={20} height={20} />

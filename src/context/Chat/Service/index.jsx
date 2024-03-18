@@ -1,10 +1,11 @@
-import { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { connectWebSocket, disconnect, sendMessage } from './websocket';
-import { CHAT_URL } from '../../../constants';
+import { WSS_CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
+import { token } from '../../../constants';
 
 const WebSocketContext = createContext();
 
@@ -17,39 +18,54 @@ const WebSocketProvider = ({ children }) => {
   const [height, setHeight] = useState(32);
   const { transcript, listening, browserSupportsContinuousListening } =
     useSpeechRecognition();
-  console.log(response);
-
-  const valueLength = value.length;
-
-  // useEffect(() => {
-  //   if (response.length > 30) {
-  //     stopListening();
-  //   }
-  // }, [response]);
+  const valueLength = value?.length;
+  const [viewMore, setViewMore] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [transcription, setTranscription] = useState(transcript);
+  const [connectionMessage, setConnectionMessage] = useState(null);
+  const [connectionErrorMessage, setConnectionErrorMessage] = useState(null);
+  const [connectionWarnMessage, setConnectionWarnMessage] = useState(null);
+  const [isWebSocketConnected, setIsWebSocketConnected] = useState(false);
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
 
   useEffect(() => {
-    if (response) {
-      setHeight(32);
-    }
-  }, [response]);
+    console.log(selectedSymptoms);
+  }, [selectedSymptoms]);
 
-  const [viewMore, setViewMore] = useState(false);
+  const handleInputChange = (e) => {
+    const symptomValue = e.target.value;
+    if (e.target.checked) {
+      setSelectedSymptoms((prevState) => [...prevState, symptomValue]);
+    } else {
+      setSelectedSymptoms((prevState) =>
+        prevState.filter((item) => item !== symptomValue)
+      );
+    }
+  };
+  const mySymptoms = selectedSymptoms.join(', ');
+  console.log(mySymptoms);
+
+  useEffect(() => {
+    if (transcript) {
+      setTranscription(transcript);
+    }
+  }, [transcript]);
 
   const handleViewMoreClick = () => {
-    if (viewMore === false) {
-      setViewMore(!viewMore);
-    } else {
-      setViewMore(false);
-    }
+    setViewMore(!viewMore);
   };
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    setTranscription(e.target.value);
   };
   useEffect(() => {
-    setValue(transcript);
-    setHeight(351);
-  }, [transcript, listening]);
+    if (transcript) {
+      setHeight(351);
+    } else {
+      setHeight(32);
+    }
+  }, [listening, transcript]);
 
   useEffect(() => {
     if (valueLength > 0) {
@@ -61,7 +77,7 @@ const WebSocketProvider = ({ children }) => {
     if (browserSupportsContinuousListening) {
       SpeechRecognition.startListening({ continuous: true });
     } else {
-      return <span>Browser doesn't support speech recognition.</span>;
+      console.error("Browser doesn't support speech recognition.");
     }
   };
 
@@ -69,34 +85,37 @@ const WebSocketProvider = ({ children }) => {
     if (browserSupportsContinuousListening) {
       SpeechRecognition.abortListening();
     } else {
-      return <span>Browser doesn't support speech recognition.</span>;
+      console.error("Browser doesn't support speech recognition.");
     }
   };
 
-  const handleTextToSpeech = () => {
-    if (response) {
-      const utterance = new SpeechSynthesisUtterance(response);
-      window.speechSynthesis.speak(utterance);
-    }
-  };
-
-  const token = localStorage.getItem('token');
-
-  useEffect(() => {
-    if (newPostData) {
-      const chatUrl = `${CHAT_URL}${newPostData.reference_no}/`;
+  const handleNewPostCreation = () => {
+    if (newPostData && !socket) {
+      const chatUrl = `${WSS_CHAT_URL}${newPostData.reference_no}/`;
       const newSocket = connectWebSocket(chatUrl, token);
 
       newSocket.onopen = () => {
-        console.log('WebSocket connected');
+        setConnectionMessage('WebSocket connected');
+        setIsWebSocketConnected(true);
+        setTimeout(() => {
+          setConnectionMessage(null);
+        }, 3000);
       };
 
       newSocket.onerror = (error) => {
-        console.error('WebSocket error:', error);
+        setConnectionErrorMessage(error.message);
+        setIsWebSocketConnected(false);
+        setTimeout(() => {
+          setConnectionErrorMessage(null);
+        }, 3000);
       };
 
       newSocket.onclose = () => {
-        console.log('WebSocket closed');
+        setConnectionWarnMessage('WebSocket closed');
+        setIsWebSocketConnected(false);
+        setTimeout(() => {
+          setConnectionWarnMessage(null);
+        }, 3000);
       };
 
       newSocket.onmessage = (event) => {
@@ -110,6 +129,31 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
+  };
+
+  const handleTextToSpeech = (message) => {
+    if ('speechSynthesis' in window) {
+      if (message) {
+        if (!isSpeaking) {
+          const utterance = new SpeechSynthesisUtterance(message);
+          utterance.onerror = (event) => {
+            console.error('Speech synthesis error:', event.error);
+          };
+          window.speechSynthesis.speak(utterance);
+          setIsSpeaking(true);
+        } else {
+          window.speechSynthesis.cancel();
+          setIsSpeaking(false);
+        }
+      }
+    } else {
+      console.error('Speech synthesis not supported in this browser.');
+    }
+  };
+
+  useEffect(() => {
+    handleNewPostCreation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPostData, token]);
 
   const sendMessageToServer = (message) => {
@@ -131,10 +175,14 @@ const WebSocketProvider = ({ children }) => {
     <WebSocketContext.Provider
       value={{
         sendMessageToServer,
+        connectionErrorMessage,
+        connectionMessage,
+        connectionWarnMessage,
         response,
         handleViewMoreClick,
         height,
         handleChange,
+        handleNewPostCreation,
         startListening,
         stopListening,
         setViewMore,
@@ -143,6 +191,15 @@ const WebSocketProvider = ({ children }) => {
         transcript,
         valueLength,
         listening,
+        newPostData,
+        transcription,
+        setHeight,
+        setValue,
+        connectWebSocket,
+        isWebSocketConnected,
+        handleInputChange,
+        selectedSymptoms,
+        mySymptoms,
       }}
     >
       {children}

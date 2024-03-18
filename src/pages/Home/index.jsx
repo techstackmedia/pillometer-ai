@@ -7,6 +7,7 @@ import { AuthSigninContext } from '../../context/Auth/Signin';
 import Alert from '../../components/shared/Alert';
 import styles from './index.module.css';
 import { NewPostContext } from '../../context/Chat/NewPost';
+import { WebSocketContext } from '../../context/Chat/Service';
 
 const Home = () => {
   const location = useLocation();
@@ -34,6 +35,9 @@ const Home = () => {
     }
   }, [token]);
 
+  const { connectionErrorMessage, connectionMessage, connectionWarnMessage } =
+    useContext(WebSocketContext);
+
   return (
     <>
       {status && successMessage && (
@@ -41,22 +45,36 @@ const Home = () => {
           <Alert>Login Successful</Alert>
         </div>
       )}
-
       {errorAltMessage && (
         <div className={styles.homeAlert}>
           <Alert>{errorAltMessage}</Alert>
         </div>
       )}
-
       {responseMessage?.statusText && (
         <div className={styles.homeAlert}>
           <Alert>{responseMessage?.statusText}</Alert>
         </div>
       )}
-
       {showProfileAlert && (
         <div className={styles.homeAlert}>
           <Alert>{profile}</Alert>
+        </div>
+      )}
+      {connectionErrorMessage && (
+        <div className={styles.homeAlert}>
+          <Alert>{connectionErrorMessage}</Alert>
+        </div>
+      )}
+
+      {connectionMessage && (
+        <div className={styles.homeAlert}>
+          <Alert>{connectionMessage}</Alert>
+        </div>
+      )}
+
+      {connectionWarnMessage && (
+        <div className={styles.homeAlert}>
+          <Alert>{connectionWarnMessage}</Alert>
         </div>
       )}
 

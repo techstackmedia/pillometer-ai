@@ -1,10 +1,12 @@
-import { useLocation, useParams } from 'react-router-dom';
-import Chat from '../Chat';
+import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import ChatResponse from '../ChatResponse';
+import Chat from '../Chat';
 import styles from './index.module.css';
+import { ChatDetailContext } from '../../context/ChatDetail';
 
 const ChatResponseList = () => {
-  const { id } = useParams();
+  const { chats, chatResponses } = useContext(ChatDetailContext);
   const { pathname } = useLocation();
   return (
     <main className={styles.main}>
@@ -15,18 +17,12 @@ const ChatResponseList = () => {
             : styles.responseDetailNonCommunity
         }`}
       >
-        <ChatResponse />
-        {/* <ChatResponse />
-        <ChatResponse />
-        <ChatResponse />
-        <ChatResponse />
-        <ChatResponse />
-        <ChatResponse />
-        <ChatResponse />
-        <ChatResponse /> */}
+        {chats &&
+          chatResponses?.map((chat) => (
+            <ChatResponse key={chat?.id} item={chat} />
+          ))}
       </div>
       {pathname === '/community' ? null : <Chat />}
-      {/* <Chat /> */}
     </main>
   );
 };

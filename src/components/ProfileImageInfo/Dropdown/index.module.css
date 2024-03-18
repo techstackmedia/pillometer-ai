@@ -4,14 +4,25 @@
   border: 1px solid #c9bfbf;
   border-radius: 8px;
   position: absolute;
-  right: 10px;
-  top: 50px;
-  width: 150px;
-  padding: 10px;
+  right: 0;
+  top: 60px;
+  width: 180px;
   cursor: pointer;
   box-shadow: 0px 0px 16px 0px #172b641a;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.line {
+  border: 0;
+  border-bottom: 1px solid #c5c4d4;
 }
 
 .dropdown a {
   border: 0;
+}
+
+.item {
+  padding: 10px;
 }

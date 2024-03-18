@@ -1,7 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { BASE_AUTH_URL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { defaultProfileValues } from '../defaultValues';
+import { token } from '../../../constants';
 
 const AuthProfileContext = createContext(defaultProfileValues);
 
@@ -15,7 +16,12 @@ const AuthProfileProvider = ({ children }) => {
   const [keepUpWithCommunity, setKeepUpWithCommunity] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [profileResponse, setProfileResponse] = useState(null);
+  const [profileError, setProfileError] = useState(null);
+
   const navigate = useNavigate();
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const navigateToNextPage = () => {
@@ -46,7 +52,7 @@ const AuthProfileProvider = ({ children }) => {
     setKeepUpWithCommunity(e.target.checked);
   };
 
-  const getProfile = async (token) => {
+  const getProfile = async () => {
     try {
       const response = await fetch(`${BASE_AUTH_URL}/profile`, {
         method: 'GET',
@@ -58,11 +64,15 @@ const AuthProfileProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         setProfileResponse(data);
+      } else {
+        setProfileError(data.details);
       }
-    } catch {}
+    } catch (e) {
+      setProfileError(e.message);
+    }
   };
 
-  const updateProfile = async (token, profileData) => {
+  const updateProfile = async (profileData) => {
     try {
       const response = await fetch(`${BASE_AUTH_URL}/complete-profile`, {
         method: 'PATCH',
@@ -76,8 +86,8 @@ const AuthProfileProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        setProfile(data.details);
-        navigate('/', { state: { profile: data.details } });
+        setProfile(data?.details);
+        navigate('/', { state: { profile: data?.details } });
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -87,8 +97,7 @@ const AuthProfileProvider = ({ children }) => {
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-      await updateProfile(token, {
+      await updateProfile({
         first_name: firstName,
         last_name: lastName,
         mobile_number: phoneNumber,
@@ -121,6 +130,7 @@ const AuthProfileProvider = ({ children }) => {
     errorMessage,
     profileResponse,
     getProfile,
+    profileError,
   };
 
   return (

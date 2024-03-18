@@ -15,6 +15,7 @@ import { AuthResetPasswordProvider } from './context/Auth/ResetPassword';
 import ResetPassword from './pages/ResetPassword';
 import { WebSocketProvider } from './context/Chat/Service';
 import { NewPostProvider } from './context/Chat/NewPost';
+import { ChatDetailProvider } from './context/ChatDetail';
 
 function App() {
   return (
@@ -26,26 +27,31 @@ function App() {
               <AuthResetPasswordProvider>
                 <NewPostProvider>
                   <WebSocketProvider>
-                    <Routes>
-                      <Route index element={<Home />} />
-                      <Route path='/auth/login' element={<Auth />} />
-                      <Route path='/auth/register' element={<Auth />} />
-                      <Route
-                        path='/auth/password-verification'
-                        element={<PasswordVerification />}
-                      />
-                      <Route
-                        path='/auth/email-verification'
-                        element={<EmailVerification />}
-                      />
-                      <Route
-                        path='/reset-password'
-                        element={<ResetPassword />}
-                      />
-                      <Route path='/auth/profile' element={<Profile />} />
-                      <Route path='/community' element={<Community />} />
-                      <Route path='/details/:id' element={<ChatQADetail />} />
-                    </Routes>
+                    <ChatDetailProvider>
+                      <Routes>
+                        <Route index element={<Home />} />
+                        <Route path='/auth/login' element={<Auth />} />
+                        <Route path='/auth/register' element={<Auth />} />
+                        <Route
+                          path='/auth/password-verification'
+                          element={<PasswordVerification />}
+                        />
+                        <Route
+                          path='/auth/email-verification'
+                          element={<EmailVerification />}
+                        />
+                        <Route
+                          path='/reset-password'
+                          element={<ResetPassword />}
+                        />
+                        <Route path='/auth/profile' element={<Profile />} />
+                        <Route path='/community' element={<Community />} />
+                        <Route
+                          path='/details/:reference_no'
+                          element={<ChatQADetail />}
+                        />
+                      </Routes>
+                    </ChatDetailProvider>
                   </WebSocketProvider>
                 </NewPostProvider>
               </AuthResetPasswordProvider>
