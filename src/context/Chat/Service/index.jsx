@@ -29,8 +29,6 @@ const WebSocketProvider = ({ children }) => {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [isSent, setIsSent] = useState(false);
 
-  useEffect(() => {}, [selectedSymptoms]);
-
   const handleInputChange = (e) => {
     const symptomValue = e.target.value;
     if (e.target.checked) {
