@@ -178,6 +178,7 @@ const WebSocketProvider = ({ children }) => {
         // setViewMore,
         handleTextToSpeech,
         value,
+        viewMore,
         transcript,
         valueLength,
         listening,
