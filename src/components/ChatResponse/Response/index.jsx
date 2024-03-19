@@ -12,6 +12,7 @@ import { WebSocketContext } from '../../../context/Chat/Service';
 import { NewPostContext } from '../../../context/Chat/NewPost';
 
 const Response = ({ message, reference_no }) => {
+  const { isSent } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const containerRef = useRef(null);
   const [textCopied, setTextCopied] = useState(false);
@@ -32,7 +33,6 @@ const Response = ({ message, reference_no }) => {
         console.error('Error copying text:', error);
       });
   };
-  const { isSent } = useContext(WebSocketContext);
 
   useEffect(() => {
     if (isSent) {

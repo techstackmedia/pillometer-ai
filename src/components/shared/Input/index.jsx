@@ -21,12 +21,12 @@ const Input = ({
     setRows(newRows > 1 ? newRows : 1);
   }, [value]);
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
-      textareaRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [value]);
+  // useEffect(() => {
+  //   if (textareaRef.current) {
+  //     textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+  //     textareaRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }, [value]);
 
   const inputElement =
     type === 'textarea' ? (

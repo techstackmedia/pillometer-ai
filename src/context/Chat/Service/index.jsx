@@ -19,7 +19,7 @@ const WebSocketProvider = ({ children }) => {
   const { transcript, listening, browserSupportsContinuousListening } =
     useSpeechRecognition();
   const valueLength = value?.length;
-  // const [viewMore, setViewMore] = useState(false);
+  const [viewMore, setViewMore] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcription, setTranscription] = useState(transcript);
   const [connectionMessage, setConnectionMessage] = useState(null);
@@ -43,9 +43,10 @@ const WebSocketProvider = ({ children }) => {
   };
   const mySymptoms = selectedSymptoms.join(', ');
 
-  // const handleViewMoreClick = () => {
-  //   setViewMore(!viewMore);
-  // };
+  const handleViewMoreClick = () => {
+    setViewMore((prevViewMore) => !prevViewMore);
+  };
+  console.log(viewMore);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -59,12 +60,6 @@ const WebSocketProvider = ({ children }) => {
       setHeight('auto');
     }
   }, [listening, transcript, transcription, height]);
-
-  // useEffect(() => {
-  //   if (valueLength > 0) {
-  //     setViewMore(false);
-  //   }
-  // }, [setViewMore, valueLength]);
 
   const startListening = () => {
     if (browserSupportsContinuousListening) {
@@ -81,7 +76,6 @@ const WebSocketProvider = ({ children }) => {
     } else {
       console.error("Browser doesn't support speech recognition.");
     }
-    // setHeight('');
     setHeight('auto');
   };
 
@@ -167,7 +161,6 @@ const WebSocketProvider = ({ children }) => {
       console.error('WebSocket not connected');
     }
   };
-  console.log(newPostData);
 
   return (
     <WebSocketContext.Provider
@@ -177,7 +170,7 @@ const WebSocketProvider = ({ children }) => {
         connectionMessage,
         connectionWarnMessage,
         response,
-        // handleViewMoreClick,
+        handleViewMoreClick,
         height,
         handleChange,
         handleNewPostCreation,

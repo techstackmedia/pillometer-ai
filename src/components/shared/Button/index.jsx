@@ -5,6 +5,7 @@ const Button = ({ children, sx, cn, type, disabled }) => {
   const { navigateToNextPage } = useContext(AuthProfileContext);
   const handleClick = () => {
     if (navigateToNextPage) {
+      console.log('Hello');
       navigateToNextPage();
     }
   };

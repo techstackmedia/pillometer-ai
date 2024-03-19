@@ -15,7 +15,7 @@ const QAIcon = ({ message, handleCopy, textCopied, successMessage }) => {
       <img
         onClick={() => handleTextToSpeech(message)}
         src={speakerIcon}
-        alt='copy icon'
+        alt='audio icon'
         width={20}
         height={20}
       />{' '}

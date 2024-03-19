@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import Button from '../../shared/Button';
 import styles from './index.module.css';
+import { WebSocketContext } from '../../../context/Chat/Service';
 
-const SymptomButton = ({ viewMore, handleViewMoreClick }) => {
+const SymptomButton = () => {
+  const { handleViewMoreClick, viewMore } = useContext(WebSocketContext);
   return (
     <>
       {viewMore ? (
