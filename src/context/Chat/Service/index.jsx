@@ -46,7 +46,6 @@ const WebSocketProvider = ({ children }) => {
   const handleViewMoreClick = () => {
     setViewMore((prevViewMore) => !prevViewMore);
   };
-  console.log(viewMore);
 
   const handleChange = (e) => {
     setValue(e.target.value);

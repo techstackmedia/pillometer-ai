@@ -6,7 +6,6 @@ import { WebSocketContext } from '../../../context/Chat/Service';
 
 const SymptomList = () => {
   const { viewMore } = useContext(WebSocketContext);
-  console.log(viewMore);
 
   return (
     <>
