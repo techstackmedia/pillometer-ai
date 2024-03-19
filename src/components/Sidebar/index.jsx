@@ -12,7 +12,9 @@ import { BASE_CHAT_URL, token } from '../../constants';
 
 const Sidebar = () => {
   const [chatList, setChatList] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
+  // const [err, setErr] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const handleCommunityNav = () => {
@@ -20,13 +22,14 @@ const Sidebar = () => {
   };
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-
   const { createNewPost, res } = useContext(NewPostContext);
   const { newPostData, response } = useContext(WebSocketContext);
   useEffect(() => {
     void handleChatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, res, response]);
+  }, [newPostData, res, response, navigate]);
+  const location = useLocation();
+  const Ref = location.state?.data;
 
   const handleChatList = async () => {
     try {
@@ -39,13 +42,17 @@ const Sidebar = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        if (res) {
+          setChatList([data?.results, ...Ref]);
+        }
         setChatList(data?.results);
+        // setErr(data?.details);
       }
     } catch (e) {
       setError(e.message);
     }
   };
-  const handleNewChat = async () => {
+  const handleNewChat = () => {
     createNewPost();
     handleChatQAResponses();
   };
@@ -55,14 +62,22 @@ const Sidebar = () => {
       <div className={styles.main}>
         <div className={styles.section}>
           {/* <form onSubmit={handleNewChat}> */}
-          <button className={styles.button} onClick={handleNewChat}>
+          <button
+            type='button'
+            className={styles.button}
+            onClick={handleNewChat}
+          >
             <span>New Chat</span> <img src={AddIcon} alt='add icon' />
           </button>
           {/* </form> */}
-          {!error && chatList?.length > 0 && (
+          {chatList?.length > 0 && (
             <>
-              <Content cn={styles.tab} sx={{ marginBlock: 0, marginTop: 30 }}>
+              <Content
+                cn={`${styles.tab}`}
+                sx={{ marginBlock: 0, marginTop: 30 }}
+              >
                 <button
+                  type='button'
                   onClick={() =>
                     navigate(`/details/${chatList[0]?.reference_no}`)
                   }
@@ -78,8 +93,14 @@ const Sidebar = () => {
               </Content>
               {showAll ? (
                 chatList.slice(1).map((item, index) => (
-                  <Content key={index} cn={styles.tab} sx={{ marginBlock: 0 }}>
+                  <Content
+                    key={index}
+                    onClick={() => navigate(`/details/${item?.reference_no}`)}
+                    cn={`${styles.tab}`}
+                    sx={{ marginBlock: 0 }}
+                  >
                     <button
+                      type='button'
                       onClick={() => navigate(`/details/${item?.reference_no}`)}
                     >
                       {item.title}
@@ -88,8 +109,9 @@ const Sidebar = () => {
                 ))
               ) : (
                 <>
-                  <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
+                  <Content cn={`${styles.tab}`} sx={{ marginBlock: 0 }}>
                     <button
+                      type='button'
                       onClick={() =>
                         navigate(`/details/${chatList[1]?.reference_no}`)
                       }
@@ -97,8 +119,9 @@ const Sidebar = () => {
                       {chatList[1]?.title}
                     </button>
                   </Content>
-                  <Content cn={styles.tab} sx={{ marginBlock: 0 }}>
+                  <Content cn={`${styles.tab}`} sx={{ marginBlock: 0 }}>
                     <button
+                      type='button'
                       onClick={() =>
                         navigate(`/details/${chatList[2]?.reference_no}`)
                       }

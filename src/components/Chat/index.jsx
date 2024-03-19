@@ -8,7 +8,7 @@ import Content from '../shared/Content';
 import unmuteMic from '../../images/unmutemic.png';
 import { NewPostContext } from '../../context/Chat/NewPost';
 import { WSS_CHAT_URL, token } from '../../constants';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../../context/ChatDetail';
 
 const Chat = () => {
@@ -26,11 +26,14 @@ const Chat = () => {
     isWebSocketConnected,
     connectWebSocket,
     mySymptoms,
+    isSent,
+    height,
   } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
+  const navigate = useNavigate();
 
   const handleMessageSend = () => {
     if (isWebSocketConnected) {
@@ -59,18 +62,23 @@ const Chat = () => {
     : mySymptoms
     ? `Provide remedy to symptoms: ${mySymptoms}`
     : transcription;
-  console.log(Ref);
 
   const handleClick = () => {
     handleMessageSend();
     handleNewPostCreation();
     if (pathname === '/') {
+      navigate(`/details/${Ref}`, { state: { data: Ref } });
       createNewPost();
       if (Ref) {
         window.location.href = `/details/${Ref}`;
       }
     }
     sendNewPost(value);
+    isSent &&
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
   };
 
   return (
@@ -85,7 +93,7 @@ const Chat = () => {
             sx={{
               resize: 'none',
               overflowY: 'hidden',
-              maxHeight: 351,
+              height: height ? height : '',
               opacity: 0.5,
             }}
             name='chatbox-text-to-speech'

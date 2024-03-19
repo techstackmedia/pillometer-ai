@@ -13,7 +13,8 @@ const Question = () => {
         <Tags />
         <div className={styles.questions}>
           {truncateWords(
-            'I am experiencing cough, sore throat and runny nose. What are the possible ways, medium or steps I can take to eradicate this feeling completely.'
+            'I am experiencing cough, sore throat and runny nose. What are the possible ways, medium or steps I can take to eradicate this feeling completely.',
+            20
           )}
         </div>
         <div className={styles.likeViews}>

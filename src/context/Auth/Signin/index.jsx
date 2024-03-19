@@ -31,9 +31,6 @@ const AuthSigninProvider = ({ children }) => {
   const handleLoginCheckboxChange = (e) => {
     setKeepSignedIn(e.target.checked);
   };
-  // const checkProfileUpdate =
-  //   profileResponse?.first_name.length > 0 &&
-  //   profileResponse?.last_name.length > 0;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,6 +59,7 @@ const AuthSigninProvider = ({ children }) => {
         setTimeout(() => {
           setSuccessMessage(null);
         }, 3000);
+        window.location.href = '/';
       } else {
         setSigninError(data.details);
         setTimeout(() => {

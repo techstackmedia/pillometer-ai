@@ -6,10 +6,7 @@ import styles from '../index.module.css';
 import { WebSocketContext } from '../../../../context/Chat/Service';
 
 const CompleteSymptomList = ({ viewMore, fullSymptomList }) => {
-  // const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
-
-  console.log(selectedSymptoms);
 
   return (
     <SymptomsSelectionInput

@@ -4,10 +4,19 @@ import ChatResponse from '../ChatResponse';
 import Chat from '../Chat';
 import styles from './index.module.css';
 import { ChatDetailContext } from '../../context/ChatDetail';
+import { WebSocketContext } from '../../context/Chat/Service';
 
 const ChatResponseList = () => {
   const { chats, chatResponses } = useContext(ChatDetailContext);
+  const { isSent } = useContext(WebSocketContext);
   const { pathname } = useLocation();
+
+  isSent &&
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+      bottom: 0,
+    });
   return (
     <main className={styles.main}>
       <div

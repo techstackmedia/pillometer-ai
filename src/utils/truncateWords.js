@@ -1,11 +1,10 @@
-const truncateWords = (text) => {
-  // Split the text into an array of words
+const truncateWords = (text, wordsLength) => {
   const words = text.split(' ');
 
-  if (words.length <= 20) {
+  if (words.length <= wordsLength) {
     return text;
   }
-  const truncatedText = words.slice(0, 20).join(' ');
+  const truncatedText = words.slice(0, wordsLength).join(' ');
   return truncatedText + '...';
 };
 

@@ -7,11 +7,11 @@ import { useContext } from 'react';
 import { WebSocketContext } from '../../../context/Chat/Service';
 import speakerIcon from '../../../images/speaker.png';
 
-const QAIcon = ({ message, handleCopy, textCopied }) => {
+const QAIcon = ({ message, handleCopy, textCopied, successMessage }) => {
   const { handleTextToSpeech } = useContext(WebSocketContext);
   return (
     <div className={styles.qaIcons}>
-      {textCopied && <span>Text Copied</span>}
+      {textCopied && <span>{successMessage}</span>}
       <img
         onClick={() => handleTextToSpeech(message)}
         src={speakerIcon}

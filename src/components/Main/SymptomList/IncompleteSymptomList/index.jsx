@@ -9,7 +9,6 @@ const IncompleteSymptomList = ({ symptoms }) => {
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-  console.log(value);
   return (
     <SymptomsSelectionInput cn={styles.cards}>
       {symptoms.map((item, index) => {

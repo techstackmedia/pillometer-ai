@@ -19,7 +19,7 @@ const WebSocketProvider = ({ children }) => {
   const { transcript, listening, browserSupportsContinuousListening } =
     useSpeechRecognition();
   const valueLength = value?.length;
-  const [viewMore, setViewMore] = useState(false);
+  // const [viewMore, setViewMore] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcription, setTranscription] = useState(transcript);
   const [connectionMessage, setConnectionMessage] = useState(null);
@@ -27,10 +27,9 @@ const WebSocketProvider = ({ children }) => {
   const [connectionWarnMessage, setConnectionWarnMessage] = useState(null);
   const [isWebSocketConnected, setIsWebSocketConnected] = useState(false);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [isSent, setIsSent] = useState(false);
 
-  useEffect(() => {
-    console.log(selectedSymptoms);
-  }, [selectedSymptoms]);
+  useEffect(() => {}, [selectedSymptoms]);
 
   const handleInputChange = (e) => {
     const symptomValue = e.target.value;
@@ -43,35 +42,29 @@ const WebSocketProvider = ({ children }) => {
     }
   };
   const mySymptoms = selectedSymptoms.join(', ');
-  console.log(mySymptoms);
 
-  useEffect(() => {
-    if (transcript) {
-      setTranscription(transcript);
-    }
-  }, [transcript]);
-
-  const handleViewMoreClick = () => {
-    setViewMore(!viewMore);
-  };
+  // const handleViewMoreClick = () => {
+  //   setViewMore(!viewMore);
+  // };
 
   const handleChange = (e) => {
     setValue(e.target.value);
     setTranscription(e.target.value);
   };
   useEffect(() => {
-    if (transcript) {
+    if (transcript || transcription) {
+      setTranscription(transcript);
       setHeight(351);
     } else {
-      setHeight(32);
+      setHeight('auto');
     }
-  }, [listening, transcript]);
+  }, [listening, transcript, transcription, height]);
 
-  useEffect(() => {
-    if (valueLength > 0) {
-      setViewMore(false);
-    }
-  }, [setViewMore, valueLength]);
+  // useEffect(() => {
+  //   if (valueLength > 0) {
+  //     setViewMore(false);
+  //   }
+  // }, [setViewMore, valueLength]);
 
   const startListening = () => {
     if (browserSupportsContinuousListening) {
@@ -79,6 +72,7 @@ const WebSocketProvider = ({ children }) => {
     } else {
       console.error("Browser doesn't support speech recognition.");
     }
+    setHeight(351);
   };
 
   const stopListening = () => {
@@ -87,6 +81,8 @@ const WebSocketProvider = ({ children }) => {
     } else {
       console.error("Browser doesn't support speech recognition.");
     }
+    // setHeight('');
+    setHeight('auto');
   };
 
   const handleNewPostCreation = () => {
@@ -166,10 +162,12 @@ const WebSocketProvider = ({ children }) => {
         conditions: [4, 5],
       };
       sendMessage(socket, messageToSend);
+      setIsSent(true);
     } else {
       console.error('WebSocket not connected');
     }
   };
+  console.log(newPostData);
 
   return (
     <WebSocketContext.Provider
@@ -179,13 +177,13 @@ const WebSocketProvider = ({ children }) => {
         connectionMessage,
         connectionWarnMessage,
         response,
-        handleViewMoreClick,
+        // handleViewMoreClick,
         height,
         handleChange,
         handleNewPostCreation,
         startListening,
         stopListening,
-        setViewMore,
+        // setViewMore,
         handleTextToSpeech,
         value,
         transcript,
@@ -200,6 +198,7 @@ const WebSocketProvider = ({ children }) => {
         handleInputChange,
         selectedSymptoms,
         mySymptoms,
+        isSent,
       }}
     >
       {children}

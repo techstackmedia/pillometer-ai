@@ -1,17 +1,22 @@
 export const connectWebSocket = (url, token) => {
   const authenticatedUrl = `${url}?token=${token}`;
   const socket = new WebSocket(authenticatedUrl);
-  // wss://pillometer-ai-backend-33371317abd5.herokuapp.com/ws/chat/chtOipkfTV/?token=
   socket.onopen = () => {
     console.log('WebSocket connected');
   };
 
   socket.onerror = (error) => {
-    console.error('WebSocket error:', error);
+    localStorage.setItem('WebSocket error', error);
+    setTimeout(() => {
+      localStorage.removeItem('WebSocket error');
+    }, 3000);
   };
 
   socket.onclose = () => {
-    console.log('WebSocket closed');
+    localStorage.setItem('WebSocket closed', 'WebSocket closed');
+    setTimeout(() => {
+      localStorage.removeItem('WebSocket closed');
+    }, 3000);
   };
 
   return socket;
