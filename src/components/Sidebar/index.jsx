@@ -80,7 +80,11 @@ const Sidebar = () => {
           {chatList?.length > 0 && (
             <>
               <Content
-                cn={`${styles.tab}`}
+                cn={`${styles.tab} ${
+                  pathname === `/details/${chatList[0]?.reference_no}`
+                    ? styles.active
+                    : undefined
+                }`}
                 sx={{ marginBlock: 0, marginTop: 30 }}
               >
                 <button
@@ -100,7 +104,11 @@ const Sidebar = () => {
                 chatList.slice(1).map((item, index) => (
                   <Content
                     key={index}
-                    cn={`${styles.tab}`}
+                    cn={`${styles.tab} ${
+                      pathname === `/details/${item.reference_no}`
+                        ? styles.active
+                        : undefined
+                    }`}
                     sx={{ marginBlock: 0 }}
                   >
                     <button
@@ -116,7 +124,11 @@ const Sidebar = () => {
                   {chatList.slice(1, 3).map((item, index) => (
                     <Content
                       key={index}
-                      cn={`${styles.tab}`}
+                      cn={`${styles.tab} ${
+                        pathname === `/details/${item.reference_no}`
+                          ? styles.active
+                          : undefined
+                      }`}
                       sx={{ marginBlock: 0 }}
                     >
                       <button
@@ -152,7 +164,14 @@ const Sidebar = () => {
           >
             Community
           </Content>
-          <Content cn={styles.tab}>Help & Feedback</Content>
+          <Content
+            handleContentClick={() => navigate('/help-feedback')}
+            cn={`${styles.tab} ${
+              pathname === '/help-feedback' ? styles.active : undefined
+            }`}
+          >
+            Help & Feedback
+          </Content>
         </div>
       </div>
       <div className={styles.main}>
