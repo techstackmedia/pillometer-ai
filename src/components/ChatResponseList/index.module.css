@@ -20,3 +20,10 @@
 .responseDetailNonCommunity {
   max-height: 75vh;
 }
+
+.refresh {
+  display: grid;
+  place-content: center;
+  height: calc(100vh - 81px);
+  text-align: center;
+}

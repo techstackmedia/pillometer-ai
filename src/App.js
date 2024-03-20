@@ -16,6 +16,7 @@ import ResetPassword from './pages/ResetPassword';
 import { WebSocketProvider } from './context/Chat/Service';
 import { NewPostProvider } from './context/Chat/NewPost';
 import { ChatDetailProvider } from './context/ChatDetail';
+import NotFoundPage from './pages/Error/404';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
                           path='/details/:reference_no'
                           element={<ChatQADetail />}
                         />
+                        <Route path='*' element={<NotFoundPage />} />
                       </Routes>
                     </ChatDetailProvider>
                   </WebSocketProvider>

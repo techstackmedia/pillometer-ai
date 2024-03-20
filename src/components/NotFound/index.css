@@ -1,0 +1,62 @@
+.not-found-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.not-found-page .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-page .popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.not-found-page.not-found-content {
+  text-align: center;
+}
+
+.not-found-page button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.not-found-page .popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.not-found-page h1,
+.not-found-page p {
+  text-align: center;
+}
+
+.not-found-page .four,
+.not-found-page .zero {
+  font-size: 50px;
+  letter-spacing: 4.1px;
+}
+
+.not-found-page .four {
+  color: red;
+}

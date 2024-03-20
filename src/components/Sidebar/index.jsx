@@ -10,21 +10,19 @@ import AddIcon from '../../images/add.png';
 import editPenIcon from '../../images/editPen.png';
 
 const Sidebar = () => {
-  const [chatList, setChatList] = useState([]);
+  // const [chatList, setChatList] = useState([]);
+  const [chat, setChat] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, res } = useContext(NewPostContext);
-  const { newPostData, response } = useContext(WebSocketContext);
+  const { newPostData } = useContext(WebSocketContext);
 
   useEffect(() => {
     handleChatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, res, response, navigate]);
-
-  const location = useLocation();
-  const Ref = location.state?.data;
+  }, [newPostData, res, navigate]);
 
   const handleChatList = async () => {
     try {
@@ -37,12 +35,17 @@ const Sidebar = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        setChatList(res ? [data?.results, ...Ref] : data?.results);
+        setChat(data);
       }
     } catch (e) {
       console.error('Error fetching chat list:', e.message);
     }
   };
+  let chatList = chat?.results;
+
+  if (res) {
+    chatList = chat?.results;
+  }
 
   const handleNewChat = () => {
     createNewPost();

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { connectWebSocket, disconnect, sendMessage } from './websocket';
 import { WSS_CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
@@ -76,7 +76,7 @@ const WebSocketProvider = ({ children }) => {
     setHeight('auto');
   };
 
-  const handleNewPostCreation = () => {
+  const handleNewPostCreation = useCallback(() => {
     if (newPostData && !socket) {
       const chatUrl = `${WSS_CHAT_URL}${newPostData.reference_no}/`;
       const newSocket = connectWebSocket(chatUrl, token);
@@ -116,7 +116,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-  };
+  }, [newPostData, socket]);
 
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
@@ -141,7 +141,7 @@ const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     handleNewPostCreation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, token]);
+  }, [handleNewPostCreation]);
 
   const sendMessageToServer = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
