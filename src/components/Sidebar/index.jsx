@@ -1,33 +1,28 @@
-import AddIcon from '../../images/add.png';
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
-import editPenIcon from '../../images/editPen.png';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { NewPostContext } from '../../context/Chat/NewPost';
-import { useContext } from 'react';
-import { useState, useEffect } from 'react';
 import { WebSocketContext } from '../../context/Chat/Service';
 import { ChatDetailContext } from '../../context/ChatDetail';
 import { BASE_CHAT_URL, token } from '../../constants';
+import AddIcon from '../../images/add.png';
+import editPenIcon from '../../images/editPen.png';
 
 const Sidebar = () => {
-  const [chatList, setChatList] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState(null);
-  // const [err, setErr] = useState(null);
+  const [chatList, setChatList] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-  const handleCommunityNav = () => {
-    navigate('/community');
-  };
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, res } = useContext(NewPostContext);
   const { newPostData, response } = useContext(WebSocketContext);
+
   useEffect(() => {
-    void handleChatList();
+    handleChatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPostData, res, response, navigate]);
+
   const location = useLocation();
   const Ref = location.state?.data;
 
@@ -42,26 +37,39 @@ const Sidebar = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        if (res) {
-          setChatList([data?.results, ...Ref]);
-        }
-        setChatList(data?.results);
-        // setErr(data?.details);
+        setChatList(res ? [data?.results, ...Ref] : data?.results);
       }
     } catch (e) {
-      setError(e.message);
+      console.error('Error fetching chat list:', e.message);
     }
   };
+
   const handleNewChat = () => {
     createNewPost();
     handleChatQAResponses();
   };
 
+  const navigateToChat = (reference_no) => {
+    navigate(`/details/${reference_no}`);
+    handleChatQAResponses();
+    window.scrollBy({ behavior: 'smooth', bottom: 0 });
+  };
+
+  const renderSection = (title, items) => (
+    <div className={styles.section}>
+      <Content cn={styles.paragraph}>{title}</Content>
+      {items.map((item, index) => (
+        <Content key={index} cn={styles.tab}>
+          {item}
+        </Content>
+      ))}
+    </div>
+  );
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.main}>
         <div className={styles.section}>
-          {/* <form onSubmit={handleNewChat}> */}
           <button
             type='button'
             className={styles.button}
@@ -69,7 +77,6 @@ const Sidebar = () => {
           >
             <span>New Chat</span> <img src={AddIcon} alt='add icon' />
           </button>
-          {/* </form> */}
           {chatList?.length > 0 && (
             <>
               <Content
@@ -78,9 +85,7 @@ const Sidebar = () => {
               >
                 <button
                   type='button'
-                  onClick={() =>
-                    navigate(`/details/${chatList[0]?.reference_no}`)
-                  }
+                  onClick={() => navigateToChat(chatList[0]?.reference_no)}
                 >
                   {chatList[0]?.title}
                 </button>
@@ -95,13 +100,12 @@ const Sidebar = () => {
                 chatList.slice(1).map((item, index) => (
                   <Content
                     key={index}
-                    onClick={() => navigate(`/details/${item?.reference_no}`)}
                     cn={`${styles.tab}`}
                     sx={{ marginBlock: 0 }}
                   >
                     <button
                       type='button'
-                      onClick={() => navigate(`/details/${item?.reference_no}`)}
+                      onClick={() => navigateToChat(item.reference_no)}
                     >
                       {item.title}
                     </button>
@@ -109,26 +113,20 @@ const Sidebar = () => {
                 ))
               ) : (
                 <>
-                  <Content cn={`${styles.tab}`} sx={{ marginBlock: 0 }}>
-                    <button
-                      type='button'
-                      onClick={() =>
-                        navigate(`/details/${chatList[1]?.reference_no}`)
-                      }
+                  {chatList.slice(1, 3).map((item, index) => (
+                    <Content
+                      key={index}
+                      cn={`${styles.tab}`}
+                      sx={{ marginBlock: 0 }}
                     >
-                      {chatList[1]?.title}
-                    </button>
-                  </Content>
-                  <Content cn={`${styles.tab}`} sx={{ marginBlock: 0 }}>
-                    <button
-                      type='button'
-                      onClick={() =>
-                        navigate(`/details/${chatList[2]?.reference_no}`)
-                      }
-                    >
-                      {chatList[2]?.title}
-                    </button>
-                  </Content>
+                      <button
+                        type='button'
+                        onClick={() => navigateToChat(item.reference_no)}
+                      >
+                        {item.title}
+                      </button>
+                    </Content>
+                  ))}
                   {chatList[2] && (
                     <Content
                       cn={styles.tab}
@@ -143,19 +141,11 @@ const Sidebar = () => {
             </>
           )}
         </div>
-        <div className={styles.section}>
-          <Content cn={styles.paragraph}>Libraries</Content>
-          <Content cn={styles.tab}>Symptoms</Content>
-          <Content cn={styles.tab}>Conditions</Content>
-        </div>
-        <div className={styles.section}>
-          <Content cn={styles.paragraph}>near me</Content>
-          <Content cn={styles.tab}>Pharmacies</Content>
-          <Content cn={styles.tab}>Hospitals</Content>
-        </div>
+        {renderSection('Libraries', ['Symptoms', 'Conditions'])}
+        {renderSection('Near Me', ['Pharmacies', 'Hospitals'])}
         <div className={styles.section}>
           <Content
-            handleContentClick={handleCommunityNav}
+            handleContentClick={() => navigate('/community')}
             cn={`${styles.tab} ${
               pathname === '/community' ? styles.active : undefined
             }`}
@@ -165,7 +155,6 @@ const Sidebar = () => {
           <Content cn={styles.tab}>Help & Feedback</Content>
         </div>
       </div>
-
       <div className={styles.main}>
         <div className={styles.section}>
           <Content cn={styles.paragraph}>Your Location:</Content>

@@ -109,4 +109,6 @@
 .tab button {
   border: 0;
   background-color: transparent;
+  display: flex;
+  width: 100%;
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BASE_CHAT_URL, token } from '../../constants';
 import { WebSocketContext } from '../Chat/Service';
 import { NewPostContext } from '../Chat/NewPost';
@@ -16,6 +16,7 @@ const ChatDetailProvider = ({ children }) => {
   const { pathname } = useLocation();
   const path = pathname.split('/');
   const id = path[path.length - 1];
+  const navigate = useNavigate();
 
   const { reference_no } = useParams();
 
@@ -37,6 +38,9 @@ const ChatDetailProvider = ({ children }) => {
         // refreshComponent();
       } else {
         setErr(data?.details);
+        setTimeout(() => {
+          setErr(null);
+        }, 3000);
       }
     } catch (e) {
       setError(e.message);
@@ -48,7 +52,7 @@ const ChatDetailProvider = ({ children }) => {
       handleChatQAResponses();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, response, newPostData, pathname, Ref, res]);
+  }, [id, response, newPostData, Ref, res, navigate, reference_no]);
   const chatResponses = chats?.results;
 
   const values = {
