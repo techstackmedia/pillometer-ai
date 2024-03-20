@@ -23,6 +23,12 @@
   border-top: none;
 }
 
+.dGap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .button {
   display: flex;
   justify-content: space-between;

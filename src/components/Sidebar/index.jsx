@@ -78,7 +78,7 @@ const Sidebar = () => {
             <span>New Chat</span> <img src={AddIcon} alt='add icon' />
           </button>
           {chatList?.length > 0 && (
-            <>
+            <div className={styles.dGap}>
               <Content
                 cn={`${styles.tab} ${
                   pathname === `/details/${chatList[0]?.reference_no}`
@@ -150,7 +150,7 @@ const Sidebar = () => {
                   )}
                 </>
               )}
-            </>
+            </div>
           )}
         </div>
         {renderSection('Libraries', ['Symptoms', 'Conditions'])}
