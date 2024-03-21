@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.dnone {
+  display: none;
+}
+
 .gradientText {
   background-image: linear-gradient(61.72deg, #5ebd75 -149.6%, #4c70d6 180.25%);
   background-clip: text;
