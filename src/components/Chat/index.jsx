@@ -34,7 +34,6 @@ const Chat = () => {
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const navigate = useNavigate();
-  console.log(WSS_CHAT_URL, reference_no);
 
   const handleMessageSend = async () => {
     if (isWebSocketConnected && reference_no) {
@@ -65,6 +64,9 @@ const Chat = () => {
         state: { data: Ref, mySymptoms: symptoms },
       });
       createNewPost();
+    }
+    if (!isWebSocketConnected) {
+      connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
     }
     isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
     handleMessageSend();

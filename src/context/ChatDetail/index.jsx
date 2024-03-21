@@ -39,16 +39,16 @@ const ChatDetailProvider = ({ children }) => {
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
-        // if (data?.results === 0) {
+        // if (data?.results.length === 0) {
         //   setTimeout(() => {
+        //     window.location.href = `/details/${path[2]}/`;
+        //   // }, 2000);
+        // }
+        // if (data?.results.length === 0) {
+        //   setInterval(() => {
         //     handleChatQAResponses();
         //   }, 2000);
         // }
-        if (data?.results === 0) {
-          setInterval(() => {
-            handleChatQAResponses();
-          }, 2000);
-        }
       } else {
         setErr(data?.details);
         setTimeout(() => {

@@ -11,13 +11,11 @@ import { WebSocketContext } from '../../context/Chat/Service';
 const ChatResponseList = () => {
   const { chats, chatResponses, refreshKey } = useContext(ChatDetailContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { isSent } = useContext(WebSocketContext);
+  const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   // const handleClick = () => {
   //   handleChatQAResponses();
   // };
-  console.log(chats);
-
   useEffect(() => {
     isSent &&
       window.scrollTo({
@@ -43,10 +41,14 @@ const ChatResponseList = () => {
               : styles.responseDetailNonCommunity
           }`}
         >
-          {chats &&
+          {!chats ? (
+            <ChatResponse key={newResponse?.id} item={newResponse?.message} />
+          ) : (
+            chats &&
             chatResponses?.map((chat) => (
               <ChatResponse key={chat?.id} item={chat} />
-            ))}
+            ))
+          )}
         </div>
         {pathname === '/community' ? null : <Chat />}
       </main>

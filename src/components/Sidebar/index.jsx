@@ -19,11 +19,6 @@ const Sidebar = () => {
   const { createNewPost, res } = useContext(NewPostContext);
   const { newPostData } = useContext(WebSocketContext);
 
-  useEffect(() => {
-    handleChatList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, res, navigate, refreshKey]);
-
   const handleChatList = async () => {
     try {
       const response = await fetch(BASE_CHAT_URL, {
@@ -46,6 +41,13 @@ const Sidebar = () => {
   if (res) {
     chatList = chat?.results;
   }
+
+  useEffect(() => {
+    if (chat) {
+      handleChatList();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newPostData, res, navigate, refreshKey]);
 
   const handleNewChat = useCallback(() => {
     createNewPost();

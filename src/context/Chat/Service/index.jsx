@@ -28,6 +28,7 @@ const WebSocketProvider = ({ children }) => {
   const [isWebSocketConnected, setIsWebSocketConnected] = useState(false);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [mySymptoms, setMySymptoms] = useState('');
+  const [newResponse, setNewResponse] = useState(null);
 
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
@@ -114,7 +115,12 @@ const WebSocketProvider = ({ children }) => {
 
       newSocket.onmessage = (event) => {
         const receivedMessage = JSON.parse(event.data);
-        setResponse(receivedMessage.message);
+        setResponse(receivedMessage?.message);
+
+        // Check if the received message matches the expected response
+        if (receivedMessage?.message) {
+          setNewResponse(receivedMessage);
+        }
       };
 
       setSocket(newSocket);
@@ -159,7 +165,6 @@ const WebSocketProvider = ({ children }) => {
         symptoms: [3, 4],
         conditions: [4, 5],
       };
-      console.log(message);
       sendMessage(socket, messageToSend);
       setIsSent(true);
     } else {
@@ -197,6 +202,7 @@ const WebSocketProvider = ({ children }) => {
         selectedSymptoms,
         mySymptoms,
         isSent,
+        newResponse,
       }}
     >
       {children}

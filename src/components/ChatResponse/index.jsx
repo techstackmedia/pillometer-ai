@@ -7,9 +7,14 @@ import styles from './index.module.css';
 import { ChatDetailContext } from '../../context/ChatDetail';
 
 const ChatResponse = ({ item }) => {
-  const { connectionErrorMessage, connectionMessage, connectionWarnMessage } =
-    useContext(WebSocketContext);
+  const {
+    connectionErrorMessage,
+    connectionMessage,
+    connectionWarnMessage,
+    newResponse,
+  } = useContext(WebSocketContext);
   const { err } = useContext(ChatDetailContext);
+  console.log(newResponse);
 
   return (
     <>
@@ -40,10 +45,10 @@ const ChatResponse = ({ item }) => {
         </div>
       )}
 
-      {item.isUser ? (
-        <UserQuestion message={item.message} />
+      {item?.isUser ? (
+        <UserQuestion message={item?.message} />
       ) : (
-        <Response message={item.message} />
+        <Response message={item?.message || newResponse} />
       )}
     </>
   );

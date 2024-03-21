@@ -19,9 +19,6 @@ const AuthProfileProvider = ({ children }) => {
   const [profileError, setProfileError] = useState(null);
 
   const navigate = useNavigate();
-  useEffect(() => {
-    getProfile();
-  }, []);
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const navigateToNextPage = () => {
@@ -71,6 +68,12 @@ const AuthProfileProvider = ({ children }) => {
       setProfileError(e.message);
     }
   };
+
+  useEffect(() => {
+    if (profileResponse) {
+      getProfile();
+    }
+  }, []);
 
   const updateProfile = async (profileData) => {
     try {
