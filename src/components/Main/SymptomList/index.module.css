@@ -54,3 +54,11 @@
   border: 1px solid #514f6d;
   cursor: pointer;
 }
+
+.nonLabel input {
+  display: none;
+}
+
+.nonInputValue {
+  border: 1px dashed #e8e7ee;
+}

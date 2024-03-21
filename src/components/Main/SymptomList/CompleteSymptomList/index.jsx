@@ -15,8 +15,13 @@ const CompleteSymptomList = ({ viewMore, fullSymptomList }) => {
       }`}
     >
       {fullSymptomList.map((item, index) => (
-        <Card key={`${index}-${item}`} cn={styles.cardCheckbox}>
-          <label className={styles.label}>
+        <Card
+          key={`${index}-${item}`}
+          cn={`${styles.cardCheckbox} ${item === '' && styles.nonInputValue}`}
+        >
+          <label
+            className={`${styles.label} ${item === '' && styles.nonLabel}`}
+          >
             <input
               type='checkbox'
               name='symptom'
