@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
@@ -15,14 +15,14 @@ const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { handleChatQAResponses, refreshKey } = useContext(ChatDetailContext);
   const { createNewPost, res } = useContext(NewPostContext);
   const { newPostData } = useContext(WebSocketContext);
 
   useEffect(() => {
     handleChatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, res, navigate]);
+  }, [newPostData, res, navigate, refreshKey]);
 
   const handleChatList = async () => {
     try {
@@ -47,10 +47,15 @@ const Sidebar = () => {
     chatList = chat?.results;
   }
 
-  const handleNewChat = () => {
+  const handleNewChat = useCallback(() => {
     createNewPost();
     handleChatQAResponses();
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createNewPost]);
+
+  // useEffect(() => {
+  //   handleNewChat();
+  // }, [handleNewChat, refreshKey]);
 
   const navigateToChat = (reference_no) => {
     navigate(`/details/${reference_no}`);

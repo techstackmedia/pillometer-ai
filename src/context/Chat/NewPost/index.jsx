@@ -12,8 +12,10 @@ const NewPostProvider = ({ children }) => {
   const [res, setRes] = useState(null);
   const { pathname } = useLocation();
   const [err, setErr] = useState();
+  const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
   const route = path[path.length - 1];
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const navigate = useNavigate();
 
@@ -37,7 +39,7 @@ const NewPostProvider = ({ children }) => {
       const reference = responseData?.reference_no;
       setRef(reference);
       if (responseData) {
-        navigate(`/details/${reference}`, {
+        navigate(`/details/${reference ?? path[2]}`, {
           state: { data: responseData },
         });
       } else {
@@ -50,7 +52,6 @@ const NewPostProvider = ({ children }) => {
       setErrorMessage(error.message);
     }
   };
-
   const sendNewPost = async (value) => {
     const postData = {
       reference_no: Ref,
@@ -66,7 +67,7 @@ const NewPostProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch(`${BASE_CHAT_URL}/${route}/predict`, {
+      const response = await fetch(`${BASE_CHAT_URL}/${path[2]}/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,6 +78,8 @@ const NewPostProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         setRes(data);
+      } else {
+        setErrDetail(data.details);
       }
     } catch (error) {
       setErr(error.message);
@@ -91,6 +94,7 @@ const NewPostProvider = ({ children }) => {
     res,
     err,
     Ref,
+    errDetail,
   };
 
   return (

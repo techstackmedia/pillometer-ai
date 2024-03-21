@@ -1,11 +1,11 @@
-import React, {
+import {
   createContext,
   useState,
   useEffect,
   useContext,
   useCallback,
 } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BASE_CHAT_URL, token } from '../../constants';
 import { WebSocketContext } from '../Chat/Service';
 
@@ -18,28 +18,33 @@ const ChatDetailProvider = ({ children }) => {
   const [err, setErr] = useState(null);
   const { pathname } = useLocation();
   const path = pathname.split('/');
-  const id = path[path.length - 1];
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const { reference_no } = useParams();
+  const navigate = useNavigate();
 
   const handleChatQAResponses = useCallback(async () => {
     try {
-      const response = await fetch(
-        `${BASE_CHAT_URL}/${id ?? reference_no}/messages`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `token ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${BASE_CHAT_URL}/${path[2]}/messages`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+      });
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
         setChats(data);
-        if (data.results.length === 0) {
-          window.location.reload();
+        if (data?.results?.length === 0) {
+          // window.location.href = `/details/${path[2]}/`;
+          navigate(`/details/${path[2]}/`);
         }
+        // setTimeout(() => {
+        //   if (data?.results?.length === 0) {
+        //     window.location.href = `/details/${path[2]}/`;
+        //     // navigate(`/details/${path[2]}/`);
+        //   }
+        // }, 3000);
         // refreshComponent();
       } else {
         setErr(data?.details);
@@ -49,8 +54,12 @@ const ChatDetailProvider = ({ children }) => {
       }
     } catch (e) {
       setError(e.message);
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
     }
-  }, [id, reference_no]);
+  }, [navigate, path]);
+  console.log(newPostData);
 
   useEffect(() => {
     if (newPostData) {
@@ -58,6 +67,9 @@ const ChatDetailProvider = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleChatQAResponses, newPostData]);
+  const refreshComponent = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
   const chatResponses = chats?.results;
 
   const values = {
@@ -66,7 +78,8 @@ const ChatDetailProvider = ({ children }) => {
     chatResponses,
     error,
     err,
-    // refreshKey,
+    refreshComponent,
+    refreshKey,
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Card from '../../../shared/Card';
 import Content from '../../../shared/Content';
 import SymptomsSelectionInput from '../../../shared/SymptomsSelectionInput';
@@ -15,10 +15,7 @@ const CompleteSymptomList = ({ viewMore, fullSymptomList }) => {
       }`}
     >
       {fullSymptomList.map((item, index) => (
-        <Card
-          key={`${index}-${item}`} // Use a unique identifier for the key
-          cn={styles.cardCheckbox}
-        >
+        <Card key={`${index}-${item}`} cn={styles.cardCheckbox}>
           <label className={styles.label}>
             <input
               type='checkbox'

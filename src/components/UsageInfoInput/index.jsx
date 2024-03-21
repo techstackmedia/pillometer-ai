@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from '../shared/Card';
 import Content from '../shared/Content';
 import personIcon from '../../images/person.png';

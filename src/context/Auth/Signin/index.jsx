@@ -58,8 +58,10 @@ const AuthSigninProvider = ({ children }) => {
         setSuccessMessage('Login Successful');
         setTimeout(() => {
           setSuccessMessage(null);
+          if (successMessage === null) {
+            window.location.href = '/';
+          }
         }, 3000);
-        window.location.href = '/';
       } else {
         setSigninError(data.details);
         setTimeout(() => {

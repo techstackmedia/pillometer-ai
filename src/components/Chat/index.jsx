@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Input from '../shared/Input';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
@@ -40,9 +40,7 @@ const Chat = () => {
       sendMessageToServer(value);
     } else {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
-      setTimeout(() => {
-        sendMessageToServer(value);
-      }, 1000);
+      sendMessageToServer(value);
     }
     handleChatQAResponses();
   };
@@ -57,28 +55,29 @@ const Chat = () => {
     }
   };
 
-  const voice = value
-    ? value
-    : mySymptoms
-    ? `Provide remedy to symptoms: ${mySymptoms}`
-    : transcription;
+  const symptoms = `Provide remedy to symptoms: ${mySymptoms}`;
+
+  const voice = value ? value : mySymptoms ? mySymptoms : transcription;
 
   const handleClick = () => {
-    handleMessageSend();
-    handleNewPostCreation();
     if (pathname === '/') {
-      navigate(`/details/${Ref}`, { state: { data: Ref } });
+      navigate(`/details/${Ref}`, {
+        state: { data: Ref, mySymptoms: symptoms },
+      });
       createNewPost();
-      if (Ref) {
-        window.location.href = `/details/${Ref}`;
-      }
     }
-    sendNewPost(value);
+    isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
+    handleMessageSend();
+
     isSent &&
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth',
+        bottom: 0,
       });
+    setTimeout(() => {
+      handleChatQAResponses();
+    }, 3000);
   };
 
   return (

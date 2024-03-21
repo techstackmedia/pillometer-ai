@@ -1,12 +1,10 @@
 import React from 'react';
 
 const formatMessage = (text) => {
-  // Split the text based on '/n/n' for paragraphs
   const paragraphs = text
     .split('/n/n')
     .map((paragraph, index) => <p key={index}>{paragraph}</p>);
 
-  // Apply strong formatting for text between '**'
   const strongRegex = /\*\*(.*?)\*\*/g;
   paragraphs.forEach((paragraph, index) => {
     if (typeof paragraph.props.children === 'string') {
@@ -18,7 +16,6 @@ const formatMessage = (text) => {
     }
   });
 
-  // Combine paragraphs back into a single JSX element
   return paragraphs.map((paragraph, index) => (
     <div key={index}>{paragraph}</div>
   ));

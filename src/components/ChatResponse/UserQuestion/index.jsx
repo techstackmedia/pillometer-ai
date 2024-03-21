@@ -1,4 +1,3 @@
-import React from 'react';
 import Content from '../../shared/Content';
 import styles from './index.module.css';
 import userProfileImage from '../../../images/personProfileImage.png';

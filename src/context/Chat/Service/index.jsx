@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 import { connectWebSocket, disconnect, sendMessage } from './websocket';
 import { WSS_CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
@@ -27,6 +27,14 @@ const WebSocketProvider = ({ children }) => {
   const [connectionWarnMessage, setConnectionWarnMessage] = useState(null);
   const [isWebSocketConnected, setIsWebSocketConnected] = useState(false);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [mySymptoms, setMySymptoms] = useState('');
+
+  useEffect(() => {
+    const symptomsString = selectedSymptoms.join(', ');
+    setMySymptoms(symptomsString);
+    setValue(symptomsString);
+  }, [selectedSymptoms]);
+
   const [isSent, setIsSent] = useState(false);
 
   const handleInputChange = (e) => {
@@ -39,7 +47,6 @@ const WebSocketProvider = ({ children }) => {
       );
     }
   };
-  const mySymptoms = selectedSymptoms.join(', ');
 
   const handleViewMoreClick = () => {
     setViewMore((prevViewMore) => !prevViewMore);
@@ -152,6 +159,7 @@ const WebSocketProvider = ({ children }) => {
         symptoms: [3, 4],
         conditions: [4, 5],
       };
+      console.log(message);
       sendMessage(socket, messageToSend);
       setIsSent(true);
     } else {
@@ -173,7 +181,6 @@ const WebSocketProvider = ({ children }) => {
         handleNewPostCreation,
         startListening,
         stopListening,
-        // setViewMore,
         handleTextToSpeech,
         value,
         viewMore,
