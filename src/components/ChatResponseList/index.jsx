@@ -16,6 +16,7 @@ const ChatResponseList = () => {
   // const handleClick = () => {
   //   handleChatQAResponses();
   // };
+  console.log(chats);
 
   useEffect(() => {
     isSent &&

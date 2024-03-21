@@ -14,8 +14,8 @@ const NewPostProvider = ({ children }) => {
   const [err, setErr] = useState();
   const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
-  const route = path[path.length - 1];
-  const [refreshKey, setRefreshKey] = useState(0);
+  // const route = path[path.length - 1];
+  // const [refreshKey, setRefreshKey] = useState(0);
 
   const navigate = useNavigate();
 
@@ -50,6 +50,9 @@ const NewPostProvider = ({ children }) => {
       }
     } catch (error) {
       setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000);
     }
   };
   const sendNewPost = async (value) => {

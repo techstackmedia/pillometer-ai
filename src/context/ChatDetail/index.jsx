@@ -34,11 +34,12 @@ const ChatDetailProvider = ({ children }) => {
       const data = await response.json();
       console.log(data);
       if (response.ok) {
+        navigate(`/details/${path[2]}/`);
         setChats(data);
-        if (data?.results?.length === 0) {
-          // window.location.href = `/details/${path[2]}/`;
-          navigate(`/details/${path[2]}/`);
-        }
+        // if (data?.results?.length === 0) {
+        //   // window.location.href = `/details/${path[2]}/`;
+        //   navigate(`/details/${path[2]}/`);
+        // }
         // setTimeout(() => {
         //   if (data?.results?.length === 0) {
         //     window.location.href = `/details/${path[2]}/`;
