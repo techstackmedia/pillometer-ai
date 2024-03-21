@@ -19,23 +19,32 @@ const ChatDetailProvider = ({ children }) => {
   const { pathname } = useLocation();
   const path = pathname.split('/');
   const [refreshKey, setRefreshKey] = useState(0);
-
+  const referenceNo = newPostData?.reference_no;
+  console.log(referenceNo);
   const navigate = useNavigate();
 
   const handleChatQAResponses = useCallback(async () => {
     try {
-      const response = await fetch(`${BASE_CHAT_URL}/${path[2]}/messages`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `token ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${BASE_CHAT_URL}/${path[2] ?? referenceNo}/messages`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `token ${token}`,
+          },
+        }
+      );
       const data = await response.json();
-      console.log(data);
+      console.log(data?.results === 0);
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
+        if (data?.results === 0) {
+          setTimeout(() => {
+            handleChatQAResponses(); // Recursive call
+          }, 3000); // Adjust the timeout as needed
+        }
         // if (data?.results?.length === 0) {
         //   // window.location.href = `/details/${path[2]}/`;
         //   navigate(`/details/${path[2]}/`);
@@ -59,8 +68,7 @@ const ChatDetailProvider = ({ children }) => {
         setError(null);
       }, 3000);
     }
-  }, [navigate, path]);
-  console.log(newPostData);
+  }, [navigate, path, referenceNo]);
 
   useEffect(() => {
     if (newPostData) {

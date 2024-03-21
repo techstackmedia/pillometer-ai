@@ -37,10 +37,10 @@ const Chat = () => {
 
   const handleMessageSend = () => {
     if (isWebSocketConnected) {
-      sendMessageToServer(value);
-    } else {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
       sendMessageToServer(value);
+      sendMessageToServer(value);
+      // } else {
     }
     handleChatQAResponses();
   };
