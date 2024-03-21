@@ -34,11 +34,11 @@ const Chat = () => {
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const navigate = useNavigate();
+  console.log(WSS_CHAT_URL, reference_no);
 
-  const handleMessageSend = () => {
-    if (isWebSocketConnected) {
+  const handleMessageSend = async () => {
+    if (isWebSocketConnected && reference_no) {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
-      sendMessageToServer(value);
       sendMessageToServer(value);
       // } else {
     }

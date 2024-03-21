@@ -86,6 +86,9 @@ const NewPostProvider = ({ children }) => {
       }
     } catch (error) {
       setErr(error.message);
+      setTimeout(() => {
+        setErr(null);
+      }, 3000);
     }
   };
 
