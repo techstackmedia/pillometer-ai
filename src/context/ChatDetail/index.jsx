@@ -20,7 +20,6 @@ const ChatDetailProvider = ({ children }) => {
   const path = pathname.split('/');
   const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
-  console.log(referenceNo);
   const navigate = useNavigate();
 
   const handleChatQAResponses = useCallback(async () => {
@@ -40,22 +39,16 @@ const ChatDetailProvider = ({ children }) => {
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
-        if (data?.results === 0) {
-          setTimeout(() => {
-            handleChatQAResponses(); // Recursive call
-          }, 3000); // Adjust the timeout as needed
-        }
-        // if (data?.results?.length === 0) {
-        //   // window.location.href = `/details/${path[2]}/`;
-        //   navigate(`/details/${path[2]}/`);
+        // if (data?.results === 0) {
+        //   setTimeout(() => {
+        //     handleChatQAResponses();
+        //   }, 2000);
         // }
-        // setTimeout(() => {
-        //   if (data?.results?.length === 0) {
-        //     window.location.href = `/details/${path[2]}/`;
-        //     // navigate(`/details/${path[2]}/`);
-        //   }
-        // }, 3000);
-        // refreshComponent();
+        if (data?.results === 0) {
+          setInterval(() => {
+            handleChatQAResponses();
+          }, 2000);
+        }
       } else {
         setErr(data?.details);
         setTimeout(() => {
@@ -74,7 +67,6 @@ const ChatDetailProvider = ({ children }) => {
     if (newPostData) {
       handleChatQAResponses();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleChatQAResponses, newPostData]);
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
