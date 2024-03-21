@@ -11,7 +11,7 @@ import Button from '../shared/Button';
 const ChatResponseList = () => {
   const { chats, chatResponses, refreshKey } = useContext(ChatDetailContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { isSent, newResponse } = useContext(WebSocketContext);
+  const { isSent /* , newResponse */ } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const handleClick = () => {
     handleChatQAResponses();
