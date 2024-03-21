@@ -49,7 +49,9 @@ const Response = ({ message, reference_no }) => {
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
           {(res || newResponse) && (
             <Markdown remarkPlugins={[remarkGfm]}>
-              {message ? message?.trim() || newResponse?.message : null}
+              {typeof message === 'string'
+                ? message.trim() || newResponse?.message
+                : null}
             </Markdown>
           )}
         </Content>
