@@ -12,14 +12,12 @@ import { WebSocketContext } from '../../../context/Chat/Service';
 import { NewPostContext } from '../../../context/Chat/NewPost';
 
 const Response = ({ message, reference_no }) => {
-  console.log(message);
   const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const containerRef = useRef(null);
   const [textCopied, setTextCopied] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const { res } = useContext(NewPostContext);
-  console.log(res);
   // const [errorMessage, setErrorMessage] = useState(null);
   const handleCopy = () => {
     setTextCopied(true);

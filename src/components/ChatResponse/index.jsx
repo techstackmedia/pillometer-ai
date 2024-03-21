@@ -14,7 +14,6 @@ const ChatResponse = ({ item }) => {
     newResponse,
   } = useContext(WebSocketContext);
   const { err } = useContext(ChatDetailContext);
-  console.log(newResponse);
 
   return (
     <>

@@ -22,12 +22,13 @@ const Chat = () => {
     transcript,
     setValue,
     transcription,
-    handleNewPostCreation,
+    // handleNewPostCreation,
     isWebSocketConnected,
     connectWebSocket,
     mySymptoms,
     isSent,
     height,
+    newPostData,
   } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
@@ -36,10 +37,12 @@ const Chat = () => {
   const navigate = useNavigate();
 
   const handleMessageSend = async () => {
-    if (isWebSocketConnected && reference_no) {
-      connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
+    if ((isWebSocketConnected && reference_no) || newPostData?.reference_no) {
+      connectWebSocket(
+        `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
+        token
+      );
       sendMessageToServer(value);
-      // } else {
     }
     handleChatQAResponses();
   };

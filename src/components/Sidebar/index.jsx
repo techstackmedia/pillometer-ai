@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import { NewPostContext } from '../../context/Chat/NewPost';
 import { WebSocketContext } from '../../context/Chat/Service';
 import { ChatDetailContext } from '../../context/ChatDetail';
-import { BASE_CHAT_URL, token } from '../../constants';
+import { BASE_CHAT_URL, WSS_CHAT_URL, token } from '../../constants';
 import AddIcon from '../../images/add.png';
 import editPenIcon from '../../images/editPen.png';
 
@@ -17,7 +17,8 @@ const Sidebar = () => {
   const { pathname } = useLocation();
   const { handleChatQAResponses, refreshKey } = useContext(ChatDetailContext);
   const { createNewPost, res } = useContext(NewPostContext);
-  const { newPostData } = useContext(WebSocketContext);
+  const { newPostData, connectWebSocket } = useContext(WebSocketContext);
+  const { reference_no } = useParams();
 
   const handleChatList = async () => {
     try {
@@ -52,6 +53,7 @@ const Sidebar = () => {
   const handleNewChat = useCallback(() => {
     createNewPost();
     handleChatQAResponses();
+    connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createNewPost]);
 

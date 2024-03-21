@@ -5,17 +5,17 @@ import Chat from '../Chat';
 import styles from './index.module.css';
 import { ChatDetailContext } from '../../context/ChatDetail';
 import { WebSocketContext } from '../../context/Chat/Service';
-// import Button from '../shared/Button';
-// import Content from '../shared/Content';
+import Content from '../shared/Content';
+import Button from '../shared/Button';
 
 const ChatResponseList = () => {
   const { chats, chatResponses, refreshKey } = useContext(ChatDetailContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
-  // const handleClick = () => {
-  //   handleChatQAResponses();
-  // };
+  const handleClick = () => {
+    handleChatQAResponses();
+  };
   useEffect(() => {
     isSent &&
       window.scrollTo({
@@ -27,32 +27,32 @@ const ChatResponseList = () => {
 
   return (
     <>
-      {/* {!chats ? (
+      {!chats ? (
         <div className={styles.refresh}>
           <Content cn='heading'>Start Conversation</Content>
           <Button navigateToNextPage={handleClick}>Open chat</Button>
         </div>
-      ) : ( */}
-      <main className={styles.main}>
-        <div
-          className={`Detail ${
-            pathname === '/community'
-              ? styles.responseDetailCommunity
-              : styles.responseDetailNonCommunity
-          }`}
-        >
-          {!chats ? (
-            <ChatResponse key={newResponse?.id} item={newResponse?.message} />
-          ) : (
-            chats &&
-            chatResponses?.map((chat) => (
-              <ChatResponse key={chat?.id} item={chat} />
-            ))
-          )}
-        </div>
-        {pathname === '/community' ? null : <Chat />}
-      </main>
-      {/* )} */}
+      ) : (
+        <main className={styles.main}>
+          <div
+            className={`Detail ${
+              pathname === '/community'
+                ? styles.responseDetailCommunity
+                : styles.responseDetailNonCommunity
+            }`}
+          >
+            {!chats ? (
+              <ChatResponse key={newResponse?.id} item={newResponse?.message} />
+            ) : (
+              chats &&
+              chatResponses?.map((chat) => (
+                <ChatResponse key={chat?.id} item={chat} />
+              ))
+            )}
+          </div>
+          {pathname === '/community' ? null : <Chat />}
+        </main>
+      )}
     </>
   );
 };

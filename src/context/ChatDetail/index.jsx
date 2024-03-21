@@ -35,7 +35,6 @@ const ChatDetailProvider = ({ children }) => {
         }
       );
       const data = await response.json();
-      console.log(data?.results === 0);
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
