@@ -8,11 +8,13 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BASE_CHAT_URL, token } from '../../constants';
 import { WebSocketContext } from '../Chat/Service';
+import { NewPostContext } from '../Chat/NewPost';
 
 const ChatDetailContext = createContext();
 
 const ChatDetailProvider = ({ children }) => {
   const { newPostData } = useContext(WebSocketContext);
+  const { res } = useContext(NewPostContext);
   const [chats, setChats] = useState(null);
   const [error, setError] = useState(null);
   const [err, setErr] = useState(null);
@@ -38,6 +40,9 @@ const ChatDetailProvider = ({ children }) => {
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
+        if (res && data?.results?.length == 0) {
+          window.location.href = `/details/${path[2]}/`;
+        }
         // if (data?.results.length === 0) {
         //   setTimeout(() => {
         //     window.location.href = `/details/${path[2]}/`;
