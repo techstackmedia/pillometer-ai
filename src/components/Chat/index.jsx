@@ -65,8 +65,10 @@ const Chat = () => {
       });
       createNewPost();
     }
-    if (!isWebSocketConnected) {
+    if (isWebSocketConnected && reference_no) {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
+      // sendMessageToServer(value);
+      // } else {
     }
     isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
     handleMessageSend();
