@@ -13,12 +13,13 @@ import { NewPostContext } from '../../../context/Chat/NewPost';
 
 const Response = ({ message, reference_no }) => {
   console.log(message);
-  const { isSent } = useContext(WebSocketContext);
+  const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const containerRef = useRef(null);
   const [textCopied, setTextCopied] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const { res } = useContext(NewPostContext);
+  console.log(res);
   // const [errorMessage, setErrorMessage] = useState(null);
   const handleCopy = () => {
     setTextCopied(true);
@@ -46,16 +47,10 @@ const Response = ({ message, reference_no }) => {
       <img src={logo} alt='user profile' className={styles.userProfileImage} />
       <div className={styles.chatResponseCol}>
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
-          {res ? (
+          {(res || newResponse) && (
             <Markdown remarkPlugins={[remarkGfm]}>
-              {message ? message?.trim() : null}
+              {message ? message?.trim() || newResponse?.message : null}
             </Markdown>
-          ) : (
-            message && (
-              <Markdown remarkPlugins={[remarkGfm]}>
-                {message ? message?.trim() : null}
-              </Markdown>
-            )
           )}
         </Content>
         {pathname !== '/community' ? (
