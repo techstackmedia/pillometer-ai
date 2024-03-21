@@ -12,6 +12,7 @@ import { WebSocketContext } from '../../../context/Chat/Service';
 import { NewPostContext } from '../../../context/Chat/NewPost';
 
 const Response = ({ message, reference_no }) => {
+  console.log(message);
   const { isSent } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const containerRef = useRef(null);
@@ -46,10 +47,14 @@ const Response = ({ message, reference_no }) => {
       <div className={styles.chatResponseCol}>
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
           {res ? (
-            <Markdown remarkPlugins={[remarkGfm]}>{message?.trim()}</Markdown>
+            <Markdown remarkPlugins={[remarkGfm]}>
+              {message ? message?.trim() : null}
+            </Markdown>
           ) : (
             message && (
-              <Markdown remarkPlugins={[remarkGfm]}>{message?.trim()}</Markdown>
+              <Markdown remarkPlugins={[remarkGfm]}>
+                {message ? message?.trim() : null}
+              </Markdown>
             )
           )}
         </Content>
