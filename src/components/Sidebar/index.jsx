@@ -53,7 +53,10 @@ const Sidebar = () => {
   const handleNewChat = useCallback(() => {
     createNewPost();
     handleChatQAResponses();
-    connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
+    connectWebSocket(
+      `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
+      token
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createNewPost]);
 

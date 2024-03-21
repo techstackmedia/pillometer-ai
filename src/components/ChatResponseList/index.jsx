@@ -24,7 +24,8 @@ const ChatResponseList = () => {
         bottom: 0,
       });
   }, [isSent, handleChatQAResponses, refreshKey]);
-
+  // console.log(newResponse);
+  // console.log(chatResponses);
   return (
     <>
       {!chats ? (
@@ -41,14 +42,10 @@ const ChatResponseList = () => {
                 : styles.responseDetailNonCommunity
             }`}
           >
-            {!chats ? (
-              <ChatResponse key={newResponse?.id} item={newResponse?.message} />
-            ) : (
-              chats &&
+            {chats &&
               chatResponses?.map((chat) => (
                 <ChatResponse key={chat?.id} item={chat} />
-              ))
-            )}
+              ))}
           </div>
           {pathname === '/community' ? null : <Chat />}
         </main>
