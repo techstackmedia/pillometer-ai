@@ -20,7 +20,6 @@ const ChatDetailProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [err, setErr] = useState(null);
   const { pathname } = useLocation();
-  const path = pathname.split('/');
   const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
   const navigate = useNavigate();
