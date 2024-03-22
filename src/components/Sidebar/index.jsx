@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { handleChatQAResponses, refreshKey } = useContext(ChatDetailContext);
+  const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, res, Ref } = useContext(NewPostContext);
   const { newPostData, connectWebSocket, isWebSocketConnected } =
     useContext(WebSocketContext);
@@ -45,11 +45,11 @@ const Sidebar = () => {
   }
 
   useEffect(() => {
-    if (chat) {
+    if (chat?.results?.length > 0) {
       handleChatList();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, res, navigate, refreshKey]);
+  }, [newPostData, res]);
 
   console.log(newPostData?.reference_no, Ref, reference_no);
 

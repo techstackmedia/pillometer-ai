@@ -26,7 +26,7 @@ const IncompleteSymptomList = ({ symptoms }) => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [Ref, reference_no, newPostData?.reference_no, sendNewPost]
+    [sendNewPost]
   );
 
   return (

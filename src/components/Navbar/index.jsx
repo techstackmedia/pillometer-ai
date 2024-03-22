@@ -1,15 +1,20 @@
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import logo from '../../logo.svg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ProfileImageInfo from '../ProfileImageInfo';
 import { useEffect } from 'react';
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const { reference_no } = useParams();
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate('/');
+    if (!reference_no) {
+      window.location.href = '/';
+    } else {
+      navigate('/');
+    }
   };
 
   return (

@@ -25,21 +25,27 @@ const ChatDetailProvider = ({ children }) => {
   const navigate = useNavigate();
   console.log(path[2], referenceNo, Ref);
 
-  const handleChatQAResponses = useCallback(async () => {
+  let id = '';
+  if (id === path[2]) {
+    id = path[2];
+  } else if (id === referenceNo) {
+    id = referenceNo;
+  } else {
+    id = Ref;
+  }
+
+  const handleChatQAResponses = async () => {
     try {
-      const response = await fetch(
-        `${BASE_CHAT_URL}/${path[2] ?? Ref ?? referenceNo}/messages`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `token ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+      });
       const data = await response.json();
       if (response.ok) {
-        navigate(`/details/${path[2]}/`);
+        navigate(`/details/${id}/`);
         setChats(data);
         if (res && data?.results?.length === 0 && newPostData) {
           window.location.href = `/details/${path[2]}/`;
@@ -57,7 +63,7 @@ const ChatDetailProvider = ({ children }) => {
       }, 3000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, referenceNo]);
+  };
 
   // useEffect(() => {
   //   if (newPostData) {
@@ -68,6 +74,12 @@ const ChatDetailProvider = ({ children }) => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
   const chatResponses = chats?.results;
+
+  // useEffect(() => {
+  //   if (referenceNo === undefined) {
+  //     navigate('/');
+  //   }
+  // }, [referenceNo]);
 
   const values = {
     handleChatQAResponses,
