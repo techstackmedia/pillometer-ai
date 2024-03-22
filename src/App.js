@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Community from './pages/Community';
@@ -17,52 +16,74 @@ import { WebSocketProvider } from './context/Chat/Service';
 import { NewPostProvider } from './context/Chat/NewPost';
 import { ChatDetailProvider } from './context/ChatDetail';
 import NotFoundPage from './pages/Error/404';
-import { NetworkStatusProvider } from './context/NetworkStatus';
+import { useContext } from 'react';
+import {
+  NetworkStatusContext,
+  NetworkStatusProvider,
+} from './context/NetworkStatus';
+
+import Alert from './components/shared/Alert';
 
 function App() {
+  const isOnline = useContext(NetworkStatusContext);
+
   return (
     <BrowserRouter>
       <NetworkStatusProvider>
-        <AuthSignupProvider>
-          <AuthSigninProvider>
-            <AuthProfileProvider>
-              <AuthForgotPasswordProvider>
-                <AuthResetPasswordProvider>
-                  <NewPostProvider>
-                    <WebSocketProvider>
-                      <ChatDetailProvider>
-                        <Routes>
-                          <Route index element={<Home />} />
-                          <Route path='/auth/login' element={<Auth />} />
-                          <Route path='/auth/register' element={<Auth />} />
-                          <Route
-                            path='/auth/password-verification'
-                            element={<PasswordVerification />}
-                          />
-                          <Route
-                            path='/auth/email-verification'
-                            element={<EmailVerification />}
-                          />
-                          <Route
-                            path='/reset-password'
-                            element={<ResetPassword />}
-                          />
-                          <Route path='/auth/profile' element={<Profile />} />
-                          <Route path='/community' element={<Community />} />
-                          <Route
-                            path='/details/:reference_no'
-                            element={<ChatQADetail />}
-                          />
-                          <Route path='*' element={<NotFoundPage />} />
-                        </Routes>
-                      </ChatDetailProvider>
-                    </WebSocketProvider>
-                  </NewPostProvider>
-                </AuthResetPasswordProvider>
-              </AuthForgotPasswordProvider>
-            </AuthProfileProvider>
-          </AuthSigninProvider>
-        </AuthSignupProvider>
+        {!isOnline ? (
+          <AuthSignupProvider>
+            <AuthSigninProvider>
+              <AuthProfileProvider>
+                <AuthForgotPasswordProvider>
+                  <AuthResetPasswordProvider>
+                    <NewPostProvider>
+                      <WebSocketProvider>
+                        <ChatDetailProvider>
+                          <Routes>
+                            <Route index element={<Home />} />
+                            <Route path='/auth/login' element={<Auth />} />
+                            <Route path='/auth/register' element={<Auth />} />
+                            <Route
+                              path='/auth/password-verification'
+                              element={<PasswordVerification />}
+                            />
+                            <Route
+                              path='/auth/email-verification'
+                              element={<EmailVerification />}
+                            />
+                            <Route
+                              path='/reset-password'
+                              element={<ResetPassword />}
+                            />
+                            <Route path='/auth/profile' element={<Profile />} />
+                            <Route path='/community' element={<Community />} />
+                            <Route
+                              path='/details/:reference_no'
+                              element={<ChatQADetail />}
+                            />
+                            <Route path='*' element={<NotFoundPage />} />
+                          </Routes>
+                        </ChatDetailProvider>
+                      </WebSocketProvider>
+                    </NewPostProvider>
+                  </AuthResetPasswordProvider>
+                </AuthForgotPasswordProvider>
+              </AuthProfileProvider>
+            </AuthSigninProvider>
+          </AuthSignupProvider>
+        ) : (
+          <div className='network'>
+            <Alert>
+              You are offline. Please check your network connection.
+            </Alert>
+            <img
+              width='48'
+              height='48'
+              src='https://img.icons8.com/color/48/wifi-off.png'
+              alt='wifi-off'
+            />
+          </div>
+        )}
       </NetworkStatusProvider>
     </BrowserRouter>
   );

@@ -4,6 +4,7 @@ const NetworkStatusContext = createContext();
 
 const NetworkStatusProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  console.log(isOnline);
 
   useEffect(() => {
     const handleNetworkChange = () => {
@@ -28,4 +29,4 @@ const NetworkStatusProvider = ({ children }) => {
   );
 };
 
-export { NetworkStatusProvider };
+export { NetworkStatusProvider, NetworkStatusContext };

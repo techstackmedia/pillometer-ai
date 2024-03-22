@@ -68,3 +68,13 @@ textarea::-webkit-input-placeholder {
 button:disabled {
   background-color: #c5c4d4;
 }
+
+.network {
+  width: 50%;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
