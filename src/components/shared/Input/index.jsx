@@ -21,6 +21,11 @@ const Input = ({
     setRows(newRows > 1 ? newRows : 1);
   }, [value]);
 
+  const handleChange = (e) => {
+    // Call the onChange prop to update the value
+    onChange(e.target.value);
+  };
+
   // useEffect(() => {
   //   if (textareaRef.current) {
   //     textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
@@ -38,7 +43,7 @@ const Input = ({
         id={name}
         value={value}
         rows={rows}
-        onChange={onChange}
+        onChange={onChange ?? handleChange}
         style={sx}
         autoFocus
       />

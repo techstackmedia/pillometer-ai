@@ -80,9 +80,9 @@ const Chat = () => {
         behavior: 'smooth',
         bottom: 0,
       });
-    setTimeout(() => {
-      handleChatQAResponses();
-    }, 1000);
+    // setTimeout(() => {
+    handleChatQAResponses();
+    // }, 1000);
   };
 
   useEffect(() => {
