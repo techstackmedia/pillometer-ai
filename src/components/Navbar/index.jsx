@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <div onClick={/* handleNavigate */ () => (window.location.href = '/')}>
+      <div onClick={handleNavigate}>
         <img src={logo} alt='pillometer logo' />
         <Content cn={`heading ${styles.heading}`}>pillometer.ai</Content>
       </div>

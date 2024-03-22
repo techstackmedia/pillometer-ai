@@ -59,11 +59,11 @@ const ChatDetailProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, referenceNo]);
 
-  useEffect(() => {
-    if (newPostData) {
-      handleChatQAResponses();
-    }
-  }, [handleChatQAResponses, newPostData]);
+  // useEffect(() => {
+  //   if (newPostData) {
+  //     handleChatQAResponses();
+  //   }
+  // }, [handleChatQAResponses, newPostData]);
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
