@@ -16,7 +16,7 @@ const SymptomButton = () => {
     if (res) {
       handleClick();
     }
-    handleChatQAResponses();
+    handleChatQAResponses(reference_no);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   const handleClick = useCallback(

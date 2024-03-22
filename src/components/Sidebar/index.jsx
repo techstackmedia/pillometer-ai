@@ -51,8 +51,6 @@ const Sidebar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reference_no]);
 
-  console.log(newPostData?.reference_no, Ref, reference_no);
-
   const handleNewChat = useCallback(() => {
     createNewPost();
     if (newPostData?.reference_no ?? Ref ?? reference_no) {
@@ -60,7 +58,7 @@ const Sidebar = () => {
         `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
         token
       );
-      handleChatQAResponses();
+      handleChatQAResponses(reference_no);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWebSocketConnected]);

@@ -41,7 +41,7 @@ const Chat = () => {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
       sendMessageToServer(value);
     }
-    handleChatQAResponses();
+    handleChatQAResponses(reference_no);
   };
 
   const handleMicClick = (e) => {
@@ -78,14 +78,13 @@ const Chat = () => {
         behavior: 'smooth',
         bottom: 0,
       });
-    handleChatQAResponses();
+    handleChatQAResponses(reference_no);
   };
-  console.log(isWebSocketConnected, Ref, reference_no, isSent);
 
   useEffect(() => {
     if (Ref !== null && Ref === reference_no) {
       isSent && handleMessageSend();
-      handleChatQAResponses();
+      handleChatQAResponses(reference_no);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

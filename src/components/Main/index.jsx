@@ -16,7 +16,6 @@ const Main = () => {
     const handleResize = () => {
       setBrowserHeight(window.innerHeight);
     };
-    console.log(browserHeight);
 
     window.addEventListener('resize', handleResize);
 

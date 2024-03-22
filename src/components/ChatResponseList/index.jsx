@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ChatResponse from '../ChatResponse';
 import Chat from '../Chat';
 import styles from './index.module.css';
@@ -14,10 +14,10 @@ const ChatResponseList = () => {
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
-  console.log(newResponse);
   const navigate = useNavigate();
+  const { reference_no } = useParams();
   const handleClick = () => {
-    handleChatQAResponses();
+    handleChatQAResponses(reference_no);
   };
   useEffect(() => {
     isSent &&

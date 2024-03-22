@@ -17,50 +17,53 @@ import { WebSocketProvider } from './context/Chat/Service';
 import { NewPostProvider } from './context/Chat/NewPost';
 import { ChatDetailProvider } from './context/ChatDetail';
 import NotFoundPage from './pages/Error/404';
+import { NetworkStatusProvider } from './context/NetworkStatus';
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthSignupProvider>
-        <AuthSigninProvider>
-          <AuthProfileProvider>
-            <AuthForgotPasswordProvider>
-              <AuthResetPasswordProvider>
-                <NewPostProvider>
-                  <WebSocketProvider>
-                    <ChatDetailProvider>
-                      <Routes>
-                        <Route index element={<Home />} />
-                        <Route path='/auth/login' element={<Auth />} />
-                        <Route path='/auth/register' element={<Auth />} />
-                        <Route
-                          path='/auth/password-verification'
-                          element={<PasswordVerification />}
-                        />
-                        <Route
-                          path='/auth/email-verification'
-                          element={<EmailVerification />}
-                        />
-                        <Route
-                          path='/reset-password'
-                          element={<ResetPassword />}
-                        />
-                        <Route path='/auth/profile' element={<Profile />} />
-                        <Route path='/community' element={<Community />} />
-                        <Route
-                          path='/details/:reference_no'
-                          element={<ChatQADetail />}
-                        />
-                        <Route path='*' element={<NotFoundPage />} />
-                      </Routes>
-                    </ChatDetailProvider>
-                  </WebSocketProvider>
-                </NewPostProvider>
-              </AuthResetPasswordProvider>
-            </AuthForgotPasswordProvider>
-          </AuthProfileProvider>
-        </AuthSigninProvider>
-      </AuthSignupProvider>
+      <NetworkStatusProvider>
+        <AuthSignupProvider>
+          <AuthSigninProvider>
+            <AuthProfileProvider>
+              <AuthForgotPasswordProvider>
+                <AuthResetPasswordProvider>
+                  <NewPostProvider>
+                    <WebSocketProvider>
+                      <ChatDetailProvider>
+                        <Routes>
+                          <Route index element={<Home />} />
+                          <Route path='/auth/login' element={<Auth />} />
+                          <Route path='/auth/register' element={<Auth />} />
+                          <Route
+                            path='/auth/password-verification'
+                            element={<PasswordVerification />}
+                          />
+                          <Route
+                            path='/auth/email-verification'
+                            element={<EmailVerification />}
+                          />
+                          <Route
+                            path='/reset-password'
+                            element={<ResetPassword />}
+                          />
+                          <Route path='/auth/profile' element={<Profile />} />
+                          <Route path='/community' element={<Community />} />
+                          <Route
+                            path='/details/:reference_no'
+                            element={<ChatQADetail />}
+                          />
+                          <Route path='*' element={<NotFoundPage />} />
+                        </Routes>
+                      </ChatDetailProvider>
+                    </WebSocketProvider>
+                  </NewPostProvider>
+                </AuthResetPasswordProvider>
+              </AuthForgotPasswordProvider>
+            </AuthProfileProvider>
+          </AuthSigninProvider>
+        </AuthSignupProvider>
+      </NetworkStatusProvider>
     </BrowserRouter>
   );
 }

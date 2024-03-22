@@ -24,14 +24,14 @@ const ChatDetailProvider = ({ children }) => {
   const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
   const navigate = useNavigate();
-  const { referene_no } = useParams();
+  const { reference_no } = useParams();
 
   const handleChatQAResponses = useCallback(
     async (id) => {
       try {
         const response = await fetch(
           `${BASE_CHAT_URL}/${
-            id ?? Ref ?? referenceNo ?? referene_no
+            id ?? Ref ?? referenceNo ?? reference_no
           }/messages`,
           {
             method: 'GET',
@@ -61,13 +61,15 @@ const ChatDetailProvider = ({ children }) => {
         }, 3000);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [Ref, referenceNo, navigate, res, newPostData]
   );
 
   useEffect(() => {
     if (newPostData && pathname !== '/') {
-      handleChatQAResponses();
+      handleChatQAResponses(reference_no);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleChatQAResponses, newPostData]);
 
   const refreshComponent = () => {
