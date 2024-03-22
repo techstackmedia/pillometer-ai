@@ -54,8 +54,10 @@ const WebSocketProvider = ({ children }) => {
   };
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-    setTranscription(e.target.value);
+    const inputValue = e.target.value;
+    setValue(inputValue);
+    setTranscription(inputValue);
+    setMySymptoms(inputValue);
   };
   useEffect(() => {
     if (transcript || transcription) {
