@@ -69,7 +69,8 @@ const ChatDetailProvider = ({ children }) => {
     if (newPostData) {
       handleChatQAResponses();
     }
-  }, [handleChatQAResponses, newPostData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };

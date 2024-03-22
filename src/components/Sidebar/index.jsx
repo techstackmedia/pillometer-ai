@@ -45,11 +45,11 @@ const Sidebar = () => {
   }
 
   useEffect(() => {
-    if (chat?.results?.length > 0) {
-      handleChatList();
-    }
+    // if (chat?.results?.length > 0) {
+    handleChatList();
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, res]);
+  }, [reference_no]);
 
   console.log(newPostData?.reference_no, Ref, reference_no);
 
@@ -63,7 +63,7 @@ const Sidebar = () => {
       handleChatQAResponses();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWebSocketConnected, res, newPostData]);
+  }, [isWebSocketConnected]);
 
   const navigateToChat = (reference_no) => {
     navigate(`/details/${reference_no}`);
