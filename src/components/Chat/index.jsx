@@ -10,6 +10,7 @@ import { NewPostContext } from '../../context/Chat/NewPost';
 import { WSS_CHAT_URL, token } from '../../constants';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../../context/ChatDetail';
+import Button from '../shared/Button';
 
 const Chat = () => {
   const {
@@ -39,7 +40,6 @@ const Chat = () => {
     if (isWebSocketConnected && reference_no) {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
       sendMessageToServer(value);
-      // } else {
     }
     handleChatQAResponses();
   };
@@ -54,15 +54,13 @@ const Chat = () => {
     }
   };
 
-  const symptoms = `Provide remedy to symptoms: ${mySymptoms}`;
-
   const voice = value ? value : mySymptoms ? mySymptoms : transcription;
 
   const handleClick = () => {
     if (pathname === '/') {
       if (Ref !== null) {
         navigate(`/details/${Ref}`, {
-          state: { data: Ref, mySymptoms: symptoms },
+          state: { data: Ref, mySymptoms },
         });
       }
 
@@ -80,19 +78,18 @@ const Chat = () => {
         behavior: 'smooth',
         bottom: 0,
       });
-    // setTimeout(() => {
     handleChatQAResponses();
-    // }, 1000);
   };
+  console.log(isWebSocketConnected, Ref, reference_no, isSent);
 
   useEffect(() => {
     if (Ref !== null && Ref === reference_no) {
-      handleMessageSend();
+      isSent && handleMessageSend();
       handleChatQAResponses();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWebSocketConnected]);
+  }, [isWebSocketConnected, isSent]);
 
   return (
     <div className={styles.input}>
@@ -124,14 +121,14 @@ const Chat = () => {
             onClick={handleMicClick}
           />
         </div>
-        <button
+        <Button
           disabled={voice ? false : true}
           type='submit'
-          onClick={handleClick}
-          className={styles.inputValueZero}
+          navigateToNextPage={handleClick}
+          cn={styles.inputValueZero}
         >
           <img src={sendIcon} alt='send icon' />
-        </button>
+        </Button>
       </div>
       <Content cn={styles.adviceNote}>
         Information may be inaccurate. It is important you see a medical doctor

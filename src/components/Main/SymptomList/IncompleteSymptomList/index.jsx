@@ -8,26 +8,33 @@ import { NewPostContext } from '../../../../context/Chat/NewPost';
 import { useParams } from 'react-router-dom';
 
 const IncompleteSymptomList = ({ symptoms }) => {
+  // const { handleInputChange, selectedSymptoms, setIsSent } =
+  //   useContext(WebSocketContext);
+  // const { sendNewPost, createNewPost, Ref, res, newPostData } =
+  //   useContext(NewPostContext);
+  // const { reference_no } = useParams();
+  // const handleClick = useCallback(
+  //   (item) => {
+  //     createNewPost();
+  //     if (Ref ?? newPostData?.reference_no ?? reference_no) {
+  //       sendNewPost(item);
+  //     }
+  //   },
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   [sendNewPost]
+  // );
+
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
-  const { sendNewPost, createNewPost, Ref, res, newPostData } =
+  const { sendNewPost, createNewPost, newPostData } =
     useContext(NewPostContext);
   const { reference_no } = useParams();
-  useEffect(() => {
-    if (res) {
-      handleClick();
+
+  const handleClick = (item) => {
+    createNewPost();
+    if (reference_no || newPostData?.reference_no) {
+      sendNewPost(item);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [res]);
-  const handleClick = useCallback(
-    (item) => {
-      createNewPost();
-      if (Ref ?? newPostData?.reference_no ?? reference_no) {
-        sendNewPost(item);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sendNewPost]
-  );
+  };
 
   return (
     <SymptomsSelectionInput cn={styles.cards}>

@@ -14,6 +14,7 @@ const ChatResponseList = () => {
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
+  console.log(newResponse);
   const navigate = useNavigate();
   const handleClick = () => {
     handleChatQAResponses();
@@ -30,7 +31,6 @@ const ChatResponseList = () => {
   const navigateToLogin = () => {
     navigate('/auth/login');
   };
-  console.log(!newResponse);
 
   return (
     <>

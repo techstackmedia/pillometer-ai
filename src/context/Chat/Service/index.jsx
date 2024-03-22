@@ -204,6 +204,7 @@ const WebSocketProvider = ({ children }) => {
         selectedSymptoms,
         mySymptoms,
         isSent,
+        setIsSent,
         newResponse,
       }}
     >

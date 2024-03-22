@@ -67,8 +67,8 @@ const Sidebar = () => {
 
   const navigateToChat = (reference_no) => {
     navigate(`/details/${reference_no}`);
-    handleChatQAResponses();
-    window.scrollBy({ behavior: 'smooth', bottom: 0 });
+    handleChatQAResponses(reference_no);
+    window.scrollBy({ behavior: 'smooth', top: 0 });
   };
 
   const renderSection = (title, items) => (
