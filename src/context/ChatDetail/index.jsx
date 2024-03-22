@@ -1,3 +1,4 @@
+// ChatDetailProvider
 import {
   createContext,
   useState,
@@ -23,32 +24,25 @@ const ChatDetailProvider = ({ children }) => {
   const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
   const navigate = useNavigate();
-  console.log(path[2], referenceNo, Ref);
-
-  let id = '';
-  if (id === path[2]) {
-    id = path[2];
-  } else if (id === referenceNo) {
-    id = referenceNo;
-  } else {
-    id = Ref;
-  }
 
   const handleChatQAResponses = useCallback(async () => {
     try {
-      const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `token ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${BASE_CHAT_URL}/${Ref || referenceNo}/messages`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `token ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       if (response.ok) {
-        navigate(`/details/${id}/`);
+        navigate(`/details/${Ref || referenceNo}/`);
         setChats(data);
         if (res && data?.results?.length === 0 && newPostData) {
-          window.location.href = `/details/${id}/`;
+          window.location.href = `/details/${Ref || referenceNo}/`;
         }
       } else {
         setErr(data?.details);
@@ -62,25 +56,18 @@ const ChatDetailProvider = ({ children }) => {
         setError(null);
       }, 3000);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [Ref, referenceNo, navigate, res, newPostData]);
 
   useEffect(() => {
     if (newPostData) {
       handleChatQAResponses();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [handleChatQAResponses, newPostData]);
+
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
   const chatResponses = chats?.results;
-
-  // useEffect(() => {
-  //   if (referenceNo === undefined) {
-  //     navigate('/');
-  //   }
-  // }, [referenceNo]);
 
   const values = {
     handleChatQAResponses,

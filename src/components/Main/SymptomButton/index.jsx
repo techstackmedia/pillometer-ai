@@ -27,7 +27,7 @@ const SymptomButton = () => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [Ref, reference_no, newPostData?.reference_no, sendNewPost]
+    [Ref, reference_no, newPostData?.reference_no]
   );
   return (
     <>
