@@ -1,18 +1,33 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import Card from '../../../shared/Card';
 import Content from '../../../shared/Content';
 import SymptomsSelectionInput from '../../../shared/SymptomsSelectionInput';
 import styles from '../index.module.css';
 import { WebSocketContext } from '../../../../context/Chat/Service';
 import { NewPostContext } from '../../../../context/Chat/NewPost';
+import { useParams } from 'react-router-dom';
 
 const IncompleteSymptomList = ({ symptoms }) => {
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
-  const { sendNewPost, createNewPost, Ref, res } = useContext(NewPostContext);
-  const handleClick = (item) => {
-    createNewPost();
-    Ref && res && sendNewPost(item);
-  };
+  const { sendNewPost, createNewPost, Ref, res, newPostData } =
+    useContext(NewPostContext);
+  const { reference_no } = useParams();
+  useEffect(() => {
+    if (res) {
+      handleClick();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [res]);
+  const handleClick = useCallback(
+    (item) => {
+      createNewPost();
+      if (Ref ?? newPostData?.reference_no ?? reference_no) {
+        sendNewPost(item);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [Ref, reference_no, newPostData?.reference_no, sendNewPost]
+  );
 
   return (
     <SymptomsSelectionInput cn={styles.cards}>

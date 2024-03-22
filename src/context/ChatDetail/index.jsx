@@ -44,16 +44,6 @@ const ChatDetailProvider = ({ children }) => {
         if (res && data?.results?.length === 0 && newPostData) {
           window.location.href = `/details/${path[2]}/`;
         }
-        // if (data?.results.length === 0) {
-        //   setTimeout(() => {
-        //     window.location.href = `/details/${path[2]}/`;
-        //   }, 1000);
-        // }
-        // if (data?.results.length === 0) {
-        //   setInterval(() => {
-        //     handleChatQAResponses();
-        //   }, 2000);
-        // }
       } else {
         setErr(data?.details);
         setTimeout(() => {
