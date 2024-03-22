@@ -60,9 +60,12 @@ const Chat = () => {
 
   const handleClick = () => {
     if (pathname === '/') {
-      navigate(`/details/${Ref}`, {
-        state: { data: Ref, mySymptoms: symptoms },
-      });
+      if (Ref !== null) {
+        navigate(`/details/${Ref}`, {
+          state: { data: Ref, mySymptoms: symptoms },
+        });
+      }
+
       createNewPost();
     }
     if (!isWebSocketConnected) {

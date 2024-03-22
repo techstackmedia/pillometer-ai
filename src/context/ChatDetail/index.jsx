@@ -41,13 +41,13 @@ const ChatDetailProvider = ({ children }) => {
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
-        if (res && data?.results?.length === 0) {
+        if (res && data?.results?.length === 0 && newPostData) {
           window.location.href = `/details/${path[2]}/`;
         }
         // if (data?.results.length === 0) {
         //   setTimeout(() => {
         //     window.location.href = `/details/${path[2]}/`;
-        //   // }, 2000);
+        //   }, 1000);
         // }
         // if (data?.results.length === 0) {
         //   setInterval(() => {
