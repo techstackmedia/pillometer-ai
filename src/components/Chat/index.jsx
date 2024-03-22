@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Input from '../shared/Input';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
@@ -22,7 +22,7 @@ const Chat = () => {
     transcript,
     setValue,
     transcription,
-    // handleNewPostCreation,
+    handleNewPostCreation,
     isWebSocketConnected,
     connectWebSocket,
     mySymptoms,
@@ -37,12 +37,10 @@ const Chat = () => {
   const navigate = useNavigate();
 
   const handleMessageSend = async () => {
-    if ((isWebSocketConnected && reference_no) || newPostData?.reference_no) {
-      connectWebSocket(
-        `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
-        token
-      );
+    if (isWebSocketConnected && reference_no) {
+      connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
       sendMessageToServer(value);
+      // } else {
     }
     handleChatQAResponses();
   };
@@ -68,13 +66,11 @@ const Chat = () => {
       });
       createNewPost();
     }
-
-    if (!isWebSocketConnected && reference_no) {
-      sendNewPost(value);
-    } else {
+    if (!isWebSocketConnected) {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
-      handleMessageSend();
     }
+    isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
+    handleMessageSend();
 
     isSent &&
       window.scrollTo({
@@ -86,6 +82,15 @@ const Chat = () => {
       handleChatQAResponses();
     }, 3000);
   };
+
+  useEffect(() => {
+    if (Ref !== null && Ref === reference_no) {
+      handleMessageSend();
+      handleChatQAResponses();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWebSocketConnected]);
 
   return (
     <div className={styles.input}>

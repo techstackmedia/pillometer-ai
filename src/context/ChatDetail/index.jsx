@@ -14,7 +14,7 @@ const ChatDetailContext = createContext();
 
 const ChatDetailProvider = ({ children }) => {
   const { newPostData } = useContext(WebSocketContext);
-  const { res } = useContext(NewPostContext);
+  const { res, Ref } = useContext(NewPostContext);
   const [chats, setChats] = useState(null);
   const [error, setError] = useState(null);
   const [err, setErr] = useState(null);
@@ -23,11 +23,12 @@ const ChatDetailProvider = ({ children }) => {
   const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
   const navigate = useNavigate();
+  console.log(path[2], referenceNo, Ref);
 
   const handleChatQAResponses = useCallback(async () => {
     try {
       const response = await fetch(
-        `${BASE_CHAT_URL}/${path[2] ?? referenceNo}/messages`,
+        `${BASE_CHAT_URL}/${path[2] ?? Ref ?? referenceNo}/messages`,
         {
           method: 'GET',
           headers: {
@@ -40,7 +41,7 @@ const ChatDetailProvider = ({ children }) => {
       if (response.ok) {
         navigate(`/details/${path[2]}/`);
         setChats(data);
-        if (res && data?.results?.length == 0) {
+        if (res && data?.results?.length === 0) {
           window.location.href = `/details/${path[2]}/`;
         }
         // if (data?.results.length === 0) {
