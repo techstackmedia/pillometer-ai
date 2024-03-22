@@ -16,7 +16,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { handleChatQAResponses, refreshKey } = useContext(ChatDetailContext);
-  const { createNewPost, res } = useContext(NewPostContext);
+  const { createNewPost, res, Ref } = useContext(NewPostContext);
   const { newPostData, connectWebSocket, isWebSocketConnected } =
     useContext(WebSocketContext);
   const { reference_no } = useParams();
@@ -51,15 +51,17 @@ const Sidebar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPostData, res, navigate, refreshKey]);
 
-  console.log(newPostData);
+  console.log(newPostData?.reference_no, Ref, reference_no);
 
   const handleNewChat = useCallback(() => {
     createNewPost();
-    connectWebSocket(
-      `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
-      token
-    );
-    handleChatQAResponses();
+    if (newPostData?.reference_no ?? Ref ?? reference_no) {
+      connectWebSocket(
+        `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
+        token
+      );
+      handleChatQAResponses();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWebSocketConnected, res, newPostData]);
 

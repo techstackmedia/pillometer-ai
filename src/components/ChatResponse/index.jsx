@@ -45,7 +45,9 @@ const ChatResponse = ({ item }) => {
       )}
 
       {item?.isUser ? (
-        <UserQuestion message={item?.message} />
+        item?.message !== '' ? (
+          <UserQuestion message={item?.message} />
+        ) : null
       ) : (
         <Response message={item?.message || newResponse} />
       )}
