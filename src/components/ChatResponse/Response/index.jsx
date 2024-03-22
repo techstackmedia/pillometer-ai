@@ -66,6 +66,7 @@ const Response = ({ message, reference_no }) => {
             message={message}
             handleCopy={handleCopy}
             successMessage={successMessage}
+            textCopied={textCopied}
           />
         )}
       </div>

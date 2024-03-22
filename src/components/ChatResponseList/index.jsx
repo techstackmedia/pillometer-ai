@@ -26,8 +26,7 @@ const ChatResponseList = () => {
         bottom: 0,
       });
   }, [isSent, handleChatQAResponses, refreshKey]);
-  // console.log(newResponse);
-  // console.log(chatResponses);
+
   const navigateToLogin = () => {
     navigate('/auth/login');
   };
