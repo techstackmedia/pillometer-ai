@@ -5,11 +5,11 @@ const symptoms = [
   'Cough',
   'Sore throat',
   'Runnynose',
-  'Nasal congestion',
-  'Runnynose',
   'Body ache',
   'Nasal congestion',
   'Neck pain',
+  'Dizziness',
+  'Loss of Apetite',
   'Go',
 ];
 
@@ -28,7 +28,7 @@ const fullSymptomList = [
   'Chest pain',
   'Changes in Urination',
   'Mood swings',
-  'Fatigue',
+  'Shortness of breath',
   'Swelling',
   'Difficulty sleeping',
   'Night sweats',

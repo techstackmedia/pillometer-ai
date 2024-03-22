@@ -82,7 +82,7 @@ const Chat = () => {
       });
     setTimeout(() => {
       handleChatQAResponses();
-    }, 3000);
+    }, 1000);
   };
 
   useEffect(() => {
