@@ -34,7 +34,7 @@ const ChatDetailProvider = ({ children }) => {
     id = Ref;
   }
 
-  const handleChatQAResponses = async () => {
+  const handleChatQAResponses = useCallback(async () => {
     try {
       const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
         method: 'GET',
@@ -48,7 +48,7 @@ const ChatDetailProvider = ({ children }) => {
         navigate(`/details/${id}/`);
         setChats(data);
         if (res && data?.results?.length === 0 && newPostData) {
-          window.location.href = `/details/${path[2]}/`;
+          window.location.href = `/details/${id}/`;
         }
       } else {
         setErr(data?.details);
@@ -63,13 +63,13 @@ const ChatDetailProvider = ({ children }) => {
       }, 3000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  };
+  }, [id]);
 
-  // useEffect(() => {
-  //   if (newPostData) {
-  //     handleChatQAResponses();
-  //   }
-  // }, [handleChatQAResponses, newPostData]);
+  useEffect(() => {
+    if (newPostData) {
+      handleChatQAResponses();
+    }
+  }, [handleChatQAResponses, newPostData]);
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
