@@ -28,7 +28,6 @@ const Chat = () => {
     mySymptoms,
     isSent,
     height,
-    newPostData,
   } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
