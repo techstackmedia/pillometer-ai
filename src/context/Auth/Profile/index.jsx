@@ -17,12 +17,31 @@ const AuthProfileProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [profileResponse, setProfileResponse] = useState(null);
   const [profileError, setProfileError] = useState(null);
+  const [firstMessage, setFirstMessage] = useState(null);
+  const [secondMessage, setSecondMessage] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const navigate = useNavigate();
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const navigateToNextPage = () => {
-    setIsCurrentPage(true);
+    if (firstName && lastName) {
+      setIsCurrentPage(true);
+    } else {
+      setFirstMessage('First Name and Last Name Required');
+      setTimeout(() => {
+        setFirstMessage(null);
+      }, 3000);
+    }
+  };
+
+  const handleFormClick = () => {
+    if (!selectedOption) {
+      setSecondMessage('Select one of the checkbox options');
+      setTimeout(() => {
+        setSecondMessage(null);
+      }, 3000);
+    }
   };
 
   const handleFirstNameChange = (e) => {
@@ -47,6 +66,10 @@ const AuthProfileProvider = ({ children }) => {
 
   const handleCommunityCheckboxChange = (e) => {
     setKeepUpWithCommunity(e.target.checked);
+  };
+
+  const handleOptionChange = (optionId) => {
+    setSelectedOption(optionId);
   };
 
   const getProfile = async () => {
@@ -75,6 +98,8 @@ const AuthProfileProvider = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const userType = profileResponse?.user_type;
 
   const updateProfile = async (profileData) => {
     try {
@@ -107,6 +132,7 @@ const AuthProfileProvider = ({ children }) => {
         mobile_number: phoneNumber,
         profession: profession,
         app_discovery: discover,
+        user_type: selectedOption,
       });
     } catch (error) {
       setErrorMessage(error.message);
@@ -135,6 +161,12 @@ const AuthProfileProvider = ({ children }) => {
     profileResponse,
     getProfile,
     profileError,
+    userType,
+    firstMessage,
+    selectedOption,
+    handleOptionChange,
+    handleFormClick,
+    secondMessage,
   };
 
   return (

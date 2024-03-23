@@ -8,7 +8,6 @@
 .profile img {
   width: 56px;
   height: 56px;
-  border: 2px solid #5ebd75;
   border-radius: 50%;
 }
 
@@ -69,4 +68,16 @@
 .dropdown {
   position: relative;
   cursor: pointer;
+}
+
+.imgWebSocket {
+  border: 2px solid #5ebd75;
+}
+
+.pageAlert {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
 }

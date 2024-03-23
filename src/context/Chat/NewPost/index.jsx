@@ -31,11 +31,11 @@ const NewPostProvider = ({ children }) => {
       };
 
       const response = await fetch(BASE_CHAT_URL, requestOptions);
+      const responseData = await response.json();
       if (!response.ok) {
         throw new Error('Failed to create new post');
       }
 
-      const responseData = await response.json();
       const reference = responseData?.reference_no;
       setRef(reference);
       if (responseData) {

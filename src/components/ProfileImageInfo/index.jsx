@@ -8,6 +8,8 @@ import styles from './index.module.css';
 import Content from '../shared/Content';
 import uploadImageIcon from '../../images/uploadProfile.png';
 import { token } from '../../constants';
+import { WebSocketContext } from '../../context/Chat/Service';
+import Alert from '../shared/Alert';
 
 const ProfileImageInfo = () => {
   const { pathname } = useLocation();
@@ -15,6 +17,8 @@ const ProfileImageInfo = () => {
   const [show, setShow] = useState(false);
   const { profileResponse, getProfile } = useContext(AuthProfileContext);
   const dropdownRef = useRef(null);
+  const { isWebSocketConnected } = useContext(WebSocketContext);
+  console.log(isWebSocketConnected);
 
   useEffect(() => {
     getProfile();
@@ -64,7 +68,7 @@ const ProfileImageInfo = () => {
 
   return (
     <>
-      {token ? (
+      {token && pathname !== '/auth/profile' ? (
         <div className={styles.profile}>
           <div onClick={logout}>
             <Button navigateToNextPage={logout}>Log out</Button>
@@ -111,12 +115,15 @@ const ProfileImageInfo = () => {
             className={
               pathname !== '/auth/profile'
                 ? styles.nonProfilePageImage
-                : `${styles.profilePageImage} ${styles.uploadProfilePageImage}`
+                : `${styles.profilePageImage} ${
+                    styles.uploadProfilePageImage
+                  } ${isWebSocketConnected && styles.imgWebSocket}`
             }
             src={profileImage}
             alt='person profile'
             onMouseEnter={handleMouseOver}
           />
+
           <img
             style={{ display: !isUpload ? 'none' : '' }}
             src={uploadImageIcon}

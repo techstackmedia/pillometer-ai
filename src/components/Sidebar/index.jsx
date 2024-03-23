@@ -20,6 +20,8 @@ const Sidebar = () => {
   const { newPostData, connectWebSocket, isWebSocketConnected } =
     useContext(WebSocketContext);
   const { reference_no } = useParams();
+  const [serverError, setServerError] = useState(null);
+  const [serverAltError, setServerAltError] = useState(null);
 
   const handleChatList = async () => {
     try {
@@ -30,12 +32,15 @@ const Sidebar = () => {
           Authorization: `token ${token}`,
         },
       });
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
         setChat(data);
+      } else {
+        setServerAltError(data?.details);
       }
     } catch (e) {
-      console.error('Error fetching chat list:', e.message);
+      setServerError(e.message);
     }
   };
   let chatList = chat?.results;
@@ -68,6 +73,7 @@ const Sidebar = () => {
     navigate(`/details/${reference_no}`);
     window.scrollBy({ behavior: 'smooth', top: 0 });
   };
+  console.log(serverError, serverAltError);
 
   const renderSection = (title, items) => (
     <div className={styles.section}>

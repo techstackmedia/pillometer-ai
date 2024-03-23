@@ -174,6 +174,22 @@ const WebSocketProvider = ({ children }) => {
     }
   };
 
+  // Add event listeners for visibility changes
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && !socket) {
+        // Reconnect WebSocket when the tab becomes visible
+        handleNewPostCreation();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [handleNewPostCreation, socket]);
+
   return (
     <WebSocketContext.Provider
       value={{

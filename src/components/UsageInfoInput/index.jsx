@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import Card from '../shared/Card';
 import Content from '../shared/Content';
 import personIcon from '../../images/person.png';
@@ -6,16 +6,20 @@ import styles from './index.module.css';
 import Button from '../shared/Button';
 import personsGroupIcon from '../../images/personsGroup.png';
 import manageSearch from '../../images/manageSearch.png';
+import { AuthProfileContext } from '../../context/Auth/Profile';
+import Alert from '../shared/Alert';
 
 const UsageInfoInput = () => {
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const handleOptionChange = (optionId) => {
-    setSelectedOption(optionId);
-  };
+  const { selectedOption, handleOptionChange, handleFormClick, secondMessage } =
+    useContext(AuthProfileContext);
 
   return (
     <>
+      {secondMessage && (
+        <div className='pageAlert'>
+          <Alert>{secondMessage}</Alert>
+        </div>
+      )}
       <Content cn={`heading ${styles.heading}`}>
         For a better experience, kindly tell us who or why you're using
         pillometer.ai
@@ -43,10 +47,10 @@ const UsageInfoInput = () => {
             <img src={personsGroupIcon} alt='person icon' />
             <input
               type='radio'
-              checked={selectedOption === 'friends-family'}
+              checked={selectedOption === 'family'}
               name='usageInfo'
-              id='friends-family'
-              onChange={() => handleOptionChange('friends-family')}
+              id='family'
+              onChange={() => handleOptionChange('family')}
             />
           </div>
           <Content cn={`heading ${styles.usageInfoHeading}`}>
@@ -63,9 +67,9 @@ const UsageInfoInput = () => {
             <img src={manageSearch} alt='person icon' />
             <input
               type='radio'
-              checked={selectedOption === 'health-consultant'}
-              id='health-consultant'
-              onChange={() => handleOptionChange('health-consultant')}
+              checked={selectedOption === 'health_consultant'}
+              id='health_consultant'
+              onChange={() => handleOptionChange('health_consultant')}
             />
           </div>
           <Content cn={`heading ${styles.usageInfoHeading}`}>
@@ -77,7 +81,11 @@ const UsageInfoInput = () => {
           </Content>
         </Card>
       </div>
-      <Button type='submit' cn={styles.proceedButton}>
+      <Button
+        type={selectedOption ? 'submit' : 'button'}
+        cn={styles.proceedButton}
+        navigateToNextPage={selectedOption ? null : handleFormClick}
+      >
         Proceed
       </Button>
     </>
