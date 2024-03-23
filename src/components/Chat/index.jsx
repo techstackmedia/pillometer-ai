@@ -83,10 +83,8 @@ const Chat = () => {
 
   useEffect(() => {
     if (Ref !== null && Ref === reference_no) {
-      isSent && handleMessageSend();
       handleChatQAResponses(reference_no);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWebSocketConnected, isSent]);
 

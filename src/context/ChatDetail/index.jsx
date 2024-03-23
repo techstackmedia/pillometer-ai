@@ -28,18 +28,13 @@ const ChatDetailProvider = ({ children }) => {
   const handleChatQAResponses = useCallback(
     async (id) => {
       try {
-        const response = await fetch(
-          `${BASE_CHAT_URL}/${
-            id ?? Ref ?? referenceNo ?? reference_no
-          }/messages`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `token ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `token ${token}`,
+          },
+        });
         const data = await response.json();
         if (response.ok) {
           navigate(`/details/${Ref || referenceNo}/`);
@@ -60,8 +55,7 @@ const ChatDetailProvider = ({ children }) => {
         }, 3000);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [Ref, referenceNo, navigate, res, newPostData]
+    [Ref, navigate, newPostData, referenceNo, res]
   );
 
   useEffect(() => {

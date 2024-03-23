@@ -17,8 +17,11 @@ const ChatResponseList = () => {
   const navigate = useNavigate();
   const { reference_no } = useParams();
   const handleClick = () => {
-    handleChatQAResponses(reference_no);
+    if (reference_no !== undefined) {
+      handleChatQAResponses(reference_no);
+    }
   };
+
   useEffect(() => {
     isSent &&
       window.scrollTo({

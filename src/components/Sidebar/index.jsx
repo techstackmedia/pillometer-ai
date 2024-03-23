@@ -63,9 +63,10 @@ const Sidebar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWebSocketConnected]);
 
-  const navigateToChat = (reference_no) => {
+  const navigateToChat = async (reference_no) => {
+    // Ensure that chat responses are fetched before navigating
+    await handleChatQAResponses(reference_no);
     navigate(`/details/${reference_no}`);
-    handleChatQAResponses(reference_no);
     window.scrollBy({ behavior: 'smooth', top: 0 });
   };
 

@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NetworkStatusContext = createContext();
 
 const NetworkStatusProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  console.log(isOnline);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleNetworkChange = () => {
@@ -18,7 +19,7 @@ const NetworkStatusProvider = ({ children }) => {
       window.removeEventListener('online', handleNetworkChange);
       window.removeEventListener('offline', handleNetworkChange);
     };
-  }, []);
+  }, [navigate]);
 
   const values = { isOnline };
 
