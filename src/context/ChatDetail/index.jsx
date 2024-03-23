@@ -12,7 +12,7 @@ const ChatDetailProvider = ({ children }) => {
   const [chats, setChats] = useState(null);
   const [error, setError] = useState(null);
   const [err, setErr] = useState(null);
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
   const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
   const navigate = useNavigate();
@@ -50,7 +50,9 @@ const ChatDetailProvider = ({ children }) => {
   const handleChatQAResponses = async (id) => {
     try {
       const response = await fetch(
-        `${BASE_CHAT_URL}/${id ?? chatId ?? Ref ?? referenceNo}/messages`,
+        `${BASE_CHAT_URL}/${
+          id ?? chatId ?? Ref ?? referenceNo ?? state?.data?.reference_no
+        }/messages`,
         {
           method: 'GET',
           headers: {
@@ -61,7 +63,9 @@ const ChatDetailProvider = ({ children }) => {
       );
       const data = await response.json();
       if (response.ok) {
-        navigate(`/details/${Ref || referenceNo}/`);
+        navigate(
+          `/details/${Ref ?? referenceNo ?? state?.data?.reference_no}/`
+        );
         setChats(data);
         if (res && data?.results?.length === 0 && newPostData) {
           window.location.href = `/details/${Ref || referenceNo}/`;
@@ -79,7 +83,6 @@ const ChatDetailProvider = ({ children }) => {
       }, 3000);
     }
   };
-  // [Ref, navigate, newPostData, referenceNo, res]
 
   useEffect(() => {
     if (newPostData && pathname !== '/') {
