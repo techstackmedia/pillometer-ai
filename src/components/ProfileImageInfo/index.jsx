@@ -9,7 +9,6 @@ import Content from '../shared/Content';
 import uploadImageIcon from '../../images/uploadProfile.png';
 import { token } from '../../constants';
 import { WebSocketContext } from '../../context/Chat/Service';
-import Alert from '../shared/Alert';
 
 const ProfileImageInfo = () => {
   const { pathname } = useLocation();
@@ -18,7 +17,6 @@ const ProfileImageInfo = () => {
   const { profileResponse, getProfile } = useContext(AuthProfileContext);
   const dropdownRef = useRef(null);
   const { isWebSocketConnected } = useContext(WebSocketContext);
-  console.log(isWebSocketConnected);
 
   useEffect(() => {
     getProfile();

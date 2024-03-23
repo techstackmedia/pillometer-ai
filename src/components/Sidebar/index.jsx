@@ -73,7 +73,6 @@ const Sidebar = () => {
     navigate(`/details/${reference_no}`);
     window.scrollBy({ behavior: 'smooth', top: 0 });
   };
-  console.log(serverError, serverAltError);
 
   const renderSection = (title, items) => (
     <div className={styles.section}>
