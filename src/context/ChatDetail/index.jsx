@@ -68,7 +68,9 @@ const ChatDetailProvider = ({ children }) => {
         );
         setChats(data);
         if (res && data?.results?.length === 0 && newPostData) {
-          window.location.href = `/details/${Ref || referenceNo}/`;
+          window.location.href = `/details/${
+            Ref ?? referenceNo ?? state?.data?.reference_no
+          }/`;
         }
       } else {
         setErr(data?.details);
