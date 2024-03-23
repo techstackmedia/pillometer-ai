@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import Button from '../../shared/Button';
 import styles from './index.module.css';
 import { WebSocketContext } from '../../../context/Chat/Service';
@@ -19,16 +19,12 @@ const SymptomButton = () => {
     handleChatQAResponses(reference_no);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
-  const handleClick = useCallback(
-    (item) => {
-      createNewPost();
-      if (Ref ?? newPostData?.reference_no ?? reference_no) {
-        sendNewPost(item);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [Ref, reference_no, newPostData?.reference_no]
-  );
+  const handleClick = (item) => {
+    createNewPost();
+    if (reference_no || newPostData?.reference_no) {
+      sendNewPost(item);
+    }
+  };
   return (
     <>
       {viewMore ? (
