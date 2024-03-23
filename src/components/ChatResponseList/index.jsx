@@ -12,7 +12,7 @@ import { token } from '../../constants';
 const ChatResponseList = () => {
   const { chats, chatResponses, refreshKey } = useContext(ChatDetailContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { isSent, newResponse } = useContext(WebSocketContext);
+  const { isSent } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { reference_no } = useParams();
@@ -37,13 +37,21 @@ const ChatResponseList = () => {
 
   return (
     <>
-      {!newResponse ? (
+      {/* {!newResponse ? (
         <div className={styles.refresh}>
           <Content cn='heading'>
             {!token ? 'Login to commence conversation' : 'Start Conversation'}
           </Content>
           <Button navigateToNextPage={!token ? navigateToLogin : handleClick}>
             {!token ? 'Login' : 'Open chat'}
+          </Button>
+        </div>
+      ) : ( */}
+      {!token ? (
+        <div className={styles.refresh}>
+          <Content cn='heading'>Login to commence conversation</Content>
+          <Button navigateToNextPage={!token ? navigateToLogin : handleClick}>
+            Login
           </Button>
         </div>
       ) : (
