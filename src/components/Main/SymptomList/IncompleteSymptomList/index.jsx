@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Card from '../../../shared/Card';
 import Content from '../../../shared/Content';
 import SymptomsSelectionInput from '../../../shared/SymptomsSelectionInput';
@@ -8,22 +8,6 @@ import { NewPostContext } from '../../../../context/Chat/NewPost';
 import { useParams } from 'react-router-dom';
 
 const IncompleteSymptomList = ({ symptoms }) => {
-  // const { handleInputChange, selectedSymptoms, setIsSent } =
-  //   useContext(WebSocketContext);
-  // const { sendNewPost, createNewPost, Ref, res, newPostData } =
-  //   useContext(NewPostContext);
-  // const { reference_no } = useParams();
-  // const handleClick = useCallback(
-  //   (item) => {
-  //     createNewPost();
-  //     if (Ref ?? newPostData?.reference_no ?? reference_no) {
-  //       sendNewPost(item);
-  //     }
-  //   },
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   [sendNewPost]
-  // );
-
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
   const { sendNewPost, createNewPost, newPostData } =
     useContext(NewPostContext);

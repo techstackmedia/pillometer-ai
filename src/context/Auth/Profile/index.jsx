@@ -73,6 +73,7 @@ const AuthProfileProvider = ({ children }) => {
     if (profileResponse) {
       getProfile();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateProfile = async (profileData) => {
