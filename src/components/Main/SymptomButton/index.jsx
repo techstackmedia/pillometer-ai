@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 const SymptomButton = () => {
   const { handleViewMoreClick, viewMore } = useContext(WebSocketContext);
-  const { sendNewPost, createNewPost, Ref, res, newPostData } =
+  const { sendNewPost, createNewPost, res, newPostData } =
     useContext(NewPostContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
