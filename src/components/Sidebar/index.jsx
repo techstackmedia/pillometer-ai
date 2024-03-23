@@ -64,7 +64,6 @@ const Sidebar = () => {
   }, [isWebSocketConnected]);
 
   const navigateToChat = async (reference_no) => {
-    // Ensure that chat responses are fetched before navigating
     await handleChatQAResponses(reference_no);
     navigate(`/details/${reference_no}`);
     window.scrollBy({ behavior: 'smooth', top: 0 });

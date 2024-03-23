@@ -9,9 +9,15 @@ import Alert from '../../components/shared/Alert';
 
 const ChatQADetail = () => {
   const { reference_no } = useParams();
-  const { err } = useContext(NewPostContext);
+  const { err, errorAltMessage } = useContext(NewPostContext);
+
   return (
     <>
+      {errorAltMessage && (
+        <div className={styles.homeAlert}>
+          <Alert>{errorAltMessage}</Alert>
+        </div>
+      )}
       {err && (
         <div className={styles.pageAlert}>
           <Alert>
