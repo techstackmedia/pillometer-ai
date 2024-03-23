@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate /* , useParams */ } from 'react-router-dom';
 import ChatResponse from '../ChatResponse';
 import Chat from '../Chat';
 import styles from './index.module.css';
@@ -15,12 +15,12 @@ const ChatResponseList = () => {
   const { isSent } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { reference_no } = useParams();
-  const handleClick = () => {
-    if (reference_no !== undefined) {
-      handleChatQAResponses(reference_no);
-    }
-  };
+  // const { reference_no } = useParams();
+  // const handleClick = () => {
+  //   if (reference_no !== undefined) {
+  //     handleChatQAResponses(reference_no);
+  //   }
+  // };
 
   useEffect(() => {
     isSent &&
@@ -50,9 +50,8 @@ const ChatResponseList = () => {
       {!token ? (
         <div className={styles.refresh}>
           <Content cn='heading'>Login to commence conversation</Content>
-          <Button navigateToNextPage={!token ? navigateToLogin : handleClick}>
-            Login
-          </Button>
+          {/* <Button navigateToNextPage={!token ? navigateToLogin : handleClick}> */}
+          <Button navigateToNextPage={navigateToLogin}>Login</Button>
         </div>
       ) : (
         <main className={styles.main}>
