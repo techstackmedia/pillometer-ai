@@ -29,6 +29,7 @@ const Chat = () => {
     mySymptoms,
     isSent,
     height,
+    newPostData,
   } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
@@ -41,7 +42,9 @@ const Chat = () => {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
       sendMessageToServer(value);
     }
-    handleChatQAResponses(reference_no);
+    if (pathname !== '/') {
+      handleChatQAResponses(reference_no);
+    }
   };
 
   const handleMicClick = (e) => {
@@ -55,6 +58,13 @@ const Chat = () => {
   };
 
   const voice = value ? value : mySymptoms ? mySymptoms : transcription;
+
+  useEffect(() => {
+    if (newPostData) {
+      handleClick();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSent]);
 
   const handleClick = () => {
     if (pathname === '/') {
@@ -78,12 +88,16 @@ const Chat = () => {
         behavior: 'smooth',
         bottom: 0,
       });
-    handleChatQAResponses(reference_no);
+    if (pathname !== '/') {
+      handleChatQAResponses(reference_no);
+    }
   };
 
   useEffect(() => {
     if (Ref !== null && Ref === reference_no) {
-      handleChatQAResponses(reference_no);
+      if (pathname !== '/') {
+        handleChatQAResponses(reference_no);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWebSocketConnected, isSent]);

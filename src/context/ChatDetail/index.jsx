@@ -1,11 +1,4 @@
-// ChatDetailProvider
-import {
-  createContext,
-  useState,
-  useEffect,
-  useContext,
-  useCallback,
-} from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BASE_CHAT_URL, token } from '../../constants';
 import { WebSocketContext } from '../Chat/Service';
@@ -25,38 +18,68 @@ const ChatDetailProvider = ({ children }) => {
   const navigate = useNavigate();
   const { reference_no } = useParams();
 
-  const handleChatQAResponses = useCallback(
-    async (id) => {
-      try {
-        const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
+  const [serverError, setServerError] = useState(null);
+  const [serverAltError, setServerAltError] = useState(null);
+  const [chat, setChat] = useState(null);
+
+  useEffect(() => {
+    handleChatList();
+  }, [reference_no]);
+
+  const handleChatList = async () => {
+    try {
+      const response = await fetch(BASE_CHAT_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setChat(data);
+      } else {
+        setServerAltError(data?.details);
+      }
+    } catch (e) {
+      setServerError(e.message);
+    }
+  };
+  const chatId = chat?.results[0]?.reference_no;
+
+  const handleChatQAResponses = async (id) => {
+    try {
+      const response = await fetch(
+        `${BASE_CHAT_URL}/${id ?? chatId ?? Ref ?? referenceNo}/messages`,
+        {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `token ${token}`,
           },
-        });
-        const data = await response.json();
-        if (response.ok) {
-          navigate(`/details/${Ref || referenceNo}/`);
-          setChats(data);
-          if (res && data?.results?.length === 0 && newPostData) {
-            window.location.href = `/details/${Ref || referenceNo}/`;
-          }
-        } else {
-          setErr(data?.details);
-          setTimeout(() => {
-            setErr(null);
-          }, 3000);
         }
-      } catch (e) {
-        setError(e.message);
+      );
+      const data = await response.json();
+      if (response.ok) {
+        navigate(`/details/${Ref || referenceNo}/`);
+        setChats(data);
+        if (res && data?.results?.length === 0 && newPostData) {
+          window.location.href = `/details/${Ref || referenceNo}/`;
+        }
+      } else {
+        setErr(data?.details);
         setTimeout(() => {
-          setError(null);
+          setErr(null);
         }, 3000);
       }
-    },
-    [Ref, navigate, newPostData, referenceNo, res]
-  );
+    } catch (e) {
+      setError(e.message);
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    }
+  };
+  // [Ref, navigate, newPostData, referenceNo, res]
 
   useEffect(() => {
     if (newPostData && pathname !== '/') {
@@ -64,6 +87,13 @@ const ChatDetailProvider = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleChatQAResponses, newPostData]);
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      handleChatQAResponses(Ref ?? referenceNo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Ref, referenceNo, chatId]);
 
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
@@ -78,6 +108,11 @@ const ChatDetailProvider = ({ children }) => {
     err,
     refreshComponent,
     refreshKey,
+    serverError,
+    serverAltError,
+    handleChatList,
+    chat,
+    chatId,
   };
 
   return (

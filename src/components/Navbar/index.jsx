@@ -18,7 +18,9 @@ const Navbar = () => {
         <Content cn={`heading ${styles.heading}`}>pillometer.ai</Content>
       </div>
       {pathname === '/auth/profile' ? (
-        <button type='button'>Close</button>
+        <button type='button' onClick={handleNavigate}>
+          Close
+        </button>
       ) : (
         <ProfileImageInfo />
       )}

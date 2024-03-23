@@ -133,6 +133,10 @@ const WebSocketProvider = ({ children }) => {
     }
   }, [newPostData, socket]);
 
+  useEffect(() => {
+    handleNewPostCreation();
+  }, [handleNewPostCreation, newResponse]);
+
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
       if (message) {

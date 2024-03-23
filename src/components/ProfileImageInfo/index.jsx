@@ -17,7 +17,7 @@ const ProfileImageInfo = () => {
   const { profileResponse, getProfile } = useContext(AuthProfileContext);
   const dropdownRef = useRef(null);
   const { isWebSocketConnected } = useContext(WebSocketContext);
-
+  const userType = profileResponse?.user_type;
   useEffect(() => {
     getProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,7 +41,7 @@ const ProfileImageInfo = () => {
   };
 
   const truncateString = (str, maxLength) => {
-    return str?.length > maxLength ? str.slice(0, maxLength) + '...' : str;
+    return str?.length > maxLength ? `${str.slice(0, maxLength)}...` : str;
   };
 
   const firstName = profileResponse?.first_name;
@@ -63,6 +63,15 @@ const ProfileImageInfo = () => {
       return !prev;
     });
   };
+
+  const arr = userType?.split('_');
+  const sourceInquiry = arr?.map((item) => {
+    const firstChar = item[0].toUpperCase();
+    const restChar = item.slice(1);
+    const source = `${firstChar}${restChar}`;
+    return source;
+  });
+  const char = sourceInquiry?.join(' ');
 
   return (
     <>
@@ -96,7 +105,7 @@ const ProfileImageInfo = () => {
               {truncateString(firstName, 10)} {truncateString(lastName, 10)}
             </Content>
             <Content cn={`paragraph ${styles.paragraph}`}>
-              {truncateString(email, 15)}
+              {userType ? char : truncateString(email, 15)}
             </Content>
           </div>
         </div>
