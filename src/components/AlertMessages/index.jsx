@@ -7,6 +7,7 @@ import Alert from '../shared/Alert';
 import { useLocation } from 'react-router-dom';
 import { AuthSigninContext } from '../../context/Auth/Signin';
 import styles from './index.module.css';
+import { NetworkStatusContext } from '../../context/NetworkStatus';
 
 const AlertMessages = () => {
   const { state } = useLocation();
@@ -23,6 +24,7 @@ const AlertMessages = () => {
   const status = state?.status;
   const token = state?.token;
   const { successMessage } = useContext(AuthSigninContext);
+  const { internetConnection } = useContext(NetworkStatusContext);
 
   useEffect(() => {
     if (profile) {
@@ -50,6 +52,17 @@ const AlertMessages = () => {
       Server error occurred. Please <a href={window.location.href}>try again</a>
     </>
   );
+  const networkError = (
+    <div className='network'>
+      <span>You are offline. Please check your network connection.</span>
+      <img
+        width='48'
+        height='48'
+        src='https://img.icons8.com/color/48/wifi-off.png'
+        alt='wifi-off'
+      />
+    </div>
+  );
 
   return (
     <>
@@ -71,6 +84,7 @@ const AlertMessages = () => {
         )}
       {connectionMessage && renderAlert(connectionMessage)}
       {connectionWarnMessage && renderAlert(connectionWarnMessage)}
+      {internetConnection && renderAlert(networkError)}
       {serverError && renderAlert(serverErr)}
     </>
   );

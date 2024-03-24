@@ -16,31 +16,25 @@ import { WebSocketProvider } from './context/Chat/Service';
 import { NewPostProvider } from './context/Chat/NewPost';
 import { ChatDetailProvider } from './context/ChatDetail';
 import NotFoundPage from './pages/Error/404';
-import { useContext } from 'react';
-import {
-  NetworkStatusContext,
-  NetworkStatusProvider,
-} from './context/NetworkStatus';
+import { NetworkStatusProvider } from './context/NetworkStatus';
 
-import Alert from './components/shared/Alert';
 import AlertMessages from './components/AlertMessages';
+import { MessagesProvider } from './context/Messages';
 
 function App() {
-  const isOnline = useContext(NetworkStatusContext);
-
   return (
     <BrowserRouter>
       <NetworkStatusProvider>
         <AlertMessages />
-        {!isOnline ? (
-          <AuthSignupProvider>
-            <AuthSigninProvider>
-              <AuthProfileProvider>
-                <AuthForgotPasswordProvider>
-                  <AuthResetPasswordProvider>
-                    <NewPostProvider>
-                      <WebSocketProvider>
-                        <ChatDetailProvider>
+        <AuthSignupProvider>
+          <AuthSigninProvider>
+            <AuthProfileProvider>
+              <AuthForgotPasswordProvider>
+                <AuthResetPasswordProvider>
+                  <NewPostProvider>
+                    <WebSocketProvider>
+                      <ChatDetailProvider>
+                        <MessagesProvider>
                           <Routes>
                             <Route index element={<Home />} />
                             <Route path='/auth/login' element={<Auth />} />
@@ -65,27 +59,15 @@ function App() {
                             />
                             <Route path='*' element={<NotFoundPage />} />
                           </Routes>
-                        </ChatDetailProvider>
-                      </WebSocketProvider>
-                    </NewPostProvider>
-                  </AuthResetPasswordProvider>
-                </AuthForgotPasswordProvider>
-              </AuthProfileProvider>
-            </AuthSigninProvider>
-          </AuthSignupProvider>
-        ) : (
-          <div className='network'>
-            <Alert>
-              You are offline. Please check your network connection.
-            </Alert>
-            <img
-              width='48'
-              height='48'
-              src='https://img.icons8.com/color/48/wifi-off.png'
-              alt='wifi-off'
-            />
-          </div>
-        )}
+                        </MessagesProvider>
+                      </ChatDetailProvider>
+                    </WebSocketProvider>
+                  </NewPostProvider>
+                </AuthResetPasswordProvider>
+              </AuthForgotPasswordProvider>
+            </AuthProfileProvider>
+          </AuthSigninProvider>
+        </AuthSignupProvider>
       </NetworkStatusProvider>
     </BrowserRouter>
   );

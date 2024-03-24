@@ -7,15 +7,13 @@ import styles from './index.module.css';
 import Content from '../shared/Content';
 import unmuteMic from '../../images/unmutemic.png';
 import { NewPostContext } from '../../context/Chat/NewPost';
-import { WSS_CHAT_URL, token } from '../../constants';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../../context/ChatDetail';
 import Button from '../shared/Button';
+import { MessagesContext } from '../../context/Messages';
 
 const Chat = () => {
-  const { state } = useLocation();
   const {
-    sendMessageToServer,
     startListening,
     stopListening,
     listening,
@@ -24,26 +22,15 @@ const Chat = () => {
     transcript,
     setValue,
     transcription,
-    handleNewPostCreation,
-    isWebSocketConnected,
-    connectWebSocket,
     mySymptoms,
     isSent,
     height,
     newPostData,
   } = useContext(WebSocketContext);
-  const { pathname } = useLocation();
+  const { handleClick } = useContext(MessagesContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
+  const { Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
-
-  const handleMessageSend = async () => {
-    if (isWebSocketConnected && reference_no) {
-      connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
-      sendMessageToServer(value);
-    }
-    handleChatQAResponses(reference_no);
-  };
 
   const handleMicClick = (e) => {
     if (listening) {
@@ -56,31 +43,6 @@ const Chat = () => {
   };
 
   const voice = value ? value : mySymptoms ? mySymptoms : transcription;
-
-  const handleClick = () => {
-    if (!isWebSocketConnected && pathname !== '/') {
-      sendNewPost(value);
-    } else {
-      if (pathname === '/') {
-        createNewPost();
-      }
-      if (!isWebSocketConnected) {
-        connectWebSocket(
-          `${WSS_CHAT_URL}${reference_no ?? state?.data?.reference_no}`,
-          token
-        );
-      }
-      isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
-      handleMessageSend();
-      isSent &&
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
-          bottom: 0,
-        });
-      handleChatQAResponses(reference_no ?? state?.data?.reference_no);
-    }
-  };
 
   useEffect(() => {
     if (Ref !== null && Ref === reference_no) {

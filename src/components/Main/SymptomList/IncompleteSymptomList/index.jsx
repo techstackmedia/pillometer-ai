@@ -4,11 +4,11 @@ import Content from '../../../shared/Content';
 import SymptomsSelectionInput from '../../../shared/SymptomsSelectionInput';
 import styles from '../index.module.css';
 import { WebSocketContext } from '../../../../context/Chat/Service';
-import { NewPostContext } from '../../../../context/Chat/NewPost';
+import { MessagesContext } from '../../../../context/Messages';
 
 const IncompleteSymptomList = ({ symptoms }) => {
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
-  const { createNewPost } = useContext(NewPostContext);
+  const { handleClick } = useContext(MessagesContext);
 
   return (
     <SymptomsSelectionInput cn={styles.cards}>
@@ -18,7 +18,7 @@ const IncompleteSymptomList = ({ symptoms }) => {
             <Card
               key={item.toLowerCase()}
               cn={`${styles.cardCheckbox} ${styles.inCompleteCheckbox}`}
-              onClick={createNewPost}
+              onClick={handleClick}
             >
               <Content>{item}</Content>
             </Card>

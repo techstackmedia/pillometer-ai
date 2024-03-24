@@ -5,11 +5,12 @@ import { WebSocketContext } from '../../../context/Chat/Service';
 import { NewPostContext } from '../../../context/Chat/NewPost';
 import { ChatDetailContext } from '../../../context/ChatDetail';
 import { useParams } from 'react-router-dom';
+import { MessagesContext } from '../../../context/Messages';
 
 const SymptomButton = () => {
   const { handleViewMoreClick, viewMore } = useContext(WebSocketContext);
-  const { sendNewPost, createNewPost, res, newPostData } =
-    useContext(NewPostContext);
+  const { handleClick } = useContext(MessagesContext);
+  const { res } = useContext(NewPostContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   useEffect(() => {
@@ -19,12 +20,7 @@ const SymptomButton = () => {
     handleChatQAResponses(reference_no);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
-  const handleClick = (item) => {
-    createNewPost();
-    if (reference_no || newPostData?.reference_no) {
-      sendNewPost(item);
-    }
-  };
+
   return (
     <>
       {viewMore ? (

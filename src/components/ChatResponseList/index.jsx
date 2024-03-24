@@ -27,6 +27,7 @@ const ChatResponseList = () => {
   const navigateToLogin = () => {
     navigate('/auth/login');
   };
+  // console.log(newResponse, chats);
 
   return (
     <>
@@ -43,7 +44,6 @@ const ChatResponseList = () => {
       {!token ? (
         <div className={styles.refresh}>
           <Content cn='heading'>Login to commence conversation</Content>
-          {/* <Button navigateToNextPage={!token ? navigateToLogin : handleClick}> */}
           <Button navigateToNextPage={navigateToLogin}>Login</Button>
         </div>
       ) : (

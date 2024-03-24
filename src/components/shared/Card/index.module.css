@@ -4,3 +4,8 @@
   border: 1px solid #dee4f7;
   margin-block: 30px;
 }
+
+.internetConnection {
+  background-color: #fff;
+  backdrop-filter: blur(90%);
+}
