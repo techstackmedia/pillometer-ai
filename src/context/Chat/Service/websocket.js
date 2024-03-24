@@ -1,8 +1,10 @@
 export const connectWebSocket = (url, token) => {
   const authenticatedUrl = `${url}?token=${token}`;
   const socket = new WebSocket(authenticatedUrl);
+  let text;
   socket.onopen = () => {
-    console.log('WebSocket connected');
+    text = 'WebSocket connected';
+    return text;
   };
 
   socket.onerror = (error) => {

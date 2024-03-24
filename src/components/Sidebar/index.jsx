@@ -20,7 +20,6 @@ const Sidebar = () => {
   const { newPostData, connectWebSocket } = useContext(WebSocketContext);
   const { serverAltError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
-  console.log(redirectToDetails, state?.data?.reference_no);
 
   useEffect(() => {
     if (redirectToDetails) {

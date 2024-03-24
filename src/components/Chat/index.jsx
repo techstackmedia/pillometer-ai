@@ -36,7 +36,6 @@ const Chat = () => {
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
-  console.log(height);
 
   const handleMessageSend = async () => {
     if (isWebSocketConnected && reference_no) {
