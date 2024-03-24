@@ -4,11 +4,10 @@ import styles from './index.module.css';
 import { WebSocketContext } from '../../../context/Chat/Service';
 import { NewPostContext } from '../../../context/Chat/NewPost';
 import { ChatDetailContext } from '../../../context/ChatDetail';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const SymptomButton = () => {
   const { handleViewMoreClick, viewMore } = useContext(WebSocketContext);
-  const { pathname } = useLocation();
   const { sendNewPost, createNewPost, res, newPostData } =
     useContext(NewPostContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
@@ -17,9 +16,7 @@ const SymptomButton = () => {
     if (res) {
       handleClick();
     }
-    if (pathname !== '/') {
-      handleChatQAResponses(reference_no);
-    }
+    handleChatQAResponses(reference_no);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   const handleClick = (item) => {

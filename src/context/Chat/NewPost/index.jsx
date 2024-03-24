@@ -1,24 +1,30 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { BASE_CHAT_URL } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
+import { ChatDetailContext } from '../../ChatDetail';
 
 const NewPostContext = createContext();
 
 const NewPostProvider = ({ children }) => {
+  const [refresh, setRefresh] = useState(false);
+  const handleChatQAResponses = useContext(ChatDetailContext);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
   const [Ref, setRef] = useState(null);
   const [res, setRes] = useState(null);
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
   const [err, setErr] = useState();
   const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
-  // const route = path[path.length - 1];
-  // const [refreshKey, setRefreshKey] = useState(0);
+
+  useEffect(() => {
+    if (state?.data) {
+      setRefresh(true);
+    }
+  }, [state?.data, path]);
 
   const navigate = useNavigate();
-
   const createNewPost = async () => {
     try {
       const requestOptions = {
@@ -42,6 +48,9 @@ const NewPostProvider = ({ children }) => {
         navigate(`/details/${reference ?? path[2]}`, {
           state: { data: responseData },
         });
+        if (refresh) {
+          handleChatQAResponses(state?.data?.reference_no);
+        }
       } else {
         setAltErrorMessage('Failed to create new post');
         setTimeout(() => {
@@ -71,17 +80,23 @@ const NewPostProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch(`${BASE_CHAT_URL}/${path[2]}/predict`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `token ${token}`,
-        },
-        body: JSON.stringify(postData),
-      });
+      const response = await fetch(
+        `${BASE_CHAT_URL}/${path[2] ?? state?.data?.reference_no}/predict`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `token ${token}`,
+          },
+          body: JSON.stringify(postData),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         setRes(data);
+        if (refresh) {
+          handleChatQAResponses(state?.data?.reference_no);
+        }
       } else {
         setErrDetail(data.details);
       }

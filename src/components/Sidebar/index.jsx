@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
@@ -13,12 +13,20 @@ import Alert from '../shared/Alert';
 const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { handleChatQAResponses, chat } = useContext(ChatDetailContext);
+  const { pathname, state } = useLocation();
+  const { handleChatQAResponses, chat, redirectToDetails } =
+    useContext(ChatDetailContext);
   const { createNewPost, res, Ref } = useContext(NewPostContext);
   const { newPostData, connectWebSocket } = useContext(WebSocketContext);
   const { serverAltError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
+  console.log(redirectToDetails, state?.data?.reference_no);
+
+  useEffect(() => {
+    if (redirectToDetails) {
+      window.location.href = `/details/${state?.data?.reference_no}`;
+    }
+  }, [redirectToDetails, state?.data?.reference_no]);
 
   let chatList = chat?.results;
 
@@ -29,28 +37,20 @@ const Sidebar = () => {
 
   const handleNewChat = () => {
     createNewPost();
-    if (
-      path.includes('details') ||
-      newPostData?.reference_no ||
-      Ref ||
-      reference_no
-    ) {
+    if (newPostData?.reference_no || Ref || reference_no) {
       connectWebSocket(
         `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
         token
       );
-      if (pathname !== '/') {
-        handleChatQAResponses(reference_no);
-      }
+      handleChatQAResponses(reference_no);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   const handleNewChatAlt = () => {
     createNewPost();
-    if (!path.includes('details')) {
-      navigate(`/details/${newPostData?.reference_no}`);
-    }
+    navigate(`/details/${newPostData?.reference_no}`);
+    handleChatQAResponses(reference_no);
   };
 
   const onClick = path.includes('details') ? handleNewChat : handleNewChatAlt;

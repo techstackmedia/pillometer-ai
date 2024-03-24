@@ -15,13 +15,6 @@ const ChatResponseList = () => {
   const { isSent } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  // const { reference_no } = useParams();
-  // const handleClick = () => {
-  //   if (reference_no !== undefined) {
-  //     handleChatQAResponses(reference_no);
-  //   }
-  // };
-
   useEffect(() => {
     isSent &&
       window.scrollTo({
@@ -29,7 +22,7 @@ const ChatResponseList = () => {
         behavior: 'smooth',
         bottom: 0,
       });
-  }, [isSent, handleChatQAResponses, refreshKey]);
+  }, [isSent, handleChatQAResponses, refreshKey, pathname]);
 
   const navigateToLogin = () => {
     navigate('/auth/login');

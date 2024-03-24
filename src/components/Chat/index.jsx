@@ -8,11 +8,12 @@ import Content from '../shared/Content';
 import unmuteMic from '../../images/unmutemic.png';
 import { NewPostContext } from '../../context/Chat/NewPost';
 import { WSS_CHAT_URL, token } from '../../constants';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../../context/ChatDetail';
 import Button from '../shared/Button';
 
 const Chat = () => {
+  const { state } = useLocation();
   const {
     sendMessageToServer,
     startListening,
@@ -35,16 +36,14 @@ const Chat = () => {
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
-  const navigate = useNavigate();
+  console.log(height);
 
   const handleMessageSend = async () => {
     if (isWebSocketConnected && reference_no) {
       connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
       sendMessageToServer(value);
     }
-    if (pathname !== '/') {
-      handleChatQAResponses(reference_no);
-    }
+    handleChatQAResponses(reference_no);
   };
 
   const handleMicClick = (e) => {
@@ -59,48 +58,37 @@ const Chat = () => {
 
   const voice = value ? value : mySymptoms ? mySymptoms : transcription;
 
-  useEffect(() => {
-    if (newPostData) {
-      handleClick();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSent]);
-
   const handleClick = () => {
-    if (pathname === '/') {
-      if (Ref !== null) {
-        navigate(`/details/${Ref}`, {
-          state: { data: Ref, mySymptoms },
-        });
+    if (!isWebSocketConnected && pathname !== '/') {
+      sendNewPost(value);
+    } else {
+      if (pathname === '/') {
+        createNewPost();
       }
-
-      createNewPost();
-    }
-    if (!isWebSocketConnected) {
-      connectWebSocket(`${WSS_CHAT_URL}${reference_no}`, token);
-    }
-    isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
-    handleMessageSend();
-
-    isSent &&
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-        bottom: 0,
-      });
-    if (pathname !== '/') {
-      handleChatQAResponses(reference_no);
+      if (!isWebSocketConnected) {
+        connectWebSocket(
+          `${WSS_CHAT_URL}${reference_no ?? state?.data?.reference_no}`,
+          token
+        );
+      }
+      isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
+      handleMessageSend();
+      isSent &&
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+          bottom: 0,
+        });
+      handleChatQAResponses(reference_no ?? state?.data?.reference_no);
     }
   };
 
   useEffect(() => {
     if (Ref !== null && Ref === reference_no) {
-      if (pathname !== '/') {
-        handleChatQAResponses(reference_no);
-      }
+      handleChatQAResponses(reference_no);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWebSocketConnected, isSent]);
+  }, [isSent, newPostData]);
 
   return (
     <div className={styles.input}>
@@ -114,7 +102,7 @@ const Chat = () => {
             sx={{
               resize: 'none',
               overflowY: 'hidden',
-              height: height ? height : '',
+              maxHeight: height ? height : '',
               opacity: 0.5,
             }}
             name='chatbox-text-to-speech'

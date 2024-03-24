@@ -119,7 +119,6 @@ const WebSocketProvider = ({ children }) => {
         const receivedMessage = JSON.parse(event.data);
         setResponse(receivedMessage?.message);
 
-        // Check if the received message matches the expected response
         if (receivedMessage?.message) {
           setNewResponse(receivedMessage);
         }
@@ -178,11 +177,9 @@ const WebSocketProvider = ({ children }) => {
     }
   };
 
-  // Add event listeners for visibility changes
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && !socket) {
-        // Reconnect WebSocket when the tab becomes visible
         handleNewPostCreation();
       }
     };
