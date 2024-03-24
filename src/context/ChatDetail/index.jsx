@@ -37,14 +37,16 @@ const ChatDetailProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         setChat(data);
-      } else {
-        setServerAltError(data?.details);
       }
     } catch (e) {
       setServerError(e.message);
+      setTimeout(() => {
+        setServerError(null);
+      }, 3000);
     }
   };
   const chatId = chat?.results[0]?.reference_no;
+  console.log(serverAltError, serverError);
 
   const handleChatQAResponses = async (id) => {
     try {

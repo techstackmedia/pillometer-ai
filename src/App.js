@@ -23,6 +23,7 @@ import {
 } from './context/NetworkStatus';
 
 import Alert from './components/shared/Alert';
+import AlertMessages from './components/AlertMessages';
 
 function App() {
   const isOnline = useContext(NetworkStatusContext);
@@ -30,6 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <NetworkStatusProvider>
+        <AlertMessages />
         {!isOnline ? (
           <AuthSignupProvider>
             <AuthSigninProvider>

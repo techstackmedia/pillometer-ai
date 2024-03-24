@@ -9,23 +9,31 @@ import Alert from '../../components/shared/Alert';
 
 const ChatQADetail = () => {
   const { reference_no } = useParams();
-  const { err, errorAltMessage } = useContext(NewPostContext);
+  const { err, errorAltMessage, serverError } = useContext(NewPostContext);
+
+  const renderAlert = (message) => (
+    <div className={styles.homeAlert}>
+      <Alert>{message}</Alert>
+    </div>
+  );
 
   return (
     <>
-      {errorAltMessage && (
-        <div className={styles.homeAlert}>
-          <Alert>{errorAltMessage}</Alert>
-        </div>
-      )}
-      {err && (
-        <div className={styles.pageAlert}>
-          <Alert>
+      {errorAltMessage && renderAlert(errorAltMessage)}
+      {err &&
+        renderAlert(
+          <>
             Websocket closed. Please{' '}
             <a href={window.location.href}>try again</a>
-          </Alert>
-        </div>
-      )}
+          </>
+        )}
+      {serverError &&
+        renderAlert(
+          <>
+            Server error occurred. Please{' '}
+            <a href={window.location.href}>try again</a>
+          </>
+        )}
       <Navbar />
       <div className='Main'>
         <Sidebar id={reference_no} />
