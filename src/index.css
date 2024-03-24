@@ -86,3 +86,11 @@ button:disabled {
   transform: translateX(-50%);
   z-index: 3;
 }
+
+.bottomError {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}

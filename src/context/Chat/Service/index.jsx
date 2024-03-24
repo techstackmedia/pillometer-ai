@@ -110,8 +110,10 @@ const WebSocketProvider = ({ children }) => {
       newSocket.onclose = () => {
         setConnectionWarnMessage('WebSocket closed');
         setIsWebSocketConnected(false);
+        // Reconnect if the connection is lost
         setTimeout(() => {
           setConnectionWarnMessage(null);
+          handleNewPostCreation(); // Reconnect
         }, 3000);
       };
 

@@ -18,13 +18,14 @@ const Sidebar = () => {
     useContext(ChatDetailContext);
   const { createNewPost, res, Ref } = useContext(NewPostContext);
   const { newPostData, connectWebSocket } = useContext(WebSocketContext);
-  const { serverAltError } = useContext(ChatDetailContext);
+  const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
 
   useEffect(() => {
-    if (redirectToDetails) {
+    if (redirectToDetails && !serverError) {
       window.location.href = `/details/${state?.data?.reference_no}`;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [redirectToDetails, state?.data?.reference_no]);
 
   let chatList = chat?.results;
@@ -73,9 +74,9 @@ const Sidebar = () => {
 
   return (
     <>
-      {serverAltError && (
-        <div>
-          <Alert>serverAltError</Alert>
+      {serverError && (
+        <div className='bottomError'>
+          <Alert>Server Error Occured. Reloading Page...</Alert>
         </div>
       )}
       <div className={styles.sidebar}>

@@ -12,7 +12,9 @@ const AlertMessages = () => {
   const { state } = useLocation();
   const errorAltMessage = useContext(NewPostContext);
   const responseMessage = useContext(NewPostContext);
+  const errorMessage = useContext(NewPostContext);
   const serverError = useContext(ChatDetailContext);
+  const err = useContext(ChatDetailContext);
   const connectionErrorMessage = useContext(WebSocketContext);
   const connectionMessage = useContext(WebSocketContext);
   const connectionWarnMessage = useContext(WebSocketContext);
@@ -53,9 +55,20 @@ const AlertMessages = () => {
     <>
       {status && successMessage && renderAlert('Login Successful')}
       {errorAltMessage && renderAlert(errorAltMessage)}
+      {err && renderAlert(err)}
       {showProfileAlert && renderAlert(profile)}
       {responseMessage?.statusText && renderAlert(responseMessage.statusText)}
       {connectionErrorMessage && renderAlert(connectionErrorMessage)}
+      {errorMessage &&
+        serverError &&
+        errorMessage &&
+        err &&
+        renderAlert(
+          <>
+            Oops! Server stopped working. Please{' '}
+            <a href={window.location.href}>try again</a>
+          </>
+        )}
       {connectionMessage && renderAlert(connectionMessage)}
       {connectionWarnMessage && renderAlert(connectionWarnMessage)}
       {serverError && renderAlert(serverErr)}
