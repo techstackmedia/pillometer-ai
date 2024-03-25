@@ -16,10 +16,11 @@ const Sidebar = () => {
   const { pathname, state } = useLocation();
   const { handleChatQAResponses, chat, redirectToDetails } =
     useContext(ChatDetailContext);
-  const { createNewPost, res, Ref } = useContext(NewPostContext);
+  const { createNewPost } = useContext(NewPostContext);
   const { newPostData, connectWebSocket } = useContext(WebSocketContext);
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
+  const referenceNo = newPostData?.reference_no;
 
   useEffect(() => {
     if (redirectToDetails && !serverError) {
@@ -28,29 +29,21 @@ const Sidebar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [redirectToDetails, state?.data?.reference_no]);
 
-  let chatList = chat?.results;
-
-  if (res) {
-    chatList = chat?.results;
-  }
+  const chatList = chat?.results;
   const path = pathname.split('/');
-
   const handleNewChat = () => {
     createNewPost();
-    if (newPostData?.reference_no || Ref || reference_no) {
-      connectWebSocket(
-        `${WSS_CHAT_URL}${reference_no ?? newPostData?.reference_no}`,
-        token
-      );
-      handleChatQAResponses(reference_no);
+    if (referenceNo ?? reference_no) {
+      connectWebSocket(`${WSS_CHAT_URL}${reference_no ?? referenceNo}`, token);
+      handleChatQAResponses(reference_no ?? referenceNo);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   const handleNewChatAlt = () => {
     createNewPost();
-    navigate(`/details/${newPostData?.reference_no}`);
-    handleChatQAResponses(reference_no);
+    navigate(`/details/${referenceNo ?? referenceNo}`);
+    handleChatQAResponses(reference_no ?? referenceNo);
   };
 
   const onClick = path.includes('details') ? handleNewChat : handleNewChatAlt;
