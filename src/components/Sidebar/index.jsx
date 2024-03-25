@@ -21,7 +21,7 @@ const Sidebar = () => {
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
-  console.log(state);
+
   useEffect(() => {
     if (redirectToDetails && !serverError) {
       window.location.href = `/details/${
