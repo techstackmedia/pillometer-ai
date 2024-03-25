@@ -14,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const message = state?.message;
-  const [successMessage, setSuccessMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     if (firstName === '' && lastName === '' && token) {
@@ -25,9 +25,11 @@ const Home = () => {
   }, [firstName, lastName, navigate]);
 
   useEffect(() => {
-    setSuccessMessage(message)
-  },  [message]);
-
+    setSuccessMessage(message);
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 3000);
+  }, [message]);
 
   return (
     <>
