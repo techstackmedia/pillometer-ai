@@ -17,7 +17,6 @@ const ChatDetailProvider = ({ children }) => {
   const referenceNo = newPostData?.reference_no;
   const { reference_no } = useParams();
   const [serverError, setServerError] = useState(null);
-  const [serverAltError, setServerAltError] = useState(null);
   const [chat, setChat] = useState(null);
   const [redirectToDetails, setRedirectToDetails] = useState(false);
 
@@ -46,7 +45,6 @@ const ChatDetailProvider = ({ children }) => {
     }
   };
   const chatId = chat?.results[0]?.reference_no;
-  console.log(serverAltError, serverError);
 
   const handleChatQAResponses = async (id) => {
     try {
@@ -110,7 +108,6 @@ const ChatDetailProvider = ({ children }) => {
     refreshComponent,
     refreshKey,
     serverError,
-    serverAltError,
     handleChatList,
     redirectToDetails,
     chat,
