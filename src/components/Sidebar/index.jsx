@@ -21,23 +21,23 @@ const Sidebar = () => {
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
+  const id =
+    newPostData?.reference_no ?? reference_no ?? state?.data?.reference_no;
 
   useEffect(() => {
     if (redirectToDetails && !serverError) {
-      window.location.href = `/details/${
-        state?.data?.reference_no ?? referenceNo
-      }`;
+      window.location.href = `/details/${id}`;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [redirectToDetails, state?.data?.reference_no, referenceNo]);
+  }, [redirectToDetails, id]);
 
   const chatList = chat?.results;
   const path = pathname.split('/');
   const handleNewChat = () => {
     createNewPost();
-    if (referenceNo ?? reference_no) {
-      connectWebSocket(`${WSS_CHAT_URL}${reference_no ?? referenceNo}`, token);
-      handleChatQAResponses(reference_no ?? referenceNo);
+    if (id) {
+      connectWebSocket(`${WSS_CHAT_URL}${id}`, token);
+      handleChatQAResponses(id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
@@ -45,7 +45,7 @@ const Sidebar = () => {
   const handleNewChatAlt = () => {
     createNewPost();
     navigate(`/details/${referenceNo ?? referenceNo}`);
-    handleChatQAResponses(reference_no ?? referenceNo);
+    handleChatQAResponses(id);
   };
 
   const onClick = path.includes('details') ? handleNewChat : handleNewChatAlt;
