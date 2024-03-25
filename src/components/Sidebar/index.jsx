@@ -21,8 +21,7 @@ const Sidebar = () => {
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
-  const id =
-    newPostData?.reference_no ?? reference_no ?? state?.data?.reference_no;
+  const id = referenceNo ?? reference_no ?? state?.data?.reference_no;
 
   useEffect(() => {
     if (redirectToDetails && !serverError) {
@@ -44,7 +43,7 @@ const Sidebar = () => {
 
   const handleNewChatAlt = () => {
     createNewPost();
-    navigate(`/details/${referenceNo ?? referenceNo}`);
+    navigate(`/details/${id}`);
     handleChatQAResponses(id);
   };
 
