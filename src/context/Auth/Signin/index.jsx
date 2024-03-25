@@ -16,8 +16,6 @@ const AuthSigninProvider = ({ children }) => {
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // const { profileResponse } = useContext(AuthProfileContext);
-
   const navigate = useNavigate();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

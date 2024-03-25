@@ -1,5 +1,5 @@
 .input {
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   width: 68%;
   position: fixed;
   bottom: 0;
@@ -64,7 +64,6 @@
 }
 
 .inputValueZero {
-  /* background-color: #c5c4d4; */
   background-color: #4c70d6;
   height: 63.3px;
   position: 'initial';
