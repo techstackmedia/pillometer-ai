@@ -5,7 +5,6 @@ import { ChatDetailContext } from '../../context/ChatDetail';
 import { WebSocketContext } from '../../context/Chat/Service';
 import Alert from '../shared/Alert';
 import { useLocation } from 'react-router-dom';
-import { AuthSigninContext } from '../../context/Auth/Signin';
 import styles from './index.module.css';
 import { NetworkStatusContext } from '../../context/NetworkStatus';
 
@@ -21,9 +20,7 @@ const AlertMessages = () => {
   const connectionWarnMessage = useContext(WebSocketContext);
   const [showProfileAlert, setShowProfileAlert] = useState(false);
   const profile = state?.profile;
-  const status = state?.status;
   const token = state?.token;
-  const { successMessage } = useContext(AuthSigninContext);
   const { internetConnection } = useContext(NetworkStatusContext);
 
   useEffect(() => {
@@ -66,7 +63,6 @@ const AlertMessages = () => {
 
   return (
     <>
-      {status && successMessage && renderAlert('Login Successful')}
       {errorAltMessage && renderAlert(errorAltMessage)}
       {err && renderAlert(err)}
       {showProfileAlert && renderAlert(profile)}

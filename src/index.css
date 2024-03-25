@@ -94,3 +94,7 @@ button:disabled {
   transform: translateX(-50%);
   z-index: 3;
 }
+
+.topZIndex {
+  z-index: 4;
+}

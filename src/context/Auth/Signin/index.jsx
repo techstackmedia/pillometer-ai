@@ -12,7 +12,6 @@ const AuthSigninProvider = ({ children }) => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [signinError, setSigninError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
@@ -49,12 +48,16 @@ const AuthSigninProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        navigate('/', { state: { token: data.token, status: data.status } });
-        setSuccessMessage('Login Successful');
+        navigate('/', {
+          state: {
+            token: data.token,
+            status: data.status,
+            message: 'Login Successful',
+          },
+        });
         setTimeout(() => {
-          setSuccessMessage(null);
-          window.location.href = '/'
-        }, 3000)
+          window.location.href = '/';
+        }, 3000);
       } else {
         setSigninError(data.details);
       }
@@ -80,7 +83,6 @@ const AuthSigninProvider = ({ children }) => {
         handleSigninSubmit: handleSubmit,
         togglePasswordVisibility,
         showPassword,
-        successMessage,
       }}
     >
       {children}
