@@ -6,6 +6,7 @@ import { NewPostContext } from '../../../context/Chat/NewPost';
 import { ChatDetailContext } from '../../../context/ChatDetail';
 import { useParams } from 'react-router-dom';
 import { MessagesContext } from '../../../context/Messages';
+import { token } from '../../../constants';
 
 const SymptomButton = () => {
   const { handleViewMoreClick, viewMore } = useContext(WebSocketContext);
@@ -24,7 +25,7 @@ const SymptomButton = () => {
   return (
     <>
       {viewMore ? (
-        <Button cn={styles.diagnoseButton} navigateToNextPage={handleClick}>
+        <Button cn={styles.diagnoseButton} navigateToNextPage={token ? handleClick : null}>
           Diagnose
         </Button>
       ) : (

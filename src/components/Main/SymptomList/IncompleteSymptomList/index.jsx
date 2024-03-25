@@ -5,6 +5,7 @@ import SymptomsSelectionInput from '../../../shared/SymptomsSelectionInput';
 import styles from '../index.module.css';
 import { WebSocketContext } from '../../../../context/Chat/Service';
 import { MessagesContext } from '../../../../context/Messages';
+import { token } from '../../../../constants';
 
 const IncompleteSymptomList = ({ symptoms }) => {
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
@@ -18,7 +19,7 @@ const IncompleteSymptomList = ({ symptoms }) => {
             <Card
               key={item.toLowerCase()}
               cn={`${styles.cardCheckbox} ${styles.inCompleteCheckbox}`}
-              onClick={handleClick}
+              onClick={token ? handleClick : null}
             >
               <Content>{item}</Content>
             </Card>

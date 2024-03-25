@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../../context/ChatDetail';
 import Button from '../shared/Button';
 import { MessagesContext } from '../../context/Messages';
+import { token } from '../../constants';
 
 const Chat = () => {
   const {
@@ -84,7 +85,7 @@ const Chat = () => {
         <Button
           disabled={voice ? false : true}
           type='submit'
-          navigateToNextPage={handleClick}
+          navigateToNextPage={token ? handleClick : null}
           cn={styles.inputValueZero}
         >
           <img src={sendIcon} alt='send icon' />
