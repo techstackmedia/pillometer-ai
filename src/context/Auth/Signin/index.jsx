@@ -2,7 +2,6 @@ import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_AUTH_URL } from '../../../constants';
 import { defaultSigninValues } from '../defaultValues';
-// import { AuthProfileContext } from '../Profile';
 
 const AuthSigninContext = createContext(defaultSigninValues);
 
@@ -17,15 +16,19 @@ const AuthSigninProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
   const handleLoginCheckboxChange = (e) => {
     setKeepSignedIn(e.target.checked);
   };
@@ -46,54 +49,36 @@ const AuthSigninProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        // if (checkProfileUpdate) {
         navigate('/', { state: { token: data.token, status: data.status } });
-        // } else {
-        //   // window.location.href = '/auth/profile';
-        //   navigate('/auth/profile', { state: { profile: data.details } });
-        // }
-
         setSuccessMessage('Login Successful');
-        setTimeout(() => {
-          setSuccessMessage(null);
-          if (successMessage === null) {
-            window.location.href = '/';
-          }
-        }, 3000);
       } else {
         setSigninError(data.details);
-        setTimeout(() => {
-          setSigninError(null);
-        }, 3000);
       }
     } catch (error) {
       setErrorMessage(error.message);
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 3000);
     } finally {
       setIsSigningIn(false);
     }
   };
 
-  const contextValues = {
-    email,
-    password,
-    keepSignedIn,
-    signinError,
-    errorMessage,
-    isSigningIn,
-    handleEmailChange,
-    handlePasswordChange,
-    handleLoginCheckboxChange,
-    handleSigninSubmit: handleSubmit,
-    togglePasswordVisibility,
-    showPassword,
-    successMessage,
-  };
-
   return (
-    <AuthSigninContext.Provider value={contextValues}>
+    <AuthSigninContext.Provider
+      value={{
+        email,
+        password,
+        keepSignedIn,
+        signinError,
+        errorMessage,
+        isSigningIn,
+        handleEmailChange,
+        handlePasswordChange,
+        handleLoginCheckboxChange,
+        handleSigninSubmit: handleSubmit,
+        togglePasswordVisibility,
+        showPassword,
+        successMessage,
+      }}
+    >
       {children}
     </AuthSigninContext.Provider>
   );

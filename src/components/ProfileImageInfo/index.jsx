@@ -18,6 +18,7 @@ const ProfileImageInfo = () => {
   const dropdownRef = useRef(null);
   const { isWebSocketConnected } = useContext(WebSocketContext);
   const userType = profileResponse?.user_type;
+
   useEffect(() => {
     getProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
