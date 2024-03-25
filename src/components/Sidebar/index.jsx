@@ -21,13 +21,15 @@ const Sidebar = () => {
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
-
+  console.log(state);
   useEffect(() => {
     if (redirectToDetails && !serverError) {
-      window.location.href = `/details/${state?.data?.reference_no}`;
+      window.location.href = `/details/${
+        state?.data?.reference_no ?? referenceNo
+      }`;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [redirectToDetails, state?.data?.reference_no]);
+  }, [redirectToDetails, state?.data?.reference_no, referenceNo]);
 
   const chatList = chat?.results;
   const path = pathname.split('/');
