@@ -5,19 +5,19 @@
   align-items: center;
 }
 
-.responseDetailCommunity,
-.responseDetailNonCommunity {
+.main .responseDetailCommunity,
+.main .responseDetailNonCommunity {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   height: 100vh;
 }
 
-.responseDetailCommunity {
+.main .responseDetailCommunity {
   width: 100%;
 }
 
-.responseDetailNonCommunity {
+.main .responseDetailNonCommunity {
   max-height: 75vh;
 }
 
