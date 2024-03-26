@@ -26,7 +26,7 @@ const SymptomsSelectionInput = ({ children, cn, sx }) => {
       <div
         className={styles['symptom-heading']}
         style={{
-          marginTop: healthConsultant ? 0 : 45,
+          marginTop: healthConsultant ? -81 : 45,
           marginBottom: healthConsultant ? 45 : undefined,
         }}
       >
