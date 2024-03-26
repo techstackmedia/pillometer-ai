@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import Alert from '../../shared/Alert';
 import Content from '../../shared/Content';
 import { AuthSignupContext } from '../../../context/Auth/Register';
-import Logo from '../../../logo.svg';
+import logo from '../../../logo.svg';
 import { AuthResetPasswordContext } from '../../../context/Auth/ResetPassword';
 
 const Login = () => {
@@ -41,7 +41,7 @@ const Login = () => {
         </div>
       )}
       <div className='authMain'>
-        <img src={Logo} alt='logo' className='logo' />
+        <img src={logo} alt='logo' className='logo' />
         <Content cn='heading'>Login To Continue</Content>
         <Content cn={`paragraph ${styles.info}`}>
           Login to start using the Pilometer AI

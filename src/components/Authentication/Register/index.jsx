@@ -5,7 +5,7 @@ import styles from '../Login/index.module.css';
 import { AuthSignupContext } from '../../../context/Auth/Register';
 import Alert from '../../shared/Alert';
 import Content from '../../shared/Content';
-import Logo from '../../../logo.svg';
+import logo from '../../../logo.svg';
 
 const Register = () => {
   const {
@@ -23,7 +23,7 @@ const Register = () => {
   return (
     <>
       <div className='authMain'>
-        <img src={Logo} alt='logo' className='logo' />
+        <img src={logo} alt='logo' className='logo' />
         <Content cn='heading'>Let's Get You Started</Content>
         <Content cn={`paragraph ${styles.info}`}>
           This information will help us curate a personalized experience

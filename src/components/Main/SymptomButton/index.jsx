@@ -7,12 +7,15 @@ import { ChatDetailContext } from '../../../context/ChatDetail';
 import { useParams } from 'react-router-dom';
 import { MessagesContext } from '../../../context/Messages';
 import { token } from '../../../constants';
+import { AuthProfileContext } from '../../../context/Auth/Profile';
 
 const SymptomButton = () => {
   const { handleViewMoreClick, viewMore } = useContext(WebSocketContext);
   const { handleClick } = useContext(MessagesContext);
   const { res } = useContext(NewPostContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { profileResponse } = useContext(AuthProfileContext);
+  const userType = profileResponse?.user_type;
   const { reference_no } = useParams();
   useEffect(() => {
     if (res) {
@@ -25,7 +28,10 @@ const SymptomButton = () => {
   return (
     <>
       {viewMore ? (
-        <Button cn={styles.diagnoseButton} navigateToNextPage={token ? handleClick : null}>
+        <Button
+          cn={styles.diagnoseButton}
+          navigateToNextPage={token ? handleClick : null}
+        >
           Diagnose
         </Button>
       ) : (
@@ -33,7 +39,7 @@ const SymptomButton = () => {
           cn={styles.symptomsButton}
           navigateToNextPage={handleViewMoreClick}
         >
-          View all symptoms
+          {userType === 'health_consultant' ? null : 'View all symptoms'}
         </Button>
       )}
     </>

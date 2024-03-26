@@ -6,15 +6,18 @@ import styles from '../index.module.css';
 import { WebSocketContext } from '../../../../context/Chat/Service';
 import { MessagesContext } from '../../../../context/Messages';
 import { token } from '../../../../constants';
+import { AuthProfileContext } from '../../../../context/Auth/Profile';
 
 const IncompleteSymptomList = ({ symptoms }) => {
   const { handleInputChange, selectedSymptoms } = useContext(WebSocketContext);
   const { handleClick } = useContext(MessagesContext);
+  const { profileResponse } = useContext(AuthProfileContext);
+  const userType = profileResponse?.user_type;
 
   return (
     <SymptomsSelectionInput cn={styles.cards}>
       {symptoms.map((item, index) => {
-        if (item === 'Go') {
+        if (item === 'Go!') {
           return (
             <Card
               key={item.toLowerCase()}
@@ -30,14 +33,20 @@ const IncompleteSymptomList = ({ symptoms }) => {
               key={`${item.replace(/\s/g, '').toLowerCase()}-${index}`}
               cn={`${styles.cardCheckbox}`}
             >
-              <label className={styles.label}>
-                <input
-                  type='checkbox'
-                  name='symptom'
-                  onChange={handleInputChange}
-                  value={item}
-                  checked={selectedSymptoms.includes(item)}
-                />
+              <label
+                className={`${styles.label} ${
+                  userType === 'health_consultant' && styles.textCenter
+                }`}
+              >
+                {userType === 'health_consultant' ? null : (
+                  <input
+                    type='checkbox'
+                    name='symptom'
+                    onChange={handleInputChange}
+                    value={item}
+                    checked={selectedSymptoms.includes(item)}
+                  />
+                )}
                 <Content>{item}</Content>
               </label>
             </Card>

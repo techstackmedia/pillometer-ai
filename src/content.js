@@ -10,7 +10,7 @@ const symptoms = [
   'Neck pain',
   'Dizziness',
   'Loss of Apetite',
-  'Go',
+  'Go!',
 ];
 
 const fullSymptomList = [
@@ -40,4 +40,19 @@ const fullSymptomList = [
   '',
 ];
 
-export { symptoms, fullSymptomList };
+const healthConsultants = [
+  'Generate a record keeping template',
+  'Diagnosis and treatment analysis',
+  'All about breast cancer',
+  'All about breast cancer',
+  'Diagnosis and treatment analysis',
+  'Generate a record keeping template',
+  'Generate a record keeping template',
+  'Diagnosis and treatment analysis',
+  'All about breast cancer',
+  '',
+  '',
+  '',
+];
+
+export { symptoms, fullSymptomList, healthConsultants };
