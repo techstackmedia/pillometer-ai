@@ -8,7 +8,6 @@ import { AuthProfileContext } from '../../../context/Auth/Profile';
 const SymptomList = () => {
   const { viewMore } = useContext(WebSocketContext);
   const { profileResponse } = useContext(AuthProfileContext);
-  console.log(profileResponse);
   const userType = profileResponse?.user_type;
 
   return (

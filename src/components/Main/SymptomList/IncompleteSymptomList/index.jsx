@@ -13,6 +13,7 @@ const IncompleteSymptomList = ({ symptoms }) => {
   const { handleClick } = useContext(MessagesContext);
   const { profileResponse } = useContext(AuthProfileContext);
   const userType = profileResponse?.user_type;
+  const healthConsultant = userType === 'health_consultant';
 
   return (
     <SymptomsSelectionInput cn={styles.cards}>
@@ -35,10 +36,10 @@ const IncompleteSymptomList = ({ symptoms }) => {
             >
               <label
                 className={`${styles.label} ${
-                  userType === 'health_consultant' && styles.textCenter
+                  healthConsultant && styles.textCenter
                 }`}
               >
-                {userType === 'health_consultant' ? null : (
+                {healthConsultant ? null : (
                   <input
                     type='checkbox'
                     name='symptom'
