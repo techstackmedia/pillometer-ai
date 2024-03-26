@@ -15,8 +15,10 @@ const SymptomsSelectionInput = ({ children, cn, sx }) => {
     greeting = `Good morning, ${profileResponse?.first_name} ☀️`;
   } else if (currentHour >= 12 && currentHour < 18) {
     greeting = `Good afternoon, ${profileResponse?.first_name} 🌤️`;
-  } else {
+  } else if (currentHour >= 18 && currentHour < 24) {
     greeting = `Good evening, ${profileResponse?.first_name} 🌙`;
+  } else {
+    greeting = `Good night, ${profileResponse?.first_name} 🌑`;
   }
 
   return (
