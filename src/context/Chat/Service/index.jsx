@@ -110,10 +110,9 @@ const WebSocketProvider = ({ children }) => {
       newSocket.onclose = () => {
         setConnectionWarnMessage('WebSocket closed');
         setIsWebSocketConnected(false);
-        // Reconnect if the connection is lost
         setTimeout(() => {
           setConnectionWarnMessage(null);
-          handleNewPostCreation(); // Reconnect
+          handleNewPostCreation();
         }, 3000);
       };
 
@@ -133,10 +132,6 @@ const WebSocketProvider = ({ children }) => {
       };
     }
   }, [newPostData, socket]);
-
-  useEffect(() => {
-    handleNewPostCreation();
-  }, [handleNewPostCreation, newResponse]);
 
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
