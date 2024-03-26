@@ -14,6 +14,7 @@ const Main = () => {
   const { pathname } = useLocation();
   const { profileResponse } = useContext(AuthProfileContext);
   const userType = profileResponse?.user_type;
+  const healthConsultant = userType === 'health_consultant';
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,8 +37,8 @@ const Main = () => {
   return (
     <>
       <div className={styles.main}>
-        <main className={userType && styles?.healthConsultantMain}>
-          {userType === 'health_consultant' ? null : (
+        <main className={healthConsultant && styles?.healthConsultantMain}>
+          {healthConsultant ? null : (
             <Banner
               cn={pathname === '/' && browserHeight < 1033 && `${styles.dnone}`}
             >
