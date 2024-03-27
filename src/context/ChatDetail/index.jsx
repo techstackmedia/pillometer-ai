@@ -21,11 +21,12 @@ const ChatDetailProvider = ({ children }) => {
   const [redirectToDetails, setRedirectToDetails] = useState(false);
   const chatId = chat?.results[0]?.reference_no;
   const idx =
-    chatId ?? Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no;
+    Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no;
 
   useEffect(() => {
     handleChatList();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx]);
 
   const handleChatList = async () => {
     try {
@@ -39,6 +40,11 @@ const ChatDetailProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         setChat(data);
+        if (data?.count === 0 && !redirectToDetails) {
+          setRedirectToDetails(true);
+          handleChatList();
+          return;
+        }
       }
     } catch (e) {
       setServerError(e.message);
