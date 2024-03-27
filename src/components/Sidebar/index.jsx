@@ -14,7 +14,7 @@ const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
-  const { handleChatQAResponses, chat, redirectToDetails } =
+  const { handleChatQAResponses, chat } =
     useContext(ChatDetailContext);
   const { createNewPost } = useContext(NewPostContext);
   const { newPostData, connectWebSocket } = useContext(WebSocketContext);
@@ -23,12 +23,12 @@ const Sidebar = () => {
   const referenceNo = newPostData?.reference_no;
   const id = referenceNo ?? reference_no ?? state?.data?.reference_no;
 
-  useEffect(() => {
-    if (redirectToDetails && !serverError) {
-      navigate(`/details/${id}`);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [redirectToDetails, id]);
+  // useEffect(() => {
+  //   if (redirectToDetails && !serverError) {
+  //     navigate(`/details/${id}`);
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [redirectToDetails, id]);
 
   const chatList = chat?.results;
   const path = pathname.split('/');

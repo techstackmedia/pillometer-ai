@@ -18,11 +18,11 @@ const NewPostProvider = ({ children }) => {
   const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
 
-  useEffect(() => {
-    if (state?.data) {
-      setRefresh(true);
-    }
-  }, [state?.data, path]);
+  // useEffect(() => {
+  //   if (state?.data) {
+  //     setRefresh(true);
+  //   }
+  // }, [state?.data]);
 
   const navigate = useNavigate();
   const createNewPost = async () => {
