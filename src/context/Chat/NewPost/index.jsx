@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { BASE_CHAT_URL } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
@@ -7,7 +7,7 @@ import { ChatDetailContext } from '../../ChatDetail';
 const NewPostContext = createContext();
 
 const NewPostProvider = ({ children }) => {
-  const [refresh, setRefresh] = useState(false);
+  const [refresh] = useState(false);
   const handleChatQAResponses = useContext(ChatDetailContext);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
@@ -17,12 +17,6 @@ const NewPostProvider = ({ children }) => {
   const [err, setErr] = useState();
   const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
-
-  // useEffect(() => {
-  //   if (state?.data) {
-  //     setRefresh(true);
-  //   }
-  // }, [state?.data]);
 
   const navigate = useNavigate();
   const createNewPost = async () => {

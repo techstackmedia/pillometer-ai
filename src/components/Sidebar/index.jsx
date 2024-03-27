@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
@@ -22,13 +22,6 @@ const Sidebar = () => {
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
   const id = referenceNo ?? reference_no ?? state?.data?.reference_no;
-
-  // useEffect(() => {
-  //   if (redirectToDetails && !serverError) {
-  //     navigate(`/details/${id}`);
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [redirectToDetails, id]);
 
   const chatList = chat?.results;
   const path = pathname.split('/');
