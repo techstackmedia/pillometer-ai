@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Input from '../shared/Input';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
@@ -6,9 +6,6 @@ import { WebSocketContext } from '../../context/Chat/Service';
 import styles from './index.module.css';
 import Content from '../shared/Content';
 import unmuteMic from '../../images/unmutemic.png';
-import { NewPostContext } from '../../context/Chat/NewPost';
-import { useParams } from 'react-router-dom';
-import { ChatDetailContext } from '../../context/ChatDetail';
 import Button from '../shared/Button';
 import { MessagesContext } from '../../context/Messages';
 import { token } from '../../constants';
@@ -24,14 +21,9 @@ const Chat = () => {
     setValue,
     transcription,
     mySymptoms,
-    isSent,
     height,
-    newPostData,
   } = useContext(WebSocketContext);
   const { handleClick } = useContext(MessagesContext);
-  const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { Ref } = useContext(NewPostContext);
-  const { reference_no } = useParams();
 
   const handleMicClick = (e) => {
     if (listening) {
@@ -44,13 +36,6 @@ const Chat = () => {
   };
 
   const voice = value ? value : mySymptoms ? mySymptoms : transcription;
-
-  useEffect(() => {
-    if (Ref !== null && Ref === reference_no) {
-      handleChatQAResponses(reference_no);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSent, newPostData]);
 
   return (
     <div className={styles.input}>

@@ -25,9 +25,9 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (redirectToDetails && !serverError) {
-      window.location.href = `/details/${id}`;
+      navigate(`/details/${id}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [redirectToDetails, id]);
 
   const chatList = chat?.results;

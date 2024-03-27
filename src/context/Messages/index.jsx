@@ -10,36 +10,35 @@ const MessagesProvider = ({ children }) => {
   const {
     sendMessageToServer,
     value,
-    handleNewPostCreation,
     isWebSocketConnected,
     connectWebSocket,
     isSent,
   } = useContext(WebSocketContext);
-  const { pathname, state } = useLocation();
+  const { state } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const referenceNo = reference_no ?? state?.data?.reference_no;
   const handleMessageSend = async () => {
     if (isWebSocketConnected && referenceNo) {
-      connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
       sendMessageToServer(value);
     }
     handleChatQAResponses(referenceNo);
   };
 
   const handleClick = () => {
-    if (!isWebSocketConnected && pathname !== '/') {
-      sendNewPost(value);
+    if (referenceNo === undefined) {
+      createNewPost()
+    }
+    if (!isWebSocketConnected) {
+      if (value.trim()) {
+        sendNewPost(value);
+      }
     } else {
-      if (pathname === '/') {
-        createNewPost();
-      }
-      if (!isWebSocketConnected) {
         connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-      }
-      isWebSocketConnected ? handleNewPostCreation() : sendNewPost(value);
-      handleMessageSend();
+        if (value.trim) {
+          handleMessageSend()
+        }
       isSent &&
         window.scrollTo({
           top: document.documentElement.scrollHeight,
