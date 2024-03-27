@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { AuthProfileContext } from '../../../context/Auth/Profile';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './index.module.css';
-import Modal from '../';
+import Modal from '../../shared/Modal';
 import googleIcon from '../../../images/googleLogo.png';
 import facebookIcon from '../../../images/facebookLogo.png';
 import appleIcon from '../../../images/appleLogo.png';

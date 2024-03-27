@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import cancelIcon from '../../images/cancel.png';
-import { MessagesContext } from '../../context/Messages';
+import cancelIcon from '../../../images/cancel.png';
+import { MessagesContext } from '../../../context/Messages';
 const Modal = ({ children, cn, sx }) => {
   const { setIsLoginModal } = useContext(MessagesContext);
   const handleCancel = () => {
