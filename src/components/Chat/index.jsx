@@ -69,8 +69,8 @@ const Chat = () => {
         </div>
         <Button
           disabled={voice ? false : true}
-          type='submit'
-          navigateToNextPage={token ? handleClick : null}
+          type={!token ? 'button' : 'submit'}
+          navigateToNextPage={handleClick}
           cn={styles.inputValueZero}
         >
           <img src={sendIcon} alt='send icon' />

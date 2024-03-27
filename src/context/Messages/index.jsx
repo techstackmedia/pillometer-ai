@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { WebSocketContext } from '../Chat/Service';
 import { useLocation, useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../ChatDetail';
@@ -7,6 +7,7 @@ import { WSS_CHAT_URL, token } from '../../constants';
 
 const MessagesContext = createContext();
 const MessagesProvider = ({ children }) => {
+  const [isloginModal, setIsLoginModal] = useState(false);
   const {
     sendMessageToServer,
     value,
@@ -27,18 +28,21 @@ const MessagesProvider = ({ children }) => {
   };
 
   const handleClick = () => {
+    if (!token) {
+      setIsLoginModal(true);
+    }
     if (referenceNo === undefined) {
-      createNewPost()
+      createNewPost();
     }
     if (!isWebSocketConnected) {
       if (value.trim()) {
         sendNewPost(value);
       }
     } else {
-        connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-        if (value.trim) {
-          handleMessageSend()
-        }
+      connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
+      if (value.trim) {
+        handleMessageSend();
+      }
       isSent &&
         window.scrollTo({
           top: document.documentElement.scrollHeight,
@@ -48,7 +52,7 @@ const MessagesProvider = ({ children }) => {
       handleChatQAResponses(referenceNo);
     }
   };
-  const values = { handleClick };
+  const values = { handleClick, isloginModal, setIsLoginModal };
   return (
     <MessagesContext.Provider value={values}>
       {children}

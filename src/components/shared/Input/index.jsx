@@ -38,7 +38,7 @@ const Input = ({
       <textarea
         ref={textareaRef}
         placeholder={placeholder}
-        className={cn === null && `${styles.input} ${styles['input-field']}`}
+        className={!cn && `${styles.input} ${styles['input-field']}`}
         name={name}
         id={name}
         value={value}
@@ -51,7 +51,7 @@ const Input = ({
       <input
         type={type}
         placeholder={placeholder}
-        className={cn === null && `${styles.input} ${styles['input-field']}`}
+        className={!cn && `${styles.input} ${styles['input-field']}`}
         name={name}
         id={name}
         value={value}
