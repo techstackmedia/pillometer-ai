@@ -15,27 +15,25 @@ const MessagesProvider = ({ children }) => {
     connectWebSocket,
     isSent,
   } = useContext(WebSocketContext);
-  const { state } = useLocation();
   const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const {pathname} = useLocation()
-  const referenceNo = reference_no ?? state?.data?.reference_no ?? Ref;
+  const paths = pathname.split('/');
+  const referenceNo = Ref ?? reference_no ?? paths[2];
   const handleMessageSend = async () => {
     if (isWebSocketConnected && referenceNo) {
       sendMessageToServer(value);
     }
     handleChatQAResponses(referenceNo);
   };
-  const paths = pathname.split('/');
 
   useEffect(() => {
-    if (chats?.count === 0 && paths.includes('detail')) {
+    if (chats?.count === 0) {
       sendNewPost(value)
       handleChatQAResponses(referenceNo);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chats?.count, value, referenceNo])
+  }, [chats?.count, value, referenceNo, sendNewPost, handleChatQAResponses])
 
   const handleClick = async () => {
     try {

@@ -3,6 +3,7 @@ import { BASE_CHAT_URL } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
 import { ChatDetailContext } from '../../ChatDetail';
+import { AuthProfileContext } from '../../Auth/Profile';
 
 const NewPostContext = createContext();
 
@@ -17,7 +18,10 @@ const NewPostProvider = ({ children }) => {
   const [err, setErr] = useState();
   const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
-
+  const reference_no = Ref ?? state?.data?.reference_no ?? path[2]
+  const endpoint = `${BASE_CHAT_URL}/${reference_no}/predict`;
+  const {profileResponse} = useContext(AuthProfileContext)
+  const userType = profileResponse?.user_type
   const navigate = useNavigate();
   const createNewPost = async () => {
     try {
@@ -38,13 +42,11 @@ const NewPostProvider = ({ children }) => {
 
       const reference = responseData?.reference_no;
       setRef(reference);
-      if (responseData) {
-        navigate(`/details/${reference ?? path[2]}`, {
+      if (Ref) {
+        navigate(`/details/${Ref}`, {
           state: { data: responseData },
         });
-        if (refresh) {
-          handleChatQAResponses(state?.data?.reference_no);
-        }
+        handleChatQAResponses(Ref);
       } else {
         setAltErrorMessage('Failed to create new post');
         setTimeout(() => {
@@ -61,10 +63,10 @@ const NewPostProvider = ({ children }) => {
 
   const sendNewPost = async (value) => {
     const postData = {
-      reference_no: Ref,
+      reference_no,
       message: value,
       message_type: '',
-      user_type: '',
+      user_type: userType,
       rating: true,
       comment: '',
       isUser: true,
@@ -74,17 +76,14 @@ const NewPostProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch(
-        `${BASE_CHAT_URL}/${path[2] ?? state?.data?.reference_no}/predict`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `token ${token}`,
-          },
-          body: JSON.stringify(postData),
-        }
-      );
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+        body: JSON.stringify(postData),
+      });
       const data = await response.json();
       if (response.ok) {
         setRes(data);
