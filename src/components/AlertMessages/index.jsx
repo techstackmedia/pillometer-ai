@@ -7,6 +7,7 @@ import Alert from '../shared/Alert';
 import { useLocation } from 'react-router-dom';
 import styles from './index.module.css';
 import { NetworkStatusContext } from '../../context/NetworkStatus';
+import wifiIcon from '../../images/wifi-off.png'
 
 const AlertMessages = () => {
   const { state } = useLocation();
@@ -51,11 +52,11 @@ const AlertMessages = () => {
   );
   const networkError = (
     <div className='network'>
-      <span>You are offline. Please check your network connection.</span>
+      <span>{internetConnection}</span>
       <img
         width='48'
         height='48'
-        src='https://img.icons8.com/color/48/wifi-off.png'
+        src={wifiIcon}
         alt='wifi-off'
       />
     </div>

@@ -16,9 +16,9 @@ const MessagesProvider = ({ children }) => {
   } = useContext(WebSocketContext);
   const { state } = useLocation();
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { sendNewPost, createNewPost } = useContext(NewPostContext);
+  const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
-  const referenceNo = reference_no ?? state?.data?.reference_no;
+  const referenceNo = reference_no ?? state?.data?.reference_no ?? Ref;
   const handleMessageSend = async () => {
     if (isWebSocketConnected && referenceNo) {
       sendMessageToServer(value);
