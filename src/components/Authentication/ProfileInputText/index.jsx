@@ -22,7 +22,7 @@ const ProfileInputText = () => {
     handleProfessionChange,
     handlePhoneNumberChange,
     handleCommunityCheckboxChange,
-    navigateToNextPage,
+    navigatePage,
   } = useContext(AuthProfileContext);
   return (
     <>
@@ -102,7 +102,7 @@ const ProfileInputText = () => {
           learning and system improvement.
         </span>
       </label>
-      <Button navigateToNextPage={navigateToNextPage}>Proceed</Button>
+      <Button navigatePage={navigatePage}>Proceed</Button>
     </>
   );
 };

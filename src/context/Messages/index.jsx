@@ -35,7 +35,7 @@ const MessagesProvider = ({ children }) => {
       handleChatQAResponses(referenceNo);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chats?.count, value])
+  }, [chats?.count, value, referenceNo])
 
   const handleClick = async () => {
     try {

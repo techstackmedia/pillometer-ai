@@ -12,7 +12,7 @@ import Content from '../../components/shared/Content';
 
 const Auth = () => {
   const [isCurrentPage, setIsCurrentPage] = useState(false);
-  const navigateToNextPage = () => {
+  const navigatePage = () => {
     setIsCurrentPage(true);
   };
   const { pathname } = useLocation();
@@ -32,7 +32,7 @@ const Auth = () => {
         )}
       </>
       <Authentication
-        navigateToNextPage={navigateToNextPage}
+        navigatePage={navigatePage}
         isCurrentPage={isCurrentPage}
       />
       {pathname === '/auth/register' && (

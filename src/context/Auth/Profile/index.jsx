@@ -24,7 +24,7 @@ const AuthProfileProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
-  const navigateToNextPage = () => {
+  const navigatePage = () => {
     if (firstName && lastName) {
       setIsCurrentPage(true);
     } else {
@@ -155,7 +155,7 @@ const AuthProfileProvider = ({ children }) => {
     handleProfessionChange,
     handleDiscoverChange,
     handleCommunityCheckboxChange,
-    navigateToNextPage,
+    navigatePage,
     isCurrentPage,
     errorMessage,
     profileResponse,

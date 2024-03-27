@@ -36,7 +36,7 @@ const ChatResponseList = () => {
           <Content cn='heading'>
             {!token ? 'Login to commence conversation' : 'Start Conversation'}
           </Content>
-          <Button navigateToNextPage={!token ? navigateToLogin : handleClick}>
+          <Button navigatePage={!token ? navigateToLogin : handleClick}>
             {!token ? 'Login' : 'Open chat'}
           </Button>
         </div>
@@ -44,7 +44,7 @@ const ChatResponseList = () => {
       {!token ? (
         <div className={styles.refresh}>
           <Content cn='heading'>Login to commence conversation</Content>
-          <Button navigateToNextPage={navigateToLogin}>Login</Button>
+          <Button navigatePage={navigateToLogin}>Login</Button>
         </div>
       ) : (
         <main className={styles.main}>

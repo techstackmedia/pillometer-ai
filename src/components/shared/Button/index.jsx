@@ -1,12 +1,12 @@
 import styles from './index.module.css';
-const Button = ({ children, sx, cn, type, disabled, navigateToNextPage }) => {
+const Button = ({ children, sx, cn, type, disabled, navigatePage }) => {
   return (
     <button
       className={`${styles.button} ${cn}`}
       style={sx}
       type={type}
       disabled={disabled}
-      onClick={navigateToNextPage}
+      onClick={navigatePage}
     >
       {children}
     </button>

@@ -30,14 +30,14 @@ const SymptomButton = () => {
       {viewMore ? (
         <Button
           cn={styles.diagnoseButton}
-          navigateToNextPage={token ? handleClick : null}
+          navigatePage={token ? handleClick : null}
         >
           Diagnose
         </Button>
       ) : (
         <Button
           cn={styles.symptomsButton}
-          navigateToNextPage={handleViewMoreClick}
+          navigatePage={handleViewMoreClick}
         >
           {userType === 'health_consultant' ? null : 'View all symptoms'}
         </Button>

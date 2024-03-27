@@ -84,7 +84,7 @@ const UsageInfoInput = () => {
       <Button
         type={selectedOption ? 'submit' : 'button'}
         cn={styles.proceedButton}
-        navigateToNextPage={selectedOption ? null : handleFormClick}
+        navigatePage={selectedOption ? null : handleFormClick}
       >
         Proceed
       </Button>

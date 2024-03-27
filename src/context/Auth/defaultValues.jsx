@@ -47,7 +47,7 @@ const defaultProfileValues = {
   handleProfessionChange: () => {},
   handleDiscoverChange: () => {},
   handleCommunityCheckboxChange: () => {},
-  navigateToNextPage: () => {},
+  navigatePage: () => {},
   isCurrentPage: false,
 };
 

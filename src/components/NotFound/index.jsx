@@ -19,8 +19,8 @@ const NotFoundPage = () => {
             <h2>Oops! Page Not Found</h2>
             <p>It seems like the page you're looking for doesn't exist.</p>
             <div className='popup-buttons'>
-              <Button navigateToNextPage={handlePopupClose}>Close</Button>
-              <Button navigateToNextPage={() => navigate('/')}>Home</Button>
+              <Button navigatePage={handlePopupClose}>Close</Button>
+              <Button navigatePage={() => navigate('/')}>Home</Button>
             </div>
           </div>
         </div>
@@ -33,10 +33,10 @@ const NotFoundPage = () => {
         </h1>
         <p>Page Not Found</p>
         <div className='popup-buttons'>
-          <Button navigateToNextPage={() => setShowPopup(true)}>
+          <Button navigatePage={() => setShowPopup(true)}>
             Show Popup
           </Button>
-          <Button navigateToNextPage={() => navigate('/')}>Home</Button>
+          <Button navigatePage={() => navigate('/')}>Home</Button>
         </div>
       </div>
     </div>

@@ -47,7 +47,7 @@
 - **Usage:** Used as the main component for authentication.
 - **Props:**
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
-  - `navigateToNextPage`: Function to navigate to the next page.
+  - `navigatePage`: Function to navigate to the next page.
 
 #### 5. **AuthLiner Component**
 
@@ -158,7 +158,7 @@
   - `children`: Button text or content.
   - `sx`: Additional styles for the button.
   - `cn`: Additional classes for the button.
-  - `navigateToNextPage`: Function to navigate to the next page.
+  - `navigatePage`: Function to navigate to the next page.
   - `isCurrentPage`: Boolean value indicating whether the current page is for authentication or registration.
 
 #### 2. **Content Component**
