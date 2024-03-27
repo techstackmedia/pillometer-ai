@@ -19,6 +19,7 @@ const MessagesProvider = ({ children }) => {
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
+  const {pathname} = useLocation()
   const referenceNo = reference_no ?? state?.data?.reference_no ?? Ref;
   const handleMessageSend = async () => {
     if (isWebSocketConnected && referenceNo) {
@@ -27,31 +28,37 @@ const MessagesProvider = ({ children }) => {
     handleChatQAResponses(referenceNo);
   };
 
-  const handleClick = () => {
-    if (!token) {
-      setIsLoginModal(true);
-    }
-    if (referenceNo === undefined) {
-      createNewPost();
-    }
-    if (!isWebSocketConnected) {
-      if (value.trim()) {
-        sendNewPost(value);
+  const handleClick = async () => {
+    try {
+      if (!token) {
+        setIsLoginModal(true);
+        return;
       }
-    } else {
-      connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-      if (value.trim) {
-        handleMessageSend();
+      
+      if (referenceNo === undefined || pathname === '/') {
+        await createNewPost();
       }
-      isSent &&
-        window.scrollTo({
+
+      if (!isWebSocketConnected) {
+        if (value.trim()) {
+          await sendNewPost(value);
+        }
+      } else {
+        await connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
+        if (value.trim()) {
+          await handleMessageSend();
+        }
+        isSent && window.scrollTo({
           top: document.documentElement.scrollHeight,
           behavior: 'smooth',
           bottom: 0,
         });
-      handleChatQAResponses(referenceNo);
+        await handleChatQAResponses(referenceNo);
+      }
+    } catch (error) {
+      console.error('Error in handleClick:', error);
     }
-  };
+  }
   const values = { handleClick, isloginModal, setIsLoginModal };
   return (
     <MessagesContext.Provider value={values}>
