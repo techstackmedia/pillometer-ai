@@ -1,0 +1,78 @@
+.login {
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  .text {
+    text-align: center;
+  }
+  
+  .modalContainer button {
+    background-color: #4c70d6;
+    color: #fff;
+    padding-block: 10px;
+    border-radius: 8px;
+  }
+  
+  .modalContainer a {
+    color: #4c70d6;
+    border: none;
+  }
+  
+  .passwordInput {
+    position: relative;
+  }
+  
+  .showPassword {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    padding: 3px;
+    top: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .modalContainer .forgotPassword {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* .modalContainer a:hover {
+    border: 0;
+    border-bottom: 1px solid #4c70d6
+  } */
+
+  .paragraph {
+    margin-bottom: 0;
+    font-size: 16px;
+    margin-block: 10px
+  }
+
+  .modalContainer hr {
+    border: 0;
+    border-bottom: 1px solid #c5c4d4;
+  }
+  
+  .socials {
+    display: flex;
+    justify-content: space-between;
+    margin-block: 20px;
+    gap: 10px
+  }
+  
+  .socials img {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #c5c4d4;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .error {
+    border: 1px solid #f00;
+  }
+  
+  .registerLink {
+    margin-top: 10px;
+  }

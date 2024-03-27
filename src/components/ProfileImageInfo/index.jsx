@@ -9,8 +9,10 @@ import Content from '../shared/Content';
 import uploadImageIcon from '../../images/uploadProfile.png';
 import { token } from '../../constants';
 import { WebSocketContext } from '../../context/Chat/Service';
+import { MessagesContext } from '../../context/Messages';
 
 const ProfileImageInfo = () => {
+  const { setIsLoginModal } = useContext(MessagesContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -55,7 +57,8 @@ const ProfileImageInfo = () => {
   };
 
   const login = () => {
-    navigate('/auth/login');
+    // navigate('/auth/login');
+    setIsLoginModal(true)
   };
   const [isUpload, setIsLoad] = useState(false);
 
