@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { WebSocketContext } from '../Chat/Service';
 import { useLocation, useParams } from 'react-router-dom';
 import { ChatDetailContext } from '../ChatDetail';
@@ -16,7 +16,7 @@ const MessagesProvider = ({ children }) => {
     isSent,
   } = useContext(WebSocketContext);
   const { state } = useLocation();
-  const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
   const { sendNewPost, createNewPost, Ref } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const {pathname} = useLocation()
@@ -27,6 +27,15 @@ const MessagesProvider = ({ children }) => {
     }
     handleChatQAResponses(referenceNo);
   };
+
+  useEffect(() => {
+    if (chats?.count === 0) {
+      sendNewPost(value)
+      setTimeout(() => {
+        handleChatQAResponses(referenceNo);
+      }, 1500)
+    }
+  }, [chats?.count, value])
 
   const handleClick = async () => {
     try {
