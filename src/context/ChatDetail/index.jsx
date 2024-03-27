@@ -19,10 +19,13 @@ const ChatDetailProvider = ({ children }) => {
   const [serverError, setServerError] = useState(null);
   const [chat, setChat] = useState(null);
   const [redirectToDetails, setRedirectToDetails] = useState(false);
+  const chatId = chat?.results[0]?.reference_no;
+  const idx =
+    chatId ?? Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no;
 
   useEffect(() => {
     handleChatList();
-  }, [setChat]);
+  }, []);
 
   const handleChatList = async () => {
     try {
@@ -44,28 +47,18 @@ const ChatDetailProvider = ({ children }) => {
       }, 3000);
     }
   };
-  const chatId = chat?.results[0]?.reference_no;
 
   const handleChatQAResponses = async (id) => {
+    const identity = id ?? idx;
     try {
       if (pathname !== '/') {
-        const response = await fetch(
-          `${BASE_CHAT_URL}/${
-            id ??
-            chatId ??
-            Ref ??
-            referenceNo ??
-            state?.data?.reference_no ??
-            reference_no
-          }/messages`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `token ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${BASE_CHAT_URL}/${identity}/messages`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `token ${token}`,
+          },
+        });
         const data = await response.json();
         if (response.ok) {
           setChats(data);
@@ -88,11 +81,9 @@ const ChatDetailProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    handleChatQAResponses(
-      chatId ?? Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no
-    );
+    handleChatQAResponses(idx);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reference_no]);
+  }, [idx]);
 
   const refreshComponent = () => {
     setRefreshKey((prevKey) => prevKey + 1);
