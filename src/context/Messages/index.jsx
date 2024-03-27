@@ -27,14 +27,14 @@ const MessagesProvider = ({ children }) => {
     }
     handleChatQAResponses(referenceNo);
   };
+  const paths = pathname.split('/');
 
   useEffect(() => {
-    if (chats?.count === 0) {
+    if (chats?.count === 0 && paths.includes('detail')) {
       sendNewPost(value)
-      setTimeout(() => {
-        handleChatQAResponses(referenceNo);
-      }, 1500)
+      handleChatQAResponses(referenceNo);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats?.count, value])
 
   const handleClick = async () => {

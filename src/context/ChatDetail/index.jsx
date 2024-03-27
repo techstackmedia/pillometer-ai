@@ -26,7 +26,7 @@ const ChatDetailProvider = ({ children }) => {
   useEffect(() => {
     handleChatList();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idx]);
+  }, []);
 
   const handleChatList = async () => {
     try {

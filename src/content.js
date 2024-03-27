@@ -9,7 +9,7 @@ const symptoms = [
   'Nasal congestion',
   'Neck pain',
   'Dizziness',
-  'Loss of Apetite',
+  'Loss of Appetite',
   'Go!',
 ];
 
@@ -24,7 +24,7 @@ const fullSymptomList = [
   'Nasal congestion',
   'Neck pain',
   'Dizziness',
-  'Loss of Apetite',
+  'Loss of Appetite',
   'Chest pain',
   'Changes in Urination',
   'Mood swings',
