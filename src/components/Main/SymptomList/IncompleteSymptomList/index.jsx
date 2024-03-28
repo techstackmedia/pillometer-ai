@@ -23,7 +23,7 @@ const IncompleteSymptomList = ({ symptoms }) => {
             <Card
               key={item.toLowerCase()}
               cn={`${styles.cardCheckbox} ${styles.inCompleteCheckbox}`}
-              onClick={token ? handleClick : null}
+              onClick={handleClick}
             >
               <Content>{item}</Content>
             </Card>
