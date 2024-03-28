@@ -42,8 +42,8 @@ const Sidebar = () => {
 
   const onClick = path.includes('details') ? handleNewChat : handleNewChatAlt;
 
-  const navigateToChat = async (reference_no) => {
-    await handleChatQAResponses(reference_no);
+  const navigateToChat = (reference_no) => {
+    handleChatQAResponses(reference_no);
     navigate(`/details/${reference_no}`);
     window.scrollBy({ behavior: 'smooth', top: 0 });
   };
