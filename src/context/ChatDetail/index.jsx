@@ -55,10 +55,10 @@ const ChatDetailProvider = ({ children }) => {
   };
 
   const handleChatQAResponses = async (id) => {
-    const identity = id ?? idx;
+    id = id ?? idx;
     try {
       if (pathname !== '/') {
-        const response = await fetch(`${BASE_CHAT_URL}/${identity}/messages`, {
+        const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

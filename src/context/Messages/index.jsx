@@ -29,21 +29,22 @@ const MessagesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (chats?.count === 0) {
+    if (chats?.count === 0 && referenceNo) {
       sendNewPost(value)
       handleChatQAResponses(referenceNo);
     }
-  }, [chats?.count, value, referenceNo, sendNewPost, handleChatQAResponses])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [referenceNo, value])
 
   const handleClick = async () => {
+    if (pathname === '/') {
+      await createNewPost();
+    }
+
     try {
       if (!token) {
         setIsLoginModal(true);
         return;
-      }
-      
-      if (referenceNo === undefined || pathname === '/') {
-        await createNewPost();
       }
 
       if (!isWebSocketConnected) {

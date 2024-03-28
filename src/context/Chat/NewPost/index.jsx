@@ -4,12 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
 import { ChatDetailContext } from '../../ChatDetail';
 import { AuthProfileContext } from '../../Auth/Profile';
+import { WebSocketContext } from '../Service';
 
 const NewPostContext = createContext();
 
 const NewPostProvider = ({ children }) => {
   const [refresh] = useState(false);
   const handleChatQAResponses = useContext(ChatDetailContext);
+  const newPostData = useContext(WebSocketContext)
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
   const [Ref, setRef] = useState(null);
@@ -18,7 +20,8 @@ const NewPostProvider = ({ children }) => {
   const [err, setErr] = useState();
   const [errDetail, setErrDetail] = useState(null);
   const path = pathname?.split('/');
-  const reference_no = Ref ?? state?.data?.reference_no ?? path[2]
+  const ref = newPostData?.reference_no
+  const reference_no = ref ?? Ref ?? state?.data?.reference_no ?? path[2]
   const endpoint = `${BASE_CHAT_URL}/${reference_no}/predict`;
   const {profileResponse} = useContext(AuthProfileContext)
   const userType = profileResponse?.user_type

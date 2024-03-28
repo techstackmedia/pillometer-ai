@@ -141,6 +141,7 @@ const WebSocketProvider = ({ children }) => {
           utterance.onerror = (event) => {
             console.error('Speech synthesis error:', event.error);
           };
+          // utterance.voice = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Female');
           window.speechSynthesis.speak(utterance);
           setIsSpeaking(true);
         } else {
