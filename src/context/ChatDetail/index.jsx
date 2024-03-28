@@ -22,28 +22,33 @@ const ChatDetailProvider = ({ children }) => {
   const chatId = chat?.results[0]?.reference_no;
   const idx =
     Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no;
+    const path = pathname.split('/')
 
   useEffect(() => {
-    handleChatList();
+    if (token) {
+      handleChatList();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChatList = async () => {
     try {
-      const response = await fetch(BASE_CHAT_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `token ${token}`,
-        },
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setChat(data);
-        if (data?.count === 0 && !redirectToDetails) {
-          setRedirectToDetails(true);
-          handleChatList();
-          return;
+      if (path.includes('details')) {
+        const response = await fetch(BASE_CHAT_URL, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `token ${token}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setChat(data);
+          if (data?.count === 0 && !redirectToDetails) {
+            setRedirectToDetails(true);
+            handleChatList();
+            return;
+          }
         }
       }
     } catch (e) {
@@ -57,7 +62,7 @@ const ChatDetailProvider = ({ children }) => {
   const handleChatQAResponses = async (id) => {
     id = id ?? idx;
     try {
-      if (pathname !== '/') {
+      if (path.includes('details')) {
         const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
           method: 'GET',
           headers: {

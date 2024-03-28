@@ -23,9 +23,9 @@ const MessagesProvider = ({ children }) => {
   const referenceNo = Ref ?? reference_no ?? paths[2];
   const handleMessageSend = async () => {
     if (isWebSocketConnected && referenceNo) {
-      sendMessageToServer(value);
+      await sendMessageToServer(value);
     }
-    handleChatQAResponses(referenceNo);
+    await handleChatQAResponses(referenceNo);
   };
 
   useEffect(() => {
@@ -33,7 +33,8 @@ const MessagesProvider = ({ children }) => {
       sendNewPost(value)
       handleChatQAResponses(referenceNo);
     }
-  }, [chats?.count, value, referenceNo, sendNewPost, handleChatQAResponses])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chats?.count, referenceNo])
 
   const handleClick = async () => {
     try {

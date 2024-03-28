@@ -94,7 +94,7 @@ const NewPostProvider = ({ children }) => {
           handleChatQAResponses(state?.data?.reference_no);
         }
       } else {
-        setErrDetail(data.details);
+        setErrDetail('Reference number is undefined. Try again!');
       }
     } catch (error) {
       setErr(error.message);
