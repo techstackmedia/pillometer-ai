@@ -1,6 +1,6 @@
 import Input from '../../shared/Input';
 import styles from './index.module.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthSigninContext } from '../../../context/Auth/Signin';
 import { useLocation } from 'react-router-dom';
 import Alert from '../../shared/Alert';
@@ -27,6 +27,17 @@ const Login = () => {
   const location = useLocation();
   const verifiedEmail = location.state?.email;
   const details = location.state?.details;
+  const signedOut = location?.state.message;
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    setMessage(signedOut)
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
+  }, [signedOut])
+    
+  
 
   return (
     <>
@@ -37,6 +48,13 @@ const Login = () => {
             <Content cn={`paragraph ${styles.paragraph}`}>
               {resetMessage}
             </Content>
+          </Alert>
+        </div>
+      )}
+      {message && (
+        <div className={styles.alert}>
+          <Alert>
+            <Content cn={`paragraph ${styles.paragraph}`}>{message}</Content>
           </Alert>
         </div>
       )}

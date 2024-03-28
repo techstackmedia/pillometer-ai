@@ -53,12 +53,12 @@ const ProfileImageInfo = () => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    navigate('/auth/login');
+    navigate('/auth/login', { state: { message: 'Logged out successfully' } });
   };
 
   const login = () => {
     // navigate('/auth/login');
-    setIsLoginModal(true)
+    setIsLoginModal(true);
   };
   const [isUpload, setIsLoad] = useState(false);
 
