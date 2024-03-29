@@ -6,41 +6,32 @@ import { NewPostContext } from '../Chat/NewPost';
 import { WSS_CHAT_URL, token } from '../../constants';
 
 const MessagesContext = createContext();
+
 const MessagesProvider = ({ children }) => {
   const [isloginModal, setIsLoginModal] = useState(false);
   const {
     sendMessageToServer,
     value,
-    isWebSocketConnected,
     connectWebSocket,
     isSent,
     newPostData,
+    uniqueArray,
   } = useContext(WebSocketContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { createNewPost, Ref } = useContext(NewPostContext);
+  const { createNewPost } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const { pathname } = useLocation();
-  const paths = pathname.split('/');
-  const referenceNo =
-    newPostData?.reference_no ?? Ref ?? reference_no ?? paths[2];
   const navigate = useNavigate();
-  const handleMessageSend = async () => {
-    if (isWebSocketConnected && referenceNo) {
-      await sendMessageToServer(value);
-    }
-    await handleChatQAResponses(referenceNo);
-  };
+  const isDetailPage = pathname.startsWith('/details');
+  const referenceNo =
+    newPostData?.reference_no ?? reference_no ?? pathname.split('/')[2];
 
   useEffect(() => {
-    if (referenceNo) {
-      // sendNewPost(value)
-      connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-      handleMessageSend();
+    if (uniqueArray && pathname === '/' && referenceNo) {
       navigate(`/details/${referenceNo}`);
       handleChatQAResponses(referenceNo);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handleChatQAResponses, navigate, pathname, referenceNo, uniqueArray]);
 
   const handleClick = async () => {
     try {
@@ -49,35 +40,31 @@ const MessagesProvider = ({ children }) => {
         return;
       }
 
-      if (referenceNo === undefined || pathname === '/') {
+      if (pathname === '/') {
         await createNewPost();
       }
 
       if (referenceNo) {
-        connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
+        await sendMessageToServer(value);
+        handleChatQAResponses(referenceNo);
       }
 
-      if (!isWebSocketConnected) {
-        // if (value.trim()) {
-        //   await sendNewPost(value);
-        // }
-      } else {
-        await connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-        if (value.trim()) {
-          await handleMessageSend();
-        }
-        isSent &&
-          window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-            bottom: 0,
-          });
-        await handleChatQAResponses(referenceNo);
+      if (isDetailPage && referenceNo) {
+        connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
+        navigate(`/details/${referenceNo}`);
       }
+      handleChatQAResponses(referenceNo);
+      isSent &&
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+          bottom: 0,
+        });
     } catch (error) {
       console.error('Error in handleClick:', error);
     }
   };
+
   const values = { handleClick, isloginModal, setIsLoginModal };
   return (
     <MessagesContext.Provider value={values}>
