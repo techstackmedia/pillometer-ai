@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { WebSocketContext } from '../Chat/Service';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { ChatDetailContext } from '../ChatDetail';
 import { NewPostContext } from '../Chat/NewPost';
 import { WSS_CHAT_URL, token } from '../../constants';
@@ -21,6 +21,7 @@ const MessagesProvider = ({ children }) => {
   const {pathname} = useLocation()
   const paths = pathname.split('/');
   const referenceNo = Ref ?? reference_no ?? paths[2];
+  const navigate = useNavigate()
   const handleMessageSend = async () => {
     if (isWebSocketConnected && referenceNo) {
       await sendMessageToServer(value);
@@ -29,8 +30,10 @@ const MessagesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (chats?.count === 0) {
-      sendNewPost(value)
+    if (chats?.count === 0 && referenceNo) {
+      // sendNewPost(value)
+      handleMessageSend()
+      navigate(`/details/${referenceNo}`)
       handleChatQAResponses(referenceNo);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,9 +51,9 @@ const MessagesProvider = ({ children }) => {
       }
 
       if (!isWebSocketConnected) {
-        if (value.trim()) {
-          await sendNewPost(value);
-        }
+        // if (value.trim()) {
+        //   await sendNewPost(value);
+        // }
       } else {
         await connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
         if (value.trim()) {
