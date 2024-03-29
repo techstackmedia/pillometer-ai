@@ -1,10 +1,8 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { connectWebSocket, disconnect, sendMessage } from './websocket';
+import { connectWebSocket, disconnect, sendMessage } from './websocket'; // Assuming websocket file path is correct
 import { WSS_CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from 'react-speech-recognition';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { token } from '../../../constants';
 
 const WebSocketContext = createContext();
@@ -14,11 +12,11 @@ const WebSocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const location = useLocation();
   const newPostData = location.state?.data;
+  const [requestHistory, setRequestHistory] = useState([]);
+  const [responseHistory, setResponseHistory] = useState([]);
   const [value, setValue] = useState('');
   const [height, setHeight] = useState(32);
-  const { transcript, listening, browserSupportsContinuousListening } =
-    useSpeechRecognition();
-  const valueLength = value?.length;
+  const { transcript, listening, browserSupportsContinuousListening } = useSpeechRecognition();
   const [viewMore, setViewMore] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcription, setTranscription] = useState(transcript);
@@ -29,6 +27,7 @@ const WebSocketProvider = ({ children }) => {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [mySymptoms, setMySymptoms] = useState('');
   const [newResponse, setNewResponse] = useState(null);
+  const [isSent, setIsSent] = useState(false);
 
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
@@ -36,21 +35,13 @@ const WebSocketProvider = ({ children }) => {
     setValue(symptomsString);
   }, [selectedSymptoms]);
 
-  const [isSent, setIsSent] = useState(false);
-
   const handleInputChange = (e) => {
     const symptomValue = e.target.value;
     if (e.target.checked) {
       setSelectedSymptoms((prevState) => [...prevState, symptomValue]);
     } else {
-      setSelectedSymptoms((prevState) =>
-        prevState.filter((item) => item !== symptomValue)
-      );
+      setSelectedSymptoms((prevState) => prevState.filter((item) => item !== symptomValue));
     }
-  };
-
-  const handleViewMoreClick = () => {
-    setViewMore((prevViewMore) => !prevViewMore);
   };
 
   const handleChange = (e) => {
@@ -59,6 +50,11 @@ const WebSocketProvider = ({ children }) => {
     setTranscription(inputValue);
     setMySymptoms(inputValue);
   };
+
+  const handleViewMoreClick = () => {
+    setViewMore((prevViewMore) => !prevViewMore);
+  };
+
   useEffect(() => {
     if (transcript || transcription) {
       setTranscription(transcript);
@@ -76,6 +72,8 @@ const WebSocketProvider = ({ children }) => {
     }
     setHeight(351);
   };
+
+  const valueLength = value?.length;
 
   const stopListening = () => {
     if (browserSupportsContinuousListening) {
@@ -119,10 +117,12 @@ const WebSocketProvider = ({ children }) => {
       newSocket.onmessage = (event) => {
         const receivedMessage = JSON.parse(event.data);
         setResponse(receivedMessage?.message);
-
+      
         if (receivedMessage?.message) {
           setNewResponse(receivedMessage);
         }
+      
+        setResponseHistory(prevResponseHistory => [...prevResponseHistory, receivedMessage]);
       };
 
       setSocket(newSocket);
@@ -131,7 +131,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-  }, [newPostData, socket]);
+  }, [newPostData, socket, responseHistory]);
 
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
@@ -141,7 +141,6 @@ const WebSocketProvider = ({ children }) => {
           utterance.onerror = (event) => {
             console.error('Speech synthesis error:', event.error);
           };
-          // utterance.voice = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Female');
           window.speechSynthesis.speak(utterance);
           setIsSpeaking(true);
         } else {
@@ -156,7 +155,6 @@ const WebSocketProvider = ({ children }) => {
 
   useEffect(() => {
     handleNewPostCreation();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleNewPostCreation]);
 
   const sendMessageToServer = (message) => {
@@ -170,6 +168,8 @@ const WebSocketProvider = ({ children }) => {
       };
       sendMessage(socket, messageToSend);
       setIsSent(true);
+
+      setRequestHistory([...requestHistory, messageToSend]);
     } else {
       console.error('WebSocket not connected');
     }
@@ -189,6 +189,11 @@ const WebSocketProvider = ({ children }) => {
     };
   }, [handleNewPostCreation, socket]);
 
+  // console.log(responseHistory);
+  const uniqueSet = new Set(responseHistory.map(item => JSON.stringify(item)));
+  const uniqueArray = Array.from(uniqueSet).map(item => JSON.parse(item));
+  console.log(uniqueArray)
+
   return (
     <WebSocketContext.Provider
       value={{
@@ -207,6 +212,7 @@ const WebSocketProvider = ({ children }) => {
         value,
         viewMore,
         transcript,
+        uniqueArray,
         valueLength,
         listening,
         newPostData,
@@ -221,6 +227,8 @@ const WebSocketProvider = ({ children }) => {
         isSent,
         setIsSent,
         newResponse,
+        requestHistory,
+        responseHistory,
       }}
     >
       {children}

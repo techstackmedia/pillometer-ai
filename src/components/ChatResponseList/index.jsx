@@ -12,7 +12,7 @@ import { token } from '../../constants';
 const ChatResponseList = () => {
   const { chats, chatResponses, refreshKey } = useContext(ChatDetailContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { isSent } = useContext(WebSocketContext);
+  const { isSent, uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,20 +27,9 @@ const ChatResponseList = () => {
   const navigateToLogin = () => {
     navigate('/auth/login');
   };
-  // console.log(newResponse, chats);
 
   return (
     <>
-      {/* {!newResponse ? (
-        <div className={styles.refresh}>
-          <Content cn='heading'>
-            {!token ? 'Login to commence conversation' : 'Start Conversation'}
-          </Content>
-          <Button navigatePage={!token ? navigateToLogin : handleClick}>
-            {!token ? 'Login' : 'Open chat'}
-          </Button>
-        </div>
-      ) : ( */}
       {!token ? (
         <div className={styles.refresh}>
           <Content cn='heading'>Login to commence conversation</Content>
@@ -57,7 +46,7 @@ const ChatResponseList = () => {
           >
             {chats &&
               chatResponses?.map((chat) => (
-                <ChatResponse key={chat?.id} item={chat} />
+                <ChatResponse key={chat?.id} item={chat || uniqueArray} />
               ))}
           </div>
           {pathname === '/community' ? null : <Chat />}

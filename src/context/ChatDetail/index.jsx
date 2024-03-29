@@ -100,6 +100,7 @@ const ChatDetailProvider = ({ children }) => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
   const chatResponses = chats?.results;
+  console.log(chats?.results)
 
   const values = {
     handleChatQAResponses,
