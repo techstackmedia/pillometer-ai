@@ -28,7 +28,7 @@ const ChatDetailProvider = ({ children }) => {
     if (token) {
       handleChatList();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   const handleChatList = async () => {
@@ -62,23 +62,21 @@ const ChatDetailProvider = ({ children }) => {
   const handleChatQAResponses = async (id) => {
     id = id ?? idx;
     try {
-      if (path.includes('details')) {
-        const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `token ${token}`,
-          },
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setChats(data);
-        } else {
-          setErr(data?.details);
-          setTimeout(() => {
-            setErr(null);
-          }, 3000);
-        }
+      const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `token ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setChats(data);
+      } else {
+        setErr(data?.details);
+        setTimeout(() => {
+          setErr(null);
+        }, 3000);
       }
     } catch (e) {
       setError(e.message);
