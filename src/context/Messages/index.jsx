@@ -16,7 +16,7 @@ const MessagesProvider = ({ children }) => {
     isSent,
     newPostData,
     uniqueArray,
-    isWebSocketConnected
+    isWebSocketConnected,
   } = useContext(WebSocketContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
@@ -31,8 +31,31 @@ const MessagesProvider = ({ children }) => {
     if (uniqueArray && pathname === '/' && referenceNo) {
       navigate(`/details/${referenceNo}`);
       handleChatQAResponses(referenceNo);
+      isSent &&
+        window.scrollTo({
+          behavior: 'smooth',
+          bottom: 0,
+        });
     }
-  }, [handleChatQAResponses, navigate, pathname, referenceNo, uniqueArray]);
+  }, [
+    handleChatQAResponses,
+    isSent,
+    navigate,
+    pathname,
+    referenceNo,
+    uniqueArray,
+  ]);
+
+  useEffect(() => {
+    if (pathname.startsWith('/details')) {
+      handleChatQAResponses(referenceNo);
+      isSent &&
+        window.scrollTo({
+          behavior: 'smooth',
+          bottom: 0,
+        });
+    }
+  }, [handleChatQAResponses, isSent, pathname, referenceNo]);
 
   const handleClick = async () => {
     try {
@@ -46,10 +69,10 @@ const MessagesProvider = ({ children }) => {
       }
 
       if (!isWebSocketConnected) {
-        sendNewPost(value)
+        sendNewPost(value);
       }
 
-      if(pathname.startsWith('/details')) {
+      if (pathname.startsWith('/details')) {
         connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
       }
 
