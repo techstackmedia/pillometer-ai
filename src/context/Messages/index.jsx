@@ -60,7 +60,7 @@ const MessagesProvider = ({ children }) => {
         });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSent, pathname, referenceNo, uniqueArray?.length, sendMessageToServer]);
+  }, [sendMessageToServer]);
 
   const handleClick = async () => {
     try {
