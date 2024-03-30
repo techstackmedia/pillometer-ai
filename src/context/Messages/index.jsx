@@ -49,6 +49,10 @@ const MessagesProvider = ({ children }) => {
         sendNewPost(value)
       }
 
+      if(pathname.startsWith('/details')) {
+        connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
+      }
+
       if (referenceNo) {
         await sendMessageToServer(value);
         handleChatQAResponses(referenceNo);
