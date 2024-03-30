@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Input from '../shared/Input';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';
@@ -9,6 +9,7 @@ import unmuteMic from '../../images/unmutemic.png';
 import Button from '../shared/Button';
 import { MessagesContext } from '../../context/Messages';
 import { token } from '../../constants';
+import {useNavigate} from 'react-router-dom'
 
 const Chat = () => {
   const {
@@ -24,6 +25,15 @@ const Chat = () => {
     height,
   } = useContext(WebSocketContext);
   const { handleClick } = useContext(MessagesContext);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // Automatically trigger handleClick once when on the home page
+    if (window.location.pathname === '/' && token) {
+      handleClick();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
 
   const handleMicClick = (e) => {
     if (listening) {

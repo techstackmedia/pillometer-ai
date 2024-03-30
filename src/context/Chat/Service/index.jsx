@@ -131,6 +131,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPostData, socket, responseHistory]);
 
   const handleTextToSpeech = (message) => {

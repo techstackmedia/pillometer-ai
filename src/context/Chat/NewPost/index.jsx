@@ -21,7 +21,6 @@ const NewPostProvider = ({ children }) => {
   const path = pathname?.split('/');
   const ref = newPostData?.reference_no;
   const reference_no = ref ?? Ref ?? state?.data?.reference_no ?? path[2];
-  const endpoint = `${BASE_CHAT_URL}/${reference_no}/predict`;
   const { profileResponse } = useContext(AuthProfileContext);
   const userType = profileResponse?.user_type;
   const navigate = useNavigate();
@@ -78,6 +77,7 @@ const NewPostProvider = ({ children }) => {
     };
 
     try {
+      const endpoint = `${BASE_CHAT_URL}/${reference_no}/predict`;
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {

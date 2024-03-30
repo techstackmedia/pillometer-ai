@@ -16,15 +16,17 @@ const MessagesProvider = ({ children }) => {
     isSent,
     newPostData,
     uniqueArray,
+    isWebSocketConnected
   } = useContext(WebSocketContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
-  const { createNewPost } = useContext(NewPostContext);
+  const { createNewPost, sendNewPost } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isDetailPage = pathname.startsWith('/details');
   const referenceNo =
     newPostData?.reference_no ?? reference_no ?? pathname.split('/')[2];
+  console.log(referenceNo)
 
   useEffect(() => {
     if (uniqueArray && pathname === '/' && referenceNo) {
@@ -40,8 +42,16 @@ const MessagesProvider = ({ children }) => {
         return;
       }
 
-      if (pathname === '/') {
+      if (pathname === '/' && !isWebSocketConnected) {
         await createNewPost();
+      }
+
+      // if (!reference_no) {
+      //   return;
+      // }
+
+      if (!isWebSocketConnected) {
+        sendNewPost(value)
       }
 
       if (referenceNo) {
