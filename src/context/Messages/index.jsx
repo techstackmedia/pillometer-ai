@@ -59,7 +59,8 @@ const MessagesProvider = ({ children }) => {
           bottom: 0,
         });
     }
-  }, [handleChatQAResponses, isSent, pathname, referenceNo, sendMessageToServer, uniqueArray?.length, value]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSent, pathname, referenceNo, uniqueArray?.length, sendMessageToServer]);
 
   const handleClick = async () => {
     try {
