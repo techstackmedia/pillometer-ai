@@ -28,12 +28,12 @@ const Chat = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Automatically trigger handleClick once when on the home page
     if (window.location.pathname === '/' && token) {
       handleClick();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
+
 
   const handleMicClick = (e) => {
     if (listening) {

@@ -26,7 +26,6 @@ const MessagesProvider = ({ children }) => {
   const isDetailPage = pathname.startsWith('/details');
   const referenceNo =
     newPostData?.reference_no ?? reference_no ?? pathname.split('/')[2];
-  console.log(referenceNo)
 
   useEffect(() => {
     if (uniqueArray && pathname === '/' && referenceNo) {
@@ -45,10 +44,6 @@ const MessagesProvider = ({ children }) => {
       if (pathname === '/' && !isWebSocketConnected) {
         await createNewPost();
       }
-
-      // if (!reference_no) {
-      //   return;
-      // }
 
       if (!isWebSocketConnected) {
         sendNewPost(value)

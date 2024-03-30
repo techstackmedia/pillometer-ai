@@ -190,10 +190,8 @@ const WebSocketProvider = ({ children }) => {
     };
   }, [handleNewPostCreation, socket]);
 
-  // console.log(responseHistory);
   const uniqueSet = new Set(responseHistory.map(item => JSON.stringify(item)));
   const uniqueArray = Array.from(uniqueSet).map(item => JSON.parse(item));
-  console.log(uniqueArray)
 
   return (
     <WebSocketContext.Provider
