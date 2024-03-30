@@ -49,13 +49,17 @@ const MessagesProvider = ({ children }) => {
   useEffect(() => {
     if (pathname.startsWith('/details')) {
       handleChatQAResponses(referenceNo);
+      if (uniqueArray?.length >= 0 && uniqueArray?.length <= 0) {
+        sendMessageToServer(value)
+        handleChatQAResponses(referenceNo);
+      }
       isSent &&
         window.scrollTo({
           behavior: 'smooth',
           bottom: 0,
         });
     }
-  }, [handleChatQAResponses, isSent, pathname, referenceNo]);
+  }, [handleChatQAResponses, isSent, pathname, referenceNo, sendMessageToServer, uniqueArray?.length, value]);
 
   const handleClick = async () => {
     try {
