@@ -60,7 +60,8 @@ const Chat = () => {
               resize: 'none',
               overflowY: 'hidden',
               maxHeight: height ? height : '',
-              opacity: 0.5,
+              opacity: value?.length === 0 ? 0.5 : 1,
+              border: value?.length === 0 ? null : '1px solid #e8e7ee'
             }}
             name='chatbox-text-to-speech'
             value={voice}

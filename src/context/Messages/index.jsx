@@ -57,7 +57,6 @@ const MessagesProvider = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendMessageToServer, messageSent]);
-  console.log(uniqueArray);
 
   const handleClick = async () => {
     try {
