@@ -9,6 +9,7 @@ const MessagesContext = createContext();
 
 const MessagesProvider = ({ children }) => {
   const [isloginModal, setIsLoginModal] = useState(false);
+  const [messageSent, setMessageSent] = useState(false); // State to track if message is sent
   const {
     sendMessageToServer,
     value,
@@ -37,20 +38,15 @@ const MessagesProvider = ({ children }) => {
           bottom: 0,
         });
     }
-  }, [
-    handleChatQAResponses,
-    isSent,
-    navigate,
-    pathname,
-    referenceNo,
-    uniqueArray,
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
 
   useEffect(() => {
     if (pathname.startsWith('/details')) {
       handleChatQAResponses(referenceNo);
-      if (uniqueArray?.length >= 0 && uniqueArray?.length <= 0) {
-        sendMessageToServer(value)
+      if (uniqueArray?.length > 0 && !messageSent) {
+        sendMessageToServer(value);
+        setMessageSent(true);
         handleChatQAResponses(referenceNo);
       }
       isSent &&
@@ -59,8 +55,9 @@ const MessagesProvider = ({ children }) => {
           bottom: 0,
         });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sendMessageToServer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sendMessageToServer, messageSent]);
+  console.log(uniqueArray);
 
   const handleClick = async () => {
     try {
