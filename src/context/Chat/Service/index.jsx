@@ -2,7 +2,9 @@ import { createContext, useState, useEffect, useCallback } from 'react';
 import { connectWebSocket, disconnect, sendMessage } from './websocket'; // Assuming websocket file path is correct
 import { WSS_CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from 'react-speech-recognition';
 import { token } from '../../../constants';
 
 const WebSocketContext = createContext();
@@ -16,7 +18,8 @@ const WebSocketProvider = ({ children }) => {
   const [responseHistory, setResponseHistory] = useState([]);
   const [value, setValue] = useState('');
   const [height, setHeight] = useState(32);
-  const { transcript, listening, browserSupportsContinuousListening } = useSpeechRecognition();
+  const { transcript, listening, browserSupportsContinuousListening } =
+    useSpeechRecognition();
   const [viewMore, setViewMore] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcription, setTranscription] = useState(transcript);
@@ -29,6 +32,8 @@ const WebSocketProvider = ({ children }) => {
   const [newResponse, setNewResponse] = useState(null);
   const [isSent, setIsSent] = useState(false);
 
+  // console.log(newPostData)
+
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
     setMySymptoms(symptomsString);
@@ -40,7 +45,9 @@ const WebSocketProvider = ({ children }) => {
     if (e.target.checked) {
       setSelectedSymptoms((prevState) => [...prevState, symptomValue]);
     } else {
-      setSelectedSymptoms((prevState) => prevState.filter((item) => item !== symptomValue));
+      setSelectedSymptoms((prevState) =>
+        prevState.filter((item) => item !== symptomValue)
+      );
     }
   };
 
@@ -117,12 +124,15 @@ const WebSocketProvider = ({ children }) => {
       newSocket.onmessage = (event) => {
         const receivedMessage = JSON.parse(event.data);
         setResponse(receivedMessage?.message);
-      
+
         if (receivedMessage?.message) {
           setNewResponse(receivedMessage);
         }
-      
-        setResponseHistory(prevResponseHistory => [...prevResponseHistory, receivedMessage]);
+
+        setResponseHistory((prevResponseHistory) => [
+          ...prevResponseHistory,
+          receivedMessage,
+        ]);
       };
 
       setSocket(newSocket);
@@ -131,7 +141,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPostData, socket, responseHistory]);
 
   const handleTextToSpeech = (message) => {
@@ -190,8 +200,10 @@ const WebSocketProvider = ({ children }) => {
     };
   }, [handleNewPostCreation, socket]);
 
-  const uniqueSet = new Set(responseHistory.map(item => JSON.stringify(item)));
-  const uniqueArray = Array.from(uniqueSet).map(item => JSON.parse(item));
+  const uniqueSet = new Set(
+    responseHistory.map((item) => JSON.stringify(item))
+  );
+  const uniqueArray = Array.from(uniqueSet).map((item) => JSON.parse(item));
 
   return (
     <WebSocketContext.Provider
