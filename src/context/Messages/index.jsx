@@ -19,7 +19,7 @@ const MessagesProvider = ({ children }) => {
     uniqueArray,
     isWebSocketConnected,
   } = useContext(WebSocketContext);
-  const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
+  const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const { pathname } = useLocation();
