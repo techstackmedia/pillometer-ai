@@ -82,18 +82,18 @@ const MessagesProvider = ({ children }) => {
   // }, [chats?.results?.length, navigate, referenceNo, sendMessageToServer, message]);
 
   const handleClick = async () => {
-    connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
     try {
       if (!token) {
         setIsLoginModal(true);
         return;
       }
 
-      if (pathname === '/' && !isWebSocketConnected) {
+      if (pathname === '/') {
         await createNewPost();
       }
 
       // if (!isWebSocketConnected) {
+      //   connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
         sendNewPost(value);
       // }
 
