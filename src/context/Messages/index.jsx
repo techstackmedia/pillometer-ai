@@ -19,7 +19,7 @@ const MessagesProvider = ({ children }) => {
     uniqueArray,
     isWebSocketConnected,
   } = useContext(WebSocketContext);
-  const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const { pathname } = useLocation();
@@ -38,7 +38,7 @@ const MessagesProvider = ({ children }) => {
           bottom: 0,
         });
     }
-  }, [navigate, handleChatQAResponses, uniqueArray, pathname, referenceNo, isSent]);
+  }, [navigate]);
 
   useEffect(() => {
     if (pathname.startsWith('/details')) {
@@ -57,6 +57,29 @@ const MessagesProvider = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendMessageToServer, messageSent]);
 
+  useEffect(() => {
+    localStorage.setItem('message', value);
+  }, [value]);
+
+  const message = localStorage.getItem('message');
+
+  useEffect(() => {
+    if (chats?.results?.length > 2) {
+      localStorage.removeItem('message');
+    }
+  }, [chats?.results?.length]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (chats?.results?.length === 0) {
+        navigate(`/details/${referenceNo}`);
+        sendMessageToServer(message);
+      }
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [chats?.results?.length, navigate, referenceNo, sendMessageToServer, message]);
+
   const handleClick = async () => {
     try {
       if (!token) {
@@ -68,9 +91,9 @@ const MessagesProvider = ({ children }) => {
         await createNewPost();
       }
 
-      if (!isWebSocketConnected) {
+      // if (!isWebSocketConnected) {
         sendNewPost(value);
-      }
+      // }
 
       if (pathname.startsWith('/details')) {
         connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
