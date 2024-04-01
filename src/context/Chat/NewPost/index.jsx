@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from 'react';
-import { BASE_CHAT_URL } from '../../../constants';
+import { BASE_CHAT_URL, WSS_CHAT_URL } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
 import { ChatDetailContext } from '../../ChatDetail';
 import { AuthProfileContext } from '../../Auth/Profile';
 import { WebSocketContext } from '../Service';
+import { connectWebSocket } from '../Service/websocket';
 
 const NewPostContext = createContext();
 
@@ -44,6 +45,7 @@ const NewPostProvider = ({ children }) => {
       const reference = responseData?.reference_no;
       setRef(reference);
       if (Ref) {
+        connectWebSocket(`${WSS_CHAT_URL}${Ref}`, token)
         navigate(`/details/${Ref}`, {
           state: { data: responseData },
         });

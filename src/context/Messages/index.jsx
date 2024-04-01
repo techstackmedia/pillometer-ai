@@ -88,7 +88,6 @@ const MessagesProvider = ({ children }) => {
       handleChatQAResponses(referenceNo);
       isSent &&
         window.scrollTo({
-          top: document.documentElement.scrollHeight,
           behavior: 'smooth',
           bottom: 0,
         });

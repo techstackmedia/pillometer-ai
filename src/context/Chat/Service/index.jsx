@@ -142,7 +142,29 @@ const WebSocketProvider = ({ children }) => {
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, socket, responseHistory]);
+  }, [newPostData, socket, responseHistory, connectWebSocket]);
+
+  // const handleNewPostCreation = useCallback(() => {
+  //   if (newPostData && !socket) {
+  //     const chatUrl = `${WSS_CHAT_URL}${newPostData.reference_no}/`;
+  //     const newSocket = connectWebSocket(chatUrl, token);
+
+  //     newSocket.onopen = () => {
+  //       setIsWebSocketConnected(true);
+  //     };
+
+  //     newSocket.onclose = () => {
+  //       setIsWebSocketConnected(false);
+  //     };
+
+  //     setSocket(newSocket);
+
+  //     return () => {
+  //       disconnect(newSocket);
+  //     };
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [newPostData, socket, connectWebSocket]);
 
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
