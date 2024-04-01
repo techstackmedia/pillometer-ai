@@ -10,8 +10,7 @@ import Button from '../shared/Button';
 import { token } from '../../constants';
 
 const ChatResponseList = () => {
-  const { chats, chatResponses, refreshKey } = useContext(ChatDetailContext);
-  const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { chats, chatResponses } = useContext(ChatDetailContext);
   const { isSent, uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ const ChatResponseList = () => {
         behavior: 'smooth',
         bottom: 0,
       });
-  }, [isSent, handleChatQAResponses, refreshKey, pathname]);
+  }, [isSent]);
 
   const navigateToLogin = () => {
     navigate('/auth/login');

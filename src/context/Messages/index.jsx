@@ -58,30 +58,31 @@ const MessagesProvider = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendMessageToServer, messageSent]);
 
-  useEffect(() => {
-    localStorage.setItem('message', value);
-  }, [value]);
+  // useEffect(() => {
+  //   localStorage.setItem('message', value);
+  // }, [value]);
 
-  const message = localStorage.getItem('message');
+  // const message = localStorage.getItem('message');
 
-  useEffect(() => {
-    if (chats?.results?.length > 2) {
-      localStorage.removeItem('message');
-    }
-  }, [chats?.results?.length]);
+  // useEffect(() => {
+  //   if (chats?.results?.length > 2) {
+  //     localStorage.removeItem('message');
+  //   }
+  // }, [chats?.results?.length]);
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (chats?.results?.length === 0) {
-        navigate(`/details/${referenceNo}`);
-        sendMessageToServer(message);
-      }
-    }, 3000);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     if (chats?.results?.length === 0) {
+  //       navigate(`/details/${referenceNo}`);
+  //       sendMessageToServer(message);
+  //     }
+  //   }, 3000);
 
-    return () => clearTimeout(timeoutId);
-  }, [chats?.results?.length, navigate, referenceNo, sendMessageToServer, message]);
+  //   return () => clearTimeout(timeoutId);
+  // }, [chats?.results?.length, navigate, referenceNo, sendMessageToServer, message]);
 
   const handleClick = async () => {
+    connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
     try {
       if (!token) {
         setIsLoginModal(true);

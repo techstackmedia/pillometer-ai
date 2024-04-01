@@ -11,15 +11,18 @@ export const connectWebSocket = (url, token) => {
     localStorage.setItem('WebSocket error', error);
     setTimeout(() => {
       localStorage.removeItem('WebSocket error');
+      // window.location.reload();
     }, 3000);
   };
-
+  
   socket.onclose = () => {
     localStorage.setItem('WebSocket closed', 'WebSocket closed');
     setTimeout(() => {
       localStorage.removeItem('WebSocket closed');
+      // window.location.reload();
     }, 3000);
   };
+  
 
   return socket;
 };
