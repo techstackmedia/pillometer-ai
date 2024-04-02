@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate('/');
+    window.location.href = '/'
   };
 
   return (

@@ -17,13 +17,13 @@ const SymptomButton = () => {
   const { profileResponse } = useContext(AuthProfileContext);
   const userType = profileResponse?.user_type;
   const { reference_no } = useParams();
-  useEffect(() => {
-    if (res) {
-      handleClick();
-    }
-    handleChatQAResponses(reference_no);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [res]);
+  // useEffect(() => {
+  //   if (res) {
+  //     handleClick();
+  //   }
+  //   handleChatQAResponses(reference_no);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [res]);
 
   return (
     <>

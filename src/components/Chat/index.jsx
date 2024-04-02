@@ -32,7 +32,7 @@ const Chat = () => {
   //     handleClick();
   //   }
   // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [navigate]);
+  // }, []);
 
 
   const handleMicClick = (e) => {
