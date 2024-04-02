@@ -93,7 +93,7 @@ const MessagesProvider = ({ children }) => {
 
       // if (!isWebSocketConnected) {
       //   connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-        sendNewPost(value);
+        // sendNewPost(value);
       // }
 
       if (pathname.startsWith('/details')) {
