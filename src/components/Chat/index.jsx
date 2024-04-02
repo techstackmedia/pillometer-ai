@@ -25,14 +25,14 @@ const Chat = () => {
     height,
   } = useContext(WebSocketContext);
   const { handleClick } = useContext(MessagesContext);
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
-  useEffect(() => {
-    if (window.location.pathname === '/' && token) {
-      handleClick();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (window.location.pathname === '/' && token) {
+  //     handleClick();
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [navigate]);
 
 
   const handleMicClick = (e) => {
