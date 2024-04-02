@@ -27,6 +27,15 @@ const MessagesProvider = ({ children }) => {
   const isDetailPage = pathname.startsWith('/details');
   const referenceNo =
     newPostData?.reference_no ?? reference_no ?? pathname.split('/')[2];
+  const [isHome, setIsHome] = useState(false);
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setIsHome(true)
+    } else {
+      setIsHome(false)
+    }
+  }, [pathname])
 
   useEffect(() => {
     if (uniqueArray && pathname === '/' && referenceNo) {
@@ -58,29 +67,7 @@ const MessagesProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendMessageToServer, messageSent]);
 
-  // useEffect(() => {
-  //   localStorage.setItem('message', value);
-  // }, [value]);
-
-  // const message = localStorage.getItem('message');
-
-  // useEffect(() => {
-  //   if (chats?.results?.length > 2) {
-  //     localStorage.removeItem('message');
-  //   }
-  // }, [chats?.results?.length]);
-
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     if (chats?.results?.length === 0) {
-  //       navigate(`/details/${referenceNo}`);
-  //       sendMessageToServer(message);
-  //     }
-  //   }, 3000);
-
-  //   return () => clearTimeout(timeoutId);
-  // }, [chats?.results?.length, navigate, referenceNo, sendMessageToServer, message]);
-
+console.log(isHome)
   const handleClick = async () => {
     try {
       if (!token) {
@@ -88,7 +75,7 @@ const MessagesProvider = ({ children }) => {
         return;
       }
 
-      if (pathname === '/') {
+      if (pathname === '/' && isHome) {
         await createNewPost();
       }
 
