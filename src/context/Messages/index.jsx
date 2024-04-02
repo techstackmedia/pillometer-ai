@@ -17,6 +17,7 @@ const MessagesProvider = ({ children }) => {
     isSent,
     newPostData,
     uniqueArray,
+    isWebSocketConnected,
   } = useContext(WebSocketContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
@@ -37,7 +38,7 @@ const MessagesProvider = ({ children }) => {
           bottom: 0,
         });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const MessagesProvider = ({ children }) => {
           bottom: 0,
         });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendMessageToServer, messageSent]);
 
   // useEffect(() => {
@@ -91,10 +92,9 @@ const MessagesProvider = ({ children }) => {
         await createNewPost();
       }
 
-      // if (!isWebSocketConnected) {
-      //   connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
-        // sendNewPost(value);
-      // }
+      if (!isWebSocketConnected) {
+        sendNewPost(value);
+      }
 
       if (pathname.startsWith('/details')) {
         connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
