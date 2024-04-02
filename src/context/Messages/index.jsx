@@ -17,7 +17,6 @@ const MessagesProvider = ({ children }) => {
     isSent,
     newPostData,
     uniqueArray,
-    isWebSocketConnected,
   } = useContext(WebSocketContext);
   const { handleChatQAResponses } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
@@ -39,7 +38,7 @@ const MessagesProvider = ({ children }) => {
         });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     if (pathname.startsWith('/details')) {
