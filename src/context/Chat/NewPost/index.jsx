@@ -49,7 +49,6 @@ const NewPostProvider = ({ children }) => {
         navigate(`/details/${Ref}`, {
           state: { data: responseData },
         });
-        window.location.href = `/details/${Ref}`;
         handleChatQAResponses(Ref);
       } else {
         setAltErrorMessage('Failed to create new post');
