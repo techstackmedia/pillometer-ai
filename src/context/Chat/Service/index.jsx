@@ -91,9 +91,11 @@ const WebSocketProvider = ({ children }) => {
     setHeight('auto');
   };
 
-  const handleNewPostCreation = useCallback(() => {
-    if (newPostData && !socket) {
-      const chatUrl = `${WSS_CHAT_URL}${newPostData.reference_no}/`;
+  const id = newPostData?.reference_no
+
+  const handleNewSocketConnection = useCallback(() => {
+    if (id) {
+      const chatUrl = `${WSS_CHAT_URL}${id}/`;
       const newSocket = connectWebSocket(chatUrl, token);
 
       newSocket.onopen = () => {
@@ -117,7 +119,6 @@ const WebSocketProvider = ({ children }) => {
         setIsWebSocketConnected(false);
         setTimeout(() => {
           setConnectionWarnMessage(null);
-          handleNewPostCreation();
         }, 3000);
       };
 
@@ -141,8 +142,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, socket, responseHistory, connectWebSocket]);
+  }, [id]);
 
   // const handleNewPostCreation = useCallback(() => {
   //   if (newPostData && !socket) {
@@ -187,8 +187,8 @@ const WebSocketProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    handleNewPostCreation();
-  }, [handleNewPostCreation]);
+    handleNewSocketConnection();
+  }, [handleNewSocketConnection]);
 
   const sendMessageToServer = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
@@ -211,7 +211,7 @@ const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && !socket) {
-        handleNewPostCreation();
+        handleNewSocketConnection();
       }
     };
 
@@ -220,12 +220,21 @@ const WebSocketProvider = ({ children }) => {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [handleNewPostCreation, socket]);
+  }, [handleNewSocketConnection, socket]);
 
   const uniqueSet = new Set(
     responseHistory.map((item) => JSON.stringify(item))
   );
   const uniqueArray = Array.from(uniqueSet).map((item) => JSON.parse(item));
+
+  useEffect(() => {
+    // Cleanup function to disconnect from the WebSocket when unmounting
+    return () => {
+      if (socket) {
+        disconnect(socket);
+      }
+    };
+  }, [socket]);
 
   return (
     <WebSocketContext.Provider
@@ -238,7 +247,7 @@ const WebSocketProvider = ({ children }) => {
         handleViewMoreClick,
         height,
         handleChange,
-        handleNewPostCreation,
+        handleNewSocketConnection,
         startListening,
         stopListening,
         handleTextToSpeech,

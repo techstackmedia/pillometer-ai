@@ -55,9 +55,6 @@ const AuthSigninProvider = ({ children }) => {
             message: 'Login Successful',
           },
         });
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 3000);
       } else {
         setSigninError(data.details);
         setTimeout(() => {
