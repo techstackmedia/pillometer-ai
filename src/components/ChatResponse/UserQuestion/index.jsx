@@ -4,14 +4,16 @@ import userProfileImage from '../../../images/personProfileImage.png';
 import editPenIcon from '../../../images/editPen.png';
 import { useLocation } from 'react-router-dom';
 
-const UserQuestion = ({ message }) => {
+const UserQuestion = ({ message, id }) => {
   const { pathname } = useLocation();
 
   return (
-    <div className={styles.userQuestion}>
+    <div className={styles.userQuestion} id={id}>
       <img src={userProfileImage} alt='user profile' />
       <div className={styles.questionHeading}>
-        <Content className={`heading ${styles.question}`}>{message}</Content>
+        <Content className={`heading ${styles.question}`}>
+          <a href={`#${id}`} style={{border: 'none'}}>{message}</a>
+        </Content>
         {pathname !== '/community' ? (
           <div className={styles.editButton}>
             <img src={editPenIcon} alt='edit pen icon' width={12} height={12} />{' '}

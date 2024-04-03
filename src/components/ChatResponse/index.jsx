@@ -10,7 +10,7 @@ const ChatResponse = ({ item }) => {
     <>
       {item?.isUser ? (
         item?.message !== '' ? (
-          <UserQuestion message={item?.message} />
+          <UserQuestion message={item?.message} id={item?.id} />
         ) : null
       ) : (
         <Response message={item?.message || newResponse} />

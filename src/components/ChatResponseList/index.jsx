@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useLocation, useNavigate /* , useParams */ } from 'react-router-dom';
 import ChatResponse from '../ChatResponse';
 import Chat from '../Chat';
@@ -11,17 +11,9 @@ import { token } from '../../constants';
 
 const ChatResponseList = () => {
   const { chats, chatResponses } = useContext(ChatDetailContext);
-  const { isSent, uniqueArray } = useContext(WebSocketContext);
+  const { uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  useEffect(() => {
-    isSent &&
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-        bottom: 0,
-      });
-  }, [isSent]);
 
   const navigateToLogin = () => {
     navigate('/auth/login');

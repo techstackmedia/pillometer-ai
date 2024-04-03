@@ -61,8 +61,12 @@ const ChatDetailProvider = ({ children }) => {
 
   const handleChatQAResponses = async (id) => {
     id = id ?? idx;
+    let endpoint = '';
+    if (id) {
+      endpoint = `${BASE_CHAT_URL}/${id}/messages`;
+    }
     try {
-      const response = await fetch(`${BASE_CHAT_URL}/${id}/messages`, {
+      const response = await fetch(endpoint, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

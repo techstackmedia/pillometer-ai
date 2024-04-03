@@ -141,8 +141,7 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newPostData, socket, responseHistory, connectWebSocket]);
+  }, [newPostData, socket]);
 
   // const handleNewPostCreation = useCallback(() => {
   //   if (newPostData && !socket) {

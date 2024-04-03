@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Input from '../shared/Input';
 import micIcon from '../../images/mic.png';
 import sendIcon from '../../images/send.png';

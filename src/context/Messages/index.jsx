@@ -31,21 +31,16 @@ const MessagesProvider = ({ children }) => {
 
   useEffect(() => {
     if (pathname === '/') {
-      setIsHome(true)
+      setIsHome(true);
     } else {
-      setIsHome(false)
+      setIsHome(false);
     }
-  }, [pathname])
+  }, [pathname]);
 
   useEffect(() => {
     if (uniqueArray && pathname === '/' && referenceNo) {
       navigate(`/details/${referenceNo}`);
       handleChatQAResponses(referenceNo);
-      isSent &&
-        window.scrollTo({
-          behavior: 'smooth',
-          bottom: 0,
-        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -58,17 +53,20 @@ const MessagesProvider = ({ children }) => {
         setMessageSent(true);
         handleChatQAResponses(referenceNo);
       }
-      isSent &&
-        window.scrollTo({
-          behavior: 'smooth',
-          bottom: 0,
-        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendMessageToServer, messageSent]);
 
-console.log(isHome)
+  const smoothScrollToLastDiv = () => {
+    const divs = document.querySelectorAll('div[id]');
+
+    const lastDiv = divs[divs.length - 1];
+
+    lastDiv.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleClick = async () => {
+    smoothScrollToLastDiv();
     try {
       if (!token) {
         setIsLoginModal(true);
@@ -99,8 +97,8 @@ console.log(isHome)
       handleChatQAResponses(referenceNo);
       isSent &&
         window.scrollTo({
+          top: document.body.scrollHeight,
           behavior: 'smooth',
-          bottom: 0,
         });
     } catch (error) {
       console.error('Error in handleClick:', error);

@@ -45,11 +45,11 @@ const NewPostProvider = ({ children }) => {
       const reference = responseData?.reference_no;
       setRef(reference);
       if (Ref) {
-        connectWebSocket(`${WSS_CHAT_URL}${Ref}`, token)
+        connectWebSocket(`${WSS_CHAT_URL}${Ref}`, token);
         navigate(`/details/${Ref}`, {
           state: { data: responseData },
         });
-        window.location.href = `/details/${Ref}`
+        window.location.href = `/details/${Ref}`;
         handleChatQAResponses(Ref);
       } else {
         setAltErrorMessage('Failed to create new post');
@@ -79,8 +79,12 @@ const NewPostProvider = ({ children }) => {
       conditions: [0],
     };
 
+    let endpoint = '';
+    if (reference_no) {
+      endpoint = `${BASE_CHAT_URL}/${reference_no}/predict`;
+    }
+
     try {
-      const endpoint = `${BASE_CHAT_URL}/${reference_no}/predict`;
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {

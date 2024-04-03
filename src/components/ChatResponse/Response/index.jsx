@@ -45,7 +45,7 @@ const Response = ({ message, reference_no }) => {
       <img src={logo} alt='user profile' className={styles.userProfileImage} />
       <div className={styles.chatResponseCol}>
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
-          {(res || newResponse) && (
+          {(res) && (
             <Markdown remarkPlugins={[remarkGfm]}>
               {typeof message === 'string'
                 ? message.trim() || newResponse?.message

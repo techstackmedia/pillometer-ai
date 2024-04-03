@@ -47,7 +47,6 @@ const Sidebar = () => {
     navigate(`/details/${reference_no}`);
     window.location.href = `/details/${reference_no}`
     handleChatQAResponses(reference_no);
-    window.scrollBy({ behavior: 'smooth', top: 0 });
   };
 
   const renderSection = (title, items) => (
