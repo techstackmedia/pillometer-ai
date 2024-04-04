@@ -55,7 +55,7 @@ const MessagesProvider = ({ children }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messageSent]);
+  }, []);
 
   useEffect(() => {
     // Automatically trigger handleClick when referenceNo is undefined and WebSocket is connected
@@ -65,7 +65,6 @@ const MessagesProvider = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats?.count, isWebSocketConnected, referenceNo]);
 
-  console.log(isWebSocketConnected)
 
   const smoothScrollToLastDiv = () => {
     const divs = document.querySelectorAll('div[id]');
