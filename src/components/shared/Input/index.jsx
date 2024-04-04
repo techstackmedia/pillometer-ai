@@ -22,7 +22,6 @@ const Input = ({
   }, [value]);
 
   const handleChange = (e) => {
-    // Call the onChange prop to update the value
     onChange(e.target.value);
   };
 
