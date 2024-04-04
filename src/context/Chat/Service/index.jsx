@@ -31,7 +31,7 @@ const WebSocketProvider = ({ children }) => {
   const [mySymptoms, setMySymptoms] = useState('');
   const [newResponse, setNewResponse] = useState(null);
   const [isSent, setIsSent] = useState(false);
-  const [isSendingMessage, setIsSendingMessage] = useState(true);
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
 
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
