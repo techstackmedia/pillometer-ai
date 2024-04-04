@@ -8,17 +8,18 @@ import { WebSocketContext } from '../../context/Chat/Service';
 import Content from '../shared/Content';
 import Button from '../shared/Button';
 import { token } from '../../constants';
+import LoadingBalls from '../LoadingBalls';
 
 const ChatResponseList = () => {
   const { chats, chatResponses } = useContext(ChatDetailContext);
-  const { uniqueArray } = useContext(WebSocketContext);
+  const { uniqueArray, isSendingMessage } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
     navigate('/auth/login');
   };
-
+  
   return (
     <>
       {!token ? (
@@ -37,12 +38,15 @@ const ChatResponseList = () => {
           >
             {chats &&
               chatResponses?.map((chat) => (
-                <ChatResponse key={chat?.id} item={chat || uniqueArray} />
+                <>
+                  <ChatResponse key={chat?.id} item={chat || uniqueArray} />
+                </>
               ))}
           </div>
           {pathname === '/community' ? null : <Chat />}
         </main>
       )}
+      {isSendingMessage && <LoadingBalls />}
     </>
   );
 };

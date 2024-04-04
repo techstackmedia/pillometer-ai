@@ -31,8 +31,7 @@ const WebSocketProvider = ({ children }) => {
   const [mySymptoms, setMySymptoms] = useState('');
   const [newResponse, setNewResponse] = useState(null);
   const [isSent, setIsSent] = useState(false);
-
-  // console.log(newPostData)
+  const [isSendingMessage, setIsSendingMessage] = useState(true);
 
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
@@ -91,7 +90,7 @@ const WebSocketProvider = ({ children }) => {
     setHeight('auto');
   };
 
-  const id = newPostData?.reference_no
+  const id = newPostData?.reference_no;
 
   const handleNewSocketConnection = useCallback(() => {
     if (id) {
@@ -144,28 +143,6 @@ const WebSocketProvider = ({ children }) => {
     }
   }, [id]);
 
-  // const handleNewPostCreation = useCallback(() => {
-  //   if (newPostData && !socket) {
-  //     const chatUrl = `${WSS_CHAT_URL}${newPostData.reference_no}/`;
-  //     const newSocket = connectWebSocket(chatUrl, token);
-
-  //     newSocket.onopen = () => {
-  //       setIsWebSocketConnected(true);
-  //     };
-
-  //     newSocket.onclose = () => {
-  //       setIsWebSocketConnected(false);
-  //     };
-
-  //     setSocket(newSocket);
-
-  //     return () => {
-  //       disconnect(newSocket);
-  //     };
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [newPostData, socket, connectWebSocket]);
-
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
       if (message) {
@@ -190,21 +167,28 @@ const WebSocketProvider = ({ children }) => {
     handleNewSocketConnection();
   }, [handleNewSocketConnection]);
 
-  const sendMessageToServer = (message) => {
-    if (socket && socket.readyState === WebSocket.OPEN) {
-      const messageToSend = {
-        message,
-        user_type: 'personal',
-        message_type: 'symptom',
-        symptoms: [3, 4],
-        conditions: [4, 5],
-      };
-      sendMessage(socket, messageToSend);
-      setIsSent(true);
+  const sendMessageToServer = async (message) => {
+    setIsSendingMessage(true);
+    try {
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        const messageToSend = {
+          message,
+          user_type: 'personal',
+          message_type: 'symptom',
+          symptoms: [3, 4],
+          conditions: [4, 5],
+        };
 
-      setRequestHistory([...requestHistory, messageToSend]);
-    } else {
-      console.error('WebSocket not connected');
+        sendMessage(socket, messageToSend);
+        setIsSent(true);
+        setRequestHistory([...requestHistory, messageToSend]);
+      } else {
+        console.error('WebSocket not connected');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    } finally {
+      setIsSendingMessage(false)
     }
   };
 
@@ -228,7 +212,6 @@ const WebSocketProvider = ({ children }) => {
   const uniqueArray = Array.from(uniqueSet).map((item) => JSON.parse(item));
 
   useEffect(() => {
-    // Cleanup function to disconnect from the WebSocket when unmounting
     return () => {
       if (socket) {
         disconnect(socket);
@@ -271,6 +254,7 @@ const WebSocketProvider = ({ children }) => {
         newResponse,
         requestHistory,
         responseHistory,
+        isSendingMessage,
       }}
     >
       {children}
