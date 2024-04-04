@@ -55,6 +55,9 @@ const AuthSigninProvider = ({ children }) => {
             message: 'Login Successful',
           },
         });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
       } else {
         setSigninError(data.details);
         setTimeout(() => {

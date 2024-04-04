@@ -27,7 +27,7 @@ const Login = () => {
   const location = useLocation();
   const verifiedEmail = location.state?.email;
   const details = location.state?.details;
-  const signedOut = location?.state.message;
+  const signedOut = location?.state?.message;
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
