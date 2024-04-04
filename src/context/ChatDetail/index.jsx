@@ -13,7 +13,6 @@ const ChatDetailProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [err, setErr] = useState(null);
   const { pathname, state } = useLocation();
-  const [refreshKey, setRefreshKey] = useState(0);
   const referenceNo = newPostData?.reference_no;
   const { reference_no } = useParams();
   const [serverError, setServerError] = useState(null);
@@ -23,6 +22,8 @@ const ChatDetailProvider = ({ children }) => {
   const idx = Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no;
   const path = pathname.split('/');
   const navigate = useNavigate();
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
+
 
   useEffect(() => {
     if (token) {
@@ -60,6 +61,7 @@ const ChatDetailProvider = ({ children }) => {
   };
 
   const handleChatQAResponses = async (id) => {
+    setIsSendingMessage(true)
     id = id ?? idx;
     let endpoint = '';
     if (id) {
@@ -87,6 +89,8 @@ const ChatDetailProvider = ({ children }) => {
       setTimeout(() => {
         setError(null);
       }, 3000);
+    } finally {
+      setIsSendingMessage(false)
     }
   };
 
@@ -95,9 +99,6 @@ const ChatDetailProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx]);
 
-  const refreshComponent = () => {
-    setRefreshKey((prevKey) => prevKey + 1);
-  };
   const chatResponses = chats?.results;
 
   const values = {
@@ -106,13 +107,12 @@ const ChatDetailProvider = ({ children }) => {
     chatResponses,
     error,
     err,
-    refreshComponent,
-    refreshKey,
     serverError,
     handleChatList,
     redirectToDetails,
     chat,
     chatId,
+    isSendingMessage,
   };
 
   return (

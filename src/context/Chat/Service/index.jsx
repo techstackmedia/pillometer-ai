@@ -31,7 +31,6 @@ const WebSocketProvider = ({ children }) => {
   const [mySymptoms, setMySymptoms] = useState('');
   const [newResponse, setNewResponse] = useState(null);
   const [isSent, setIsSent] = useState(false);
-  const [isSendingMessage, setIsSendingMessage] = useState(false);
 
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
@@ -168,7 +167,6 @@ const WebSocketProvider = ({ children }) => {
   }, [handleNewSocketConnection]);
 
   const sendMessageToServer = async (message) => {
-    setIsSendingMessage(true);
     try {
       if (socket && socket.readyState === WebSocket.OPEN) {
         const messageToSend = {
@@ -187,9 +185,7 @@ const WebSocketProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error sending message:', error);
-    } finally {
-      setIsSendingMessage(false)
-    }
+    } 
   };
 
   useEffect(() => {
@@ -254,7 +250,6 @@ const WebSocketProvider = ({ children }) => {
         newResponse,
         requestHistory,
         responseHistory,
-        isSendingMessage,
       }}
     >
       {children}

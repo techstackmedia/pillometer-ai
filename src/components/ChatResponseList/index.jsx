@@ -11,8 +11,8 @@ import { token } from '../../constants';
 import LoadingBalls from '../LoadingBalls';
 
 const ChatResponseList = () => {
-  const { chats, chatResponses } = useContext(ChatDetailContext);
-  const { uniqueArray, isSendingMessage } = useContext(WebSocketContext);
+  const { chats, chatResponses, isSendingMessage } = useContext(ChatDetailContext);
+  const { uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
