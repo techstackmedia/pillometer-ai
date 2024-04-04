@@ -28,6 +28,7 @@ const MessagesProvider = ({ children }) => {
   const referenceNo =
     newPostData?.reference_no ?? reference_no ?? pathname.split('/')[2];
   const [isHome, setIsHome] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
     if (pathname === '/') {
@@ -58,13 +59,19 @@ const MessagesProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // Automatically trigger handleClick when referenceNo is undefined and WebSocket is connected
-    if (chats?.count === 0 && isWebSocketConnected) {
+    if (isButtonClicked && chats?.count === 0 && pathname === '/') {
       handleClick();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chats?.count, isWebSocketConnected, referenceNo]);
 
+    if (
+      pathname.startsWith('/details') &&
+      chats?.count === 0 &&
+      isWebSocketConnected
+    ) {
+      handleClick();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chats?.count, isWebSocketConnected, referenceNo]);
 
   const smoothScrollToLastDiv = () => {
     const divs = document.querySelectorAll('div[id]');
@@ -75,6 +82,7 @@ const MessagesProvider = ({ children }) => {
   };
 
   const handleClick = async () => {
+    setIsButtonClicked(true);
     smoothScrollToLastDiv();
     try {
       if (!token) {
