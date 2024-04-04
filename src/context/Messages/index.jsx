@@ -19,7 +19,7 @@ const MessagesProvider = ({ children }) => {
     uniqueArray,
     isWebSocketConnected,
   } = useContext(WebSocketContext);
-  const { handleChatQAResponses } = useContext(ChatDetailContext);
+  const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
   const { reference_no } = useParams();
   const { pathname } = useLocation();
@@ -55,7 +55,17 @@ const MessagesProvider = ({ children }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sendMessageToServer, messageSent]);
+  }, [messageSent]);
+
+  useEffect(() => {
+    // Automatically trigger handleClick when referenceNo is undefined and WebSocket is connected
+    if (chats?.count === 0 && isWebSocketConnected) {
+      handleClick();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chats?.count, isWebSocketConnected, referenceNo]);
+
+  console.log(isWebSocketConnected)
 
   const smoothScrollToLastDiv = () => {
     const divs = document.querySelectorAll('div[id]');
