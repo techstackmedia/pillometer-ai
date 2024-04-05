@@ -18,6 +18,7 @@ const MessagesProvider = ({ children }) => {
     newPostData,
     uniqueArray,
     isWebSocketConnected,
+    setValue,
   } = useContext(WebSocketContext);
   const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
@@ -102,7 +103,7 @@ const MessagesProvider = ({ children }) => {
         connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
       }
 
-      if (referenceNo) {
+      if (referenceNo && value !== '') {
         await sendMessageToServer(value);
         handleChatQAResponses(referenceNo);
       }
@@ -117,6 +118,7 @@ const MessagesProvider = ({ children }) => {
           top: document.body.scrollHeight,
           behavior: 'smooth',
         });
+      // setValue('');
     } catch (error) {
       console.error('Error in handleClick:', error);
     }
