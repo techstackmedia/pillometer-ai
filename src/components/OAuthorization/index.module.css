@@ -3,10 +3,11 @@
 }
 
 .mediaImage {
-  position: relative;
-  color: #000;
-  background-color: #fff;
-  border: 1px solid #c5c4d4;
+  position: relative !important;
+  color: #000 !important;
+  background-color: #fff !important;
+  border: 1px solid #c5c4d4 !important;
+  width: 700px !important;
 }
 
 .mediaImage::before {
@@ -30,4 +31,16 @@
 
 .buttonMg {
   margin-block: 20px;
+}
+
+@media screen and (max-width: 760px) {
+  .mediaImage {
+    width: 500px !important;
+  }
+}
+
+@media screen and (max-width: 572px) {
+  .mediaImage {
+    width: 300px !important;
+  }
 }

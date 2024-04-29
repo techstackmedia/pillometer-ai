@@ -21,3 +21,9 @@
 .or span {
   font-size: 12;
 }
+
+@media screen and (max-width: 760px) {
+  .AuthOrLine {
+    width: 100% !important;
+  }
+}
