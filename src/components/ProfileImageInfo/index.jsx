@@ -81,7 +81,7 @@ const ProfileImageInfo = () => {
     <>
       {token && pathname !== '/auth/profile' ? (
         <div className={styles.profile}>
-          <div onClick={logout}>
+          <div className={styles.logOut} onClick={logout}>
             <Button navigatePage={logout}>Log out</Button>
           </div>
           <div
