@@ -156,3 +156,9 @@ textarea {
 .flex {
   display: flex;
 }
+
+@media screen and (max-width: 991px) {
+  form {
+    width: 80%;
+  }
+}

@@ -9,15 +9,21 @@
   height: 50px;
 }
 
-@media screen and (max-width: 735px) {
+@media screen and (max-width: 991px) {
   .button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 735px) {
+  .loginButton {
     width: 500px;
     margin-inline: auto;
   }
 }
 
 @media screen and (max-width: 545px) {
-  .button {
+  .loginButton {
     width: 300px;
   }
 }
