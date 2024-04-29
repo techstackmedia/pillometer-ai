@@ -21,6 +21,7 @@ const Modal = ({ children, cn, sx }) => {
         .querySelector('.modal-overlay')
         ?.removeEventListener('click', closeModal);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

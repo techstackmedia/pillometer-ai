@@ -18,7 +18,6 @@ const MessagesProvider = ({ children }) => {
     newPostData,
     uniqueArray,
     isWebSocketConnected,
-    setValue,
   } = useContext(WebSocketContext);
   const { handleChatQAResponses, chats } = useContext(ChatDetailContext);
   const { createNewPost, sendNewPost } = useContext(NewPostContext);
@@ -81,12 +80,13 @@ const MessagesProvider = ({ children }) => {
 
     lastDiv.scrollIntoView({ behavior: 'smooth' });
   };
+  console.log(token)
 
   const handleClick = async () => {
     setIsButtonClicked(true);
     smoothScrollToLastDiv();
     try {
-      if (!token) {
+      if (!token || token === null) {
         setIsLoginModal(true);
         return;
       }
