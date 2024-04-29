@@ -98,7 +98,7 @@ const LoginModal = () => {
               <div className={styles.forgotPassword}>
                 <Link to='/auth/email-verification'>Forgot Password</Link>
               </div>
-              <button type='submit'>Login</button>
+              <button type='submit'>Log in</button>
             </form>
             {/* <Content sx={{ marginBlock: 20 }}>
               <small>
