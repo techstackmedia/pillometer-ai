@@ -9,16 +9,17 @@ import { WSS_CHAT_URL, token } from '../../constants';
 import AddIcon from '../../images/add.png';
 import editPenIcon from '../../images/editPen.png';
 import Alert from '../shared/Alert';
+import { MessagesContext } from '../../context/Messages';
 
 const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
   const { handleChatQAResponses, chat } = useContext(ChatDetailContext);
-  const { createNewPost, isOpen , setIsOpen} =
-    useContext(NewPostContext);
+  const { createNewPost, isOpen, setIsOpen } = useContext(NewPostContext);
   const { newPostData, connectWebSocket, setValue } =
     useContext(WebSocketContext);
+  const { isLoginModal } = useContext(MessagesContext);
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
@@ -62,20 +63,20 @@ const Sidebar = () => {
       ))}
     </div>
   );
-  
+
   const closeNav = (event) => {
     if (event.target === event.currentTarget) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }
+  };
 
   useEffect(() => {
     document.body.addEventListener('click', closeNav);
     return () => {
-      document.body.removeEventListener('click', closeNav)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      document.body.removeEventListener('click', closeNav);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -84,9 +85,13 @@ const Sidebar = () => {
           <Alert>Server Error Occured. Reloading Page...</Alert>
         </div>
       )}
-      {isOpen ? <div className={styles.overlay} onClick={() => setIsOpen(false)}></div> : null}
+      {isOpen ? (
+        <div className={styles.overlay} onClick={() => setIsOpen(false)}></div>
+      ) : null}
       <div
-        className={`${styles.sidebar} ${!isOpen ? styles.none : styles.flex}`}
+        className={`${styles.sidebar} ${!isOpen ? styles.none : styles.flex} ${
+          isLoginModal ? styles.zIndex10 : styles.zIndex1
+        }`}
       >
         <div className={styles.main}>
           <div className={styles.section}>
