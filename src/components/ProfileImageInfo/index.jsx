@@ -121,7 +121,7 @@ const ProfileImageInfo = () => {
       ) : (
         pathname !== '/auth/profile' && (
           <div onClick={login}>
-            <Button className={styles.loginButton}>Log in</Button>
+            <Button>Log in</Button>
           </div>
         )
       )}
