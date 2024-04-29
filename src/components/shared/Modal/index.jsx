@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import cancelIcon from '../../../images/cancel.png';
 import { MessagesContext } from '../../../context/Messages';
 const Modal = ({ children, cn, sx }) => {
@@ -6,6 +6,23 @@ const Modal = ({ children, cn, sx }) => {
   const handleCancel = () => {
     setIsLoginModal(false);
   };
+  const closeModal = (event) => {
+    if (event.target === event.currentTarget) {
+      setIsLoginModal(false);
+    }
+  };
+
+  useEffect(() => {
+    document
+      .querySelector('.modal-overlay')
+      ?.addEventListener('click', closeModal);
+    return () => {
+      document
+        .querySelector('.modal-overlay')
+        ?.removeEventListener('click', closeModal);
+    };
+  }, []);
+
   return (
     <div className='modal-overlay'>
       <div className={`modal ${cn}`} style={sx}>
