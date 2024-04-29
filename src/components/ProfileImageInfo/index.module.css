@@ -73,3 +73,9 @@
 .imgWebSocket {
   border: 2px solid #5ebd75;
 }
+
+@media screen and (max-width: 1111px) {
+  .logOut {
+    display: none !important;
+  }
+}
