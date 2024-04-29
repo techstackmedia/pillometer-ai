@@ -17,10 +17,22 @@
 }
 
 .Detail {
-  width: 55%;
+  width: 60%;
   margin: auto;
   overflow-y: auto;
 }
 .Detail::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 1111px) {
+  .Main {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .Detail {
+    width: 90%;
+  }
 }
