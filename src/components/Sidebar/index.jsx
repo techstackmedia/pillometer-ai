@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
@@ -14,10 +14,11 @@ const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
-  const { handleChatQAResponses, chat } =
-    useContext(ChatDetailContext);
-  const { createNewPost } = useContext(NewPostContext);
-  const { newPostData, connectWebSocket } = useContext(WebSocketContext);
+  const { handleChatQAResponses, chat } = useContext(ChatDetailContext);
+  const { createNewPost, isOpen , setIsOpen} =
+    useContext(NewPostContext);
+  const { newPostData, connectWebSocket, setValue } =
+    useContext(WebSocketContext);
   const { serverError } = useContext(ChatDetailContext);
   const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
@@ -25,7 +26,10 @@ const Sidebar = () => {
 
   const chatList = chat?.results;
   const path = pathname.split('/');
-  const handleNewChat = () => {
+  const handleNewChat = (e) => {
+    if (e.target.textContent.trim() === 'New Chat') {
+      setValue('');
+    }
     createNewPost();
     if (id) {
       connectWebSocket(`${WSS_CHAT_URL}${id}`, token);
@@ -58,6 +62,20 @@ const Sidebar = () => {
       ))}
     </div>
   );
+  
+  const closeNav = (event) => {
+    if (event.target === event.currentTarget) {
+      setIsOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('click', closeNav);
+    return () => {
+      document.body.removeEventListener('click', closeNav)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
@@ -66,7 +84,10 @@ const Sidebar = () => {
           <Alert>Server Error Occured. Reloading Page...</Alert>
         </div>
       )}
-      <div className={styles.sidebar}>
+      {isOpen ? <div className={styles.overlay} onClick={() => setIsOpen(false)}></div> : null}
+      <div
+        className={`${styles.sidebar} ${!isOpen ? styles.none : styles.flex}`}
+      >
         <div className={styles.main}>
           <div className={styles.section}>
             <button type='button' className={styles.button} onClick={onClick}>
