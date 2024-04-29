@@ -24,6 +24,10 @@ const NewPostProvider = ({ children }) => {
   const reference_no = ref ?? Ref ?? state?.data?.reference_no ?? path[2];
   const { profileResponse } = useContext(AuthProfileContext);
   const userType = profileResponse?.user_type;
+  const [isOpen, setIsOpen] = useState(false);
+  const handleMenuToggle = () => {
+    setIsOpen(!isOpen);
+  };
   const navigate = useNavigate();
   const createNewPost = async () => {
     try {
@@ -115,6 +119,9 @@ const NewPostProvider = ({ children }) => {
     err,
     Ref,
     errDetail,
+    handleMenuToggle,
+    isOpen,
+    setIsOpen
   };
 
   return (
