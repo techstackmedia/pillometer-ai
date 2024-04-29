@@ -25,7 +25,7 @@ const ChatResponseList = () => {
       {!token ? (
         <div className={styles.refresh}>
           <Content cn='heading'>Login to commence conversation</Content>
-          <Button navigatePage={navigateToLogin}>Login</Button>
+          <Button navigatePage={navigateToLogin}>Log in</Button>
         </div>
       ) : (
         <main className={styles.main}>
