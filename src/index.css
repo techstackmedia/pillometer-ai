@@ -149,6 +149,10 @@ textarea {
   outline: none;
 }
 
-textare[value] {
-  color: red;
+.none {
+  display: none;
+}
+
+.flex {
+  display: flex;
 }
