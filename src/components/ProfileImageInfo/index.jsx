@@ -10,6 +10,7 @@ import uploadImageIcon from '../../images/uploadProfile.png';
 import { token } from '../../constants';
 import { WebSocketContext } from '../../context/Chat/Service';
 import { MessagesContext } from '../../context/Messages';
+import { NewPostContext } from '../../context/Chat/NewPost';
 
 const ProfileImageInfo = () => {
   const { setIsLoginModal } = useContext(MessagesContext);
@@ -17,6 +18,7 @@ const ProfileImageInfo = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const { profileResponse, getProfile } = useContext(AuthProfileContext);
+  const { setIsOpen } = useContext(NewPostContext);
   const dropdownRef = useRef(null);
   const { isWebSocketConnected } = useContext(WebSocketContext);
   const userType = profileResponse?.user_type;
@@ -59,6 +61,7 @@ const ProfileImageInfo = () => {
   const login = () => {
     // navigate('/auth/login');
     setIsLoginModal(true);
+    setIsOpen(false)
   };
   const [isUpload, setIsLoad] = useState(false);
 
