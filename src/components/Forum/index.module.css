@@ -76,7 +76,7 @@
 
 .topics form:last-child {
   display: flex;
-  width: 40%;
+  width: 50%;
   gap: 10px;
 }
 
