@@ -59,10 +59,11 @@ const ProfileImageInfo = () => {
   };
 
   const login = () => {
-    setIsLoginModal(true);
-    setIsOpen(false);
     if (pathname !== '/') {
       navigate('/auth/login');
+    } else {
+      setIsLoginModal(true);
+      setIsOpen(false);
     }
   };
   const [isUpload, setIsLoad] = useState(false);
