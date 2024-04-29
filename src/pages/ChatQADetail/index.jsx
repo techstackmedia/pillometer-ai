@@ -4,7 +4,6 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import { useContext } from 'react';
 import { NewPostContext } from '../../context/Chat/NewPost';
-import styles from './index.module.css';
 import Alert from '../../components/shared/Alert';
 
 const ChatQADetail = () => {
@@ -12,7 +11,7 @@ const ChatQADetail = () => {
   const { err, errorAltMessage, serverError } = useContext(NewPostContext);
 
   const renderAlert = (message) => (
-    <div className={styles.homeAlert}>
+    <div className='pageAlert'>
       <Alert>{message}</Alert>
     </div>
   );
