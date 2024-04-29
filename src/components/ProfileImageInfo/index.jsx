@@ -13,7 +13,7 @@ import { MessagesContext } from '../../context/Messages';
 import { NewPostContext } from '../../context/Chat/NewPost';
 
 const ProfileImageInfo = () => {
-  const { setIsLoginModal } = useContext(MessagesContext);
+  const { setIsLoginModal, isLoginModal } = useContext(MessagesContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -61,7 +61,10 @@ const ProfileImageInfo = () => {
   const login = () => {
     // navigate('/auth/login');
     setIsLoginModal(true);
-    setIsOpen(false)
+    setIsOpen(false);
+    if (isLoginModal === undefined) {
+      navigate('/auth/login');
+    }
   };
   const [isUpload, setIsLoad] = useState(false);
 
