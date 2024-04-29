@@ -80,7 +80,6 @@ const MessagesProvider = ({ children }) => {
 
     lastDiv.scrollIntoView({ behavior: 'smooth' });
   };
-  console.log(token)
 
   const handleClick = async () => {
     setIsButtonClicked(true);
