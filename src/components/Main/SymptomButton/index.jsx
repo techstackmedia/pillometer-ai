@@ -3,7 +3,7 @@ import Button from '../../shared/Button';
 import styles from './index.module.css';
 import { WebSocketContext } from '../../../context/Chat/Service';
 import { MessagesContext } from '../../../context/Messages';
-import { token } from '../../../constants';
+// import { token } from '../../../constants';
 import { AuthProfileContext } from '../../../context/Auth/Profile';
 
 const SymptomButton = () => {
@@ -17,7 +17,7 @@ const SymptomButton = () => {
       {viewMore ? (
         <Button
           cn={styles.diagnoseButton}
-          navigatePage={token ? handleClick : null}
+          navigatePage={handleClick}
         >
           Diagnose
         </Button>
