@@ -76,3 +76,45 @@
   width: 68%;
   margin-inline: auto;
 }
+
+@media screen and (max-width: 1111px) {
+  .inputPosition textarea {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .inputPosition textarea {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 786px) {
+  .adviceNote {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 645px) {
+  .inputPosition textarea {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 542px) {
+  .inputPosition textarea {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 441px) {
+  .inputPosition textarea {
+    width: 250px;
+  }
+} 
+
+@media screen and (max-width: 392px) {
+  .inputPosition textarea {
+    width: 150px;
+  }
+} 
