@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: -81px;
 }
 
 .not-found-page .popup {
@@ -16,6 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 132.5px;
 }
 
 .not-found-page .popup-content {
@@ -59,4 +61,10 @@
 
 .not-found-page .four {
   color: red;
+}
+
+@media screen and (max-width: 1111px) {
+  .not-found-page .popup {
+    margin-left: initial;
+  }
 }

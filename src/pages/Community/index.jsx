@@ -1,16 +1,11 @@
-import Sidebar from '../../components/Sidebar';
-import Navbar from '../../components/Navbar';
 import Question from '../../components/Forum';
+import Layout from '../../components/shared/Layout';
 
 const Community = () => {
   return (
-    <>
-      <Navbar />
-      <div className='Main'>
-        <Sidebar />
-        <Question />
-      </div>
-    </>
+    <Layout>
+      <Question />
+    </Layout>
   );
 };
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { BASE_CHAT_URL, WSS_CHAT_URL } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
@@ -11,6 +11,7 @@ const NewPostContext = createContext();
 
 const NewPostProvider = ({ children }) => {
   const handleChatQAResponses = useContext(ChatDetailContext);
+  // const chats = useContext(ChatDetailContext);
   const newPostData = useContext(WebSocketContext);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
@@ -28,6 +29,7 @@ const NewPostProvider = ({ children }) => {
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
   };
+
   const navigate = useNavigate();
   const createNewPost = async () => {
     try {
@@ -67,6 +69,17 @@ const NewPostProvider = ({ children }) => {
       }, 3000);
     }
   };
+
+  const handleClick = async () => {
+    await createNewPost()
+  }
+
+  useEffect(() => {
+    if (errorAltMessage) {
+      handleClick()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorAltMessage])
 
   const sendNewPost = async (value) => {
     const postData = {

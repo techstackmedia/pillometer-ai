@@ -1,12 +1,11 @@
-import Navbar from '../../components/Navbar';
 import Main from '../../components/Main';
-import Sidebar from '../../components/Sidebar';
 import { useContext, useEffect, useState } from 'react';
 import { AuthProfileContext } from '../../context/Auth/Profile';
 import { token } from '../../constants';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Alert from '../../components/shared/Alert';
 import LoginModal from '../../components/Modal/LoginModal';
+import Layout from '../../components/shared/Layout';
 
 const Home = () => {
   const { profileResponse } = useContext(AuthProfileContext);
@@ -40,11 +39,9 @@ const Home = () => {
         </div>
       )}
       <LoginModal />
-      <Navbar />
-      <div className='Main'>
-        <Sidebar />
+      <Layout>
         <Main />
-      </div>
+      </Layout>
     </>
   );
 };

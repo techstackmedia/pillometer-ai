@@ -1,11 +1,12 @@
 import NotFound from '../../../components/NotFound';
-import Navbar from '../../../components/Navbar';
+import Layout from '../../../components/shared/Layout';
 
 const NotFoundPage = () => {
   return (
     <>
-      <Navbar />
-      <NotFound />
+      <Layout>
+        <NotFound />
+      </Layout>
     </>
   );
 };
