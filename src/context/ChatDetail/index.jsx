@@ -60,12 +60,11 @@ const ChatDetailProvider = ({ children }) => {
     }
   };
 
-  const handleChatQAResponses = async (id) => {
-    setIsSendingMessage(true)
-    id = id ?? idx;
+  const handleChatQAResponses = async () => {
+    setIsSendingMessage(true);
     let endpoint = '';
-    if (id) {
-      endpoint = `${BASE_CHAT_URL}/${id}/messages`;
+    if (idx) {
+      endpoint = `${BASE_CHAT_URL}/${idx}/messages`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -95,16 +94,13 @@ const ChatDetailProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    handleChatQAResponses(idx);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      handleChatQAResponses();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx]);
-
-  const chatResponses = chats?.results;
 
   const values = {
     handleChatQAResponses,
     chats,
-    chatResponses,
     error,
     err,
     serverError,
