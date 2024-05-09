@@ -4,22 +4,22 @@ import ChatResponse from '../ChatResponse';
 import Chat from '../Chat';
 import styles from './index.module.css';
 import { ChatDetailContext } from '../../context/ChatDetail';
-import { WebSocketContext } from '../../context/Chat/Service';
+// import { WebSocketContext } from '../../context/Chat/Service';
 import Content from '../shared/Content';
 import Button from '../shared/Button';
 import { token } from '../../constants';
 import LoadingBalls from '../LoadingBalls';
 
 const ChatResponseList = () => {
-  const { chats, chatResponses, isSendingMessage } =
-    useContext(ChatDetailContext);
-  const { uniqueArray } = useContext(WebSocketContext);
+  const { chats, isSendingMessage } = useContext(ChatDetailContext);
+  // const { uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
     navigate('/auth/login');
   };
+  // console.log(uniqueArray);
 
   return (
     <>
@@ -37,15 +37,14 @@ const ChatResponseList = () => {
                 : styles.responseDetailNonCommunity
             }`}
           >
-            {chats &&
-              chatResponses?.map((chat, index) => (
-                <>
-                  <ChatResponse
-                    key={`${chat?.id}-${index}`}
-                    item={chat || uniqueArray}
-                  />
-                </>
-              ))}
+            {chats?.results?.map((chat) => {
+              return (
+                <ChatResponse
+                  key={`${chat?.id}${chat?.reference_no}`}
+                  item={chat}
+                />
+              );
+            })}
           </div>
           {pathname === '/community' ? null : <Chat />}
         </main>
