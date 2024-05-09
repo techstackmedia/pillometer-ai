@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
-  const { handleChatQAResponses, chat } = useContext(ChatDetailContext);
+  const { chat } = useContext(ChatDetailContext);
   const { createNewPost, isOpen, setIsOpen } = useContext(NewPostContext);
   const { newPostData, connectWebSocket, setValue } =
     useContext(WebSocketContext);
@@ -34,7 +34,6 @@ const Sidebar = () => {
     createNewPost();
     if (id) {
       connectWebSocket(`${WSS_CHAT_URL}${id}`, token);
-      handleChatQAResponses(id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
@@ -42,15 +41,12 @@ const Sidebar = () => {
   const handleNewChatAlt = () => {
     createNewPost();
     navigate(`/details/${id}`);
-    handleChatQAResponses(id);
   };
 
   const onClick = path.includes('details') ? handleNewChat : handleNewChatAlt;
 
   const navigateToChat = (reference_no) => {
-    handleChatQAResponses(reference_no);
     navigate(`/details/${reference_no}`);
-    handleChatQAResponses(reference_no);
   };
 
   const renderSection = (title, items) => (
