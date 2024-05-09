@@ -18,6 +18,7 @@ const AlertMessages = () => {
   const err = useContext(ChatDetailContext);
   const connectionErrorMessage = useContext(WebSocketContext);
   const connectionMessage = useContext(WebSocketContext);
+  const isWebSocketConnected = useContext(WebSocketContext);
   const connectionWarnMessage = useContext(WebSocketContext);
   const [showProfileAlert, setShowProfileAlert] = useState(false);
   const profile = state?.profile;
@@ -79,7 +80,7 @@ const AlertMessages = () => {
             <a href={window.location.href}>try again</a>
           </>
         )}
-      {connectionMessage && renderAlert(connectionMessage)}
+      {isWebSocketConnected && renderAlert(connectionMessage)}
       {connectionWarnMessage && renderAlert(connectionWarnMessage)}
       {internetConnection && renderAlert(networkError)}
       {serverError && renderAlert(serverErr)}
