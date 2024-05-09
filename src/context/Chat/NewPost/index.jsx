@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { BASE_CHAT_URL, WSS_CHAT_URL } from '../../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { token } from '../../../constants';
-import { ChatDetailContext } from '../../ChatDetail';
 import { AuthProfileContext } from '../../Auth/Profile';
 import { WebSocketContext } from '../Service';
 import { connectWebSocket } from '../Service/websocket';
@@ -10,8 +9,6 @@ import { connectWebSocket } from '../Service/websocket';
 const NewPostContext = createContext();
 
 const NewPostProvider = ({ children }) => {
-  const handleChatQAResponses = useContext(ChatDetailContext);
-  // const chats = useContext(ChatDetailContext);
   const newPostData = useContext(WebSocketContext);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorAltMessage, setAltErrorMessage] = useState(null);
@@ -55,7 +52,6 @@ const NewPostProvider = ({ children }) => {
         navigate(`/details/${Ref}`, {
           state: { data: responseData },
         });
-        handleChatQAResponses(Ref);
       } else {
         setAltErrorMessage('Failed to create new post');
         setTimeout(() => {
