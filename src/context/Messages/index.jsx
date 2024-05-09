@@ -41,18 +41,15 @@ const MessagesProvider = ({ children }) => {
   useEffect(() => {
     if (uniqueArray && pathname === '/' && referenceNo) {
       navigate(`/details/${referenceNo}`);
-      handleChatQAResponses(referenceNo);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (pathname.startsWith('/details')) {
-      handleChatQAResponses(referenceNo);
       if (uniqueArray?.length > 0 && !messageSent) {
         sendMessageToServer(value);
         setMessageSent(true);
-        handleChatQAResponses(referenceNo);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,7 +78,11 @@ const MessagesProvider = ({ children }) => {
     lastDiv.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleClick = async () => {
+  const handleClick = () => {
+    // if (errorAltMessage) {
+    //   window.location.href = `/details/${referenceNo}`
+    //   handleChatQAResponses(referenceNo)
+    // }
     setIsButtonClicked(true);
     smoothScrollToLastDiv();
     try {
@@ -91,7 +92,7 @@ const MessagesProvider = ({ children }) => {
       }
 
       if (pathname === '/' && isHome) {
-        await createNewPost();
+        createNewPost();
       }
 
       if (!isWebSocketConnected) {
@@ -103,8 +104,7 @@ const MessagesProvider = ({ children }) => {
       }
 
       if (referenceNo && value !== '') {
-        await sendMessageToServer(value);
-        handleChatQAResponses(referenceNo);
+        sendMessageToServer(value);
       }
 
       if (isDetailPage && referenceNo) {
