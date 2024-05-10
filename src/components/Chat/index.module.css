@@ -75,6 +75,9 @@
   text-align: center;
   width: 68%;
   margin-inline: auto;
+  font-size: 12px;
+  position: relative;
+  top: -5px;
 }
 
 @media screen and (max-width: 1111px) {
