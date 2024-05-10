@@ -70,7 +70,7 @@ const Chat = () => {
           />
         </div>
         <Button
-          disabled={voice ? false : true}
+          // disabled={voice ? false : true}
           type={!token ? 'button' : 'submit'}
           navigatePage={handleClick}
           cn={styles.inputValueZero}
