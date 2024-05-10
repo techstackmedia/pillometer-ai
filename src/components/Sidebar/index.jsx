@@ -66,10 +66,66 @@ const Sidebar = () => {
     }
   };
 
+  const handleShortcutCloseNav = (event) => {
+    if (event.key === 'Escape') {
+      setIsOpen(false);
+    }
+  };
+
+  const handleShortcutOpenNav = (event) => {
+    if (event.shiftKey && event.key === 'O') {
+      setIsOpen(true);
+    }
+  };
+
+  const handleShortcutToggleNav = (event) => {
+    if (event.shiftKey && event.key === 'T') {
+      setIsOpen((prev) => !prev);
+    }
+  };
+
+  const handleShortcutNewChat = (event) => {
+    if (event.shiftKey && event.key === 'N') {
+      onClick();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleShortcutNewChat);
+    return () => {
+      document.removeEventListener('keydown', handleShortcutNewChat);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     document.body.addEventListener('click', closeNav);
     return () => {
       document.body.removeEventListener('click', closeNav);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleShortcutCloseNav);
+    return () => {
+      document.removeEventListener('keydown', handleShortcutCloseNav);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleShortcutToggleNav);
+    return () => {
+      document.removeEventListener('keydown', handleShortcutToggleNav);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleShortcutOpenNav);
+    return () => {
+      document.removeEventListener('keydown', handleShortcutOpenNav);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
