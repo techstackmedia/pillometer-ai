@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Content from '../shared/Content';
 import styles from './index.module.css';
 import { NewPostContext } from '../../context/Chat/NewPost';
