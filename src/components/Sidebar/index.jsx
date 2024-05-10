@@ -11,7 +11,7 @@ import editPenIcon from '../../images/editPen.png';
 import Alert from '../shared/Alert';
 import { MessagesContext } from '../../context/Messages';
 
-const Sidebar = ({ reference_no }) => {
+const Sidebar = ({ id: reference_no }) => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
