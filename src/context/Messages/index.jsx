@@ -78,11 +78,26 @@ const MessagesProvider = ({ children }) => {
     lastDiv.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleShortcutSendMessage = (event) => {
+    if (event.shiftKey && event.key === 'Enter') {
+      handleClick();
+    }
+  };
+
+  const handleShortcutCloseModal = (event) => {
+    if (event.key === 'Escape') {
+      setIsLoginModal(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleShortcutCloseModal);
+    return () => {
+      document.removeEventListener('keydown', handleShortcutCloseModal);
+    };
+  }, []);
+
   const handleClick = () => {
-    // if (errorAltMessage) {
-    //   window.location.href = `/details/${referenceNo}`
-    //   handleChatQAResponses(referenceNo)
-    // }
     setIsButtonClicked(true);
     smoothScrollToLastDiv();
     try {
@@ -122,6 +137,14 @@ const MessagesProvider = ({ children }) => {
       console.error('Error in handleClick:', error);
     }
   };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleShortcutSendMessage);
+    return () => {
+      document.removeEventListener('keydown', handleShortcutSendMessage);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const values = { handleClick, isloginModal, setIsLoginModal };
   return (
