@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { connectWebSocket, disconnect, sendMessage } from './websocket'; // Assuming websocket file path is correct
+import { connectWebSocket, disconnect, sendMessage } from './websocket';
 import { WSS_CHAT_URL } from '../../../constants';
 import { useLocation } from 'react-router-dom';
 import SpeechRecognition, {
