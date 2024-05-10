@@ -12,7 +12,7 @@ import { WebSocketContext } from '../../../context/Chat/Service';
 import { NewPostContext } from '../../../context/Chat/NewPost';
 
 const Response = ({ message, reference_no }) => {
-  const { isSent } = useContext(WebSocketContext);
+  const { isSent, newResponse } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const containerRef = useRef(null);
   const [textCopied, setTextCopied] = useState(false);
@@ -38,18 +38,20 @@ const Response = ({ message, reference_no }) => {
     if (isSent) {
       containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
-  }, [isSent]);
+  }, [isSent, res]);
 
   return (
     <div ref={containerRef} className={styles.chatResponse}>
       <img src={logo} alt='user profile' className={styles.userProfileImage} />
       <div className={styles.chatResponseCol}>
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
-          {/* {res && ( */}
+          {(res || message) && (
             <Markdown remarkPlugins={[remarkGfm]}>
-              {typeof message === 'string' ? message.trim() : null}
+              {typeof message === 'string'
+                ? message.trim() || newResponse?.message
+                : null}
             </Markdown>
-          {/* )} */}
+          )}
         </Content>
         {pathname !== '/community' ? (
           <QAIcon
