@@ -38,18 +38,18 @@ const Response = ({ message, reference_no }) => {
     if (isSent) {
       containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
-  }, [isSent, res]);
+  }, [isSent]);
 
   return (
     <div ref={containerRef} className={styles.chatResponse}>
       <img src={logo} alt='user profile' className={styles.userProfileImage} />
       <div className={styles.chatResponseCol}>
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
-          {res && (
+          {/* {res && ( */}
             <Markdown remarkPlugins={[remarkGfm]}>
               {typeof message === 'string' ? message.trim() : null}
             </Markdown>
-          )}
+          {/* )} */}
         </Content>
         {pathname !== '/community' ? (
           <QAIcon
