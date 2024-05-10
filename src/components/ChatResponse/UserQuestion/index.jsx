@@ -12,7 +12,9 @@ const UserQuestion = ({ message, id }) => {
       <img src={userProfileImage} alt='user profile' />
       <div className={styles.questionHeading}>
         <Content className={`heading ${styles.question}`}>
-          <a href={`#${id}`} style={{border: 'none'}}>{message}</a>
+          <a href={`#${id}`} style={{ border: 'none' }}>
+            {message}
+          </a>
         </Content>
         {pathname !== '/community' ? (
           <div className={styles.editButton}>

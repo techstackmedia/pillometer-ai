@@ -114,10 +114,10 @@
   .inputPosition textarea {
     width: 250px;
   }
-} 
+}
 
 @media screen and (max-width: 392px) {
   .inputPosition textarea {
     width: 150px;
   }
-} 
+}

@@ -17,7 +17,7 @@ const NetworkStatusProvider = ({ children }) => {
       window.removeEventListener('online', handleNetworkChange);
       window.removeEventListener('offline', handleNetworkChange);
     };
-  }, [isOnline]);
+  }, []);
 
   const internetConnection = isOnline
     ? null

@@ -52,7 +52,7 @@ const Chat = () => {
               maxHeight: height ? height : '',
               opacity: value?.length === 0 ? 0.5 : 1,
               border: value?.length === 0 ? null : '1px solid #e8e7ee',
-              color: value?.length === 0 ? null : '#514f6d'
+              color: value?.length === 0 ? null : '#514f6d',
             }}
             name='chatbox-text-to-speech'
             value={voice}

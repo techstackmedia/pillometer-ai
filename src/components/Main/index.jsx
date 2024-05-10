@@ -37,7 +37,11 @@ const Main = () => {
   return (
     <>
       <div className={styles.main}>
-        <main className={healthConsultant ? styles?.healthConsultantMain : undefined}>
+        <main
+          className={
+            healthConsultant ? styles?.healthConsultantMain : undefined
+          }
+        >
           {healthConsultant ? null : (
             <Banner
               cn={pathname === '/' && browserHeight < 1033 && `${styles.dnone}`}

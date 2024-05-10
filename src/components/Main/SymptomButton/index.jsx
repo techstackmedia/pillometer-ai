@@ -15,17 +15,11 @@ const SymptomButton = () => {
   return (
     <>
       {viewMore ? (
-        <Button
-          cn={styles.diagnoseButton}
-          navigatePage={handleClick}
-        >
+        <Button cn={styles.diagnoseButton} navigatePage={handleClick}>
           Diagnose
         </Button>
       ) : (
-        <Button
-          cn={styles.symptomsButton}
-          navigatePage={handleViewMoreClick}
-        >
+        <Button cn={styles.symptomsButton} navigatePage={handleViewMoreClick}>
           {userType === 'health_consultant' ? null : 'View all symptoms'}
         </Button>
       )}

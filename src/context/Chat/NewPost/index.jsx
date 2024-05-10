@@ -67,15 +67,15 @@ const NewPostProvider = ({ children }) => {
   };
 
   const handleClick = async () => {
-    await createNewPost()
-  }
+    await createNewPost();
+  };
 
   useEffect(() => {
     if (errorAltMessage) {
-      handleClick()
+      handleClick();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [errorAltMessage])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorAltMessage]);
 
   const sendNewPost = async (value) => {
     const postData = {
@@ -130,7 +130,7 @@ const NewPostProvider = ({ children }) => {
     errDetail,
     handleMenuToggle,
     isOpen,
-    setIsOpen
+    setIsOpen,
   };
 
   return (

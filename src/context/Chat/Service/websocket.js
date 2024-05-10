@@ -14,7 +14,7 @@ export const connectWebSocket = (url, token) => {
       // window.location.reload();
     }, 3000);
   };
-  
+
   socket.onclose = () => {
     localStorage.setItem('WebSocket closed', 'WebSocket closed');
     setTimeout(() => {
@@ -22,7 +22,6 @@ export const connectWebSocket = (url, token) => {
       // window.location.reload();
     }, 3000);
   };
-  
 
   return socket;
 };

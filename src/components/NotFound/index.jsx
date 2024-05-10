@@ -33,9 +33,7 @@ const NotFoundPage = () => {
         </h1>
         <p>Page Not Found</p>
         <div className='popup-buttons'>
-          <Button navigatePage={() => setShowPopup(true)}>
-            Show Popup
-          </Button>
+          <Button navigatePage={() => setShowPopup(true)}>Show Popup</Button>
           <Button navigatePage={() => navigate('/')}>Home</Button>
         </div>
       </div>

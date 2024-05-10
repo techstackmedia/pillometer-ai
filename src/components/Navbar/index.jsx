@@ -19,12 +19,12 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div onClick={handleMenuToggle} className={styles.menuButton}>
         <img src={menuIcon} alt='menu icon' />
-      </div> 
+      </div>
       <div onClick={handleNavigate} className={styles.logo}>
         <img src={logo} alt='pillometer logo' />
         <Content cn={`heading ${styles.heading}`}>pillometer.ai</Content>
       </div>
-      
+
       {pathname === '/auth/profile' ? (
         <button type='button' onClick={handleNavigate}>
           Close

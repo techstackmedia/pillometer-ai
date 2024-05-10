@@ -38,7 +38,7 @@ const LoginModal = () => {
     if (!firstName && !lastName && token) {
       setIsProfile(true);
     } else {
-      setIsProfile(false)
+      setIsProfile(false);
     }
   }, [firstName, lastName]);
 
@@ -49,9 +49,7 @@ const LoginModal = () => {
           <Alert>{successMessage}</Alert>
         </div>
       )}
-      {isProfile && (
-        <ModalLogin />
-      )}
+      {isProfile && <ModalLogin />}
       {isloginModal && (
         <div>
           {signinError && (

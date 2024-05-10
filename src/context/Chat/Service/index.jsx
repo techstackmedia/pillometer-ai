@@ -185,7 +185,7 @@ const WebSocketProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error sending message:', error);
-    } 
+    }
   };
 
   useEffect(() => {

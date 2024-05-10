@@ -31,13 +31,11 @@ const Login = () => {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    setMessage(signedOut)
+    setMessage(signedOut);
     setTimeout(() => {
-      setMessage(null)
-    }, 3000)
-  }, [signedOut])
-    
-  
+      setMessage(null);
+    }, 3000);
+  }, [signedOut]);
 
   return (
     <>

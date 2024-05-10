@@ -56,13 +56,13 @@ const AuthSigninProvider = ({ children }) => {
           },
         });
         setTimeout(() => {
-          window.location.reload()
-        }, 1000)
+          window.location.reload();
+        }, 1000);
       } else {
         setSigninError(data.details);
         setTimeout(() => {
-          setSigninError(null)
-        }, 3000)
+          setSigninError(null);
+        }, 3000);
       }
     } catch (error) {
       setErrorMessage(error.message);

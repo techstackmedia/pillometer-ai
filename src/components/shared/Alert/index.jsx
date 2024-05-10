@@ -17,8 +17,8 @@ const Alert = ({ children, sx }) => {
         src={
           // errorMessage && serverError && errorMessage && err
           //   ? oopsIcon
-            // : 
-            infoIcon
+          // :
+          infoIcon
         }
         alt='info icon'
         width={24}
