@@ -11,7 +11,7 @@ import editPenIcon from '../../images/editPen.png';
 import Alert from '../shared/Alert';
 import { MessagesContext } from '../../context/Messages';
 
-const Sidebar = () => {
+const Sidebar = ({ reference_no }) => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
@@ -21,7 +21,6 @@ const Sidebar = () => {
     useContext(WebSocketContext);
   const { isLoginModal } = useContext(MessagesContext);
   const { serverError } = useContext(ChatDetailContext);
-  const { reference_no } = useParams();
   const referenceNo = newPostData?.reference_no;
   const id = referenceNo ?? reference_no ?? state?.data?.reference_no;
 
