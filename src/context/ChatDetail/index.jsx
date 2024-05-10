@@ -34,7 +34,7 @@ const ChatDetailProvider = ({ children }) => {
 
   const handleChatList = async () => {
     try {
-      if (path.includes('details')) {
+      if (path) {
         const response = await fetch(BASE_CHAT_URL, {
           method: 'GET',
           headers: {
