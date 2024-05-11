@@ -25,6 +25,10 @@
   display: none;
 }
 
+.sidebar {
+  scrollbar-width: none;
+}
+
 .newChat {
   display: flex;
   align-items: center;
