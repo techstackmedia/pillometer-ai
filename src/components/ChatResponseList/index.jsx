@@ -4,7 +4,6 @@ import ChatResponse from '../ChatResponse';
 import Chat from '../Chat';
 import styles from './index.module.css';
 import { ChatDetailContext } from '../../context/ChatDetail';
-// import { WebSocketContext } from '../../context/Chat/Service';
 import Content from '../shared/Content';
 import Button from '../shared/Button';
 import { token } from '../../constants';

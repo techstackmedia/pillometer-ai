@@ -18,7 +18,7 @@ const Response = ({ message, reference_no }) => {
   const [textCopied, setTextCopied] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const { res } = useContext(NewPostContext);
-  // const [errorMessage, setErrorMessage] = useState(null);
+  
   const handleCopy = () => {
     setTextCopied(true);
     setTimeout(() => {

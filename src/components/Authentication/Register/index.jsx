@@ -13,7 +13,6 @@ const Register = () => {
     passwordReg,
     keepSignedup,
     signupError,
-    // isSignup,
     handleEmailChangeReg,
     handlePasswordChangeReg,
     handleCheckboxChangeReg,

@@ -15,7 +15,6 @@ const Login = () => {
     password,
     keepSignedIn,
     signinError,
-    // isSigningIn,
     handleEmailChange,
     handlePasswordChange,
     handleLoginCheckboxChange,
