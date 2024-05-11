@@ -4,8 +4,9 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { ChatDetailContext } from '../ChatDetail';
 import { NewPostContext } from '../Chat/NewPost';
 import { WSS_CHAT_URL, token } from '../../constants';
+import { defaultMessagesValues } from '../defaultValues';
 
-const MessagesContext = createContext();
+const MessagesContext = createContext(defaultMessagesValues);
 
 const MessagesProvider = ({ children }) => {
   const [isloginModal, setIsLoginModal] = useState(false);

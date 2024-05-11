@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
 import { BASE_AUTH_URL } from '../../../constants';
-import { defaultForgotPasswordValues } from '../defaultValues';
+import { defaultAuthForgotPassswordResetValues } from '../../defaultValues';
 
 const AuthForgotPasswordResetContext = createContext(
-  defaultForgotPasswordValues
+  defaultAuthForgotPassswordResetValues
 );
 
 const AuthForgotPasswordProvider = ({ children }) => {

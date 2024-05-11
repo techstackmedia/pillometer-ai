@@ -6,8 +6,9 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 import { token } from '../../../constants';
+import { defaultWebSocketServiceValues } from '../../defaultValues';
 
-const WebSocketContext = createContext();
+const WebSocketContext = createContext(defaultWebSocketServiceValues);
 
 const WebSocketProvider = ({ children }) => {
   const [response, setResponse] = useState('');

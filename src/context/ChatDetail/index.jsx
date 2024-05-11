@@ -3,8 +3,9 @@ import { useLocation, useParams } from 'react-router-dom';
 import { BASE_CHAT_URL, token } from '../../constants';
 import { WebSocketContext } from '../Chat/Service';
 import { NewPostContext } from '../Chat/NewPost';
+import { defaultChatDetailsValues } from '../defaultValues';
 
-const ChatDetailContext = createContext();
+const ChatDetailContext = createContext(defaultChatDetailsValues);
 
 const ChatDetailProvider = ({ children }) => {
   const { newPostData } = useContext(WebSocketContext);

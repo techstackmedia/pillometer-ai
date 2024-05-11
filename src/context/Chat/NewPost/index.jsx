@@ -5,8 +5,9 @@ import { token } from '../../../constants';
 import { AuthProfileContext } from '../../Auth/Profile';
 import { WebSocketContext } from '../Service';
 import { connectWebSocket } from '../Service/websocket';
+import { defaultNewPostValues } from '../../defaultValues';
 
-const NewPostContext = createContext();
+const NewPostContext = createContext(defaultNewPostValues);
 
 const NewPostProvider = ({ children }) => {
   const newPostData = useContext(WebSocketContext);

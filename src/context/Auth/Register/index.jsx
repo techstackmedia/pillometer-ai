@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_AUTH_URL } from '../../../constants';
-import { defaultSignupValues } from '../defaultValues';
+import { defaultAuthSignupValues } from '../../defaultValues';
 
-const AuthSignupContext = createContext(defaultSignupValues);
+const AuthSignupContext = createContext(defaultAuthSignupValues);
 
 const AuthSignupProvider = ({ children }) => {
   const [email, setEmail] = useState('');

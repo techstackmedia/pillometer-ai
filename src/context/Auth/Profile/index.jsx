@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
 import { BASE_AUTH_URL } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
-import { defaultProfileValues } from '../defaultValues';
 import { token } from '../../../constants';
+import { defaultAuthProfileValues } from '../../defaultValues';
 
-const AuthProfileContext = createContext(defaultProfileValues);
+const AuthProfileContext = createContext(defaultAuthProfileValues);
 
 const AuthProfileProvider = ({ children }) => {
   const [profile, setProfile] = useState(null);

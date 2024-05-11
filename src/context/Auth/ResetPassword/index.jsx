@@ -1,9 +1,10 @@
 import { createContext, useState } from 'react';
 import { BASE_AUTH_URL, token } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
-import { defaultResetPasswordValues } from '../defaultValues';
+import { defaultAuthResetPasswordValues } from '../../defaultValues';
 
-const AuthResetPasswordContext = createContext(defaultResetPasswordValues);
+const AuthResetPasswordContext = createContext(defaultAuthResetPasswordValues);
+
 const AuthResetPasswordProvider = ({ children }) => {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');

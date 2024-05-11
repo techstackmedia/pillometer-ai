@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
+import { defaultNetworkStatusValues } from '../defaultValues';
 
-const NetworkStatusContext = createContext();
+const NetworkStatusContext = createContext(defaultNetworkStatusValues);
 
 const NetworkStatusProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
