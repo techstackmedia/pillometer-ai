@@ -10,7 +10,7 @@ import { token } from '../../constants';
 import LoadingBalls from '../LoadingBalls';
 
 const ChatResponseList = () => {
-  const { chats, isSendingMessage } = useContext(ChatDetailContext);
+  const { messages, isSendingMessage } = useContext(ChatDetailContext);
   // const { uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const ChatResponseList = () => {
                 : styles.responseDetailNonCommunity
             }`}
           >
-            {chats?.results?.map((chat) => {
+            {messages?.map((chat) => {
               return (
                 <ChatResponse
                   key={`${chat?.id}${chat?.reference_no}`}
