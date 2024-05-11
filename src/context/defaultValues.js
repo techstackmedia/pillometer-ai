@@ -1,4 +1,4 @@
-const defaultChatDetailsValues = {
+const { defaultChatDetailsValues } = {
   handleChatQAResponses: () => {},
   chats: null,
   error: null,
@@ -11,13 +11,13 @@ const defaultChatDetailsValues = {
   isSendingMessage: false,
 };
 
-const defaultMessagesValues = {
+const { defaultMessagesValues } = {
   handleClick: () => {},
   isloginModal: false,
   setIsLoginModal: () => {},
 };
 
-const defaultNewPostValues = {
+const { defaultNewPostValues } = {
   createNewPost: () => {},
   errorMessage: null,
   errorAltMessage: null,
@@ -31,7 +31,7 @@ const defaultNewPostValues = {
   setIsOpen: () => {},
 };
 
-const defaultWebSocketServiceValues = {
+const { defaultWebSocketServiceValues } = {
   sendMessageToServer: () => {},
   connectionErrorMessage: null,
   connectionMessage: null,
@@ -66,7 +66,7 @@ const defaultWebSocketServiceValues = {
   responseHistory: [],
 };
 
-const defaultAuthForgotPassswordResetValues = {
+const { defaultAuthForgotPassswordResetValues } = {
   handleForgotPasswordSubmit: () => {},
   handleEmailChange: () => {},
   forgotPasswordErrorMessage: null,
@@ -74,7 +74,7 @@ const defaultAuthForgotPassswordResetValues = {
   forgotPasswordErrorAltMessage: null,
 };
 
-const defaultAuthProfileValues = {
+const { defaultAuthProfileValues } = {
   profile: null,
   handleProfileSubmit: () => {},
   updateProfile: () => {},
@@ -104,7 +104,7 @@ const defaultAuthProfileValues = {
   secondMessage: null,
 };
 
-const defaultAuthSignupValues = {
+const { defaultAuthSignupValues } = {
   emailReg: '',
   passwordReg: '',
   keepSignedup: false,
@@ -120,7 +120,7 @@ const defaultAuthSignupValues = {
   successMessageReg: null,
 };
 
-const defaultAuthResetPasswordValues = {
+const { defaultAuthResetPasswordValues } = {
   password: '',
   resetMessage: null,
   resetPasswordErrorMessage: null,
@@ -130,7 +130,7 @@ const defaultAuthResetPasswordValues = {
   handlePasswordChange: () => {},
 };
 
-const defaultAuthSigninValues = {
+const { defaultAuthSigninValues } = {
   email: '',
   password: '',
   keepSignedIn: false,
@@ -145,7 +145,7 @@ const defaultAuthSigninValues = {
   showPassword: false,
 };
 
-const defaultNetworkStatusValues = {
+const { defaultNetworkStatusValues } = {
   internetConnection: null,
 };
 
