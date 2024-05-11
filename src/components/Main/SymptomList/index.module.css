@@ -1,12 +1,16 @@
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin-inline: auto;
-  /* width: 80%; */
   gap: 1rem;
-  margin-block: 0;
-  max-width: 1352.28px;
+}
+
+.cards {
+  scrollbar-width: 0;
+}
+
+.cards::-webkit-scrollbar {
+  display: none;
 }
 
 .openViewMore {
@@ -20,7 +24,6 @@
 
 .cardCheckbox {
   border: 1px solid #e8e7ee;
-  width: 20%;
   cursor: pointer;
   height: 37px;
   margin-block: 0;
@@ -56,6 +59,10 @@
   cursor: pointer;
 }
 
+.label input + div {
+  padding-inline: 10px;
+}
+
 .textCenter {
   display: flex;
   justify-content: center;
@@ -67,4 +74,24 @@
 
 .nonInputValue {
   border: 1px dashed #e8e7ee;
+}
+
+@media screen and (max-width: 767px) {
+  .cards {
+    width: 95%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 687px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    width: 80%;
+  }
 }
