@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
 import { connectWebSocket, disconnect, sendMessage } from './websocket';
 import { WSS_CHAT_URL } from '../../../constants';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
@@ -32,6 +32,9 @@ const WebSocketProvider = ({ children }) => {
   const [mySymptoms, setMySymptoms] = useState('');
   const [newResponse, setNewResponse] = useState(null);
   const [isSent, setIsSent] = useState(false);
+  const pathname = location.pathname;
+  const idx = pathname.split('/details/')[1];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const symptomsString = selectedSymptoms.join(', ');
@@ -90,7 +93,7 @@ const WebSocketProvider = ({ children }) => {
     setHeight('auto');
   };
 
-  const id = newPostData?.reference_no;
+  const id = newPostData?.reference_no ?? idx;
 
   const handleNewSocketConnection = useCallback(() => {
     if (id) {
@@ -141,7 +144,8 @@ const WebSocketProvider = ({ children }) => {
         disconnect(newSocket);
       };
     }
-  }, [id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, navigate]);
 
   const handleTextToSpeech = (message) => {
     if ('speechSynthesis' in window) {
