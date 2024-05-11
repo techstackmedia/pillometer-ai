@@ -115,7 +115,7 @@ const ChatDetailProvider = ({ children }) => {
       const { scrollTop, clientHeight, scrollHeight } =
         document.documentElement;
       if (
-        scrollTop + clientHeight >= scrollHeight - 10 &&
+        scrollTop + clientHeight >= scrollHeight - 100 &&
         !pageLoading &&
         hasMore
       ) {
