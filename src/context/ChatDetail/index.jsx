@@ -25,10 +25,6 @@ const ChatDetailProvider = ({ children }) => {
     id ?? Ref ?? referenceNo ?? state?.data?.reference_no ?? reference_no;
   const path = pathname.split('/');
   const [isSendingMessage, setIsSendingMessage] = useState(false);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [pageLoading, setPageLoading] = useState(false);
-  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -67,10 +63,9 @@ const ChatDetailProvider = ({ children }) => {
 
   const handleChatQAResponses = async () => {
     setIsSendingMessage(true);
-    setPageLoading(true);
     let endpoint = '';
     if (idx) {
-      endpoint = `${BASE_CHAT_URL}/${idx}/messages?page=${page}`;
+      endpoint = `${BASE_CHAT_URL}/${idx}/messages?page=1`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -84,15 +79,6 @@ const ChatDetailProvider = ({ children }) => {
 
       if (response.ok) {
         setChats(data);
-        setMessages((prev) => {
-          const newMessages = data?.results?.filter((newMessage) => {
-            return !prev.some(
-              (prevMessage) => prevMessage.id === newMessage.id
-            );
-          });
-          return [...prev, ...newMessages];
-        });
-        setHasMore(data.next !== null);
       } else {
         setErr(data?.details);
         setTimeout(() => {
@@ -106,40 +92,19 @@ const ChatDetailProvider = ({ children }) => {
       }, 3000);
     } finally {
       setIsSendingMessage(false);
-      setPageLoading(false);
     }
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, clientHeight, scrollHeight } =
-        document.documentElement;
-      if (
-        scrollTop + clientHeight >= scrollHeight - 100 &&
-        !pageLoading &&
-        hasMore
-      ) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasMore, pageLoading]);
-
-  useEffect(() => {
     handleChatQAResponses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idx, page]);
+  }, [idx]);
 
   const values = {
     handleChatQAResponses,
     chats,
     error,
     err,
-    messages,
-    page,
     serverError,
     handleChatList,
     redirectToDetails,

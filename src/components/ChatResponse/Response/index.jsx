@@ -18,7 +18,7 @@ const Response = ({ message, reference_no }) => {
   const [textCopied, setTextCopied] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const { res } = useContext(NewPostContext);
-  
+
   const handleCopy = () => {
     setTextCopied(true);
     setTimeout(() => {
@@ -45,7 +45,7 @@ const Response = ({ message, reference_no }) => {
       <img src={logo} alt='user profile' className={styles.userProfileImage} />
       <div className={styles.chatResponseCol}>
         <Content cn={`paragraph ${styles.chatResponseParagraph}`}>
-          {(res || message) && (
+          {(res ?? message) && (
             <Markdown remarkPlugins={[remarkGfm]}>
               {typeof message === 'string'
                 ? message.trim() || newResponse?.message

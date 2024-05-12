@@ -127,8 +127,7 @@ const MessagesProvider = ({ children }) => {
         connectWebSocket(`${WSS_CHAT_URL}${referenceNo}`, token);
         navigate(`/details/${referenceNo}`);
       }
-      handleChatQAResponses(referenceNo);
-      isSent &&
+      isSent &&  handleChatQAResponses() &&
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: 'smooth',

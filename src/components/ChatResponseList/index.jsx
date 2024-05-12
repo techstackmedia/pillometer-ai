@@ -10,7 +10,7 @@ import { token } from '../../constants';
 import LoadingBalls from '../LoadingBalls';
 
 const ChatResponseList = () => {
-  const { messages, isSendingMessage, chats } = useContext(ChatDetailContext);
+  const { isSendingMessage, chats } = useContext(ChatDetailContext);
   // const { uniqueArray } = useContext(WebSocketContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const ChatResponseList = () => {
   };
   // console.log(uniqueArray);
 
-  const data = chats?.results ?? messages
+  const data = chats?.results
 
   return (
     <>
