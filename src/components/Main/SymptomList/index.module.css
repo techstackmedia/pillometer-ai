@@ -95,3 +95,8 @@
     width: 80%;
   }
 }
+@media screen and (max-width: 480px) {
+  .openViewMore {
+    height: 300px;
+  }
+}
