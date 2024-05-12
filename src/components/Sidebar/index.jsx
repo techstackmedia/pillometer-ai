@@ -51,7 +51,7 @@ const Sidebar = ({ id: reference_no }) => {
   useEffect(() => {
     navigateToChat(reference_no);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
+  }, []);
 
   const renderSection = (title, items) => (
     <div className={styles.section}>
