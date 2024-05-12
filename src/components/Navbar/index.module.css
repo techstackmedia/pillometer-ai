@@ -57,7 +57,7 @@
 
 
 @media screen and (max-width: 480px) {
-  .navbar .button {
+  .navbar button {
    width: 60px;
   }
 }
