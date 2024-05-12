@@ -44,10 +44,6 @@
   overflow-y: auto;
 }
 
-/* .dGap::-webkit-scrollbar {
-  width: 30px;
-} */
-
 .button {
   display: flex;
   justify-content: space-between;

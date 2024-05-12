@@ -79,3 +79,10 @@
     display: none !important;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .heading,
+  .paragraph {
+    display: none !important;
+  }
+}

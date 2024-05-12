@@ -47,3 +47,15 @@
     display: none !important;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .logo > img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo + img {
+    display: none;
+  }
+}
