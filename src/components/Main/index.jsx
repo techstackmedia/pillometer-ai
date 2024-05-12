@@ -41,6 +41,7 @@ const Main = () => {
           className={
             healthConsultant ? styles?.healthConsultantMain : undefined
           }
+          style={{ marginTop: -20 }}
         >
           {healthConsultant ? null : (
             <Banner
