@@ -95,8 +95,3 @@
     width: 80%;
   }
 }
-@media screen and (max-width: 500px) {
-  .openDiagnose {
-    height: 300px;
-  }
-}
