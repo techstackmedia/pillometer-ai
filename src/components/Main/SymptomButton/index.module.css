@@ -16,10 +16,3 @@
   margin-inline: auto;
   width: 68%;
 }
-
-
-@media screen and (max-width: 500px) {
-  .diagnoseButton {
-    display: none;
-  }
-}
